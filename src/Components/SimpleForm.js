@@ -1,26 +1,89 @@
 import Exercise from "./Exercise";
 import styled from "styled-components";
 import ScreenReaderOnly from "./Styles/ScreenReaderOnly";
-import SpaceBetween from "./Styles/SpaceBetween.js";
+import SpaceBetween from "./Styles/SpaceBetween";
+import Button from "./Button";
+import Center from "./Styles/Center";
+import { useState } from "react";
+
+TestValue = [
+  {
+    day: "",
+    muscle: "",
+    exercise: "",
+    weight: "",
+    repetitions: "",
+    sets: "",
+  },
+];
 
 export default function SimpleForm() {
+  const [formData, setFormData] = useState(TestValue);
+
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
-    <Box>
+    <FormBox>
       <CreateWorkout>Create Workout</CreateWorkout>
-      <form>
-        <label>
+      <form aria-labelledby="Create ur Workout plan" onSubmit={handleSubmit}>
+        <label htmlFor="day">
           <ScreenReaderOnly>Enter Day</ScreenReaderOnly>
         </label>
-        <input type="text" placeholder="Add workout day" />
+        <input
+          onChange={handleOnChange}
+          id="day"
+          name="day"
+          required
+          maxlength="20"
+          type="text"
+          placeholder="Add workout day"
+        />
         <SpaceBetween>
-          <label>Muscle</label>
-          <input type="text" placeholder="Add the muscles you want to train" />
+          <label htmlFor="muscle">Muscle</label>
+          <input
+            onChange={handleOnChange}
+            id="muscle"
+            name="muscle"
+            required
+            maxLength="20"
+            type="text"
+            placeholder="Add the muscles you want to train"
+          />
         </SpaceBetween>
         <Exercise />
-        <button>Create</button>
+        <Center>
+          <Button name="Click here" />
+        </Center>
       </form>
-    </Box>
+      <div>
+        {TestValue.map((TestValue) => {
+          const list = (
+            <>
+              <ul>
+                <li>Day: {TestValue.day}</li>
+                <li>Muscle: {TestValue.muscle}</li>
+                <li>Exercise: {TestValue.exercise}</li>
+                <li>Weight: {TestValue.weight}</li>
+                <li>Repetitions: {TestValue.repetitions}</li>
+                <li>Sets: {TestValue.sets}</li>
+              </ul>
+              <hr />
+            </>
+          );
+          return list;
+        })}
+      </div>
+    </FormBox>
   );
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 }
 
 const CreateWorkout = styled.h2`
@@ -30,7 +93,7 @@ const CreateWorkout = styled.h2`
   margin-top: 0;
 `;
 
-const Box = styled.div`
+const FormBox = styled.div`
   border: 1px solid Black;
   padding: 2px;
 `;

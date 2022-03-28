@@ -1,24 +1,52 @@
 import styled from "styled-components";
-import SpaceBetween from "./Styles/SpaceBetween.js";
+import SpaceBetween from "./Styles/SpaceBetween";
 
 export default function Exercise() {
   return (
     <StyledBox>
       <SpaceBetween>
-        <label>Exercise</label>
-        <input type="text" placeholder="add ur exercise" />
+        <label htmlFor="exercise">Exercise</label>
+        <input
+          name="exercise"
+          required
+          maxlength="20"
+          id="exercise"
+          type="text"
+          placeholder="add ur exercise"
+        />
       </SpaceBetween>
       <SpaceBetween>
-        <label>Weight</label>
-        <input type="text" placeholder="add ur weight" />
+        <label htmlFor="weight">Weight</label>
+        <input
+          name="weight"
+          required
+          maxlength="20"
+          id="weight"
+          type="text"
+          placeholder="add ur weight"
+        />
       </SpaceBetween>
       <SpaceBetween>
-        <label>Repetitions</label>
-        <input type="text" placeholder="add ur repetitions" />
+        <label htmlFor="repetitions">Repetitions</label>
+        <input
+          name="repetitions"
+          required
+          maxLength="20"
+          id="repetitions"
+          type="text"
+          placeholder="add ur repetitions"
+        />
       </SpaceBetween>
       <SpaceBetween>
-        <label>Sets</label>
-        <input type="text" placeholder="add ur sets" />
+        <label htmlFor="sets">Sets</label>
+        <input
+          name="sets"
+          required
+          maxlength="20"
+          id="sets"
+          type="text"
+          placeholder="add ur sets"
+        />
       </SpaceBetween>
     </StyledBox>
   );
