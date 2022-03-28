@@ -6,26 +6,20 @@ import Button from "./Button";
 import Center from "./Styles/Center";
 import { useState } from "react";
 
-TestValue = [
-  {
-    day: "",
-    muscle: "",
-    exercise: "",
-    weight: "",
-    repetitions: "",
-    sets: "",
-  },
-];
-
 export default function SimpleForm() {
-  const [formData, setFormData] = useState(TestValue);
+  const [formData, setFormData] = useState([]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
 
   const handleOnChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target.value;
     setFormData({
       ...formData,
       [name]: value,
     });
+    console.log(formData);
   };
 
   return (
@@ -61,29 +55,8 @@ export default function SimpleForm() {
           <Button name="Click here" />
         </Center>
       </form>
-      <div>
-        {TestValue.map((TestValue) => {
-          const list = (
-            <>
-              <ul>
-                <li>Day: {TestValue.day}</li>
-                <li>Muscle: {TestValue.muscle}</li>
-                <li>Exercise: {TestValue.exercise}</li>
-                <li>Weight: {TestValue.weight}</li>
-                <li>Repetitions: {TestValue.repetitions}</li>
-                <li>Sets: {TestValue.sets}</li>
-              </ul>
-              <hr />
-            </>
-          );
-          return list;
-        })}
-      </div>
     </FormBox>
   );
-  function handleSubmit(event) {
-    event.preventDefault();
-  }
 }
 
 const CreateWorkout = styled.h2`
