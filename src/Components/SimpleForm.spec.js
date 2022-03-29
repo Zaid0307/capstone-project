@@ -1,13 +1,26 @@
-//import { userEvent } from "@storybook/testing-library";
 import { render, screen } from '@testing-library/react';
-import SimpleForm from './SimpleForm.js';
+import SimpleForm from './SimpleForm';
 
-describe('SimpleForm', () => {
-  it('renders 6 label and an 6 input with a placeholder', () => {
-    //const callback = jest.fn();
+describe('Header', () => {
+  it('shows a logo and a title', () => {
     render(<SimpleForm />);
 
-    const inputDay = screen.getByRole('input');
+    const inputDay = screen.getByLabelText(/Enter Day/i);
+    const inputMuscle = screen.getByLabelText(/Muscle/i);
+    const inputExercise = screen.getByLabelText(/exercise/i);
+    const inputWeight = screen.getByLabelText(/weight/i);
+    const inputRepetitions = screen.getByLabelText(/repetitions/i);
+    const inputSets = screen.getByLabelText(/sets/i);
+
+    const submitButton = screen.getByRole('button', { name: /Click here/i });
+
     expect(inputDay).toBeInTheDocument();
+    expect(inputMuscle).toBeInTheDocument();
+    expect(inputExercise).toBeInTheDocument();
+    expect(inputWeight).toBeInTheDocument();
+    expect(inputRepetitions).toBeInTheDocument();
+    expect(inputSets).toBeInTheDocument();
+
+    expect(submitButton).toBeInTheDocument();
   });
 });

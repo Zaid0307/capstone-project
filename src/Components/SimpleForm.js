@@ -25,7 +25,9 @@ export default function SimpleForm() {
     <FormBox>
       <CreateWorkout>Create Workout</CreateWorkout>
       <form aria-labelledby="Create ur Workout plan" onSubmit={handleSubmit}>
-        <label htmlFor="day">Enter Day</label>
+        <label htmlFor="day">
+          <ScreenReaderOnly> Enter Day </ScreenReaderOnly>
+        </label>
         <InputDay
           onChange={handleOnChange}
           id="day"
