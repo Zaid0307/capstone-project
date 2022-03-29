@@ -6,11 +6,14 @@ import Center from './Styles/Center';
 import { useState } from 'react';
 
 export default function SimpleForm() {
-  const [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState('');
+  const [data, setData] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
+    setData(Object.values(formData));
   }
+  console.log(data);
 
   const handleOnChange = event => {
     const { name, value } = event.target;
@@ -24,7 +27,11 @@ export default function SimpleForm() {
   return (
     <FormBox>
       <CreateWorkout>Create Workout</CreateWorkout>
-      <form aria-labelledby="Create ur Workout plan" onSubmit={handleSubmit}>
+      <form
+        autoComplete="off"
+        aria-labelledby="Create ur Workout plan"
+        onSubmit={handleSubmit}
+      >
         <label htmlFor="day">
           <ScreenReaderOnly> Enter Day </ScreenReaderOnly>
         </label>
@@ -103,6 +110,9 @@ export default function SimpleForm() {
           <Button name="Click here" />
         </Center>
       </form>
+      {data.map(function (item, index) {
+        return <p key={index}>{item}</p>;
+      })}
     </FormBox>
   );
 }
