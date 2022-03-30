@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import SimpleForm from './SimpleForm';
 
-describe('Header', () => {
-  it('shows a logo and a title', () => {
+describe('SimpleForm', () => {
+  it('shows 6 inout fields', () => {
     render(<SimpleForm />);
 
     const inputDay = screen.getByLabelText(/Enter Day/i);

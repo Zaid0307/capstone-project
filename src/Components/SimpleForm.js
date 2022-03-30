@@ -13,6 +13,7 @@ export default function SimpleForm() {
     event.preventDefault();
     console.log('formData', formData);
     setData([...data, formData]);
+    event.target.reset();
     //setData(Object.values(formData));
   }
 
@@ -41,7 +42,7 @@ export default function SimpleForm() {
           id="day"
           name="day"
           required
-          maxlength="20"
+          maxLength={20}
           type="text"
           placeholder="Add workout day"
         />
@@ -52,7 +53,7 @@ export default function SimpleForm() {
             id="muscle"
             name="muscle"
             required
-            maxLength="20"
+            maxLength={20}
             type="text"
             placeholder="Add the muscles"
           />
@@ -64,7 +65,7 @@ export default function SimpleForm() {
               onChange={handleOnChange}
               name="exercise"
               required
-              maxlength="20"
+              maxLength={20}
               id="exercise"
               type="text"
               placeholder="add ur exercise"
@@ -76,7 +77,7 @@ export default function SimpleForm() {
               onChange={handleOnChange}
               name="weight"
               required
-              maxlength="20"
+              maxLength={20}
               id="weight"
               type="text"
               placeholder="add ur weight"
@@ -88,7 +89,7 @@ export default function SimpleForm() {
               onChange={handleOnChange}
               name="repetitions"
               required
-              maxLength="20"
+              maxLength={20}
               id="repetitions"
               type="text"
               placeholder="add ur repetitions"
@@ -100,7 +101,7 @@ export default function SimpleForm() {
               onChange={handleOnChange}
               name="sets"
               required
-              maxlength="20"
+              maxLength={20}
               id="sets"
               type="text"
               placeholder="add ur sets"
