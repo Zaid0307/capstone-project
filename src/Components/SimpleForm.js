@@ -11,9 +11,10 @@ export default function SimpleForm() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    setData(Object.values(formData));
+    console.log('formData', formData);
+    setData([...data, formData]);
+    //setData(Object.values(formData));
   }
-  console.log(data);
 
   const handleOnChange = event => {
     const { name, value } = event.target;
@@ -111,7 +112,16 @@ export default function SimpleForm() {
         </Center>
       </form>
       {data.map(function (item, index) {
-        return <p key={index}>{item}</p>;
+        return (
+          <div key={index}>
+            <p>{item.day}</p>
+            <p>{item.muscle}</p>
+            <p>{item.exercise}</p>
+            <p>{item.weight}</p>
+            <p>{item.repetitions}</p>
+            <p>{item.sets}</p>
+          </div>
+        );
       })}
     </FormBox>
   );
