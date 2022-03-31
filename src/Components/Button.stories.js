@@ -1,12 +1,14 @@
-import Button from "./Button";
+import Button from './Button';
 
 export default {
-  title: "components/Button",
+  title: 'components/Button',
   component: Button,
   argTypes: {},
 };
 
-const Template = (args) => <Button {...args} />;
+const Template = args => <Button {...args} />;
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  name: 'Click me',
+};

@@ -5,16 +5,14 @@ import Button from './Button';
 import Center from './Styles/Center';
 import { useState } from 'react';
 
-export default function SimpleForm() {
+export default function SimpleForm({ onCreateCard }) {
   const [formData, setFormData] = useState('');
-  const [data, setData] = useState([]);
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log('formData', formData);
-    setData([...data, formData]);
+    onCreateCard(formData);
     event.target.reset();
-    //setData(Object.values(formData));
   }
 
   const handleOnChange = event => {
@@ -112,18 +110,6 @@ export default function SimpleForm() {
           <Button name="Click here" />
         </Center>
       </form>
-      {data.map(function (item, index) {
-        return (
-          <div key={index}>
-            <p>{item.day}</p>
-            <p>{item.muscle}</p>
-            <p>{item.exercise}</p>
-            <p>{item.weight}</p>
-            <p>{item.repetitions}</p>
-            <p>{item.sets}</p>
-          </div>
-        );
-      })}
     </FormBox>
   );
 }
@@ -132,13 +118,14 @@ const CreateWorkout = styled.h2`
   display: flex;
   justify-content: center;
   border: 2px solid Black;
-  margin-top: 0;
+  border-radius: 5px;
 `;
 
 const FormBox = styled.div`
   border: 1px solid Black;
   padding: 2px;
   margin: 5px;
+  border-radius: 5px;
 `;
 
 const InputMuscle = styled.input`
@@ -161,6 +148,7 @@ const StyledBox = styled.div`
   margin: 5px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  border-radius: 5px;
 `;
 
 const Input = styled.input`
