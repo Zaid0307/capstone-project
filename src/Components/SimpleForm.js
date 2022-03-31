@@ -10,7 +10,6 @@ export default function SimpleForm({ onCreateCard }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('formData', formData);
     onCreateCard(formData);
     event.target.reset();
   }
@@ -21,15 +20,14 @@ export default function SimpleForm({ onCreateCard }) {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
 
   return (
     <FormBox>
-      <CreateWorkout>Create Workout</CreateWorkout>
+      <CreateWorkout id="formTitle">Create Workout</CreateWorkout>
       <form
         autoComplete="off"
-        aria-labelledby="Create ur Workout plan"
+        aria-labelledby="formTitle"
         onSubmit={handleSubmit}
       >
         <label htmlFor="day">

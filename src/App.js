@@ -25,7 +25,6 @@ export default function App() {
   );
 
   function createCard(formData) {
-    console.log(formData);
     setData([...data, formData]);
     navigate('/Workoutplans');
   }
