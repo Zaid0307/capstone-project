@@ -1,42 +1,37 @@
 import styled from 'styled-components';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
-import SpaceBetween from './Styles/SpaceBetween';
+import InputWrapper from './Styles/SpaceBetween';
 import Button from './Button';
 import Center from './Styles/Center';
 import { useState } from 'react';
 
-export default function SimpleForm({ onCreateCard }) {
-  const [formData, setFormData] = useState('');
+export default function SimpleForm({ onCreateCards }) {
+  const [formData, setFormData] = useState({
+    exercise: '',
+    weight: '',
+    repetitions: '',
+    sets: '',
+  });
   //add and remove new Card
-  const [exerciseInputs, setExerciseInputs] = useState([
-    { Exercise: '', Weight: '', Repetitions: '', Sets: '' },
-  ]);
-
-  const handleChangeInput = (index, event) => {
-    const values = [...exerciseInputs];
-    values[index][event.target.name] = event.target.value;
-    setExerciseInputs(values);
-  };
+  const [exerciseCards, setExerciseCards] = useState([]);
 
   const handleAddExercise = () => {
-    setExerciseInputs([
-      ...exerciseInputs,
-      { Exercise: '', Weight: '', Repetitions: '', Sets: '' },
-    ]);
+    console.log(formData);
+    setExerciseCards([...exerciseCards, formData]);
+    setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
   };
 
   const handleRemoveExercise = targetIndex => {
-    const values = exerciseInputs.filter(
+    const values = exerciseCards.filter(
       (input, valuesIndex) => valuesIndex !== targetIndex
     );
-    setExerciseInputs(values);
+    setExerciseCards(values);
   };
   // add and remove new Card ends here
 
   function handleSubmit(event) {
     event.preventDefault();
-    onCreateCard(formData);
-    event.target.reset();
+    onCreateCards(exerciseCards);
   }
 
   const handleOnChange = event => {
@@ -46,7 +41,7 @@ export default function SimpleForm({ onCreateCard }) {
       [name]: value,
     });
   };
-
+  console.log({ formData });
   return (
     <>
       <CreateWorkout id="formTitle">Create Workout</CreateWorkout>
@@ -68,7 +63,7 @@ export default function SimpleForm({ onCreateCard }) {
             type="text"
             placeholder="Add workout day"
           />
-          <SpaceBetween>
+          <InputWrapper>
             <LabelMuscle htmlFor="muscle">Muscle</LabelMuscle>
             <InputMuscle
               onChange={handleOnChange}
@@ -79,11 +74,12 @@ export default function SimpleForm({ onCreateCard }) {
               type="text"
               placeholder="Add the muscles"
             />
-          </SpaceBetween>
+          </InputWrapper>
           <StyledBox>
-            <SpaceBetween>
+            <InputWrapper>
               <Label htmlFor="exercise">Exercise</Label>
               <Input
+                value={formData.exercise}
                 onChange={handleOnChange}
                 name="exercise"
                 required
@@ -92,10 +88,11 @@ export default function SimpleForm({ onCreateCard }) {
                 type="text"
                 placeholder="add ur exercise"
               />
-            </SpaceBetween>
-            <SpaceBetween>
+            </InputWrapper>
+            <InputWrapper>
               <Label htmlFor="weight">Weight</Label>
               <Input
+                value={formData.weight}
                 onChange={handleOnChange}
                 name="weight"
                 required
@@ -104,10 +101,11 @@ export default function SimpleForm({ onCreateCard }) {
                 type="text"
                 placeholder="add ur weight"
               />
-            </SpaceBetween>
-            <SpaceBetween>
+            </InputWrapper>
+            <InputWrapper>
               <Label htmlFor="repetitions">Repetitions</Label>
               <Input
+                value={formData.repetitions}
                 onChange={handleOnChange}
                 name="repetitions"
                 required
@@ -116,10 +114,11 @@ export default function SimpleForm({ onCreateCard }) {
                 type="text"
                 placeholder="add ur repetitions"
               />
-            </SpaceBetween>
-            <SpaceBetween>
+            </InputWrapper>
+            <InputWrapper>
               <Label htmlFor="sets">Sets</Label>
               <Input
+                value={formData.sets}
                 onChange={handleOnChange}
                 name="sets"
                 required
@@ -128,77 +127,76 @@ export default function SimpleForm({ onCreateCard }) {
                 type="text"
                 placeholder="add ur sets"
               />
-            </SpaceBetween>
+            </InputWrapper>
           </StyledBox>
-          {exerciseInputs.map((exerciseInputs, index) => (
+          <button type="button" onClick={handleAddExercise}>
+            add
+          </button>
+
+          {exerciseCards.map((exerciseInputs, index) => (
             <StyledBox key={index}>
-              <Button
-                name="add exercise"
-                type="button"
-                onClick={() => handleAddExercise()}
-              />
-              <SpaceBetween>
+              <InputWrapper>
                 <Label htmlFor="exercise">Exercise</Label>
                 <Input
-                  name="Exercise"
+                  name="exercise"
                   required
                   maxLength={20}
                   id="exercise"
                   type="text"
-                  placeholder="add ur exercise"
-                  value={exerciseInputs.Exercise}
-                  onChange={event => handleChangeInput(index, event)}
+                  value={exerciseInputs.exercise}
+                  onChange={handleOnChange}
                 />
-              </SpaceBetween>
-              <SpaceBetween>
+              </InputWrapper>
+              <InputWrapper>
                 <Label htmlFor="weight">Weight</Label>
                 <Input
-                  name="Weight"
+                  name="weight"
                   required
                   maxLength={20}
                   id="weight"
                   type="text"
                   placeholder="add ur weight"
-                  value={exerciseInputs.Weight}
-                  onChange={event => handleChangeInput(index, event)}
+                  value={exerciseInputs.weight}
+                  onChange={handleOnChange}
                 />
-              </SpaceBetween>
-              <SpaceBetween>
+              </InputWrapper>
+              <InputWrapper>
                 <Label htmlFor="rep etitions">Repetitions</Label>
                 <Input
-                  name="Repetitions"
+                  name="repetitions"
                   required
                   maxLength={20}
                   id="repetitions"
                   type="text"
                   placeholder="add ur repetitions"
-                  value={exerciseInputs.Repetitions}
-                  onChange={event => handleChangeInput(index, event)}
+                  value={exerciseInputs.repetitions}
+                  onChange={handleOnChange}
                 />
-              </SpaceBetween>
-              <SpaceBetween>
+              </InputWrapper>
+              <InputWrapper>
                 <Label htmlFor="sets">Sets</Label>
                 <Input
-                  name="Sets"
+                  name="sets"
                   required
                   maxLength={20}
                   id="sets"
                   type="text"
                   placeholder="add ur sets"
-                  value={exerciseInputs.Sets}
-                  onChange={event => handleChangeInput(index, event)}
+                  value={exerciseInputs.sets}
+                  onChange={handleOnChange}
+                  // use this if handleOnChange not work. onChange={event => handleChangeInput(index, event)}
                 />
-              </SpaceBetween>
-              <Button
-                name="remove exercise"
-                type="button"
-                onClick={() => handleRemoveExercise(index)}
-              />
+              </InputWrapper>
+              <button type="button" onClick={() => handleRemoveExercise(index)}>
+                Remove
+              </button>
             </StyledBox>
           ))}
         </FormBox>
         <Center>
-          <Button name="Click here" type="submit" onClick={handleSubmit} />
+          <button type="submit" onClick={handleSubmit}>
+            Click here
+          </button>
         </Center>
       </form>
     </>
