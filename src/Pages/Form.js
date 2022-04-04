@@ -4,56 +4,40 @@ import DayForm from '../Components/DayForm';
 
 export default function Form() {
   const [formInfo, setFormInfo] = useState([]);
-  const [days, setDays] = useState([
-    {
-      monday: '',
-      tuseday: '',
-      wednesday: '',
-      thursday: '',
-      friday: '',
-      saturday: '',
-      sunday: '',
-    },
-  ]);
+  const [days, setDays] = useState([]);
+  const [toggleForm, setToggleForm] = useState(false);
 
-  console.log(formInfo);
-  console.log(days);
+  console.log('formInfo', formInfo);
+  console.log('Days', days);
 
   const selcetedDays = Object.keys(days).filter(obj => days[obj]);
 
   return (
     <>
-      {formInfo && <CreateForm handleSubmit={handleCreateForm} />}
-      {!formInfo && <p>no info here</p>}
+      {!toggleForm ? (
+        <CreateForm
+          handleSubmit={handleCreateForm}
+          onCheck={onCheck}
+          onChange={onChange}
+        />
+      ) : (
+        <p>no info here</p>
+      )}
     </>
   );
 
   function handleCreateForm(event) {
     event.preventDefault();
-    const { name, value } = event.target;
-    setDays({
-      ...days,
-      [name]: value,
-    });
-    setFormInfo({
-      ...formInfo,
-      [name]: value,
-    });
+    setToggleForm(true);
   }
 
-  /*  function onCheck(event) {
+  function onCheck(event) {
     const { name, checked } = event.target;
-    setDays({
-      ...days,
-      [name]: checked,
-    });
+    setDays([...days, { [name]: checked }]);
   }
 
   function onChange(event) {
     const { name, value } = event.target;
-    setFormInfo({
-      ...formInfo,
-      [name]: value,
-    });
-  }*/
+    setFormInfo([...formInfo, { [name]: value }]);
+  }
 }

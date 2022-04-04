@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from './Button';
 import styled from 'styled-components';
 
-export default function CreateForm({ handleSubmit }) {
+export default function CreateForm({ handleSubmit, onCheck, onChange }) {
   return (
     <PageBox>
       <StyledCenterBox>
@@ -14,7 +14,7 @@ export default function CreateForm({ handleSubmit }) {
           <label htmlFor="nameOfWorkout">Workout plan name*:</label>
 
           <StyledInput
-            /*onChange={onCheck}*/
+            onChange={onChange}
             name="workOutName"
             required
             maxLength="100"
@@ -27,44 +27,44 @@ export default function CreateForm({ handleSubmit }) {
         <TitleCheckbox>Choose your training days*:</TitleCheckbox>
 
         <StyledCheckBox>
-          <input name="monday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="monday" onChange={onCheck} type="checkbox" />
           <label>Monday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="tuseday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="tuseday" onChange={onCheck} type="checkbox" />
           <label>Tuseday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="wednesday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="wednesday" onChange={onCheck} type="checkbox" />
           <label>Wednesday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="thursday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="thursday" onChange={onCheck} type="checkbox" />
           <label>Thursday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="friday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="friday" onChange={onCheck} type="checkbox" />
           <label>Friday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="saturday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="saturday" onChange={onCheck} type="checkbox" />
           <label>Saturday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="sunday" /*onChange={onCheck}*/ type="checkbox" />
+          <input name="sunday" onChange={onCheck} type="checkbox" />
           <label>Sunday</label>
         </StyledCheckBox>
 
         <StyledInputBox>
           <label htmlFor="discripeUrPlan">Description:</label>
           <StyledInput
-            //onChange={onChange}
+            onChange={onChange}
             name="description"
             maxLength="200"
             id="discripeUrPlan"
