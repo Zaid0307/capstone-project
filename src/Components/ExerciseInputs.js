@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import SpaceBetween from './Styles/SpaceBetween';
-import Button from './Button';
+import Button from './Styles/Button';
 import styled from 'styled-components';
 
 export default function ExerciseInputs() {
