@@ -1,17 +1,28 @@
 import styled from 'styled-components';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
-import SpaceBetween from './Styles/SpaceBetween';
-import Button from './Button';
+import InputWrapper from './Styles/SpaceBetween';
 import Center from './Styles/Center';
 import { useState } from 'react';
 
-export default function SimpleForm({ onCreateCard }) {
-  const [formData, setFormData] = useState('');
+export default function SimpleForm({ onCreateCards }) {
+  const [exerciseCards, setExerciseCards] = useState([]);
+
+  const handleAddExercise = () => {
+    console.log(formData);
+    setExerciseCards([...exerciseCards, formData]);
+    setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
+  };
+
+  const handleRemoveExercise = targetIndex => {
+    const values = exerciseCards.filter(
+      (input, valuesIndex) => valuesIndex !== targetIndex
+    );
+    setExerciseCards(values);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
-    onCreateCard(formData);
-    event.target.reset();
+    onCreateCards(exerciseCards);
   }
 
   const handleOnChange = event => {
@@ -21,94 +32,169 @@ export default function SimpleForm({ onCreateCard }) {
       [name]: value,
     });
   };
-
+  console.log({ formData });
   return (
-    <FormBox>
+    <>
       <CreateWorkout id="formTitle">Create Workout</CreateWorkout>
       <form
         autoComplete="off"
         aria-labelledby="formTitle"
         onSubmit={handleSubmit}
       >
-        <label htmlFor="day">
-          <ScreenReaderOnly> Enter Day </ScreenReaderOnly>
-        </label>
-        <InputDay
-          onChange={handleOnChange}
-          id="day"
-          name="day"
-          required
-          maxLength={20}
-          type="text"
-          placeholder="Add workout day"
-        />
-        <SpaceBetween>
-          <LabelMuscle htmlFor="muscle">Muscle</LabelMuscle>
-          <InputMuscle
+        <FormBox>
+          <label htmlFor="day">
+            <ScreenReaderOnly> Enter Day </ScreenReaderOnly>
+          </label>
+          <InputDay
             onChange={handleOnChange}
-            id="muscle"
-            name="muscle"
+            id="day"
+            name="day"
             required
             maxLength={20}
             type="text"
-            placeholder="Add the muscles"
+            placeholder="Add workout day"
           />
-        </SpaceBetween>
-        <StyledBox>
-          <SpaceBetween>
-            <Label htmlFor="exercise">Exercise</Label>
-            <Input
+          <InputWrapper>
+            <LabelMuscle htmlFor="muscle">Muscle</LabelMuscle>
+            <InputMuscle
               onChange={handleOnChange}
-              name="exercise"
+              id="muscle"
+              name="muscle"
               required
               maxLength={20}
-              id="exercise"
               type="text"
-              placeholder="add ur exercise"
+              placeholder="Add the muscles"
             />
-          </SpaceBetween>
-          <SpaceBetween>
-            <Label htmlFor="weight">Weight</Label>
-            <Input
-              onChange={handleOnChange}
-              name="weight"
-              required
-              maxLength={20}
-              id="weight"
-              type="text"
-              placeholder="add ur weight"
-            />
-          </SpaceBetween>
-          <SpaceBetween>
-            <Label htmlFor="repetitions">Repetitions</Label>
-            <Input
-              onChange={handleOnChange}
-              name="repetitions"
-              required
-              maxLength={20}
-              id="repetitions"
-              type="text"
-              placeholder="add ur repetitions"
-            />
-          </SpaceBetween>
-          <SpaceBetween>
-            <Label htmlFor="sets">Sets</Label>
-            <Input
-              onChange={handleOnChange}
-              name="sets"
-              required
-              maxLength={20}
-              id="sets"
-              type="text"
-              placeholder="add ur sets"
-            />
-          </SpaceBetween>
-        </StyledBox>
+          </InputWrapper>
+          <StyledBox>
+            <InputWrapper>
+              <Label htmlFor="exercise">Exercise</Label>
+              <Input
+                value={formData.exercise}
+                onChange={handleOnChange}
+                name="exercise"
+                required
+                maxLength={20}
+                id="exercise"
+                type="text"
+                placeholder="add ur exercise"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="weight">Weight</Label>
+              <Input
+                value={formData.weight}
+                onChange={handleOnChange}
+                name="weight"
+                required
+                maxLength={20}
+                id="weight"
+                type="text"
+                placeholder="add ur weight"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="repetitions">Repetitions</Label>
+              <Input
+                value={formData.repetitions}
+                onChange={handleOnChange}
+                name="repetitions"
+                required
+                maxLength={20}
+                id="repetitions"
+                type="text"
+                placeholder="add ur repetitions"
+              />
+            </InputWrapper>
+            <InputWrapper>
+              <Label htmlFor="sets">Sets</Label>
+              <Input
+                value={formData.sets}
+                onChange={handleOnChange}
+                name="sets"
+                required
+                maxLength={20}
+                id="sets"
+                type="text"
+                placeholder="add ur sets"
+              />
+            </InputWrapper>
+          </StyledBox>
+          <button type="button" onClick={handleAddExercise}>
+            add
+          </button>
+
+          {exerciseCards.map((exerciseInputs, index) => (
+            <StyledBox key={index}>
+              <InputWrapper>
+                <p>Exercise :</p> {exerciseInputs.exercise}
+                {/* <Label htmlFor="exercise">Exercise</Label>
+                <Input
+                  name="exercise"
+                  required
+                  maxLength={20}
+                  id="exercise"
+                  type="text"
+                  value={exerciseInputs.exercise}
+                  onChange={handleOnChange}
+                />*/}
+              </InputWrapper>
+              <InputWrapper>
+                <p>Weight :</p> {exerciseInputs.weight}
+                {/* <Label htmlFor="weight">Weight</Label>
+                <Input
+                  name="weight"
+                  required
+                  maxLength={20}
+                  id="weight"
+                  type="text"
+                  placeholder="add ur weight"
+                  value={exerciseInputs.weight}
+                  onChange={handleOnChange}
+              />*/}
+              </InputWrapper>
+              <InputWrapper>
+                <p>Repetitions :</p> {exerciseInputs.repetitions}
+                {/* <Label htmlFor="rep etitions">Repetitions</Label>
+                <Input
+                  name="repetitions"
+                  required
+                  maxLength={20}
+                  id="repetitions"
+                  type="text"
+                  placeholder="add ur repetitions"
+                  value={exerciseInputs.repetitions}
+                  onChange={handleOnChange}
+            />*/}
+              </InputWrapper>
+              <InputWrapper>
+                <p>Sets :</p> {exerciseInputs.sets}
+                {/* <Label htmlFor="sets">Sets</Label>
+                <Input
+                  name="sets"
+                  required
+                  maxLength={20}
+                  id="sets"
+                  type="text"
+                  placeholder="add ur sets"
+                  value={exerciseInputs.sets}
+                  onChange={handleOnChange}
+                  // use this if handleOnChange not work. onChange={event => handleChangeInput(index, event)}
+          />*/}
+              </InputWrapper>
+              <button type="button" onClick={() => handleRemoveExercise(index)}>
+                Remove
+              </button>
+            </StyledBox>
+          ))}
+        </FormBox>
         <Center>
-          <Button name="Click here" />
+          <button type="submit" onClick={handleSubmit}>
+            Click here
+          </button>
         </Center>
       </form>
-    </FormBox>
+    </>
   );
 }
 
@@ -117,6 +203,8 @@ const CreateWorkout = styled.h2`
   justify-content: center;
   border: 2px solid Black;
   border-radius: 5px;
+  margin: 5px;
+  padding-top: 3px;
 `;
 
 const FormBox = styled.div`

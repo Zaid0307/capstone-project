@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import SpaceBetween from './Styles/SpaceBetween';
 
 export default function WorkoutPlans({ item }) {
-  console.log(item);
   return (
     <WorkoutBox>
       <WorkoutPlan>Workout Plans</WorkoutPlan>

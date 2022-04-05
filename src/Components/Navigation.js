@@ -32,7 +32,7 @@ const LinkStyled = styled(NavLink)`
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  background: #a9cce3;
+  background: #526b7a;
   color: white;
   height: 48px;
 `;

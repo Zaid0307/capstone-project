@@ -1,18 +1,25 @@
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Navigation from './Components/Navigation';
-import FormPage from './Pages/FormPage';
 import WorkoutplansPage from './Pages/WorkoutplansPage';
 import styled from 'styled-components';
 import { useLocalStorage } from 'usehooks-ts';
+import SimpleForm from './Components/SimpleForm';
+import CreateForm from './Components/CreateForm';
+import Form from './Pages/Form';
+import { useState } from 'react';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   return (
     <div>
       <Routes>
-        <Route path="/" element={<FormPage onCreateCard={createCard} />} />
+        <Route
+          path="/"
+          element={<Form onAddWorkoutPlan={createCard} />} /*path="/"
+          element={<SimpleForm onCreateCards={createCards} />}*/
+        />
         <Route
           path="/Workoutplans"
           element={<WorkoutplansPage data={data} />}
@@ -24,8 +31,8 @@ export default function App() {
     </div>
   );
 
-  function createCard(formData) {
-    setData([...data, formData]);
+  function createCard(newCard) {
+    setData([...data, newCard]);
     navigate('/Workoutplans');
   }
 }
