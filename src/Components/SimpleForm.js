@@ -5,13 +5,6 @@ import Center from './Styles/Center';
 import { useState } from 'react';
 
 export default function SimpleForm({ onCreateCards }) {
-  const [formData, setFormData] = useState({
-    exercise: '',
-    weight: '',
-    repetitions: '',
-    sets: '',
-  });
-  //add and remove new Card
   const [exerciseCards, setExerciseCards] = useState([]);
 
   const handleAddExercise = () => {
@@ -26,7 +19,6 @@ export default function SimpleForm({ onCreateCards }) {
     );
     setExerciseCards(values);
   };
-  // add and remove new Card ends here
 
   function handleSubmit(event) {
     event.preventDefault();

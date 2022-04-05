@@ -8,7 +8,6 @@ export default function CreateForm({ onSubmit }) {
     description: '',
   });
   const [days, setDays] = useState();
-  console.log(formInfo);
 
   function onCheck(event) {
     const { name, checked } = event.target;
