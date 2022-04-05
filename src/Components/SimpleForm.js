@@ -7,11 +7,11 @@ import { useState } from 'react';
 export default function SimpleForm({ onCreateCards }) {
   const [exerciseCards, setExerciseCards] = useState([]);
 
-  const handleAddExercise = () => {
-    console.log(formData);
-    setExerciseCards([...exerciseCards, formData]);
-    setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
-  };
+  //const handleAddExercise = () => {
+  // console.log(formData);
+  // setExerciseCards([...exerciseCards, formData]);
+  // setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
+  // };
 
   const handleRemoveExercise = targetIndex => {
     const values = exerciseCards.filter(
