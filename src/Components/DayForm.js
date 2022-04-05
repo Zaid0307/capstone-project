@@ -3,7 +3,7 @@ import ScreenReaderOnly from './Styles/ScreenReaderOnly';
 import SpaceBetween from './Styles/SpaceBetween';
 import Center from './Styles/Center';
 import styled from 'styled-components';
-import { IoIosAddCircleOutline } from 'react-icons/io';
+//import { IoIosAddCircleOutline } from 'react-icons/io';
 
 export default function DayForm({ onSubmit, day }) {
   function handleSubmit(event) {
@@ -119,11 +119,6 @@ export default function DayForm({ onSubmit, day }) {
     </>
   );
 }
-
-const StyledRow = styled.div`
-  display: flex;
-  gap: 5px;
-`;
 
 const StyledDay = styled.h2`
   display: flex;
