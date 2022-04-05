@@ -1,72 +1,111 @@
 import Button from './Button';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
+import SpaceBetween from './Styles/SpaceBetween';
+import Center from './Styles/Center';
+import styled from 'styled-components';
+import { IoIosAddCircleOutline } from 'react-icons/io';
 
-export default function DayForm({ day }) {
+export default function DayForm({ onSubmit, day }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const { exercise, weight, repetitions, sets } = form.elements;
+    const newDay = {
+      day,
+      exercise: exercise.value,
+      weight: weight.value,
+      repetitions: repetitions.value,
+      sets: sets.value,
+    };
+    onSubmit(newDay);
+  }
+
   return (
     <>
       <ScreenReaderOnly id="formSpan" Create your workout sessions />
-      <h2>{day}</h2>
       <form
         autoComplete="off"
         aria-labelledby="formSpan"
-        //onSubmit={}
+        onSubmit={handleSubmit}
       >
-        <div>
-          <p>mucels</p> <Button name="+" />
-          <p>0</p>
-          <Button name="-" />
-        </div>
-
-        <input
-          lable="Exercise"
-          id="exercise"
-          name="exercise"
-          required="required"
-          maxLenght={20}
-          type="text"
-          placeholder="add ur exercise"
-          //value=""
-          //onChange={}
-        />
-        <input
-          lable="Weight"
-          id="weight"
-          name="weight"
-          required="required"
-          maxLenght={5}
-          type="text"
-          placeholder="add your weight"
-          //value=""
-          //onChange={}
-        />
-        <input
-          lable="Repetitions"
-          id="repetitions"
-          name="repetitions"
-          required="required"
-          maxLenght={2}
-          type="text"
-          placeholder="add your repetitions"
-          //value=""
-          //onChange={}
-        />
-        <input
-          lable="Sets"
-          id="sets"
-          name="sets"
-          required="required"
-          maxLenght={2}
-          type="text"
-          placeholder="add your sets"
-          //value=""
-          //onChange={}
-        />
-        <Button
-          name="Save"
-          type="submit"
-          //onClick={}
-        />
+        <h3>{day}</h3>
+        {/* <SpaceBetween>
+          <div>
+            <p>mucels</p>
+          </div>
+          <StyledRow>
+            <button type="button">
+              <IoIosAddCircleOutline />
+            </button>
+            <p>0</p>
+            <Button name="-" />
+          </StyledRow>
+        </SpaceBetween> */}
+        <SpaceBetween>
+          <label htmlFor={`exercise${day.day}`}>Exercise</label>
+          <input
+            id={`exercise${day.day}`}
+            name="exercise"
+            required="required"
+            maxlenght={20}
+            type="text"
+            placeholder="add ur exercise"
+            //value=""
+            //onChange={}
+          />
+        </SpaceBetween>
+        <SpaceBetween>
+          <label htmlFor={`weight${day.day}`}>Weight</label>
+          <input
+            id={`weight${day.day}`}
+            name="weight"
+            required="required"
+            maxlenght={5}
+            type="text"
+            placeholder="add your weight"
+            //value=""
+            //onChange={}
+          />
+        </SpaceBetween>
+        <SpaceBetween>
+          <label htmlFor={`repetitions${day.day}`}>Repetitions</label>
+          <input
+            id={`repetitions${day.day}`}
+            name="repetitions"
+            required="required"
+            maxlenght={2}
+            type="text"
+            placeholder="add your repetitions"
+            //value=""
+            //onChange={}
+          />
+        </SpaceBetween>
+        <SpaceBetween>
+          <label htmlFor={`sets${day.day}`}>Sets</label>
+          <input
+            id={`sets${day.day}`}
+            name="sets"
+            required="required"
+            maxlenght={2}
+            type="text"
+            placeholder="add your sets"
+            //value=""
+            //onChange={}
+          />
+        </SpaceBetween>
+        <Center>
+          <Button
+            name="Save"
+            type="submit"
+            //onClick={}
+          />
+        </Center>
       </form>
     </>
   );
 }
+
+const StyledRow = styled.div`
+  display: flex;
+  gap: 5px;
+`;

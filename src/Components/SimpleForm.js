@@ -135,7 +135,8 @@ export default function SimpleForm({ onCreateCards }) {
           {exerciseCards.map((exerciseInputs, index) => (
             <StyledBox key={index}>
               <InputWrapper>
-                <Label htmlFor="exercise">Exercise</Label>
+                <p>Exercise :</p> {exerciseInputs.exercise}
+                {/* <Label htmlFor="exercise">Exercise</Label>
                 <Input
                   name="exercise"
                   required
@@ -144,10 +145,11 @@ export default function SimpleForm({ onCreateCards }) {
                   type="text"
                   value={exerciseInputs.exercise}
                   onChange={handleOnChange}
-                />
+                />*/}
               </InputWrapper>
               <InputWrapper>
-                <Label htmlFor="weight">Weight</Label>
+                <p>Weight :</p> {exerciseInputs.weight}
+                {/* <Label htmlFor="weight">Weight</Label>
                 <Input
                   name="weight"
                   required
@@ -157,10 +159,11 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur weight"
                   value={exerciseInputs.weight}
                   onChange={handleOnChange}
-                />
+              />*/}
               </InputWrapper>
               <InputWrapper>
-                <Label htmlFor="rep etitions">Repetitions</Label>
+                <p>Repetitions :</p> {exerciseInputs.repetitions}
+                {/* <Label htmlFor="rep etitions">Repetitions</Label>
                 <Input
                   name="repetitions"
                   required
@@ -170,10 +173,11 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur repetitions"
                   value={exerciseInputs.repetitions}
                   onChange={handleOnChange}
-                />
+            />*/}
               </InputWrapper>
               <InputWrapper>
-                <Label htmlFor="sets">Sets</Label>
+                <p>Sets :</p> {exerciseInputs.sets}
+                {/* <Label htmlFor="sets">Sets</Label>
                 <Input
                   name="sets"
                   required
@@ -184,7 +188,7 @@ export default function SimpleForm({ onCreateCards }) {
                   value={exerciseInputs.sets}
                   onChange={handleOnChange}
                   // use this if handleOnChange not work. onChange={event => handleChangeInput(index, event)}
-                />
+          />*/}
               </InputWrapper>
               <button type="button" onClick={() => handleRemoveExercise(index)}>
                 Remove

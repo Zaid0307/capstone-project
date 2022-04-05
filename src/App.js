@@ -17,9 +17,8 @@ export default function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Form />
-          } /* path="/" element={<SimpleForm onCreateCards={createCards} />}*/
+          element={<Form onAddWorkoutPlan={createCard} />} /*path="/"
+          element={<SimpleForm onCreateCards={createCards} />}*/
         />
         <Route
           path="/Workoutplans"
@@ -32,8 +31,8 @@ export default function App() {
     </div>
   );
 
-  function createCards(newCards) {
-    setData([...data, ...newCards]);
+  function createCard(newCard) {
+    setData([...data, newCard]);
     navigate('/Workoutplans');
   }
 }

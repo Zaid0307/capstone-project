@@ -2,7 +2,38 @@ import { useState } from 'react';
 import Button from './Button';
 import styled from 'styled-components';
 
-export default function CreateForm({ handleSubmit, onCheck, onChange }) {
+export default function CreateForm({ onSubmit }) {
+  const [formInfo, setFormInfo] = useState({});
+  const [days, setDays] = useState();
+
+  function onCheck(event) {
+    const { name, checked } = event.target;
+    setDays({ ...days, [name]: checked });
+  }
+
+  function onChange(event) {
+    const { name, value } = event.target;
+    setFormInfo({ ...formInfo, [name]: value });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const daysAsArray = Object.entries(days).map(element => {
+      if (element[1]) {
+        return { day: element[0] };
+      }
+    });
+    // {tuesday: true}
+    // [['tuesday', true]]
+
+    onSubmit({
+      nameOfWorkout: formInfo.nameOfWorkout,
+      description: formInfo.description,
+      days: daysAsArray,
+    });
+  }
+
   return (
     <PageBox>
       <StyledCenterBox>
@@ -21,44 +52,65 @@ export default function CreateForm({ handleSubmit, onCheck, onChange }) {
             id="nameOfWorkout"
             type="text"
             placeholder="Name your Workout plan"
+            value={formInfo.workOutName}
           />
         </StyledInputBox>
 
         <TitleCheckbox>Choose your training days*:</TitleCheckbox>
 
         <StyledCheckBox>
-          <input name="monday" onChange={onCheck} type="checkbox" />
-          <label>Monday</label>
+          <input id="monday" name="monday" onChange={onCheck} type="checkbox" />
+          <label htmlFor="monday">Monday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="tuseday" onChange={onCheck} type="checkbox" />
-          <label>Tuseday</label>
+          <input
+            id="tuseday"
+            name="tuseday"
+            onChange={onCheck}
+            type="checkbox"
+          />
+          <label htmlFor="tuseday">Tuseday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="wednesday" onChange={onCheck} type="checkbox" />
-          <label>Wednesday</label>
+          <input
+            id="wednesday"
+            name="wednesday"
+            onChange={onCheck}
+            type="checkbox"
+          />
+          <label htmlFor="wednesday">Wednesday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="thursday" onChange={onCheck} type="checkbox" />
-          <label>Thursday</label>
+          <input
+            id="thursday"
+            name="thursday"
+            onChange={onCheck}
+            type="checkbox"
+          />
+          <label htmlFor="thursday"> Thursday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="friday" onChange={onCheck} type="checkbox" />
-          <label>Friday</label>
+          <input id="friday" name="friday" onChange={onCheck} type="checkbox" />
+          <label htmlFor="friday">Friday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="saturday" onChange={onCheck} type="checkbox" />
-          <label>Saturday</label>
+          <input
+            id="saturday"
+            name="saturday"
+            onChange={onCheck}
+            type="checkbox"
+          />
+          <label htmlFor="saturday">Saturday</label>
         </StyledCheckBox>
 
         <StyledCheckBox>
-          <input name="sunday" onChange={onCheck} type="checkbox" />
-          <label>Sunday</label>
+          <input id="sunday" name="sunday" onChange={onCheck} type="checkbox" />
+          <label htmlFor="sunday">Sunday</label>
         </StyledCheckBox>
 
         <StyledInputBox>
@@ -70,6 +122,7 @@ export default function CreateForm({ handleSubmit, onCheck, onChange }) {
             id="discripeUrPlan"
             type="text"
             placeholder="Add a description for your Workout plan ..."
+            value={formInfo.description}
           />
         </StyledInputBox>
 
