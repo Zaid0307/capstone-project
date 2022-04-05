@@ -43,24 +43,22 @@ export default function DayForm({ onSubmit, day }) {
           </StyledRow>
         </SpaceBetween> */}
           <SpaceBetween>
-            <label htmlFor={`muscle${day.day}`}>Muscle:</label>
-            <Input
-              id={`muscle${day.day}`}
+            <label htmlFor={`muscle${day}`}>Muscle:</label>
+            <input
+              id={`muscle${day}`}
               name="muscle"
-              required="required"
+              required
               maxlenght={20}
               type="text"
               placeholder="add ur muscle"
-              //value=""
-              //onChange={}
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`exercise${day.day}`}>Exercise:</label>
+            <label htmlFor={`exercise${day}`}>Exercise:</label>
             <Input
-              id={`exercise${day.day}`}
+              id={`exercise${day}`}
               name="exercise"
-              required="required"
+              required
               maxlenght={20}
               type="text"
               placeholder="add ur exercise"
@@ -69,11 +67,11 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`weight${day.day}`}>Weight:</label>
+            <label htmlFor={`weight${day}`}>Weight:</label>
             <Input
-              id={`weight${day.day}`}
+              id={`weight${day}`}
               name="weight"
-              required="required"
+              required
               maxlenght={5}
               type="text"
               placeholder="add your weight"
@@ -82,11 +80,11 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`repetitions${day.day}`}>Repetitions:</label>
+            <label htmlFor={`repetitions${day}`}>Repetitions:</label>
             <Input
-              id={`repetitions${day.day}`}
+              id={`repetitions${day}`}
               name="repetitions"
-              required="required"
+              required
               maxlenght={2}
               type="text"
               placeholder="add your repetitions"
@@ -95,11 +93,11 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`sets${day.day}`}>Sets:</label>
+            <label htmlFor={`sets${day}`}>Sets:</label>
             <Input
-              id={`sets${day.day}`}
+              id={`sets${day}`}
               name="sets"
-              required="required"
+              required
               maxlenght={2}
               type="text"
               placeholder="add your sets"
@@ -108,11 +106,7 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <Center>
-            <Button
-              name="Save"
-              type="submit"
-              //onClick={}
-            />
+            <button type="submit">Save</button>
           </Center>
         </form>
       </FormBox>
