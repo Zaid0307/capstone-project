@@ -54,8 +54,8 @@ export default function Form({ onAddWorkoutPlan }) {
     setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
   }
   // const data = {
-  //   nameOfWorkout: 'foobar',
-  //   description: 'foobarbaz',
+  //   nameOfWorkout: 'Test 1',
+  //   description: 'description 1',
   //   days: [{day: 'tuesday', exercise: 'ringbell', weight: '50', repetitions: '100', sets: '50' }]
   // }
 }
