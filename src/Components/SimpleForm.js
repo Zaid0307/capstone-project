@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+/*import styled from 'styled-components';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
 import InputWrapper from './Styles/SpaceBetween';
 import Center from './Styles/Center';
@@ -137,11 +137,11 @@ export default function SimpleForm({ onCreateCards }) {
                   type="text"
                   value={exerciseInputs.exercise}
                   onChange={handleOnChange}
-                />*/}
+                />*
               </InputWrapper>
               <InputWrapper>
                 <p>Weight :</p> {exerciseInputs.weight}
-                {/* <Label htmlFor="weight">Weight</Label>
+                 <Label htmlFor="weight">Weight</Label>
                 <Input
                   name="weight"
                   required
@@ -151,7 +151,7 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur weight"
                   value={exerciseInputs.weight}
                   onChange={handleOnChange}
-              />*/}
+              />
               </InputWrapper>
               <InputWrapper>
                 <p>Repetitions :</p> {exerciseInputs.repetitions}
@@ -165,11 +165,11 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur repetitions"
                   value={exerciseInputs.repetitions}
                   onChange={handleOnChange}
-            />*/}
+            />
               </InputWrapper>
               <InputWrapper>
                 <p>Sets :</p> {exerciseInputs.sets}
-                {/* <Label htmlFor="sets">Sets</Label>
+                 <Label htmlFor="sets">Sets</Label>
                 <Input
                   name="sets"
                   required
@@ -180,7 +180,7 @@ export default function SimpleForm({ onCreateCards }) {
                   value={exerciseInputs.sets}
                   onChange={handleOnChange}
                   // use this if handleOnChange not work. onChange={event => handleChangeInput(index, event)}
-          />*/}
+          />
               </InputWrapper>
               <button type="button" onClick={() => handleRemoveExercise(index)}>
                 Remove
@@ -244,3 +244,4 @@ const Input = styled.input`
 const Label = styled.label`
   font-size: 1rem;
 `;
+*/
