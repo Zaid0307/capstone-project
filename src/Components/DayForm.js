@@ -22,14 +22,15 @@ export default function DayForm({ onSubmit, day }) {
 
   return (
     <>
-      <ScreenReaderOnly id="formSpan" Create your workout sessions />
-      <form
-        autoComplete="off"
-        aria-labelledby="formSpan"
-        onSubmit={handleSubmit}
-      >
-        <h3>{day}</h3>
-        {/* <SpaceBetween>
+      <FormBox>
+        <ScreenReaderOnly id="formSpan" Create your workout sessions />
+        <form
+          autoComplete="off"
+          aria-labelledby="formSpan"
+          onSubmit={handleSubmit}
+        >
+          <StyledDay>{day}</StyledDay>
+          {/* <SpaceBetween>
           <div>
             <p>mucels</p>
           </div>
@@ -41,66 +42,80 @@ export default function DayForm({ onSubmit, day }) {
             <Button name="-" />
           </StyledRow>
         </SpaceBetween> */}
-        <SpaceBetween>
-          <label htmlFor={`exercise${day.day}`}>Exercise</label>
-          <input
-            id={`exercise${day.day}`}
-            name="exercise"
-            required="required"
-            maxlenght={20}
-            type="text"
-            placeholder="add ur exercise"
-            //value=""
-            //onChange={}
-          />
-        </SpaceBetween>
-        <SpaceBetween>
-          <label htmlFor={`weight${day.day}`}>Weight</label>
-          <input
-            id={`weight${day.day}`}
-            name="weight"
-            required="required"
-            maxlenght={5}
-            type="text"
-            placeholder="add your weight"
-            //value=""
-            //onChange={}
-          />
-        </SpaceBetween>
-        <SpaceBetween>
-          <label htmlFor={`repetitions${day.day}`}>Repetitions</label>
-          <input
-            id={`repetitions${day.day}`}
-            name="repetitions"
-            required="required"
-            maxlenght={2}
-            type="text"
-            placeholder="add your repetitions"
-            //value=""
-            //onChange={}
-          />
-        </SpaceBetween>
-        <SpaceBetween>
-          <label htmlFor={`sets${day.day}`}>Sets</label>
-          <input
-            id={`sets${day.day}`}
-            name="sets"
-            required="required"
-            maxlenght={2}
-            type="text"
-            placeholder="add your sets"
-            //value=""
-            //onChange={}
-          />
-        </SpaceBetween>
-        <Center>
-          <Button
-            name="Save"
-            type="submit"
-            //onClick={}
-          />
-        </Center>
-      </form>
+          <SpaceBetween>
+            <label htmlFor={`muscle${day.day}`}>Muscle:</label>
+            <Input
+              id={`muscle${day.day}`}
+              name="muscle"
+              required="required"
+              maxlenght={20}
+              type="text"
+              placeholder="add ur muscle"
+              //value=""
+              //onChange={}
+            />
+          </SpaceBetween>
+          <SpaceBetween>
+            <label htmlFor={`exercise${day.day}`}>Exercise:</label>
+            <Input
+              id={`exercise${day.day}`}
+              name="exercise"
+              required="required"
+              maxlenght={20}
+              type="text"
+              placeholder="add ur exercise"
+              //value=""
+              //onChange={}
+            />
+          </SpaceBetween>
+          <SpaceBetween>
+            <label htmlFor={`weight${day.day}`}>Weight:</label>
+            <Input
+              id={`weight${day.day}`}
+              name="weight"
+              required="required"
+              maxlenght={5}
+              type="text"
+              placeholder="add your weight"
+              //value=""
+              //onChange={}
+            />
+          </SpaceBetween>
+          <SpaceBetween>
+            <label htmlFor={`repetitions${day.day}`}>Repetitions:</label>
+            <Input
+              id={`repetitions${day.day}`}
+              name="repetitions"
+              required="required"
+              maxlenght={2}
+              type="text"
+              placeholder="add your repetitions"
+              //value=""
+              //onChange={}
+            />
+          </SpaceBetween>
+          <SpaceBetween>
+            <label htmlFor={`sets${day.day}`}>Sets:</label>
+            <Input
+              id={`sets${day.day}`}
+              name="sets"
+              required="required"
+              maxlenght={2}
+              type="text"
+              placeholder="add your sets"
+              //value=""
+              //onChange={}
+            />
+          </SpaceBetween>
+          <Center>
+            <Button
+              name="Save"
+              type="submit"
+              //onClick={}
+            />
+          </Center>
+        </form>
+      </FormBox>
     </>
   );
 }
@@ -108,4 +123,24 @@ export default function DayForm({ onSubmit, day }) {
 const StyledRow = styled.div`
   display: flex;
   gap: 5px;
+`;
+
+const StyledDay = styled.h2`
+  display: flex;
+  justify-content: center;
+  border: 1.5px solid gray;
+  border-radius: 5px;
+  margin: 5px;
+  padding-top: 3px;
+`;
+
+const FormBox = styled.div`
+  border: 1px solid lightgray;
+  padding: 2px;
+  margin: 5px 0 5px 0;
+  border-radius: 5px;
+`;
+
+const Input = styled.input`
+  width: 230px;
 `;

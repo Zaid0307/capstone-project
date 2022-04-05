@@ -3,8 +3,12 @@ import Button from './Button';
 import styled from 'styled-components';
 
 export default function CreateForm({ onSubmit }) {
-  const [formInfo, setFormInfo] = useState({});
+  const [formInfo, setFormInfo] = useState({
+    workOutName: '',
+    description: '',
+  });
   const [days, setDays] = useState();
+  console.log(formInfo);
 
   function onCheck(event) {
     const { name, checked } = event.target;
@@ -28,7 +32,7 @@ export default function CreateForm({ onSubmit }) {
     // [['tuesday', true]]
 
     onSubmit({
-      nameOfWorkout: formInfo.nameOfWorkout,
+      nameOfWorkout: formInfo.workOutName,
       description: formInfo.description,
       days: daysAsArray,
     });
