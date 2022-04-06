@@ -44,7 +44,7 @@ export default function DayForm({ onSubmit, day }) {
         </SpaceBetween> */}
           <SpaceBetween>
             <label htmlFor={`muscle${day}`}>Muscle:</label>
-            <input
+            <Input
               id={`muscle${day}`}
               name="muscle"
               required
