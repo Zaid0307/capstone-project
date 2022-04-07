@@ -7,8 +7,6 @@ export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
   const [toggleForm, setToggleForm] = useState(false);
 
-  console.log('main', workoutPlan);
-
   return (
     <>
       <PageBox>
@@ -43,22 +41,15 @@ export default function Form({ onAddWorkoutPlan }) {
   }
 
   function createDayExercises(updatedDay) {
-    // updatedDay = {day: 'tuesday', exercise: 'ringbell', weight: '50', repetitions: '100', sets: '50' }
-
     const daysAndExercises = workoutPlan.days.map(day => {
       if (day.day === updatedDay.day) {
         return updatedDay;
       }
       return day;
     });
-    console.log(daysAndExercises);
+
     setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
   }
-  // const data = {
-  //   nameOfWorkout: 'Test 1',
-  //   description: 'description 1',
-  //   days: [{day: 'tuesday', exercise: 'ringbell', weight: '50', repetitions: '100', sets: '50' }]
-  // }
 }
 
 const StyledCenterBox = styled.div`

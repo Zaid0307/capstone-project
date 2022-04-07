@@ -27,8 +27,6 @@ export default function CreateForm({ onSubmit }) {
         return { day: element[0] };
       }
     });
-    // {tuesday: true}
-    // [['tuesday', true]]
 
     onSubmit({
       nameOfWorkout: formInfo.workOutName,
@@ -135,7 +133,6 @@ export default function CreateForm({ onSubmit }) {
   );
 }
 
-//Styled-Component
 const PageBox = styled.div`
   display: flex;
   flex-direction: column;
