@@ -1,4 +1,4 @@
-/*import styled from 'styled-components';
+import styled from 'styled-components';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
 import InputWrapper from './Styles/SpaceBetween';
 import Center from './Styles/Center';
@@ -7,11 +7,11 @@ import { useState } from 'react';
 export default function SimpleForm({ onCreateCards }) {
   const [exerciseCards, setExerciseCards] = useState([]);
 
-  //const handleAddExercise = () => {
-  // console.log(formData);
-  // setExerciseCards([...exerciseCards, formData]);
-  // setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
-  // };
+  const handleAddExercise = () => {
+    console.log(formData);
+    setExerciseCards([...exerciseCards, formData]);
+    setFormData({ exercise: '', weight: '', repetitions: '', sets: '' });
+  };
 
   const handleRemoveExercise = targetIndex => {
     const values = exerciseCards.filter(
@@ -128,7 +128,7 @@ export default function SimpleForm({ onCreateCards }) {
             <StyledBox key={index}>
               <InputWrapper>
                 <p>Exercise :</p> {exerciseInputs.exercise}
-                {/* <Label htmlFor="exercise">Exercise</Label>
+                <Label htmlFor="exercise">Exercise</Label>
                 <Input
                   name="exercise"
                   required
@@ -137,11 +137,11 @@ export default function SimpleForm({ onCreateCards }) {
                   type="text"
                   value={exerciseInputs.exercise}
                   onChange={handleOnChange}
-                />*
+                />
               </InputWrapper>
               <InputWrapper>
                 <p>Weight :</p> {exerciseInputs.weight}
-                 <Label htmlFor="weight">Weight</Label>
+                <Label htmlFor="weight">Weight</Label>
                 <Input
                   name="weight"
                   required
@@ -151,11 +151,11 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur weight"
                   value={exerciseInputs.weight}
                   onChange={handleOnChange}
-              />
+                />
               </InputWrapper>
               <InputWrapper>
                 <p>Repetitions :</p> {exerciseInputs.repetitions}
-                {/* <Label htmlFor="rep etitions">Repetitions</Label>
+                <Label htmlFor="rep etitions">Repetitions</Label>
                 <Input
                   name="repetitions"
                   required
@@ -165,11 +165,11 @@ export default function SimpleForm({ onCreateCards }) {
                   placeholder="add ur repetitions"
                   value={exerciseInputs.repetitions}
                   onChange={handleOnChange}
-            />
+                />
               </InputWrapper>
               <InputWrapper>
                 <p>Sets :</p> {exerciseInputs.sets}
-                 <Label htmlFor="sets">Sets</Label>
+                <Label htmlFor="sets">Sets</Label>
                 <Input
                   name="sets"
                   required
@@ -180,7 +180,7 @@ export default function SimpleForm({ onCreateCards }) {
                   value={exerciseInputs.sets}
                   onChange={handleOnChange}
                   // use this if handleOnChange not work. onChange={event => handleChangeInput(index, event)}
-          />
+                />
               </InputWrapper>
               <button type="button" onClick={() => handleRemoveExercise(index)}>
                 Remove
@@ -244,4 +244,3 @@ const Input = styled.input`
 const Label = styled.label`
   font-size: 1rem;
 `;
-*/

@@ -4,28 +4,28 @@ import SpaceBetween from './Styles/SpaceBetween';
 export default function WorkoutPlans({ item }) {
   return (
     <WorkoutBox>
-      <WorkoutPlan>Workout Plans</WorkoutPlan>
-      <Day>{item.day}</Day>
+      <NameOfWorkoutplan>{item.nameOfWorkout}</NameOfWorkoutplan>
+      <Day>{item.days[0].day}</Day>
       <SpaceBetween>
         <Muscle>Muscle</Muscle>
-        <ItemMuscle>{item.muscle}</ItemMuscle>
+        <ItemMuscle>{item.days[0].muscle}</ItemMuscle>
       </SpaceBetween>
       <StyledBox>
         <SpaceBetween>
           <p>Exercise</p>
-          <p>{item.exercise}</p>
+          <p>{item.days[0].exercise}</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Weight</p>
-          <p>{item.weight} Kg</p>
+          <p>{item.days[0].weight} Kg</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Repetitions</p>
-          <p>{item.repetitions}</p>
+          <p>{item.days[0].repetitions}</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Sets</p>
-          <p>{item.sets}</p>
+          <p>{item.days[0].sets}</p>
         </SpaceBetween>
       </StyledBox>
     </WorkoutBox>
@@ -41,7 +41,7 @@ const StyledBox = styled.div`
   border-radius: 5px;
 `;
 
-const WorkoutPlan = styled.h2`
+const NameOfWorkoutplan = styled.h2`
   display: flex;
   justify-content: center;
   border: 2px solid Black;

@@ -7,6 +7,8 @@ export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
   const [toggleForm, setToggleForm] = useState(false);
 
+  console.log('main', workoutPlan);
+
   return (
     <>
       <PageBox>
