@@ -15,7 +15,7 @@ describe('CreateForm', () => {
     const checkboxSunday = screen.getByLabelText(/sunday/i);
     const inputDescription = screen.getByLabelText(/description/i);
     const submitButton = screen.getByRole('button', {
-      name: /Create Workout Plan/i,
+      name: /Create/i,
     });
 
     expect(inputTitle).toBeInTheDocument();
