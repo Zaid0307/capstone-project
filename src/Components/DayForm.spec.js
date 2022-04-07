@@ -22,8 +22,7 @@ describe('DayForm', () => {
     expect(inputExercise).toHaveAttribute('type', 'text');
     expect(inputExercise).toHaveValue('');
     expect(inputWeight).toBeInTheDocument();
-    expect(inputWeight).toHaveAttribute('type', 'text');
-    expect(inputWeight).toHaveValue('');
+    expect(inputWeight).toHaveAttribute('type', 'number');
     expect(inputRepetitions).toBeInTheDocument();
     expect(inputRepetitions).toHaveAttribute('type', 'number');
     expect(inputSets).toBeInTheDocument();

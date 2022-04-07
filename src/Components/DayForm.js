@@ -51,14 +51,13 @@ export default function DayForm({ onSubmit, day }) {
           <SpaceBetween>
             <label htmlFor={`muscle${day}`}>Muscle:</label>
             <select
+              defaultValue="Arms"
               id={`muscle${day}`}
               name="selectList"
               required
               onChange={handleOnChange}
             >
-              <option selected value="Arms">
-                Arms
-              </option>
+              <option value="Arms">Arms</option>
               <option value="Back">Back</option>
               <option value="Chest">Chest</option>
               <option value="Legs">Legs</option>
@@ -86,8 +85,8 @@ export default function DayForm({ onSubmit, day }) {
               name="weight"
               required
               maxlenght={5}
-              type="text"
-              placeholder="12,5 or body weight"
+              type="number"
+              placeholder="12,5 ... 80 for Bodyweight"
               value={workOutData.weight}
               onChange={handleOnChange}
             />
