@@ -169,11 +169,10 @@ const StyledInput = styled.input`
   font-size: 1rem;
   padding-left: 0.25rem;
   padding-top: 0.25rem;
-  min-width: 20rem;
   background-color: transparent;
-  width: 50px;
+  width: 250px;
   &::placeholder {
-    color: #344b59;
+    color: red;
   }
   &:focus {
     border-color: #496b73;

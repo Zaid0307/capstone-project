@@ -194,11 +194,12 @@ const StyledInput = styled.input`
   min-width: 20rem;
   background-color: transparent;
   width: 100%;
-  /* &::placeholder {
+  &::placeholder {
     color: #344b59;
-  } */
+  }
   &:focus {
-    border-color: #496b73;
+    border-color: red;
+    /* border-color: #496b73; */
     outline: none;
   }
 `;
