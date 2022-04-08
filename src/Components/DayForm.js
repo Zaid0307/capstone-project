@@ -26,7 +26,7 @@ export default function DayForm({ onSubmit, day }) {
       sets: sets.value,
     };
 
-    onSubmit({ newDay });
+    onSubmit(newDay);
   }
 
   function handleOnChange(event) {
@@ -120,9 +120,7 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <Center>
-            <button type="button" onClick={handleAddExercise}>
-              add exercise
-            </button>
+            <button onClick={handleAddExercise}>add exercise</button>
           </Center>
         </form>
 
@@ -157,10 +155,17 @@ const StyledMuscleName = styled.div`
   padding-top: 3px;
 `;
 const FormBox = styled.div`
-  border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  margin: 0 15px 15px 15px;
+  padding: 5px;
+  background-color: #d5dee8;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  /* border: 1px solid lightgray;
   padding: 2px;
   margin: 5px 0 5px 0;
-  border-radius: 5px;
+  border-radius: 5px; */
 `;
 
 const Input = styled.input`

@@ -60,77 +60,77 @@ export default function CreateForm({ onSubmit }) {
         </StyledInputBox>
 
         <TitleCheckbox>Choose your training days*:</TitleCheckbox>
+        <div required>
+          <StyledCheckBox>
+            <InputCheck
+              id="monday"
+              name="monday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="monday">Monday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="monday"
-            name="monday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="monday">Monday</StyledLabel>
-        </StyledCheckBox>
+          <StyledCheckBox>
+            <InputCheck
+              id="tuseday"
+              name="tuseday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="tuseday">Tuseday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="tuseday"
-            name="tuseday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="tuseday">Tuseday</StyledLabel>
-        </StyledCheckBox>
+          <StyledCheckBox>
+            <InputCheck
+              id="wednesday"
+              name="wednesday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="wednesday">Wednesday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="wednesday"
-            name="wednesday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="wednesday">Wednesday</StyledLabel>
-        </StyledCheckBox>
+          <StyledCheckBox>
+            <InputCheck
+              id="thursday"
+              name="thursday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="thursday"> Thursday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="thursday"
-            name="thursday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="thursday"> Thursday</StyledLabel>
-        </StyledCheckBox>
+          <StyledCheckBox>
+            <InputCheck
+              id="friday"
+              name="friday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="friday">Friday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="friday"
-            name="friday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="friday">Friday</StyledLabel>
-        </StyledCheckBox>
+          <StyledCheckBox>
+            <InputCheck
+              id="saturday"
+              name="saturday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="saturday">Saturday</StyledLabel>
+          </StyledCheckBox>
 
-        <StyledCheckBox>
-          <InputCheck
-            id="saturday"
-            name="saturday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="saturday">Saturday</StyledLabel>
-        </StyledCheckBox>
-
-        <StyledCheckBox>
-          <InputCheck
-            id="sunday"
-            name="sunday"
-            onChange={onCheck}
-            type="checkbox"
-          />
-          <StyledLabel htmlFor="sunday">Sunday</StyledLabel>
-        </StyledCheckBox>
-
+          <StyledCheckBox>
+            <InputCheck
+              id="sunday"
+              name="sunday"
+              onChange={onCheck}
+              type="checkbox"
+            />
+            <StyledLabel htmlFor="sunday">Sunday</StyledLabel>
+          </StyledCheckBox>
+        </div>
         <StyledInputBox>
           <label htmlFor="discripeUrPlan">
             <ScreenReaderOnly>Description</ScreenReaderOnly>
@@ -159,7 +159,7 @@ const PageBox = styled.div`
   border-radius: 5px;
   margin: 0 15px 15px 15px;
   padding: 5px;
-  background-color: #6fa0a6;
+  background-color: #d5dee8;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 `;
 
@@ -176,7 +176,7 @@ const StyledCenterBox = styled.div`
 
 const TitleCheckbox = styled.p`
   padding-bottom: 20px;
-  color: #283a45;
+  color: #496b73;
 `;
 
 const StyledInputBox = styled.div`
@@ -218,7 +218,7 @@ const InputCheck = styled.input`
 `;
 
 const StyledLabel = styled.label`
-  color: #283a45;
+  color: #496b73;
   display: flex;
   ::before {
     content: '';
@@ -243,9 +243,9 @@ const SubmitButton = styled.button`
   font-weight: 500;
   padding: 5px;
   background-color: #283a45;
-  color: #6fa0a6;
+  color: #d5dee8;
   :hover {
     background-color: #496b73;
-    color: #283a45;
+    color: #b5dff5;
   }
 `;
