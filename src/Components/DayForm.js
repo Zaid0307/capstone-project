@@ -47,9 +47,9 @@ export default function DayForm({ onSubmit, day }) {
           aria-labelledby="formSpan"
           onSubmit={handleSubmit}
         >
-          <StyledDay>{day}</StyledDay>
+          <StyledCenterBox>{day}</StyledCenterBox>
           <SpaceBetween>
-            <label htmlFor={`muscle${day}`}>Muscle:</label>
+            <Lable htmlFor={`muscle${day}`}>Muscle:</Lable>
             <select
               defaultValue="Arms"
               id={`muscle${day}`}
@@ -66,8 +66,8 @@ export default function DayForm({ onSubmit, day }) {
             </select>
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`exercise${day}`}>Exercise:</label>
-            <Input
+            <Lable htmlFor={`exercise${day}`}>Exercise:</Lable>
+            <StyledInput
               id={`exercise${day}`}
               name="exercise"
               required
@@ -79,8 +79,8 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`weight${day}`}>Weight:</label>
-            <Input
+            <Lable htmlFor={`weight${day}`}>Weight:</Lable>
+            <StyledInput
               id={`weight${day}`}
               name="weight"
               required
@@ -92,8 +92,8 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`repetitions${day}`}>Repetitions:</label>
-            <Input
+            <Lable htmlFor={`repetitions${day}`}>Repetitions:</Lable>
+            <StyledInput
               id={`repetitions${day}`}
               name="repetitions"
               required
@@ -106,8 +106,8 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`sets${day}`}>Sets:</label>
-            <Input
+            <Lable htmlFor={`sets${day}`}>Sets:</Lable>
+            <StyledInput
               id={`sets${day}`}
               name="sets"
               required
@@ -120,7 +120,9 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <Center>
-            <button onClick={handleAddExercise}>add exercise</button>
+            <OnClickButton onClick={handleAddExercise}>
+              add exercise
+            </OnClickButton>
           </Center>
         </form>
 
@@ -138,14 +140,6 @@ export default function DayForm({ onSubmit, day }) {
   );
 }
 
-const StyledDay = styled.h2`
-  display: flex;
-  justify-content: center;
-  border: 1.5px solid gray;
-  border-radius: 5px;
-  margin: 5px;
-  padding-top: 3px;
-`;
 const StyledMuscleName = styled.div`
   display: flex;
   justify-content: center;
@@ -168,6 +162,53 @@ const FormBox = styled.div`
   border-radius: 5px; */
 `;
 
-const Input = styled.input`
-  width: 230px;
+const StyledInput = styled.input`
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 0.5px solid #5e888c;
+  font-size: 1rem;
+  padding-left: 0.25rem;
+  padding-top: 0.25rem;
+  min-width: 20rem;
+  background-color: transparent;
+  width: 50px;
+  ::placeholder {
+    color: #344b59;
+  }
+  :focus {
+    border-color: #496b73;
+    outline: none;
+  }
+`;
+
+const OnClickButton = styled.button`
+  display: inline-flex;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px;
+  background-color: #283a45;
+  color: #d5dee8;
+  :hover {
+    background-color: #496b73;
+    color: #b5dff5;
+  }
+`;
+
+const Lable = styled.label`
+  color: #496b73;
+`;
+
+const StyledCenterBox = styled.div`
+  display: flex;
+  background-color: #5e888c;
+  color: #283a45;
+  width: 100%;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  padding: 5px;
+  border-radius: 5px;
 `;
