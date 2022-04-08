@@ -172,10 +172,10 @@ const StyledInput = styled.input`
   min-width: 20rem;
   background-color: transparent;
   width: 50px;
-  ::placeholder {
+  &::placeholder {
     color: #344b59;
   }
-  :focus {
+  &:focus {
     border-color: #496b73;
     outline: none;
   }
@@ -192,7 +192,7 @@ const OnClickButton = styled.button`
   padding: 5px;
   background-color: #283a45;
   color: #d5dee8;
-  :hover {
+  &:hover {
     background-color: #496b73;
     color: #b5dff5;
   }

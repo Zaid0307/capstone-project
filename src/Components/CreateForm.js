@@ -194,10 +194,10 @@ const StyledInput = styled.input`
   min-width: 20rem;
   background-color: transparent;
   width: 100%;
-  ::placeholder {
+  /* &::placeholder {
     color: #344b59;
-  }
-  :focus {
+  } */
+  &:focus {
     border-color: #496b73;
     outline: none;
   }
@@ -212,7 +212,7 @@ const StyledCheckBox = styled.div`
 const InputCheck = styled.input`
   opacity: 0;
   position: absolute;
-  :checked + label::before {
+  &:checked + label::before {
     background-color: #344b59;
   }
 `;
@@ -220,7 +220,7 @@ const InputCheck = styled.input`
 const StyledLabel = styled.label`
   color: #496b73;
   display: flex;
-  ::before {
+  &::before {
     content: '';
     width: 1rem;
     height: 1rem;
@@ -244,7 +244,7 @@ const SubmitButton = styled.button`
   padding: 5px;
   background-color: #283a45;
   color: #d5dee8;
-  :hover {
+  &:hover {
     background-color: #496b73;
     color: #b5dff5;
   }
