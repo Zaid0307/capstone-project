@@ -6,8 +6,9 @@ import { useState } from 'react';
 import ListedExercise from './ListedExercise';
 
 export default function DayForm({ onSubmit, day }) {
-  const [createCard, setCreateCard] = useState([]);
-  const [workOutData, setWorkOutData] = useState({
+  const [exercises, setExercises] = useState([]);
+  const [muscle, setMuscle] = useState('');
+  const [exercise, setExercise] = useState({
     exercise: '',
     weight: '',
     repetitions: '',
@@ -16,26 +17,40 @@ export default function DayForm({ onSubmit, day }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const { exercise, weight, repetitions, sets } = form.elements;
-    const newDay = {
-      day,
-      exercise: exercise.value,
-      weight: weight.value,
-      repetitions: repetitions.value,
-      sets: sets.value,
-    };
-
-    onSubmit(newDay);
+    setExercises([...exercises, exercise]);
+    setExercise({
+      exercise: '',
+      weight: '',
+      repetitions: '',
+      sets: '',
+    });
+    setMuscle('');
   }
 
   function handleOnChange(event) {
     const { name, value } = event.target;
-    setWorkOutData({ ...workOutData, [name]: value });
+    setExercise({ ...exercise, [name]: value });
   }
 
   function handleAddExercise() {
-    setCreateCard([...createCard, workOutData]);
+    setExercises([...exercises, exercise]);
+    const newDay = {
+      day,
+      muscles: {
+        name: muscle,
+        exercises,
+      },
+    };
+    onSubmit(newDay);
+
+    setExercise({
+      exercise: '',
+      weight: '',
+      repetitions: '',
+      sets: '',
+    });
+    // setMuscle('');
+    // setExercise([]);
   }
 
   return (
@@ -51,12 +66,16 @@ export default function DayForm({ onSubmit, day }) {
           <SpaceBetween>
             <Lable htmlFor={`muscle${day}`}>Muscle:</Lable>
             <select
-              defaultValue="Arms"
               id={`muscle${day}`}
               name="selectList"
               required
-              onChange={handleOnChange}
+              defaultValue={'default'}
+              onChange={event => setMuscle(event.target.value)}
+              // value={muscle}
             >
+              <option value={'default'} disabled>
+                Choose an option
+              </option>
               <option value="Arms">Arms</option>
               <option value="Back">Back</option>
               <option value="Chest">Chest</option>
@@ -74,7 +93,7 @@ export default function DayForm({ onSubmit, day }) {
               maxlenght={20}
               type="text"
               placeholder="Dumbbell Incline Curl "
-              value={workOutData.exercise}
+              value={exercise.exercise}
               onChange={handleOnChange}
             />
           </SpaceBetween>
@@ -85,9 +104,10 @@ export default function DayForm({ onSubmit, day }) {
               name="weight"
               required
               maxlenght={5}
+              min="0"
               type="number"
               placeholder="12,5 ... 80 for Bodyweight"
-              value={workOutData.weight}
+              value={exercise.weight}
               onChange={handleOnChange}
             />
           </SpaceBetween>
@@ -97,11 +117,11 @@ export default function DayForm({ onSubmit, day }) {
               id={`repetitions${day}`}
               name="repetitions"
               required
-              maxlenght="2"
+              maxlenght={2}
               type="number"
               min="0"
               placeholder="12"
-              value={workOutData.repetitions}
+              value={exercise.repetitions}
               onChange={handleOnChange}
             />
           </SpaceBetween>
@@ -115,24 +135,20 @@ export default function DayForm({ onSubmit, day }) {
               type="number"
               min="0"
               placeholder="3"
-              value={workOutData.sets}
+              value={exercise.sets}
               onChange={handleOnChange}
             />
           </SpaceBetween>
           <Center>
-            <OnClickButton onClick={handleAddExercise}>
+            <OnClickButton type="button" onClick={handleAddExercise}>
               add exercise
             </OnClickButton>
           </Center>
         </form>
 
-        {!workOutData.selectList ? (
-          ''
-        ) : (
-          <StyledMuscleName>{workOutData.selectList}</StyledMuscleName>
-        )}
+        {muscle && <StyledMuscleName>{muscle}</StyledMuscleName>}
 
-        {createCard.map((newCards, index) => (
+        {exercises.map((newCards, index) => (
           <ListedExercise key={`card${index}`} newCards={newCards} />
         ))}
       </FormBox>
@@ -170,7 +186,7 @@ const StyledInput = styled.input`
   padding-left: 0.25rem;
   padding-top: 0.25rem;
   background-color: transparent;
-  width: 250px;
+  width: 220px;
   &::placeholder {
     color: red;
   }

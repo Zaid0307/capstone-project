@@ -14,7 +14,7 @@ export default function ListedExercise({ newCards }) {
         <p>Repetitions:</p> <p>{newCards.repetitions}</p>
       </SpaceBetween>
       <SpaceBetween>
-        <p>Sets:</p> <p>sets</p>
+        <p>Sets:</p> <p>{newCards.sets}</p>
       </SpaceBetween>
     </StyledBox>
   );

@@ -5,29 +5,38 @@ export default function WorkoutPlans({ item }) {
   return (
     <WorkoutBox>
       <NameOfWorkoutplan>{item.nameOfWorkout}</NameOfWorkoutplan>
-      <Day>{item.days[0].day}</Day>
-      <SpaceBetween>
+      {item.days.map(function (day, index) {
+        console.log(day);
+        return (
+          <Day key={`day${index}`}>
+            <p>{day.day}</p>
+            {/* <p>{day.muscles.name}</p> */}
+          </Day>
+        );
+      })}
+      {/* <Day>{item.days[0].day}</Day> */}
+      {/* <SpaceBetween>
         <Muscle>Muscle</Muscle>
-        <ItemMuscle>{item.days[0].muscle}</ItemMuscle>
+        <ItemMuscle>{item.days[0].muscles.name}</ItemMuscle>
       </SpaceBetween>
       <StyledBox>
         <SpaceBetween>
           <p>Exercise</p>
-          <p>{item.days[0].exercise}</p>
+          <p>{item.days[0].muscles.exercises[0].exercise}</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Weight</p>
-          <p>{item.days[0].weight} Kg</p>
+          <p>{item.days[0].muscles.exercises[0].weight} Kg</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Repetitions</p>
-          <p>{item.days[0].repetitions}</p>
+          <p>{item.days[0].muscles.exercises[0].repetitions}</p>
         </SpaceBetween>
         <SpaceBetween>
           <p>Sets</p>
-          <p>{item.days[0].sets}</p>
+          <p>{item.days[0].muscles.exercises[0].sets}</p>
         </SpaceBetween>
-      </StyledBox>
+      </StyledBox> */}
     </WorkoutBox>
   );
 }
@@ -48,7 +57,7 @@ const NameOfWorkoutplan = styled.h2`
   border-radius: 5px;
 `;
 
-const Day = styled.p`
+const Day = styled.div`
   border-bottom: 1px solid lightgray;
   margin-left: 10px;
   margin-top: 5px;

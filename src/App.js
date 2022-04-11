@@ -12,11 +12,7 @@ export default function App() {
   return (
     <GridWrap>
       <Routes>
-        <Route
-          path="/"
-          element={<Form onAddWorkoutPlan={createCard} />} /*path="/"
-          element={<SimpleForm onCreateCards={createCards} />}*/
-        />
+        <Route path="/" element={<Form onAddWorkoutPlan={createCard} />} />
         <Route
           path="/Workoutplans"
           element={<WorkoutplansPage data={data} />}
