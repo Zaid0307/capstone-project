@@ -4,13 +4,14 @@ import SpaceBetween from './Styles/SpaceBetween';
 export default function WorkoutPlans({ item }) {
   return (
     <WorkoutBox>
-      <NameOfWorkoutplan>{item.nameOfWorkout}</NameOfWorkoutplan>
-      {item.days.map(function (day, index) {
+      {/* <NameOfWorkoutplan>{item.nameOfWorkout}</NameOfWorkoutplan> */}
+      {item.map(function (day, index) {
         console.log(day);
         return (
           <Day key={`day${index}`}>
+            <p>{day.nameOfWorkout}</p>
             <p>{day.day}</p>
-            {/* <p>{day.muscles.name}</p> */}
+            {/* <p>{day[muscles].name}</p> */}
           </Day>
         );
       })}

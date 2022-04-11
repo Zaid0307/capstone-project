@@ -49,7 +49,7 @@ export default function DayForm({ onSubmit, day }) {
       repetitions: '',
       sets: '',
     });
-    // setMuscle('');
+    setMuscle('');
     // setExercise([]);
   }
 
@@ -69,13 +69,11 @@ export default function DayForm({ onSubmit, day }) {
               id={`muscle${day}`}
               name="selectList"
               required
-              defaultValue={'default'}
+              //defaultValue={'default'}
               onChange={event => setMuscle(event.target.value)}
-              // value={muscle}
+              value={muscle}
             >
-              <option value={'default'} disabled>
-                Choose an option
-              </option>
+              <option value={'default'}>Choose an option</option>
               <option value="Arms">Arms</option>
               <option value="Back">Back</option>
               <option value="Chest">Chest</option>
