@@ -7,12 +7,13 @@ import ListedExercise from './ListedExercise';
 
 export default function DayForm({ onSubmit, day }) {
   const [exercises, setExercises] = useState([]);
-  const [muscle, setMuscle] = useState('');
+  // const [muscle, setMuscle] = useState('');
   const [exercise, setExercise] = useState({
     exercise: '',
     weight: '',
     repetitions: '',
     sets: '',
+    muscle: '',
   });
 
   function handleSubmit(event) {
@@ -23,8 +24,9 @@ export default function DayForm({ onSubmit, day }) {
       weight: '',
       repetitions: '',
       sets: '',
+      muscle: 'default',
     });
-    setMuscle('');
+    // setMuscle('');
   }
 
   function handleOnChange(event) {
@@ -33,13 +35,23 @@ export default function DayForm({ onSubmit, day }) {
   }
 
   function handleAddExercise() {
-    setExercises([...exercises, exercise]);
+    // setExercises([...exercises, exercise]);
+
+    const muscleGroups = exercises.map(pMucsle => pMucsle.muscle);
+    const uniqueMuscleGroups = [...new Set(muscleGroups)];
+    const perMucsle = uniqueMuscleGroups.map(pMucsle => {
+      const exerciseMucsle = exercises.filter(
+        exercise => exercise.muscle === pMucsle
+      );
+      return {
+        name: pMucsle,
+        exercises: exerciseMucsle,
+      };
+    });
+
     const newDay = {
       day,
-      muscles: {
-        name: muscle,
-        exercises,
-      },
+      muscles: perMucsle,
     };
     onSubmit(newDay);
 
@@ -49,7 +61,7 @@ export default function DayForm({ onSubmit, day }) {
       repetitions: '',
       sets: '',
     });
-    setMuscle('');
+    //setMuscle('default');
     // setExercise([]);
   }
 
@@ -67,11 +79,11 @@ export default function DayForm({ onSubmit, day }) {
             <Lable htmlFor={`muscle${day}`}>Muscle:</Lable>
             <select
               id={`muscle${day}`}
-              name="selectList"
+              name="muscle"
               required
               //defaultValue={'default'}
-              onChange={event => setMuscle(event.target.value)}
-              value={muscle}
+              onChange={handleOnChange}
+              value={exercise.muscle}
             >
               <option value={'default'}>Choose an option</option>
               <option value="Arms">Arms</option>
@@ -141,10 +153,13 @@ export default function DayForm({ onSubmit, day }) {
             <OnClickButton type="button" onClick={handleAddExercise}>
               add exercise
             </OnClickButton>
+            <button>submit exercise</button>
           </Center>
         </form>
 
-        {muscle && <StyledMuscleName>{muscle}</StyledMuscleName>}
+        {exercise.muscle && (
+          <StyledMuscleName>{exercise.muscle}</StyledMuscleName>
+        )}
 
         {exercises.map((newCards, index) => (
           <ListedExercise key={`card${index}`} newCards={newCards} />

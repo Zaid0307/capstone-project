@@ -35,4 +35,6 @@ const Nav = styled.nav`
   background: #496b73;
   color: white;
   height: 48px;
+  position: sticky;
+  bottom: 0;
 `;
