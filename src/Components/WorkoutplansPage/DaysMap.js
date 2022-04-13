@@ -4,21 +4,18 @@ import { BiHide } from 'react-icons/bi';
 import WorkoutPlanMuscles from './WorkouPlanMuscles';
 import { useState } from 'react';
 
-export default function DaysMap({ day, index }) {
+export default function DaysMap({ day }) {
   const [showDay, setShowDay] = useState(false);
   return (
-    <div key={`day${index}`}>
-      <StyledDayBox>
-        <TestDayContainer>
-          <StyledDay>{day.day.toUpperCase()}</StyledDay>
-          <Button onClick={() => setShowDay(!showDay)}>
-            {showDay ? <BiHide /> : <BiShow />}
-          </Button>
-        </TestDayContainer>
-        {showDay ? <WorkoutPlanMuscles day={day} /> : null}
-        {}
-      </StyledDayBox>
-    </div>
+    <StyledDayBox>
+      <TestDayContainer>
+        <StyledDay>{day.day.toUpperCase()}</StyledDay>
+        <Button onClick={() => setShowDay(!showDay)}>
+          {showDay ? <BiHide /> : <BiShow />}
+        </Button>
+      </TestDayContainer>
+      {showDay ? <WorkoutPlanMuscles day={day} /> : null}
+    </StyledDayBox>
   );
 }
 

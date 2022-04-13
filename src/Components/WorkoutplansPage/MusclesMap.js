@@ -4,10 +4,10 @@ import { BiShow } from 'react-icons/bi';
 import { BiHide } from 'react-icons/bi';
 import WorkoutplanExersice from './WorkoutplanExercise';
 
-export default function MusclesMap({ muscle, index }) {
+export default function MusclesMap({ muscle }) {
   const [showMucsle, setShowMucsle] = useState(false);
   return (
-    <Card key={`muscle${index}`}>
+    <>
       <StyledMuscleBox>
         <StyledMuscle>{muscle.name}</StyledMuscle>
         <Button onClick={() => setShowMucsle(!showMucsle)}>
@@ -15,8 +15,7 @@ export default function MusclesMap({ muscle, index }) {
         </Button>
       </StyledMuscleBox>
       {showMucsle ? <WorkoutplanExersice muscle={muscle} /> : null}
-      {}
-    </Card>
+    </>
   );
 }
 

@@ -17,7 +17,6 @@ export default function WorkoutPlans({ item }) {
           </Button>
         </StyledCenterBox>
         {showTitle ? <WorkoutPlanDay item={item} /> : null}
-        {}
       </Day>
     </WorkoutBox>
   );
