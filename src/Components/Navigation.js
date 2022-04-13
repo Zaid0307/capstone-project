@@ -21,18 +21,20 @@ const LinkStyled = styled(NavLink)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: black;
+  color: #283a45;
   width: 100%;
   &.active {
-    background: #1a5276;
-    color: white;
+    background: #283a45;
+    color: #6fa0a6;
   }
 `;
 
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
-  background: #526b7a;
+  background: #496b73;
   color: white;
   height: 48px;
+  position: sticky;
+  bottom: 0;
 `;

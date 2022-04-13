@@ -8,31 +8,31 @@ export default function Form({ onAddWorkoutPlan }) {
   const [toggleForm, setToggleForm] = useState(false);
 
   return (
-    <>
-      <PageBox>
-        {!toggleForm ? (
+    <Background>
+      {!toggleForm ? (
+        <CenterComponent>
           <CreateForm onSubmit={handleCreateForm} />
-        ) : (
-          <>
-            <StyledCenterBox>
-              <h2>{workoutPlan.nameOfWorkout}</h2>
-            </StyledCenterBox>
-            {workoutPlan.days.map(day => {
-              return (
-                <DayForm
-                  key={day.day}
-                  onSubmit={createDayExercises}
-                  day={day.day}
-                />
-              );
-            })}
-            <button onClick={() => onAddWorkoutPlan(workoutPlan)}>
-              Save all changes
-            </button>
-          </>
-        )}
-      </PageBox>
-    </>
+        </CenterComponent>
+      ) : (
+        <>
+          <StyledCenterBox>
+            <h2>{workoutPlan.nameOfWorkout}</h2>
+          </StyledCenterBox>
+          {workoutPlan.days.map(day => {
+            return (
+              <DayForm
+                key={day.day}
+                onSubmit={createDayExercises}
+                day={day.day}
+              />
+            );
+          })}
+          <button onClick={() => onAddWorkoutPlan(workoutPlan)}>
+            Save all changes
+          </button>
+        </>
+      )}
+    </Background>
   );
 
   function handleCreateForm(newWorkoutPlan) {
@@ -41,22 +41,15 @@ export default function Form({ onAddWorkoutPlan }) {
   }
 
   function createDayExercises(updatedDay) {
-    // updatedDay = {day: 'tuesday', exercise: 'ringbell', weight: '50', repetitions: '100', sets: '50' }
-
     const daysAndExercises = workoutPlan.days.map(day => {
       if (day.day === updatedDay.day) {
         return updatedDay;
       }
       return day;
     });
-    console.log(daysAndExercises);
+
     setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
   }
-  // const data = {
-  //   nameOfWorkout: 'Test 1',
-  //   description: 'description 1',
-  //   days: [{day: 'tuesday', exercise: 'ringbell', weight: '50', repetitions: '100', sets: '50' }]
-  // }
 }
 
 const StyledCenterBox = styled.div`
@@ -68,10 +61,14 @@ const StyledCenterBox = styled.div`
   padding: 5px;
 `;
 
-const PageBox = styled.div`
+const Background = styled.div`
+  background: radial-gradient(#85c1c7, #5e888c, #344b59);
+  height: 100%;
+`;
+
+const CenterComponent = styled.div`
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  border: 1px solid lightgray;
-  padding: 5px;
-  margin: 5px;
+  justify-content: center;
+  align-items: center;
 `;

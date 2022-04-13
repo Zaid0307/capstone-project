@@ -1,23 +1,62 @@
-import Button from './Button';
 import ScreenReaderOnly from './Styles/ScreenReaderOnly';
 import SpaceBetween from './Styles/SpaceBetween';
 import Center from './Styles/Center';
 import styled from 'styled-components';
-//import { IoIosAddCircleOutline } from 'react-icons/io';
+import { useState } from 'react';
+import ListedExercise from './ListedExercise';
 
 export default function DayForm({ onSubmit, day }) {
+  const [exercises, setExercises] = useState([]);
+  const [exercise, setExercise] = useState({
+    exercise: '',
+    weight: '',
+    repetitions: '',
+    sets: '',
+    muscle: '',
+  });
+
   function handleSubmit(event) {
     event.preventDefault();
-    const form = event.target;
-    const { exercise, weight, repetitions, sets } = form.elements;
+    setExercises([...exercises, exercise]);
+    setExercise({
+      exercise: '',
+      weight: '',
+      repetitions: '',
+      sets: '',
+      muscle: 'default',
+    });
+  }
+
+  function handleOnChange(event) {
+    const { name, value } = event.target;
+    setExercise({ ...exercise, [name]: value });
+  }
+
+  function handleAddExercise() {
+    const muscleGroups = exercises.map(pMucsle => pMucsle.muscle);
+    const uniqueMuscleGroups = [...new Set(muscleGroups)];
+    const perMucsle = uniqueMuscleGroups.map(pMucsle => {
+      const exerciseMucsle = exercises.filter(
+        exercise => exercise.muscle === pMucsle
+      );
+      return {
+        name: pMucsle,
+        exercises: exerciseMucsle,
+      };
+    });
+
     const newDay = {
       day,
-      exercise: exercise.value,
-      weight: weight.value,
-      repetitions: repetitions.value,
-      sets: sets.value,
+      muscles: perMucsle,
     };
     onSubmit(newDay);
+
+    setExercise({
+      exercise: '',
+      weight: '',
+      repetitions: '',
+      sets: '',
+    });
   }
 
   return (
@@ -29,107 +68,168 @@ export default function DayForm({ onSubmit, day }) {
           aria-labelledby="formSpan"
           onSubmit={handleSubmit}
         >
-          <StyledDay>{day}</StyledDay>
-          {/* <SpaceBetween>
-          <div>
-            <p>mucels</p>
-          </div>
-          <StyledRow>
-            <button type="button">
-              <IoIosAddCircleOutline />
-            </button>
-            <p>0</p>
-            <Button name="-" />
-          </StyledRow>
-        </SpaceBetween> */}
+          <StyledCenterBox>{day}</StyledCenterBox>
           <SpaceBetween>
-            <label htmlFor={`muscle${day}`}>Muscle:</label>
-            <Input
+            <Lable htmlFor={`muscle${day}`}>Muscle:</Lable>
+            <select
               id={`muscle${day}`}
               name="muscle"
               required
-              maxlenght={20}
-              type="text"
-              placeholder="add ur muscle"
-            />
+              //defaultValue={'default'}
+              onChange={handleOnChange}
+              value={exercise.muscle}
+            >
+              <option value={'default'}>Choose an option</option>
+              <option value="Arms">Arms</option>
+              <option value="Back">Back</option>
+              <option value="Chest">Chest</option>
+              <option value="Legs">Legs</option>
+              <option value="Shoulders">Shoulders</option>
+              <option value="Stomach">Stomach</option>
+            </select>
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`exercise${day}`}>Exercise:</label>
-            <Input
+            <Lable htmlFor={`exercise${day}`}>Exercise:</Lable>
+            <StyledInput
               id={`exercise${day}`}
               name="exercise"
               required
               maxlenght={20}
               type="text"
-              placeholder="add ur exercise"
-              //value=""
-              //onChange={}
+              placeholder="Dumbbell Incline Curl "
+              value={exercise.exercise}
+              onChange={handleOnChange}
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`weight${day}`}>Weight:</label>
-            <Input
+            <Lable htmlFor={`weight${day}`}>Weight:</Lable>
+            <StyledInput
               id={`weight${day}`}
               name="weight"
               required
               maxlenght={5}
-              type="text"
-              placeholder="add your weight"
-              //value=""
-              //onChange={}
+              min="0"
+              type="number"
+              placeholder="12,5 ... 80 for Bodyweight"
+              value={exercise.weight}
+              onChange={handleOnChange}
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`repetitions${day}`}>Repetitions:</label>
-            <Input
+            <Lable htmlFor={`repetitions${day}`}>Repetitions:</Lable>
+            <StyledInput
               id={`repetitions${day}`}
               name="repetitions"
               required
               maxlenght={2}
-              type="text"
-              placeholder="add your repetitions"
-              //value=""
-              //onChange={}
+              type="number"
+              min="0"
+              placeholder="12"
+              value={exercise.repetitions}
+              onChange={handleOnChange}
             />
           </SpaceBetween>
           <SpaceBetween>
-            <label htmlFor={`sets${day}`}>Sets:</label>
-            <Input
+            <Lable htmlFor={`sets${day}`}>Sets:</Lable>
+            <StyledInput
               id={`sets${day}`}
               name="sets"
               required
               maxlenght={2}
-              type="text"
-              placeholder="add your sets"
-              //value=""
-              //onChange={}
+              type="number"
+              min="0"
+              placeholder="3"
+              value={exercise.sets}
+              onChange={handleOnChange}
             />
           </SpaceBetween>
           <Center>
-            <button type="submit">Save</button>
+            <OnClickButton> add exercise</OnClickButton>
           </Center>
         </form>
+
+        {exercise.muscle && (
+          <StyledMuscleName>{exercise.muscle}</StyledMuscleName>
+        )}
+
+        {exercises.map((newCards, index) => (
+          <ListedExercise key={`card${index}`} newCards={newCards} />
+        ))}
+        <Center>
+          <OnClickButton type="button" onClick={handleAddExercise}>
+            Save Day
+          </OnClickButton>
+        </Center>
       </FormBox>
     </>
   );
 }
 
-const StyledDay = styled.h2`
+const StyledMuscleName = styled.div`
   display: flex;
   justify-content: center;
-  border: 1.5px solid gray;
+  border: 1px solid lightgray;
   border-radius: 5px;
-  margin: 5px;
+  margin-top: 5px;
   padding-top: 3px;
 `;
-
 const FormBox = styled.div`
-  border: 1px solid lightgray;
-  padding: 2px;
-  margin: 5px 0 5px 0;
+  display: flex;
+  flex-direction: column;
   border-radius: 5px;
+  margin: 0 15px 15px 15px;
+  padding: 5px;
+  background-color: #d5dee8;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 `;
 
-const Input = styled.input`
-  width: 230px;
+const StyledInput = styled.input`
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 0.5px solid #5e888c;
+  font-size: 1rem;
+  padding-left: 0.25rem;
+  padding-top: 0.25rem;
+  background-color: transparent;
+  width: 220px;
+  &::placeholder {
+    color: red;
+  }
+  &:focus {
+    border-color: #496b73;
+    outline: none;
+  }
+`;
+
+const OnClickButton = styled.button`
+  display: inline-flex;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px 0px;
+  background-color: #283a45;
+  color: #d5dee8;
+  &:hover {
+    background-color: #496b73;
+    color: #b5dff5;
+  }
+`;
+
+const Lable = styled.label`
+  color: #496b73;
+`;
+
+const StyledCenterBox = styled.div`
+  display: flex;
+  background-color: #5e888c;
+  color: #283a45;
+  width: 100%;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  padding: 5px;
+  border-radius: 5px;
 `;

@@ -1,7 +1,8 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default styled.div`
   display: flex;
   justify-content: space-between;
+  align-self: center;
   padding: 5px;
 `;
