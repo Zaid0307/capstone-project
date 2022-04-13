@@ -7,7 +7,6 @@ import ListedExercise from './ListedExercise';
 
 export default function DayForm({ onSubmit, day }) {
   const [exercises, setExercises] = useState([]);
-  // const [muscle, setMuscle] = useState('');
   const [exercise, setExercise] = useState({
     exercise: '',
     weight: '',
@@ -26,7 +25,6 @@ export default function DayForm({ onSubmit, day }) {
       sets: '',
       muscle: 'default',
     });
-    // setMuscle('');
   }
 
   function handleOnChange(event) {
@@ -35,8 +33,6 @@ export default function DayForm({ onSubmit, day }) {
   }
 
   function handleAddExercise() {
-    // setExercises([...exercises, exercise]);
-
     const muscleGroups = exercises.map(pMucsle => pMucsle.muscle);
     const uniqueMuscleGroups = [...new Set(muscleGroups)];
     const perMucsle = uniqueMuscleGroups.map(pMucsle => {
@@ -61,8 +57,6 @@ export default function DayForm({ onSubmit, day }) {
       repetitions: '',
       sets: '',
     });
-    //setMuscle('default');
-    // setExercise([]);
   }
 
   return (
@@ -150,10 +144,7 @@ export default function DayForm({ onSubmit, day }) {
             />
           </SpaceBetween>
           <Center>
-            <OnClickButton type="button" onClick={handleAddExercise}>
-              add exercise
-            </OnClickButton>
-            <button>submit exercise</button>
+            <OnClickButton> add exercise</OnClickButton>
           </Center>
         </form>
 
@@ -164,6 +155,11 @@ export default function DayForm({ onSubmit, day }) {
         {exercises.map((newCards, index) => (
           <ListedExercise key={`card${index}`} newCards={newCards} />
         ))}
+        <Center>
+          <OnClickButton type="button" onClick={handleAddExercise}>
+            Save Day
+          </OnClickButton>
+        </Center>
       </FormBox>
     </>
   );
@@ -185,10 +181,6 @@ const FormBox = styled.div`
   padding: 5px;
   background-color: #d5dee8;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  /* border: 1px solid lightgray;
-  padding: 2px;
-  margin: 5px 0 5px 0;
-  border-radius: 5px; */
 `;
 
 const StyledInput = styled.input`
@@ -218,6 +210,7 @@ const OnClickButton = styled.button`
   font-size: 1rem;
   font-weight: 500;
   padding: 5px;
+  margin: 5px 0px;
   background-color: #283a45;
   color: #d5dee8;
   &:hover {
