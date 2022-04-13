@@ -62,7 +62,7 @@ const StyledCenterBox = styled.div`
 `;
 
 const Background = styled.div`
-  background: radial-gradient(#07080d, #5e888c, #344b59);
+  background: radial-gradient(#85c1c7, #5e888c, #344b59);
   height: 100%;
 `;
 
