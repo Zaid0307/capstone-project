@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ScreenReaderOnly from './Styles/ScreenReaderOnly';
-import Center from './Styles/Center';
+import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
+import Center from '../Styles/Center';
 
 export default function CreateForm({ onSubmit }) {
   const [formInfo, setFormInfo] = useState({

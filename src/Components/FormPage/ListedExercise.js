@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SpaceBetween from './Styles/SpaceBetween';
+import SpaceBetween from '../Styles/SpaceBetween';
 
 export default function ListedExercise({ newCards }) {
   return (

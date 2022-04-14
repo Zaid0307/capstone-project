@@ -1,6 +1,6 @@
-import CreateForm from '../Components/CreateForm';
+import CreateForm from '../Components/FormPage/CreateForm';
 import { useState } from 'react';
-import DayForm from '../Components/DayForm';
+import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
 
 export default function Form({ onAddWorkoutPlan }) {
