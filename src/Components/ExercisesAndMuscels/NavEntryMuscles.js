@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 export default function NavEntryMuscels({ handleActiveMuscle, activeMuscle }) {
   const [isActive, setIsActive] = useState(activeMuscle);
-  console.log(isActive);
 
   return (
     <Box>

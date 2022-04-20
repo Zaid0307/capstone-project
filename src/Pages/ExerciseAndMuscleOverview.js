@@ -19,9 +19,7 @@ export default function ExerciseAndMuscleOverview({
   function handleActiveMuscle(name) {
     setActiveMuscle(name);
   }
-  {
-    activeMuscle !== null ? console.log(activeMuscle) : <p>no data</p>;
-  }
+
   return (
     <Background>
       {!activeMuscle ? (
