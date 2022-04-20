@@ -19,7 +19,9 @@ export default function ExerciseAndMuscleOverview({
   function handleActiveMuscle(name) {
     setActiveMuscle(name);
   }
-
+  {
+    activeMuscle !== null ? console.log(activeMuscle) : <p>no data</p>;
+  }
   return (
     <Background>
       {!activeMuscle ? (
@@ -42,7 +44,10 @@ export default function ExerciseAndMuscleOverview({
           )}
           {activeMuscle === 'legs' && (
             <div>
-              <NavEntryMuscels handleActiveMuscle={handleActiveMuscle} />
+              <NavEntryMuscels
+                handleActiveMuscle={handleActiveMuscle}
+                activeMuscle={activeMuscle}
+              />
               <BacktoTopButton />
               {legs.map((item, index) => (
                 <div key={index}>
@@ -53,7 +58,10 @@ export default function ExerciseAndMuscleOverview({
           )}
           {activeMuscle === 'arms' && (
             <div>
-              <NavEntryMuscels handleActiveMuscle={handleActiveMuscle} />
+              <NavEntryMuscels
+                handleActiveMuscle={handleActiveMuscle}
+                activeMuscle={activeMuscle}
+              />
               <BacktoTopButton />
               {arms.map((item, index) => (
                 <div key={index}>
@@ -64,7 +72,10 @@ export default function ExerciseAndMuscleOverview({
           )}
           {activeMuscle === 'abs' && (
             <div>
-              <NavEntryMuscels handleActiveMuscle={handleActiveMuscle} />
+              <NavEntryMuscels
+                handleActiveMuscle={handleActiveMuscle}
+                activeMuscle={activeMuscle}
+              />
               <BacktoTopButton />
               {abs.map((item, index) => (
                 <div key={index}>
@@ -75,7 +86,10 @@ export default function ExerciseAndMuscleOverview({
           )}
           {activeMuscle === 'chest' && (
             <div>
-              <NavEntryMuscels handleActiveMuscle={handleActiveMuscle} />
+              <NavEntryMuscels
+                handleActiveMuscle={handleActiveMuscle}
+                activeMuscle={activeMuscle}
+              />
               <BacktoTopButton />
               {chest.map((item, index) => (
                 <div key={index}>
@@ -86,7 +100,10 @@ export default function ExerciseAndMuscleOverview({
           )}
           {activeMuscle === 'back' && (
             <div>
-              <NavEntryMuscels handleActiveMuscle={handleActiveMuscle} />
+              <NavEntryMuscels
+                handleActiveMuscle={handleActiveMuscle}
+                activeMuscle={activeMuscle}
+              />
               <BacktoTopButton />
               {back.map((item, index) => (
                 <div key={index}>

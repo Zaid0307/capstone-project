@@ -1,15 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-export default function NavEntryMuscels({ handleActiveMuscle }) {
-  const [isActive, setIsActive] = useState('');
-
-  //   function handleClick(name) {
-  //     setIsActive(name);
-  //     handleActiveMuscle(name);
-  //   }
-
+export default function NavEntryMuscels({ handleActiveMuscle, activeMuscle }) {
+  const [isActive, setIsActive] = useState(activeMuscle);
   console.log(isActive);
+
   return (
     <Box>
       <Button onClick={() => window.location.reload()}>
@@ -20,6 +15,7 @@ export default function NavEntryMuscels({ handleActiveMuscle }) {
         />
       </Button>
       <Button
+        name="chest"
         onClick={() => {
           setIsActive('chest');
           handleActiveMuscle('chest');
