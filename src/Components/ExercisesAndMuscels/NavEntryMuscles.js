@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 export default function NavEntryMuscels({ handleActiveMuscle }) {
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState('');
 
   //   function handleClick(name) {
   //     setIsActive(name);
