@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
-export default function EntryMuscels({ handleSholders }) {
+export default function EntryMuscels({ handleActiveMuscle }) {
   return (
     <StyledDiv>
       <StyledRow>
-        <Button>
+        <Button onClick={() => handleActiveMuscle('chest')}>
           <img
             src="https://visualpharm.com/assets/331/Chest-595b40b65ba036ed117d38eb.svg"
             alt="chest"
@@ -14,7 +12,7 @@ export default function EntryMuscels({ handleSholders }) {
           />
           Chest
         </Button>
-        <Button>
+        <Button onClick={() => handleActiveMuscle('back')}>
           <img
             src="https://visualpharm.com/assets/301/Bodybuilder-595b40b65ba036ed117d3784.svg"
             alt="back"
@@ -24,7 +22,7 @@ export default function EntryMuscels({ handleSholders }) {
         </Button>
       </StyledRow>
       <StyledRow>
-        <Button>
+        <Button onClick={() => handleActiveMuscle('abs')}>
           <img
             src="https://visualpharm.com/assets/875/Prelum-595b40b85ba036ed117da1a7.svg"
             alt="abs"
@@ -32,7 +30,7 @@ export default function EntryMuscels({ handleSholders }) {
           />
           Abs
         </Button>
-        <Button onClick={handleSholders}>
+        <Button onClick={() => handleActiveMuscle('sholders')}>
           <img
             src="https://visualpharm.com/assets/824/Shoulders-595b40b85ba036ed117da331.svg"
             alt="sholders"
@@ -42,7 +40,7 @@ export default function EntryMuscels({ handleSholders }) {
         </Button>
       </StyledRow>
       <StyledRow>
-        <Button>
+        <Button onClick={() => handleActiveMuscle('arms')}>
           <img
             src="https://visualpharm.com/assets/13/Flex%20Biceps-595b40b75ba036ed117d9cfe.svg"
             alt="arms"
@@ -50,7 +48,7 @@ export default function EntryMuscels({ handleSholders }) {
           />
           Arms
         </Button>
-        <Button>
+        <Button onClick={() => handleActiveMuscle('legs')}>
           <img
             src="https://visualpharm.com/assets/568/Leg-595b40b75ba036ed117d9ee5.svg"
             alt="legs"

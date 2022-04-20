@@ -2,19 +2,37 @@ import styled from 'styled-components';
 
 export default function Card({ item, images }) {
   const regex = /(<([^>]+)>)/gi;
-  console.log(item);
+
+  const renderImg = images.filter(
+    img => img.exercise_base == item.exercise_base
+  );
+
+  console.log(renderImg);
   return (
     <StyledDiv>
       <StyledTitle>{item.name}</StyledTitle>
       <DiscriptionDiv>
-        {item.exercise_base === images.exercise_base ? (
-          <img srch={images.image} alt="img" />
+        {!item.exercise_base ? (
+          <img
+            src="https://img.icons8.com/carbon-copy/100/000000/no-image.png"
+            alt="noImg"
+          />
+        ) : (
+          <>
+            {item.exercise_base === renderImg.exercise_base && (
+              <img src={renderImg.image} />
+            )}
+          </>
+        )}
+
+        {/* {item.exercise_base === renderImg.exercise_base ? (
+          <img src={renderImg.image} />
         ) : (
           <img
             src="https://img.icons8.com/carbon-copy/100/000000/no-image.png"
             alt="noImg"
           />
-        )}
+        )} */}
         <STyledDescription>
           {item.description.replace(regex, '')}
         </STyledDescription>
