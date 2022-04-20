@@ -7,32 +7,22 @@ export default function Card({ item, images }) {
     img => img.exercise_base == item.exercise_base
   );
 
-  console.log(renderImg);
+  const img = renderImg.map(img => img.image);
+
   return (
     <StyledDiv>
       <StyledTitle>{item.name}</StyledTitle>
       <DiscriptionDiv>
-        {!item.exercise_base ? (
-          <img
+        {renderImg.length === 0 ? (
+          <Img1
             src="https://img.icons8.com/carbon-copy/100/000000/no-image.png"
             alt="noImg"
+            width="80"
+            height="80"
           />
         ) : (
-          <>
-            {item.exercise_base === renderImg.exercise_base && (
-              <img src={renderImg.image} />
-            )}
-          </>
+          <Img1 src={img[0]} alt="" height="80" />
         )}
-
-        {/* {item.exercise_base === renderImg.exercise_base ? (
-          <img src={renderImg.image} />
-        ) : (
-          <img
-            src="https://img.icons8.com/carbon-copy/100/000000/no-image.png"
-            alt="noImg"
-          />
-        )} */}
         <STyledDescription>
           {item.description.replace(regex, '')}
         </STyledDescription>
@@ -66,4 +56,9 @@ const DiscriptionDiv = styled.div`
   margin: 5px;
   border-radius: 15px;
   overflow: hidden;
+  display: flex;
+`;
+
+const Img1 = styled.img`
+  align-self: center;
 `;
