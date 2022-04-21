@@ -18,6 +18,20 @@ export default function App() {
     navigate('/Workoutplans');
   }
 
+  function handleDelete(perId) {
+    const deleteData = data.filter(dData => dData.id !== perId);
+    const mapDay = data.map(mDays => mDays.days);
+    const deleteDays = mapDay.filter(dDay => dDay.id !== perId);
+    const mapMuscles = mapDay.map(mMuscle => mMuscle.muscles);
+    const deleteMuscles = mapMuscles.filter(dMuscle => dMuscle.id !== perId);
+    const mapExercises = mapMuscles.map(mExercises => mExercises.exercises);
+    const deleteExercises = mapExercises.filter(
+      dExercises => dExercises.id !== perId
+    );
+
+    setData(deleteData, deleteDays, deleteMuscles, deleteExercises);
+  }
+
   return (
     <GridWrap>
       <Routes>
@@ -38,7 +52,7 @@ export default function App() {
         />
         <Route
           path="/Workoutplans"
-          element={<WorkoutplansPage data={data} />}
+          element={<WorkoutplansPage data={data} handleDelete={handleDelete} />}
         />
       </Routes>
       <Navigation />

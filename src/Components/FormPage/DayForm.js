@@ -4,6 +4,7 @@ import Center from '../Styles/Center';
 import styled from 'styled-components';
 import { useState } from 'react';
 import ListedExercise from './ListedExercise';
+import { nanoid } from 'nanoid';
 
 export default function DayForm({ onSubmit, day }) {
   const [exercises, setExercises] = useState([]);
@@ -23,13 +24,13 @@ export default function DayForm({ onSubmit, day }) {
       weight: '',
       repetitions: '',
       sets: '',
-      muscle: 'default',
+      muscle: 'Select a muscle',
     });
   }
 
   function handleOnChange(event) {
     const { name, value } = event.target;
-    setExercise({ ...exercise, [name]: value });
+    setExercise({ ...exercise, [name]: value, id: nanoid() });
   }
 
   function handleAddExercise() {
@@ -40,12 +41,14 @@ export default function DayForm({ onSubmit, day }) {
         exercise => exercise.muscle === pMucsle
       );
       return {
+        id: nanoid(),
         name: pMucsle,
         exercises: exerciseMucsle,
       };
     });
 
     const newDay = {
+      id: nanoid(),
       day,
       muscles: perMucsle,
     };
@@ -79,7 +82,7 @@ export default function DayForm({ onSubmit, day }) {
               onChange={handleOnChange}
               value={exercise.muscle}
             >
-              <option value={'default'}>Choose an option</option>
+              <option value={'Select a muscle'}>Choose an option</option>
               <option value="Arms">Arms</option>
               <option value="Back">Back</option>
               <option value="Chest">Chest</option>

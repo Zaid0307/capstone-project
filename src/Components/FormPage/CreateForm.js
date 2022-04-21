@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
 import Center from '../Styles/Center';
+import { nanoid } from 'nanoid';
 
 export default function CreateForm({ onSubmit }) {
   const [formInfo, setFormInfo] = useState({
@@ -25,11 +26,12 @@ export default function CreateForm({ onSubmit }) {
 
     const daysAsArray = Object.entries(days).map(element => {
       if (element[1]) {
-        return { day: element[0] };
+        return { day: element[0], id: nanoid() };
       }
     });
 
     onSubmit({
+      id: nanoid(),
       nameOfWorkout: formInfo.workOutName,
       description: formInfo.description,
       days: daysAsArray,

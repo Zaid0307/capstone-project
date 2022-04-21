@@ -4,7 +4,7 @@ import { BsPlusCircle } from 'react-icons/bs';
 import Center from '../Components/Styles/Center';
 import { useNavigate } from 'react-router-dom';
 
-export default function WorkoutplansPage({ data }) {
+export default function WorkoutplansPage({ data, handleDelete }) {
   const navigate = useNavigate();
 
   function handleCreateWorkout() {
@@ -15,7 +15,7 @@ export default function WorkoutplansPage({ data }) {
       {data.map(function (item, index) {
         return (
           <div key={`plan${index}`}>
-            <WorkoutPlans item={item} />
+            <WorkoutPlans item={item} handleDelete={handleDelete} />
           </div>
         );
       })}
