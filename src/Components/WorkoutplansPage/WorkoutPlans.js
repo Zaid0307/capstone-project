@@ -3,8 +3,13 @@ import { BiShow } from 'react-icons/bi';
 import { BiHide } from 'react-icons/bi';
 import { useState } from 'react';
 import WorkoutPlanDay from './WorkoutPlanDay';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 
-export default function WorkoutPlans({ item }) {
+export default function WorkoutPlans({
+  item,
+  handleDeleteCard,
+  handleDeleteDays,
+}) {
   const [showTitle, setShowTitle] = useState(false);
 
   return (
@@ -12,11 +17,16 @@ export default function WorkoutPlans({ item }) {
       <Day>
         <StyledCenterBox>
           <p>{item.nameOfWorkout}</p>
+          <DeleteButton onClick={() => handleDeleteCard(item.id)}>
+            <MdOutlineDeleteForever />
+          </DeleteButton>
           <Button onClick={() => setShowTitle(!showTitle)}>
             {showTitle ? <BiHide /> : <BiShow />}
           </Button>
         </StyledCenterBox>
-        {showTitle ? <WorkoutPlanDay item={item} /> : null}
+        {showTitle ? (
+          <WorkoutPlanDay item={item} handleDeleteDays={handleDeleteDays} />
+        ) : null}
       </Day>
     </WorkoutBox>
   );
@@ -56,5 +66,14 @@ const Button = styled.button`
   outline: none;
   position: absolute;
   right: 40px;
+  color: #283a45;
+`;
+const DeleteButton = styled.button`
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 70px;
   color: #283a45;
 `;

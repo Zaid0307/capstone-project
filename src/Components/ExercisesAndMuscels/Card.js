@@ -39,26 +39,34 @@ const StyledTitle = styled.div`
 const STyledDescription = styled.p`
   font-size: small;
 `;
+
 const StyledDiv = styled.div`
-  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 10px;
   margin: 5px;
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  /* height: 100px;
-  width: 250px; */
+  background-color: #d5dee8;
+  width: 350px;
+  height: 150px;
 `;
 
 const DiscriptionDiv = styled.div`
-  border: 1px solid black;
   padding: 10px;
   margin: 5px;
   border-radius: 15px;
-  overflow: hidden;
   display: flex;
+  word-wrap: wrap;
+  overflow: hidden;
+  overflow-y: scroll;
 `;
 
 const Img1 = styled.img`
   align-self: center;
+  background-color: snow;
+  border-radius: 15px;
+  margin-right: 15px;
+  padding: 5px;
+  border: 2px solid 283a45;
 `;

@@ -4,7 +4,12 @@ import { BsPlusCircle } from 'react-icons/bs';
 import Center from '../Components/Styles/Center';
 import { useNavigate } from 'react-router-dom';
 
-export default function WorkoutplansPage({ data }) {
+export default function WorkoutplansPage({
+  data,
+  handleDeleteCard,
+  handleDeleteDays,
+  handleDeleteMusles,
+}) {
   const navigate = useNavigate();
 
   function handleCreateWorkout() {
@@ -15,15 +20,18 @@ export default function WorkoutplansPage({ data }) {
       {data.map(function (item, index) {
         return (
           <div key={`plan${index}`}>
-            <WorkoutPlans item={item} />
+            <WorkoutPlans
+              item={item}
+              handleDeleteCard={handleDeleteCard}
+              handleDeleteDays={handleDeleteDays}
+              handleDeleteMusles={handleDeleteMusles}
+            />
           </div>
         );
       })}
       <Center>
         <Button onClick={handleCreateWorkout}>
-          <span>
-            <BsPlusCircle size={20} />
-          </span>
+          <BsPlusCircle size={20} />
           <span>Create new Workoutplan</span>
         </Button>
       </Center>
@@ -38,6 +46,7 @@ const Background = styled.div`
 
 const Button = styled.button`
   text-decoration: none;
+  color: #d5dee8;
   background-color: transparent;
   border: none;
   outline: none;
@@ -46,6 +55,7 @@ const Button = styled.button`
   border-radius: 15px;
   gap: 5px;
   padding: 5px;
+  margin-top: 15px;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
     rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
     rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,

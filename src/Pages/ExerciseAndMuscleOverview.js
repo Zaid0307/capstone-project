@@ -27,7 +27,7 @@ export default function ExerciseAndMuscleOverview({
       ) : (
         <>
           {activeMuscle === 'shoulders' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -38,10 +38,10 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
           {activeMuscle === 'legs' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -52,10 +52,10 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
           {activeMuscle === 'arms' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -66,10 +66,10 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
           {activeMuscle === 'abs' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -80,10 +80,10 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
           {activeMuscle === 'chest' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -94,10 +94,10 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
           {activeMuscle === 'back' && (
-            <div>
+            <BackgroundCards>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}
                 activeMuscle={activeMuscle}
@@ -108,7 +108,7 @@ export default function ExerciseAndMuscleOverview({
                   <Card item={item} images={images} />
                 </div>
               ))}
-            </div>
+            </BackgroundCards>
           )}
         </>
       )}
@@ -118,4 +118,13 @@ export default function ExerciseAndMuscleOverview({
 
 const Background = styled.div`
   height: 100%;
+`;
+const BackgroundCards = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background: radial-gradient(#85c1c7, #5e888c, #344b59);
 `;

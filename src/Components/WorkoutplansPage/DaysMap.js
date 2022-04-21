@@ -3,13 +3,17 @@ import { BiShow } from 'react-icons/bi';
 import { BiHide } from 'react-icons/bi';
 import WorkoutPlanMuscles from './WorkouPlanMuscles';
 import { useState } from 'react';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 
-export default function DaysMap({ day }) {
+export default function DaysMap({ day, handleDeleteDays, itemId }) {
   const [showDay, setShowDay] = useState(false);
   return (
     <StyledDayBox>
       <TestDayContainer>
         <StyledDay>{day.day.toUpperCase()}</StyledDay>
+        <DeleteButton onClick={() => handleDeleteDays(day.id, itemId)}>
+          <MdOutlineDeleteForever />
+        </DeleteButton>
         <Button onClick={() => setShowDay(!showDay)}>
           {showDay ? <BiHide /> : <BiShow />}
         </Button>
@@ -53,5 +57,15 @@ const Button = styled.button`
   outline: none;
   position: absolute;
   right: 40px;
+  color: #283a45;
+`;
+
+const DeleteButton = styled.button`
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 70px;
   color: #283a45;
 `;

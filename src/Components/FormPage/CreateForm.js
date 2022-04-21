@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
 import Center from '../Styles/Center';
+import { nanoid } from 'nanoid';
 
 export default function CreateForm({ onSubmit }) {
   const [formInfo, setFormInfo] = useState({
@@ -25,11 +26,12 @@ export default function CreateForm({ onSubmit }) {
 
     const daysAsArray = Object.entries(days).map(element => {
       if (element[1]) {
-        return { day: element[0] };
+        return { day: element[0], id: nanoid() };
       }
     });
 
     onSubmit({
+      id: nanoid(),
       nameOfWorkout: formInfo.workOutName,
       description: formInfo.description,
       days: daysAsArray,
@@ -42,7 +44,12 @@ export default function CreateForm({ onSubmit }) {
         <Title id="fromH2">Create your Workout plan</Title>
       </StyledCenterBox>
 
-      <form onSubmit={handleSubmit} autoComplete="off" aria-labelledby="fromH2">
+      <form
+        required
+        onSubmit={handleSubmit}
+        autoComplete="off"
+        aria-labelledby="fromH2"
+      >
         <StyledInputBox>
           <label htmlFor="nameOfWorkout">
             <ScreenReaderOnly>Workout plan name:</ScreenReaderOnly>
@@ -50,12 +57,12 @@ export default function CreateForm({ onSubmit }) {
           <StyledInput
             onChange={onChange}
             name="workOutName"
-            required
             maxLength="100"
             id="nameOfWorkout"
             type="text"
             placeholder="Name your Workout plan*"
             value={formInfo.workOutName}
+            required
           />
         </StyledInputBox>
 
@@ -136,6 +143,7 @@ export default function CreateForm({ onSubmit }) {
             <ScreenReaderOnly>Description</ScreenReaderOnly>
           </label>
           <StyledInput
+            required
             onChange={onChange}
             name="description"
             maxLength="200"
@@ -199,7 +207,6 @@ const StyledInput = styled.input`
   }
   &:focus {
     border-color: red;
-    /* border-color: #496b73; */
     outline: none;
   }
 `;
