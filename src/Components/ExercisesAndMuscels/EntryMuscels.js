@@ -30,10 +30,10 @@ export default function EntryMuscels({ handleActiveMuscle }) {
           />
           Abs
         </Button>
-        <Button onClick={() => handleActiveMuscle('sholders')}>
+        <Button onClick={() => handleActiveMuscle('shoulders')}>
           <img
             src="https://visualpharm.com/assets/824/Shoulders-595b40b85ba036ed117da331.svg"
-            alt="sholders"
+            alt="shoulders"
             width="80"
           />
           Shoulders

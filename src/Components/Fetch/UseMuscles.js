@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-export default function UseSholders() {
-  const [sholder, setSholder] = useState([]);
+export default function UseMuscles() {
+  const [shoulders, setShoulders] = useState([]);
   const [arms, setArms] = useState([]);
   const [legs, setLegs] = useState([]);
   const [abs, setAbs] = useState([]);
@@ -11,7 +11,7 @@ export default function UseSholders() {
 
   useEffect(() => {
     async function getMuscles() {
-      const responseSholders = await fetch(
+      const responseShoulders = await fetch(
         'https://wger.de/api/v2/exercise/?limit=500&muscles=2&language=1'
       );
       const responseArms = await fetch(
@@ -33,7 +33,7 @@ export default function UseSholders() {
         'https://wger.de/api/v2/exerciseimage/?limit=500'
       );
 
-      const dataSholders = await responseSholders.json();
+      const dataShoulders = await responseShoulders.json();
       const dataArms = await responseArms.json();
       const dataLegs = await responseLegs.json();
       const dataAbs = await responseAbs.json();
@@ -41,7 +41,7 @@ export default function UseSholders() {
       const dataBack = await responseBack.json();
       const dataImages = await responseimages.json();
 
-      setSholder(dataSholders.results);
+      setShoulders(dataShoulders.results);
       setArms(dataArms.results);
       setLegs(dataLegs.results);
       setAbs(dataAbs.results);
@@ -51,5 +51,5 @@ export default function UseSholders() {
     }
     getMuscles();
   }, []);
-  return { sholder, arms, legs, abs, chest, back, images };
+  return { shoulders, arms, legs, abs, chest, back, images };
 }

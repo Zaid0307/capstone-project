@@ -9,8 +9,15 @@ import UseMuscles from './Components/Fetch/UseMuscles';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
-  const { sholder, arms, legs, abs, chest, back, images } = UseMuscles();
+
+  const { shoulders, arms, legs, abs, chest, back, images } = UseMuscles();
   const navigate = useNavigate();
+
+  function createCard(newCard) {
+    setData([...data, newCard]);
+    navigate('/Workoutplans');
+  }
+
   return (
     <GridWrap>
       <Routes>
@@ -19,7 +26,7 @@ export default function App() {
           path="/test"
           element={
             <ExerciseAndMuscleOverview
-              sholder={sholder}
+              shoulders={shoulders}
               images={images}
               arms={arms}
               legs={legs}
@@ -37,11 +44,6 @@ export default function App() {
       <Navigation />
     </GridWrap>
   );
-
-  function createCard(newCard) {
-    setData([...data, newCard]);
-    navigate('/Workoutplans');
-  }
 }
 
 const GridWrap = styled.div`

@@ -26,7 +26,7 @@ export default function ExerciseAndMuscleOverview({
         <EntryMuscels handleActiveMuscle={handleActiveMuscle} />
       ) : (
         <>
-          {activeMuscle === 'sholders' && (
+          {activeMuscle === 'shoulders' && (
             <div>
               <NavEntryMuscels
                 handleActiveMuscle={handleActiveMuscle}

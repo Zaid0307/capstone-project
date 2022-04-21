@@ -54,15 +54,15 @@ export default function NavEntryMuscels({ handleActiveMuscle, activeMuscle }) {
         />
       </Button>
       <Button
-        isActive={isActive === 'sholders'}
+        isActive={isActive === 'shoulders'}
         onClick={() => {
-          setIsActive('sholders');
-          handleActiveMuscle('sholders');
+          setIsActive('shoulders');
+          handleActiveMuscle('shoulders');
         }}
       >
         <img
           src="https://visualpharm.com/assets/824/Shoulders-595b40b85ba036ed117da331.svg"
-          alt="sholders"
+          alt="shoulders"
           width="30"
         />
       </Button>
