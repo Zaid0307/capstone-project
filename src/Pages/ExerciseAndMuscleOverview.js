@@ -6,7 +6,7 @@ import NavEntryMuscels from '../Components/ExercisesAndMuscels/NavEntryMuscles';
 import BacktoTopButton from '../Components/BacktoTopButton';
 
 export default function ExerciseAndMuscleOverview({
-  sholder,
+  shoulders,
   arms,
   legs,
   abs,
@@ -33,7 +33,7 @@ export default function ExerciseAndMuscleOverview({
                 activeMuscle={activeMuscle}
               />
               <BacktoTopButton />
-              {sholder.map((item, index) => (
+              {shoulders.map((item, index) => (
                 <div key={index}>
                   <Card item={item} images={images} />
                 </div>
