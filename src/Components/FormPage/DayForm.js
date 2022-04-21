@@ -1,6 +1,6 @@
-import ScreenReaderOnly from './Styles/ScreenReaderOnly';
-import SpaceBetween from './Styles/SpaceBetween';
-import Center from './Styles/Center';
+import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
+import SpaceBetween from '../Styles/SpaceBetween';
+import Center from '../Styles/Center';
 import styled from 'styled-components';
 import { useState } from 'react';
 import ListedExercise from './ListedExercise';

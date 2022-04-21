@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import SpaceBetween from './Styles/SpaceBetween';
+import SpaceBetween from '../Styles/SpaceBetween';
+import Center from '../Styles/Center';
 
 export default function ListedExercise({ newCards }) {
   return (
     <StyledBox>
+      <Center>
+        <p>{newCards.muscle}</p>
+      </Center>
       <SpaceBetween>
         <p>Exercise:</p> <p>{newCards.exercise}</p>
       </SpaceBetween>

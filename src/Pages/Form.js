@@ -1,11 +1,27 @@
-import CreateForm from '../Components/CreateForm';
+import CreateForm from '../Components/FormPage/CreateForm';
 import { useState } from 'react';
-import DayForm from '../Components/DayForm';
+import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
 
 export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
   const [toggleForm, setToggleForm] = useState(false);
+
+  function handleCreateForm(newWorkoutPlan) {
+    setWorkoutPlan(newWorkoutPlan);
+    setToggleForm(true);
+  }
+
+  function createDayExercises(updatedDay) {
+    const daysAndExercises = workoutPlan.days.map(day => {
+      if (day.day === updatedDay.day) {
+        return updatedDay;
+      }
+      return day;
+    });
+
+    setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
+  }
 
   return (
     <Background>
@@ -34,22 +50,6 @@ export default function Form({ onAddWorkoutPlan }) {
       )}
     </Background>
   );
-
-  function handleCreateForm(newWorkoutPlan) {
-    setWorkoutPlan(newWorkoutPlan);
-    setToggleForm(true);
-  }
-
-  function createDayExercises(updatedDay) {
-    const daysAndExercises = workoutPlan.days.map(day => {
-      if (day.day === updatedDay.day) {
-        return updatedDay;
-      }
-      return day;
-    });
-
-    setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
-  }
 }
 
 const StyledCenterBox = styled.div`

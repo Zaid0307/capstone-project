@@ -9,6 +9,7 @@ export default function Navigation() {
       <LinkStyled to="/">
         <MdFormatAlignJustify size={40} />
       </LinkStyled>
+      <LinkStyled to="/test">Test</LinkStyled>
       <LinkStyled to="/Workoutplans">
         <BiDumbbell size={40} />
       </LinkStyled>
