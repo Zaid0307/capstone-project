@@ -15,7 +15,7 @@ export default function BacktoTopButton() {
     });
   }, []);
 
-  const scroleToTop = () => {
+  const scrolleToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -25,7 +25,7 @@ export default function BacktoTopButton() {
   return (
     <div>
       {backtoTop && (
-        <ToTopButton onClick={scroleToTop}>
+        <ToTopButton onClick={scrolleToTop}>
           <BiArrowToTop size={30} />
         </ToTopButton>
       )}
