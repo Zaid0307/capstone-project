@@ -68,5 +68,5 @@ const Img1 = styled.img`
   border-radius: 15px;
   margin-right: 15px;
   padding: 5px;
-  border: 2px solid #283a45;
+  border: 2px solid 283a45;
 `;

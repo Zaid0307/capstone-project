@@ -53,9 +53,12 @@ export default function App() {
   return (
     <GridWrap>
       <Routes>
-        <Route path="/" element={<Form onAddWorkoutPlan={createCard} />} />
         <Route
-          path="/test"
+          path="/Create_Plan"
+          element={<Form onAddWorkoutPlan={createCard} />}
+        />
+        <Route
+          path="/"
           element={
             <ExerciseAndMuscleOverview
               shoulders={shoulders}

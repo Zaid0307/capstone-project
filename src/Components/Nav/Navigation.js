@@ -2,14 +2,17 @@ import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { BiDumbbell } from 'react-icons/bi';
 import { MdFormatAlignJustify } from 'react-icons/md';
+import { ImHome } from 'react-icons/im';
 
 export default function Navigation() {
   return (
     <Nav>
-      <LinkStyled to="/">
+      <LinkStyled to="/Create_Plan">
         <MdFormatAlignJustify size={40} />
       </LinkStyled>
-      <LinkStyled to="/test">Test</LinkStyled>
+      <LinkStyled to="/">
+        <ImHome size={40} />
+      </LinkStyled>
       <LinkStyled to="/Workoutplans">
         <BiDumbbell size={40} />
       </LinkStyled>
