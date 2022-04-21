@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default function EntryMuscels({ handleActiveMuscle }) {
   return (
-    <StyledDiv>
+    <Background>
       <StyledRow>
         <Button onClick={() => handleActiveMuscle('chest')}>
           <img
@@ -57,11 +57,11 @@ export default function EntryMuscels({ handleActiveMuscle }) {
           Legs
         </Button>
       </StyledRow>
-    </StyledDiv>
+    </Background>
   );
 }
 
-const StyledDiv = styled.div`
+const Background = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;

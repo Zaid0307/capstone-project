@@ -4,7 +4,11 @@ import { BiHide } from 'react-icons/bi';
 import { useState } from 'react';
 import WorkoutPlanDay from './WorkoutPlanDay';
 
-export default function WorkoutPlans({ item, handleDelete }) {
+export default function WorkoutPlans({
+  item,
+  handleDeleteCard,
+  handleDeleteDays,
+}) {
   const [showTitle, setShowTitle] = useState(false);
 
   return (
@@ -12,12 +16,14 @@ export default function WorkoutPlans({ item, handleDelete }) {
       <Day>
         <StyledCenterBox>
           <p>{item.nameOfWorkout}</p>
-          <button onClick={handleDelete}>delete</button>
+          <button onClick={() => handleDeleteCard(item.id)}>delete</button>
           <Button onClick={() => setShowTitle(!showTitle)}>
             {showTitle ? <BiHide /> : <BiShow />}
           </Button>
         </StyledCenterBox>
-        {showTitle ? <WorkoutPlanDay item={item} /> : null}
+        {showTitle ? (
+          <WorkoutPlanDay item={item} handleDeleteDays={handleDeleteDays} />
+        ) : null}
       </Day>
     </WorkoutBox>
   );

@@ -22,11 +22,13 @@ const LinkStyled = styled(NavLink)`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #283a45;
+  color: #d5dee8;
   width: 100%;
   &.active {
-    background: #283a45;
-    color: #6fa0a6;
+    background: #d5dee8;
+    color: #496b73;
+    border-radius: 15px;
+    margin: 5px;
   }
 `;
 
@@ -38,4 +40,6 @@ const Nav = styled.nav`
   height: 48px;
   position: sticky;
   bottom: 0;
+  border-top: 1px solid #d5dee8;
 `;
+// #496b73, #283a45

@@ -101,7 +101,8 @@ const Button = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.isActive ? '#222' : 'transparent')};
+  background-color: ${props => (props.isActive ? '#d5dee8' : 'transparent')};
+  border-radius: 15px;
   border: none;
   outline: none;
   color: #283a45;
@@ -111,9 +112,13 @@ const Button = styled.button`
 `;
 
 const Box = styled.div`
+  position: sticky;
+  top: 0;
+  width: 100%;
   height: 48px;
   display: flex;
   justify-content: space-between;
   padding: 5px;
   margin: 5px;
+  background-color: #496b73;
 `;

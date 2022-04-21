@@ -9,7 +9,7 @@ import UseMuscles from './Components/Fetch/UseMuscles';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
-
+  console.log('data', data);
   const { shoulders, arms, legs, abs, chest, back, images } = UseMuscles();
   const navigate = useNavigate();
 
@@ -18,19 +18,37 @@ export default function App() {
     navigate('/Workoutplans');
   }
 
-  function handleDelete(perId) {
+  function handleDeleteCard(perId) {
     const deleteData = data.filter(dData => dData.id !== perId);
-    const mapDay = data.map(mDays => mDays.days);
-    const deleteDays = mapDay.filter(dDay => dDay.id !== perId);
-    const mapMuscles = mapDay.map(mMuscle => mMuscle.muscles);
-    const deleteMuscles = mapMuscles.filter(dMuscle => dMuscle.id !== perId);
-    const mapExercises = mapMuscles.map(mExercises => mExercises.exercises);
-    const deleteExercises = mapExercises.filter(
-      dExercises => dExercises.id !== perId
-    );
-
-    setData(deleteData, deleteDays, deleteMuscles, deleteExercises);
+    // const mapDay = data.map(mDays => mDays.days);
+    // const deleteDays = mapDay.filter(dDay => dDay.id !== perId);
+    // const mapMuscles = mapDay.map(mMuscle => mMuscle.muscles);
+    // const deleteMuscles = mapMuscles.filter(dMuscle => dMuscle.id !== perId);
+    // const mapExercises = mapMuscles.map(mExercises => mExercises.exercises);
+    // const deleteExercises = mapExercises.filter(
+    //   dExercises => dExercises.id !== perId
+    // );
+    // deleteDays, deleteMuscles, deleteExercises
+    setData(deleteData);
   }
+
+  function handleDeleteDays(perId, workoutId) {
+    console.log('perId', perId);
+    const days = data.map(newData => newData.days);
+    const newDays = days.filter(dDays => dDays.id !== perId);
+    const workoutToUpdate = data.find(workout => workout.id === workoutId);
+    const updatedWorkout = { ...workoutToUpdate, days: newDays };
+    console.log(newDays);
+    console.log(updatedWorkout);
+    // setData();
+  }
+
+  // function handleDeleteMusles(perId) {
+  //   const mapDay = data.map(newData => newData.mucsles);
+  //   const deleteMusles = mapDay.filter(deleteDays => deleteDays.id !== perId);
+
+  //   setData(deleteMusles);
+  // }
 
   return (
     <GridWrap>
@@ -52,7 +70,13 @@ export default function App() {
         />
         <Route
           path="/Workoutplans"
-          element={<WorkoutplansPage data={data} handleDelete={handleDelete} />}
+          element={
+            <WorkoutplansPage
+              data={data}
+              handleDeleteCard={handleDeleteCard}
+              handleDeleteDays={handleDeleteDays}
+            />
+          }
         />
       </Routes>
       <Navigation />
