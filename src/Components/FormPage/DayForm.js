@@ -71,14 +71,13 @@ export default function DayForm({ onSubmit, day }) {
           aria-labelledby="formSpan"
           onSubmit={handleSubmit}
         >
-          <StyledCenterBox>{day}</StyledCenterBox>
+          <StyledCenterBox>{day.toUpperCase()}</StyledCenterBox>
           <SpaceBetween>
             <Lable htmlFor={`muscle${day}`}>Muscle:</Lable>
             <select
               id={`muscle${day}`}
               name="muscle"
               required
-              //defaultValue={'default'}
               onChange={handleOnChange}
               value={exercise.muscle}
             >
@@ -195,9 +194,6 @@ const StyledInput = styled.input`
   padding-top: 0.25rem;
   background-color: transparent;
   width: 220px;
-  &::placeholder {
-    color: red;
-  }
   &:focus {
     border-color: #496b73;
     outline: none;

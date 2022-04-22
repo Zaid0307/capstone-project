@@ -2,6 +2,7 @@ import CreateForm from '../Components/FormPage/CreateForm';
 import { useState } from 'react';
 import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
+import Center from '../Components/Styles/Center';
 
 export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
@@ -32,7 +33,7 @@ export default function Form({ onAddWorkoutPlan }) {
       ) : (
         <>
           <StyledCenterBox>
-            <h2>{workoutPlan.nameOfWorkout}</h2>
+            <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
           </StyledCenterBox>
           {workoutPlan.days.map(day => {
             return (
@@ -43,9 +44,11 @@ export default function Form({ onAddWorkoutPlan }) {
               />
             );
           })}
-          <button onClick={() => onAddWorkoutPlan(workoutPlan)}>
-            Save all changes
-          </button>
+          <Center>
+            <OnClickButton onClick={() => onAddWorkoutPlan(workoutPlan)}>
+              Save all changes
+            </OnClickButton>
+          </Center>
         </>
       )}
     </Background>
@@ -71,4 +74,31 @@ const CenterComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const OnClickButton = styled.button`
+  display: inline-flex;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px 0px;
+  background-color: #d5dee8;
+  color: #283a45;
+  &:hover {
+    background-color: #496b73;
+    color: #b5dff5;
+  }
+`;
+const StyledH2 = styled.h2`
+  color: #283a45;
+  background-color: #d5dee8;
+  width: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  margin: 0 10px 0 10px;
 `;

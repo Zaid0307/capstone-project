@@ -13,7 +13,7 @@ export default function WorkoutplansPage({
   const navigate = useNavigate();
 
   function handleCreateWorkout() {
-    navigate('/');
+    navigate('/Create_Plan');
   }
   return (
     <Background>
