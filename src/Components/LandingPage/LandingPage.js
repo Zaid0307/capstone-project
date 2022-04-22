@@ -13,6 +13,8 @@ export default function LandingPage({ handleLandingpage }) {
 
 const BackgroundImg = styled.div`
   background-image: url(${img});
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 100vh;
   display: flex;
   flex-direction: column;
