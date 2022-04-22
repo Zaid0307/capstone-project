@@ -10,7 +10,7 @@ export default function Navigation() {
       <LinkStyled to="/Create_Plan">
         <MdFormatAlignJustify size={40} />
       </LinkStyled>
-      <LinkStyled to="/">
+      <LinkStyled to="/home">
         <ImHome size={40} />
       </LinkStyled>
       <LinkStyled to="/Workoutplans">

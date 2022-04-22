@@ -3,7 +3,7 @@ import { useState } from 'react';
 import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
 import Center from '../Components/Styles/Center';
-
+import Navigation from '../Components/Nav/Navigation';
 export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
   const [toggleForm, setToggleForm] = useState(false);
@@ -25,36 +25,43 @@ export default function Form({ onAddWorkoutPlan }) {
   }
 
   return (
-    <Background>
-      {!toggleForm ? (
-        <CenterComponent>
-          <CreateForm onSubmit={handleCreateForm} />
-        </CenterComponent>
-      ) : (
-        <>
-          <StyledCenterBox>
-            <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
-          </StyledCenterBox>
-          {workoutPlan.days.map(day => {
-            return (
-              <DayForm
-                key={day.day}
-                onSubmit={createDayExercises}
-                day={day.day}
-              />
-            );
-          })}
-          <Center>
-            <OnClickButton onClick={() => onAddWorkoutPlan(workoutPlan)}>
-              Save all changes
-            </OnClickButton>
-          </Center>
-        </>
-      )}
-    </Background>
+    <GridWrap>
+      <Background>
+        {!toggleForm ? (
+          <CenterComponent>
+            <CreateForm onSubmit={handleCreateForm} />
+          </CenterComponent>
+        ) : (
+          <>
+            <StyledCenterBox>
+              <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
+            </StyledCenterBox>
+            {workoutPlan.days.map(day => {
+              return (
+                <DayForm
+                  key={day.day}
+                  onSubmit={createDayExercises}
+                  day={day.day}
+                />
+              );
+            })}
+            <Center>
+              <OnClickButton onClick={() => onAddWorkoutPlan(workoutPlan)}>
+                Save all changes
+              </OnClickButton>
+            </Center>
+          </>
+        )}
+      </Background>
+      <Navigation />
+    </GridWrap>
   );
 }
-
+const GridWrap = styled.div`
+  display: grid;
+  grid-template-rows: auto 48px;
+  height: 100vh;
+`;
 const StyledCenterBox = styled.div`
   display: flex;
   width: 100%;
