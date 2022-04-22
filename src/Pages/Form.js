@@ -2,7 +2,8 @@ import CreateForm from '../Components/FormPage/CreateForm';
 import { useState } from 'react';
 import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
-
+import Center from '../Components/Styles/Center';
+import Navigation from '../Components/Nav/Navigation';
 export default function Form({ onAddWorkoutPlan }) {
   const [workoutPlan, setWorkoutPlan] = useState({});
   const [toggleForm, setToggleForm] = useState(false);
@@ -24,34 +25,43 @@ export default function Form({ onAddWorkoutPlan }) {
   }
 
   return (
-    <Background>
-      {!toggleForm ? (
-        <CenterComponent>
-          <CreateForm onSubmit={handleCreateForm} />
-        </CenterComponent>
-      ) : (
-        <>
-          <StyledCenterBox>
-            <h2>{workoutPlan.nameOfWorkout}</h2>
-          </StyledCenterBox>
-          {workoutPlan.days.map(day => {
-            return (
-              <DayForm
-                key={day.day}
-                onSubmit={createDayExercises}
-                day={day.day}
-              />
-            );
-          })}
-          <button onClick={() => onAddWorkoutPlan(workoutPlan)}>
-            Save all changes
-          </button>
-        </>
-      )}
-    </Background>
+    <GridWrap>
+      <Background>
+        {!toggleForm ? (
+          <CenterComponent>
+            <CreateForm onSubmit={handleCreateForm} />
+          </CenterComponent>
+        ) : (
+          <>
+            <StyledCenterBox>
+              <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
+            </StyledCenterBox>
+            {workoutPlan.days.map(day => {
+              return (
+                <DayForm
+                  key={day.day}
+                  onSubmit={createDayExercises}
+                  day={day.day}
+                />
+              );
+            })}
+            <Center>
+              <OnClickButton onClick={() => onAddWorkoutPlan(workoutPlan)}>
+                Save all changes
+              </OnClickButton>
+            </Center>
+          </>
+        )}
+      </Background>
+      <Navigation />
+    </GridWrap>
   );
 }
-
+const GridWrap = styled.div`
+  display: grid;
+  grid-template-rows: auto 48px;
+  height: 100vh;
+`;
 const StyledCenterBox = styled.div`
   display: flex;
   width: 100%;
@@ -71,4 +81,31 @@ const CenterComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const OnClickButton = styled.button`
+  display: inline-flex;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px 0px;
+  background-color: #d5dee8;
+  color: #283a45;
+  &:hover {
+    background-color: #496b73;
+    color: #b5dff5;
+  }
+`;
+const StyledH2 = styled.h2`
+  color: #283a45;
+  background-color: #d5dee8;
+  width: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  margin: 0 10px 0 10px;
 `;

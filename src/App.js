@@ -6,12 +6,18 @@ import { useLocalStorage } from 'usehooks-ts';
 import Form from './Pages/Form';
 import ExerciseAndMuscleOverview from './Pages/ExerciseAndMuscleOverview';
 import UseMuscles from './Components/Fetch/UseMuscles';
+import LandingPage from './Components/LandingPage/LandingPage';
+import { useState } from 'react';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
-  console.log('data', data);
+  const [toggle, setToggle] = useState(false);
   const { shoulders, arms, legs, abs, chest, back, images } = UseMuscles();
   const navigate = useNavigate();
+
+  function handleLandingpage() {
+    navigate('/Home');
+  }
 
   function createCard(newCard) {
     setData([...data, newCard]);
@@ -20,75 +26,68 @@ export default function App() {
 
   function handleDeleteCard(perId) {
     const deleteData = data.filter(dData => dData.id !== perId);
-    // const mapDay = data.map(mDays => mDays.days);
-    // const deleteDays = mapDay.filter(dDay => dDay.id !== perId);
-    // const mapMuscles = mapDay.map(mMuscle => mMuscle.muscles);
-    // const deleteMuscles = mapMuscles.filter(dMuscle => dMuscle.id !== perId);
-    // const mapExercises = mapMuscles.map(mExercises => mExercises.exercises);
-    // const deleteExercises = mapExercises.filter(
-    //   dExercises => dExercises.id !== perId
-    // );
-    // deleteDays, deleteMuscles, deleteExercises
     setData(deleteData);
   }
 
   function handleDeleteDays(perId, workoutId) {
-    console.log('perId', perId);
     const days = data.map(newData => newData.days);
-    const newDays = days.filter(dDays => dDays.id !== perId);
+    const newDays = days[0].filter(dDays => dDays.id !== perId);
     const workoutToUpdate = data.find(workout => workout.id === workoutId);
+    const workoutToUpdateIndex = data.findIndex(
+      workout => workout.id === workoutId
+    );
     const updatedWorkout = { ...workoutToUpdate, days: newDays };
-    console.log(newDays);
-    console.log(updatedWorkout);
-    // setData();
+    const newData = data.slice();
+    newData[workoutToUpdateIndex] = updatedWorkout;
+
+    setData(newData);
   }
 
-  // function handleDeleteMusles(perId) {
-  //   const mapDay = data.map(newData => newData.mucsles);
-  //   const deleteMusles = mapDay.filter(deleteDays => deleteDays.id !== perId);
-
-  //   setData(deleteMusles);
-  // }
-
   return (
-    <GridWrap>
-      <Routes>
-        <Route
-          path="/Create_Plan"
-          element={<Form onAddWorkoutPlan={createCard} />}
-        />
-        <Route
-          path="/"
-          element={
-            <ExerciseAndMuscleOverview
-              shoulders={shoulders}
-              images={images}
-              arms={arms}
-              legs={legs}
-              abs={abs}
-              chest={chest}
-              back={back}
-            />
-          }
-        />
-        <Route
-          path="/Workoutplans"
-          element={
-            <WorkoutplansPage
-              data={data}
-              handleDeleteCard={handleDeleteCard}
-              handleDeleteDays={handleDeleteDays}
-            />
-          }
-        />
-      </Routes>
-      <Navigation />
-    </GridWrap>
+    // <GridWrap>
+    <Routes>
+      <Route
+        path="/"
+        element={<LandingPage handleLandingpage={handleLandingpage} />}
+      />
+      <Route
+        path="/Create_Plan"
+        element={<Form onAddWorkoutPlan={createCard} />}
+      />
+      <Route
+        path="/home"
+        element={
+          <ExerciseAndMuscleOverview
+            shoulders={shoulders}
+            images={images}
+            arms={arms}
+            legs={legs}
+            abs={abs}
+            chest={chest}
+            back={back}
+          />
+        }
+      />
+      <Route
+        path="/Workoutplans"
+        element={
+          <WorkoutplansPage
+            data={data}
+            handleDeleteCard={handleDeleteCard}
+            handleDeleteDays={handleDeleteDays}
+          />
+        }
+      />
+    </Routes>
   );
 }
+{
+  /* <Navigation />
+</GridWrap> */
+}
 
-const GridWrap = styled.div`
-  display: grid;
-  grid-template-rows: auto 48px;
-  height: 100vh;
-`;
+// const GridWrap = styled.div`
+//   display: grid;
+//   grid-template-rows: auto 48px;
+//   height: 100vh;
+// `;

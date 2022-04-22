@@ -44,16 +44,9 @@ export default function CreateForm({ onSubmit }) {
         <Title id="fromH2">Create your Workout plan</Title>
       </StyledCenterBox>
 
-      <form
-        required
-        onSubmit={handleSubmit}
-        autoComplete="off"
-        aria-labelledby="fromH2"
-      >
+      <form onSubmit={handleSubmit} autoComplete="off" aria-labelledby="fromH2">
         <StyledInputBox>
-          <label htmlFor="nameOfWorkout">
-            <ScreenReaderOnly>Workout plan name:</ScreenReaderOnly>
-          </label>
+          <label htmlFor="nameOfWorkout">Workout plan name:</label>
           <StyledInput
             onChange={onChange}
             name="workOutName"
@@ -67,7 +60,7 @@ export default function CreateForm({ onSubmit }) {
         </StyledInputBox>
 
         <TitleCheckbox>Choose your training days*:</TitleCheckbox>
-        <div required>
+        <div>
           <StyledCheckBox>
             <InputCheck
               id="monday"
@@ -80,12 +73,12 @@ export default function CreateForm({ onSubmit }) {
 
           <StyledCheckBox>
             <InputCheck
-              id="tuseday"
-              name="tuseday"
+              id="tuesday"
+              name="tuesday"
               onChange={onCheck}
               type="checkbox"
             />
-            <StyledLabel htmlFor="tuseday">Tuseday</StyledLabel>
+            <StyledLabel htmlFor="tuesday">Tuesday</StyledLabel>
           </StyledCheckBox>
 
           <StyledCheckBox>
@@ -188,6 +181,8 @@ const TitleCheckbox = styled.p`
 `;
 
 const StyledInputBox = styled.div`
+  display: flex;
+  flex-direction: column;
   padding-top: 20px;
   padding-bottom: 20px;
 `;
@@ -202,11 +197,8 @@ const StyledInput = styled.input`
   min-width: 20rem;
   background-color: transparent;
   width: 100%;
-  &::placeholder {
-    color: #344b59;
-  }
   &:focus {
-    border-color: red;
+    border-color: #d5dee8;
     outline: none;
   }
 `;

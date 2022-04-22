@@ -3,7 +3,7 @@ import WorkoutPlans from '../Components/WorkoutplansPage/WorkoutPlans';
 import { BsPlusCircle } from 'react-icons/bs';
 import Center from '../Components/Styles/Center';
 import { useNavigate } from 'react-router-dom';
-
+import Navigation from '../Components/Nav/Navigation';
 export default function WorkoutplansPage({
   data,
   handleDeleteCard,
@@ -13,31 +13,39 @@ export default function WorkoutplansPage({
   const navigate = useNavigate();
 
   function handleCreateWorkout() {
-    navigate('/');
+    navigate('/Create_Plan');
   }
   return (
-    <Background>
-      {data.map(function (item, index) {
-        return (
-          <div key={`plan${index}`}>
-            <WorkoutPlans
-              item={item}
-              handleDeleteCard={handleDeleteCard}
-              handleDeleteDays={handleDeleteDays}
-              handleDeleteMusles={handleDeleteMusles}
-            />
-          </div>
-        );
-      })}
-      <Center>
-        <Button onClick={handleCreateWorkout}>
-          <BsPlusCircle size={20} />
-          <span>Create new Workoutplan</span>
-        </Button>
-      </Center>
-    </Background>
+    <GridWrap>
+      <Background>
+        {data.map(function (item, index) {
+          return (
+            <div key={`plan${index}`}>
+              <WorkoutPlans
+                item={item}
+                handleDeleteCard={handleDeleteCard}
+                handleDeleteDays={handleDeleteDays}
+                handleDeleteMusles={handleDeleteMusles}
+              />
+            </div>
+          );
+        })}
+        <Center>
+          <Button onClick={handleCreateWorkout}>
+            <BsPlusCircle size={20} />
+            <span>Create new Workoutplan</span>
+          </Button>
+        </Center>
+      </Background>
+      <Navigation />
+    </GridWrap>
   );
 }
+const GridWrap = styled.div`
+  display: grid;
+  grid-template-rows: auto 48px;
+  height: 100vh;
+`;
 
 const Background = styled.div`
   background: radial-gradient(#85c1c7, #5e888c, #344b59);
