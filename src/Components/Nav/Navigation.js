@@ -45,4 +45,3 @@ const Nav = styled.nav`
   bottom: 0;
   border-top: 1px solid #d5dee8;
 `;
-// #496b73, #283a45
