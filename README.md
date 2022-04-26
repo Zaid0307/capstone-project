@@ -40,4 +40,4 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 - Run app in dev mode with `$ npm run dev`
 - Server: [http://localhost:3000/](http://localhost:3000/)
 - Run tests via `$ npm run test`
-- Run Storybook with `$ npm run storybook
+- Run Storybook with `$ npm run storybook`
