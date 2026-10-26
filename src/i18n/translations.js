@@ -28,9 +28,6 @@ const translations = {
     'day.saturday': 'Saturday',
     'day.sunday': 'Sunday',
 
-    'exercises.loading': 'Loading exercises …',
-    'exercises.error': 'The exercises could not be loaded.',
-    'exercises.retry': 'Try again',
     'exercises.empty': 'No exercises found for this muscle group.',
     'exercises.back': 'Back to muscle groups',
     'exercises.noImage': 'No image available',
@@ -114,9 +111,6 @@ const translations = {
     'day.saturday': 'Samstag',
     'day.sunday': 'Sonntag',
 
-    'exercises.loading': 'Übungen werden geladen …',
-    'exercises.error': 'Die Übungen konnten nicht geladen werden.',
-    'exercises.retry': 'Erneut versuchen',
     'exercises.empty': 'Für diese Muskelgruppe wurden keine Übungen gefunden.',
     'exercises.back': 'Zurück zu den Muskelgruppen',
     'exercises.noImage': 'Kein Bild vorhanden',

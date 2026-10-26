@@ -28,7 +28,7 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 - ESLint
 - Storybook 10
 - JavaScript
-- wger.de API
+- Own exercise library (97 exercises, German and English)
 - localStorage
 - npm
 - Vercel
@@ -48,13 +48,12 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 
 ## Languages
 
-The app is available in English and German. Exercise names and descriptions come from wger in the selected language and fall back to English when no translation exists. UI texts live in `src/i18n/translations.js`.
+The app is available in English and German. Exercise names and descriptions come from the app's own exercise library in `src/data/` and exist in both languages. UI texts live in `src/i18n/translations.js`.
 
 ## Project Structure
 
 ```
 src/
-  api/          wger REST API client and data mapping
   assets/       images used by the app
   components/
     exercises/    exercise cards and muscle group navigation
@@ -63,7 +62,8 @@ src/
     planForm/     forms to create and edit workout plans
     ui/           small reusable building blocks (buttons, headers, …)
     workoutPlans/ display of saved workout plans
-  hooks/        useExercises (API data), useWorkoutPlans (localStorage)
+  data/         own exercise library: exercises, muscles, equipment, muscle groups
+  hooks/        useWorkoutPlans (localStorage)
   i18n/         translations and language context
   pages/        one component per route
   styles/       design tokens (colors, fonts, radii) and global styles

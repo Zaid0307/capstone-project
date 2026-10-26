@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import muscleIcons from './muscleIcons';
-import { MUSCLE_GROUP_NAMES } from '../../api/wger';
+import { MUSCLE_GROUP_NAMES } from '../../data/muscleGroups';
 import { colors } from '../../styles/colors';
 import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';

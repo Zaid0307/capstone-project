@@ -5,7 +5,7 @@ import ExerciseListItem from './ExerciseListItem';
 import { FormCard, FormTitle, Input, Label } from './formStyles';
 import Button from '../ui/Button';
 import ScreenReaderOnly from '../ui/ScreenReaderOnly';
-import { MUSCLE_GROUP_NAMES } from '../../api/wger';
+import { MUSCLE_GROUP_NAMES } from '../../data/muscleGroups';
 import { colors } from '../../styles/colors';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { dayLabel } from '../../utils/workoutPlan';

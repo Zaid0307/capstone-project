@@ -1,7 +1,7 @@
-import { act, screen, within } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
-import { mockWgerFetch, renderWithProviders } from './test-utils';
+import { renderWithProviders } from './test-utils';
 import { LEGACY_STORAGE_KEY, STORAGE_KEY } from './hooks/useWorkoutPlans';
 
 const savedPlans = [
@@ -49,10 +49,8 @@ const savedPlans = [
   },
 ];
 
-// Renders the app and waits until the exercise request has settled.
 async function renderApp(route) {
   renderWithProviders(<App />, { route });
-  await act(() => new Promise(resolve => setTimeout(resolve, 0)));
 }
 
 function savePlans(plans) {
@@ -66,12 +64,10 @@ function readPlans() {
 describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
-    mockWgerFetch();
     window.confirm = vi.fn(() => true);
   });
 
   afterEach(() => {
-    delete global.fetch;
     delete window.confirm;
   });
 
@@ -271,26 +267,27 @@ describe('App', () => {
   });
 
   describe('exercise overview', () => {
-    it('loads the exercises of a muscle group from wger', async () => {
+    it('shows the exercises of a muscle group from the own library', async () => {
       await renderApp('/exercises');
 
       await userEvent.click(screen.getByRole('link', { name: 'Chest' }));
       expect(
-        await screen.findByRole('heading', { name: 'Bench Press' })
+        screen.getByRole('heading', { name: 'Barbell bench press' })
       ).toBeInTheDocument();
-      expect(screen.getByText('Lie on the bench.')).toBeInTheDocument();
-      expect(screen.getByRole('img', { name: 'Bench Press' })).toHaveAttribute(
-        'src',
-        'https://wger.de/bench.png'
-      );
+      expect(
+        screen.getByText(/Lower the bar under control to your lower chest/)
+      ).toBeInTheDocument();
+      expect(
+        screen.getAllByRole('img', { name: /no image available/i }).length
+      ).toBeGreaterThan(0);
 
       await userEvent.click(screen.getByRole('link', { name: 'Legs' }));
       expect(
-        screen.getByRole('heading', { name: 'Squat' })
+        screen.getByRole('heading', { name: 'Barbell squat' })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole('img', { name: /no image available/i })
-      ).toBeInTheDocument();
+        screen.queryByRole('heading', { name: 'Barbell bench press' })
+      ).not.toBeInTheDocument();
 
       await userEvent.click(
         screen.getByRole('link', { name: /back to muscle groups/i })
@@ -298,20 +295,14 @@ describe('App', () => {
       expect(screen.getAllByRole('link', { name: 'Chest' })).toHaveLength(1);
     });
 
-    it('shows an error and loads again on retry', async () => {
-      mockWgerFetch({ fail: true });
-      await renderApp('/exercises');
+    it('sorts the exercises of a group by name', async () => {
+      await renderApp('/exercises/arms');
 
-      await userEvent.click(screen.getByRole('link', { name: 'Chest' }));
-      expect(await screen.findByRole('alert')).toHaveTextContent(
-        /could not be loaded/i
-      );
-
-      mockWgerFetch();
-      await userEvent.click(screen.getByRole('button', { name: /try again/i }));
-      expect(
-        await screen.findByRole('heading', { name: 'Bench Press' })
-      ).toBeInTheDocument();
+      const names = screen
+        .getAllByRole('heading', { level: 3 })
+        .map(heading => heading.textContent);
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'en')));
+      expect(names).toContain('Hammer curl');
     });
   });
 
@@ -326,7 +317,10 @@ describe('App', () => {
 
       await userEvent.click(screen.getByRole('link', { name: 'Brust' }));
       expect(
-        await screen.findByRole('heading', { name: 'Bankdrücken' })
+        screen.getByRole('heading', { name: 'Langhantel-Bankdrücken' })
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/Die Stange kontrolliert zur unteren Brust senken/)
       ).toBeInTheDocument();
 
       expect(
@@ -360,7 +354,7 @@ describe('App', () => {
     it('opens a muscle group directly by its address', async () => {
       await renderApp('/exercises/chest');
       expect(
-        await screen.findByRole('heading', { name: 'Bench Press' })
+        screen.getByRole('heading', { name: 'Barbell bench press' })
       ).toBeInTheDocument();
     });
 

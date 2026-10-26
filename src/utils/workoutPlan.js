@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { MUSCLE_GROUP_NAMES } from '../api/wger';
+import { MUSCLE_GROUP_NAMES } from '../data/muscleGroups';
 
 export const WEEKDAYS = [
   'monday',

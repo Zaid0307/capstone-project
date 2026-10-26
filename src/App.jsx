@@ -4,14 +4,10 @@ import ExercisesPage from './pages/ExercisesPage';
 import WorkoutPlansPage from './pages/WorkoutPlansPage';
 import CreatePlanPage from './pages/CreatePlanPage';
 import EditPlanPage from './pages/EditPlanPage';
-import useExercises from './hooks/useExercises';
 import useWorkoutPlans from './hooks/useWorkoutPlans';
-import { useTranslation } from './i18n/LanguageContext';
 import { legacyRedirects, routes } from './routes';
 
 export default function App() {
-  const { language } = useTranslation();
-  const exercises = useExercises(language);
   const { plans, addPlan, updatePlan, deletePlan, deleteDay } =
     useWorkoutPlans();
   const navigate = useNavigate();
@@ -31,11 +27,11 @@ export default function App() {
       <Route path={routes.landing} element={<LandingPage />} />
       <Route
         path={routes.exercises}
-        element={<ExercisesPage {...exercises} />}
+        element={<ExercisesPage />}
       />
       <Route
         path={routes.muscleGroup(':muscle')}
-        element={<ExercisesPage {...exercises} />}
+        element={<ExercisesPage />}
       />
       <Route
         path={routes.plans}
