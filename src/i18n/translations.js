@@ -80,6 +80,8 @@ const translations = {
     'plans.confirmDelete':
       'Do you really want to delete the workout plan "{name}"?',
     'plans.confirmDeleteDay': 'Do you really want to delete {day} from "{name}"?',
+    'plans.confirmDeleteLastDay':
+      '{day} is the last day of "{name}". Do you want to delete the whole workout plan?',
     'plans.notFound': 'This workout plan does not exist.',
     'plans.backToPlans': 'Back to my workout plans',
   },
@@ -164,6 +166,8 @@ const translations = {
     'plans.confirmDelete':
       'Möchtest du den Trainingsplan „{name}“ wirklich löschen?',
     'plans.confirmDeleteDay': 'Möchtest du {day} aus „{name}“ wirklich löschen?',
+    'plans.confirmDeleteLastDay':
+      '{day} ist der letzte Tag in „{name}“. Möchtest du den ganzen Trainingsplan löschen?',
     'plans.notFound': 'Diesen Trainingsplan gibt es nicht.',
     'plans.backToPlans': 'Zurück zu meinen Trainingsplänen',
   },

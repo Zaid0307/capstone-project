@@ -24,11 +24,15 @@ export default function WorkoutPlanCard({ plan, onDeletePlan, onDeleteDay }) {
   }
 
   function handleDeleteDay(day) {
-    const question = t('plans.confirmDeleteDay', {
-      day: dayLabel(day.day, t),
-      name,
-    });
-    if (window.confirm(question)) {
+    const values = { day: dayLabel(day.day, t), name };
+    // A plan without days is useless, so deleting the last day deletes the plan.
+    if (plan.days.length === 1) {
+      if (window.confirm(t('plans.confirmDeleteLastDay', values))) {
+        onDeletePlan(plan.id);
+      }
+      return;
+    }
+    if (window.confirm(t('plans.confirmDeleteDay', values))) {
       onDeleteDay(plan.id, day.id);
     }
   }

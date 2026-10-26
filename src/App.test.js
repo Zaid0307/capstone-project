@@ -161,6 +161,36 @@ describe('App', () => {
       expect(readPlans()).toEqual(savedPlans);
       expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
     });
+
+    it('offers to delete the whole plan when its last day is deleted', async () => {
+      savePlans(savedPlans);
+      await renderApp('/plans');
+
+      userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
+
+      expect(window.confirm).toHaveBeenCalledWith(
+        'Monday is the last day of "Push". Do you want to delete the whole workout plan?'
+      );
+      expect(readPlans().map(plan => plan.id)).toEqual(['plan2']);
+      expect(
+        screen.queryByRole('heading', { name: 'Push' })
+      ).not.toBeInTheDocument();
+    });
+
+    it('keeps the plan when deleting its last day is cancelled', async () => {
+      window.confirm = jest.fn(() => false);
+      savePlans(savedPlans);
+      await renderApp('/plans');
+
+      userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
+
+      expect(readPlans()).toEqual(savedPlans);
+      expect(
+        screen.getByRole('button', { name: 'Delete Monday' })
+      ).toBeInTheDocument();
+    });
   });
 
   describe('editing a plan', () => {
