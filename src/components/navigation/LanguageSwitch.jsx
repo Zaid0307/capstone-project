@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
 export default function LanguageSwitch() {
@@ -23,7 +24,7 @@ const Button = styled.button`
   width: 48px;
   margin: 5px;
   border: 1px solid ${colors.surface};
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: transparent;
   color: ${colors.surface};
   font-weight: bold;

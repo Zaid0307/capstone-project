@@ -5,6 +5,7 @@ import PageLayout from '../components/layout/PageLayout';
 import WorkoutPlanCard from '../components/workoutPlans/WorkoutPlanCard';
 import Center from '../components/ui/Center';
 import { colors } from '../styles/colors';
+import { radii } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
 
@@ -45,7 +46,7 @@ const CreateButton = styled.button`
   padding: 5px;
   margin-top: 15px;
   border: 1px solid;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   color: ${colors.surface};
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,

@@ -6,6 +6,7 @@ import IconButton from '../ui/IconButton';
 import ItemHeader from '../ui/ItemHeader';
 import ToggleButton from '../ui/ToggleButton';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { dayLabel } from '../../utils/workoutPlan';
 
@@ -47,7 +48,7 @@ export default function PlanDay({ day, onDelete }) {
 
 const Card = styled.li`
   margin: 10px 0;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   color: ${colors.text};
   box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 6px 2px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;

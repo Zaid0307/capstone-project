@@ -3,33 +3,35 @@ import userEvent from '@testing-library/user-event';
 import PlanForm from './PlanForm';
 import { renderWithProviders } from '../../test-utils';
 
-function createPlan(name, days) {
-  userEvent.type(screen.getByLabelText(/Workout plan name/i), name);
-  days.forEach(day => userEvent.click(screen.getByLabelText(day)));
-  userEvent.click(screen.getByRole('button', { name: /next/i }));
+async function createPlan(name, days) {
+  await userEvent.type(screen.getByLabelText(/Workout plan name/i), name);
+  for (const day of days) {
+    await userEvent.click(screen.getByLabelText(day));
+  }
+  await userEvent.click(screen.getByRole('button', { name: /next/i }));
 }
 
-function addExercise(dayName, { muscle, exercise, weight, repetitions, sets }) {
+async function addExercise(dayName, { muscle, exercise, weight, repetitions, sets }) {
   const dayForm = screen.getByRole('form', {
     name: new RegExp(`exercises for ${dayName}`, 'i'),
   });
   const form = within(dayForm);
-  userEvent.selectOptions(form.getByLabelText(/muscle/i), muscle);
-  userEvent.type(form.getByLabelText(/exercise:/i), exercise);
-  userEvent.type(form.getByLabelText(/weight/i), weight);
-  userEvent.type(form.getByLabelText(/repetitions/i), repetitions);
-  userEvent.type(form.getByLabelText(/sets/i), sets);
-  userEvent.click(form.getByRole('button', { name: /add exercise/i }));
+  await userEvent.selectOptions(form.getByLabelText(/muscle/i), muscle);
+  await userEvent.type(form.getByLabelText(/exercise:/i), exercise);
+  await userEvent.type(form.getByLabelText(/weight/i), weight);
+  await userEvent.type(form.getByLabelText(/repetitions/i), repetitions);
+  await userEvent.type(form.getByLabelText(/sets/i), sets);
+  await userEvent.click(form.getByRole('button', { name: /add exercise/i }));
 }
 
 describe('PlanForm', () => {
   beforeEach(() => localStorage.clear());
 
-  it('creates a complete workout plan', () => {
-    const onSave = jest.fn();
+  it('creates a complete workout plan', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm onSave={onSave} />);
 
-    createPlan('Upper / Lower', ['Thursday', 'Monday']);
+    await createPlan('Upper / Lower', ['Thursday', 'Monday']);
 
     expect(
       screen.getByRole('heading', { name: 'Upper / Lower' })
@@ -39,21 +41,21 @@ describe('PlanForm', () => {
       ['dayExercises-monday', 'dayExercises-thursday']
     );
 
-    addExercise('Monday', {
+    await addExercise('Monday', {
       muscle: 'Chest',
       exercise: 'Bench Press',
       weight: '60',
       repetitions: '8',
       sets: '4',
     });
-    addExercise('Monday', {
+    await addExercise('Monday', {
       muscle: 'Arms',
       exercise: 'Curl',
       weight: '12.5',
       repetitions: '12',
       sets: '3',
     });
-    addExercise('Thursday', {
+    await addExercise('Thursday', {
       muscle: 'Legs',
       exercise: 'Squat',
       weight: '80',
@@ -61,7 +63,7 @@ describe('PlanForm', () => {
       sets: '5',
     });
 
-    userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     expect(onSave).toHaveBeenCalledTimes(1);
     const plan = onSave.mock.calls[0][0];
@@ -80,19 +82,19 @@ describe('PlanForm', () => {
     });
   });
 
-  it('does not save while a day has no exercises', () => {
-    const onSave = jest.fn();
+  it('does not save while a day has no exercises', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm onSave={onSave} />);
 
-    createPlan('Push', ['Monday', 'Friday']);
-    addExercise('Monday', {
+    await createPlan('Push', ['Monday', 'Friday']);
+    await addExercise('Monday', {
       muscle: 'Chest',
       exercise: 'Bench Press',
       weight: '60',
       repetitions: '8',
       sets: '4',
     });
-    userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     expect(onSave).not.toHaveBeenCalled();
     expect(screen.getByRole('alert')).toHaveTextContent(
@@ -100,27 +102,27 @@ describe('PlanForm', () => {
     );
   });
 
-  it('removes an exercise before saving', () => {
-    const onSave = jest.fn();
+  it('removes an exercise before saving', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm onSave={onSave} />);
 
-    createPlan('Push', ['Monday']);
-    addExercise('Monday', {
+    await createPlan('Push', ['Monday']);
+    await addExercise('Monday', {
       muscle: 'Chest',
       exercise: 'Bench Press',
       weight: '60',
       repetitions: '8',
       sets: '4',
     });
-    addExercise('Monday', {
+    await addExercise('Monday', {
       muscle: 'Chest',
       exercise: 'Typo',
       weight: '1',
       repetitions: '1',
       sets: '1',
     });
-    userEvent.click(screen.getByRole('button', { name: /remove typo/i }));
-    userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await userEvent.click(screen.getByRole('button', { name: /remove typo/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     const [monday] = onSave.mock.calls[0][0].days;
     expect(monday.muscles[0].exercises.map(e => e.exercise)).toEqual([
@@ -128,31 +130,31 @@ describe('PlanForm', () => {
     ]);
   });
 
-  it('keeps the exercises when going back to change the days', () => {
-    const onSave = jest.fn();
+  it('keeps the exercises when going back to change the days', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm onSave={onSave} />);
 
-    createPlan('Push', ['Monday']);
-    addExercise('Monday', {
+    await createPlan('Push', ['Monday']);
+    await addExercise('Monday', {
       muscle: 'Chest',
       exercise: 'Bench Press',
       weight: '60',
       repetitions: '8',
       sets: '4',
     });
-    userEvent.click(screen.getByRole('button', { name: /edit name and days/i }));
+    await userEvent.click(screen.getByRole('button', { name: /edit name and days/i }));
     expect(screen.getByLabelText('Monday')).toBeChecked();
-    userEvent.click(screen.getByLabelText('Friday'));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.click(screen.getByLabelText('Friday'));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
-    addExercise('Friday', {
+    await addExercise('Friday', {
       muscle: 'Legs',
       exercise: 'Squat',
       weight: '80',
       repetitions: '5',
       sets: '5',
     });
-    userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     const plan = onSave.mock.calls[0][0];
     expect(plan.days.map(day => day.day)).toEqual(['monday', 'friday']);
@@ -211,8 +213,8 @@ describe('PlanForm in edit mode', () => {
 
   beforeEach(() => localStorage.clear());
 
-  it('shows the saved exercises of every day', () => {
-    renderWithProviders(<PlanForm initialPlan={plan} onSave={jest.fn()} />);
+  it('shows the saved exercises of every day', async () => {
+    renderWithProviders(<PlanForm initialPlan={plan} onSave={vi.fn()} />);
 
     expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
     expect(
@@ -225,19 +227,19 @@ describe('PlanForm in edit mode', () => {
     ).toBeInTheDocument();
   });
 
-  it('changes an exercise and keeps the ids of plan, days and exercises', () => {
-    const onSave = jest.fn();
+  it('changes an exercise and keeps the ids of plan, days and exercises', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm initialPlan={plan} onSave={onSave} />);
 
-    userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
+    await userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
     const monday = within(
       screen.getByRole('form', { name: /exercises for monday/i })
     );
     expect(monday.getByLabelText(/exercise:/i)).toHaveValue('Bench Press');
-    userEvent.clear(monday.getByLabelText(/weight/i));
-    userEvent.type(monday.getByLabelText(/weight/i), '62.5');
-    userEvent.click(monday.getByRole('button', { name: /save exercise/i }));
-    userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+    await userEvent.clear(monday.getByLabelText(/weight/i));
+    await userEvent.type(monday.getByLabelText(/weight/i), '62.5');
+    await userEvent.click(monday.getByRole('button', { name: /save exercise/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
 
     const saved = onSave.mock.calls[0][0];
     expect(saved.id).toBe('plan1');
@@ -255,17 +257,17 @@ describe('PlanForm in edit mode', () => {
     ]);
   });
 
-  it('changes name and days', () => {
-    const onSave = jest.fn();
+  it('changes name and days', async () => {
+    const onSave = vi.fn();
     renderWithProviders(<PlanForm initialPlan={plan} onSave={onSave} />);
 
-    userEvent.click(screen.getByRole('button', { name: /edit name and days/i }));
+    await userEvent.click(screen.getByRole('button', { name: /edit name and days/i }));
     expect(screen.getByLabelText(/Workout plan name/i)).toHaveValue('Push');
-    userEvent.clear(screen.getByLabelText(/Workout plan name/i));
-    userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Push v2');
-    userEvent.click(screen.getByLabelText('Thursday'));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
-    userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+    await userEvent.clear(screen.getByLabelText(/Workout plan name/i));
+    await userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Push v2');
+    await userEvent.click(screen.getByLabelText('Thursday'));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
 
     const saved = onSave.mock.calls[0][0];
     expect(saved.nameOfWorkout).toBe('Push v2');

@@ -67,7 +67,7 @@ describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
     mockWgerFetch();
-    window.confirm = jest.fn(() => true);
+    window.confirm = vi.fn(() => true);
   });
 
   afterEach(() => {
@@ -87,10 +87,10 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
       expect(screen.getByText('Chest and arms')).toBeInTheDocument();
-      userEvent.click(screen.getByRole('button', { name: 'Show Monday' }));
-      userEvent.click(screen.getByRole('button', { name: 'Show Chest' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Monday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Chest' }));
       expect(screen.getByText('Bench Press')).toBeInTheDocument();
       expect(screen.getByText('60 kg')).toBeInTheDocument();
     });
@@ -99,15 +99,15 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
       const dayButtons = screen.getAllByRole('button', { name: /^Show / });
       expect(dayButtons.map(button => button.getAttribute('aria-label'))).toEqual(
         ['Show Push', 'Show Tuesday', 'Show Friday']
       );
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Friday' }));
-      userEvent.click(screen.getByRole('button', { name: 'Show Tuesday' }));
-      userEvent.click(screen.getByRole('button', { name: 'Show Abs' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Friday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Tuesday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Abs' }));
       expect(screen.getByText('Crunch')).toBeInTheDocument();
     });
 
@@ -115,8 +115,8 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
-      userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
 
       expect(window.confirm).toHaveBeenCalledWith(
         'Do you really want to delete Friday from "Legacy"?'
@@ -133,7 +133,7 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: 'Delete workout plan Push' })
       );
 
@@ -147,15 +147,15 @@ describe('App', () => {
     });
 
     it('keeps plan and day when deleting is cancelled', async () => {
-      window.confirm = jest.fn(() => false);
+      window.confirm = vi.fn(() => false);
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: 'Delete workout plan Push' })
       );
-      userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
-      userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
 
       expect(window.confirm).toHaveBeenCalledTimes(2);
       expect(readPlans()).toEqual(savedPlans);
@@ -166,8 +166,8 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
-      userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
 
       expect(window.confirm).toHaveBeenCalledWith(
         'Monday is the last day of "Push". Do you want to delete the whole workout plan?'
@@ -179,12 +179,12 @@ describe('App', () => {
     });
 
     it('keeps the plan when deleting its last day is cancelled', async () => {
-      window.confirm = jest.fn(() => false);
+      window.confirm = vi.fn(() => false);
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
-      userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Delete Monday' }));
 
       expect(readPlans()).toEqual(savedPlans);
       expect(
@@ -198,14 +198,14 @@ describe('App', () => {
       savePlans(savedPlans);
       await renderApp('/plans');
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: 'Edit workout plan Push' })
       );
-      userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
-      userEvent.clear(screen.getByLabelText(/weight/i));
-      userEvent.type(screen.getByLabelText(/weight/i), '65');
-      userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
-      userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+      await userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
+      await userEvent.clear(screen.getByLabelText(/weight/i));
+      await userEvent.type(screen.getByLabelText(/weight/i), '65');
+      await userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
+      await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
 
       expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
       const [push, legacy] = readPlans();
@@ -227,7 +227,7 @@ describe('App', () => {
       ).toBeInTheDocument();
       expect(screen.getByText(/no exercises added yet/i)).toBeInTheDocument();
 
-      userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+      await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
       expect(screen.getByRole('alert')).toHaveTextContent(
         'Add at least one exercise for: Friday'
       );
@@ -239,7 +239,7 @@ describe('App', () => {
       expect(screen.getByRole('alert')).toHaveTextContent(
         /this workout plan does not exist/i
       );
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('link', { name: /back to my workout plans/i })
       );
       expect(
@@ -251,17 +251,17 @@ describe('App', () => {
   it('creates a plan and shows it on the plans page', async () => {
     await renderApp('/plans/new');
 
-    userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Legs');
-    userEvent.click(screen.getByLabelText('Saturday'));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Legs');
+    await userEvent.click(screen.getByLabelText('Saturday'));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
-    userEvent.selectOptions(screen.getByLabelText(/muscle/i), 'Legs');
-    userEvent.type(screen.getByLabelText(/exercise:/i), 'Squat');
-    userEvent.type(screen.getByLabelText(/weight/i), '80');
-    userEvent.type(screen.getByLabelText(/repetitions/i), '5');
-    userEvent.type(screen.getByLabelText(/sets/i), '5');
-    userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
-    userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await userEvent.selectOptions(screen.getByLabelText(/muscle/i), 'Legs');
+    await userEvent.type(screen.getByLabelText(/exercise:/i), 'Squat');
+    await userEvent.type(screen.getByLabelText(/weight/i), '80');
+    await userEvent.type(screen.getByLabelText(/repetitions/i), '5');
+    await userEvent.type(screen.getByLabelText(/sets/i), '5');
+    await userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     expect(screen.getByRole('heading', { name: 'Legs' })).toBeInTheDocument();
     expect(readPlans()).toHaveLength(1);
@@ -274,7 +274,7 @@ describe('App', () => {
     it('loads the exercises of a muscle group from wger', async () => {
       await renderApp('/exercises');
 
-      userEvent.click(screen.getByRole('link', { name: 'Chest' }));
+      await userEvent.click(screen.getByRole('link', { name: 'Chest' }));
       expect(
         await screen.findByRole('heading', { name: 'Bench Press' })
       ).toBeInTheDocument();
@@ -284,7 +284,7 @@ describe('App', () => {
         'https://wger.de/bench.png'
       );
 
-      userEvent.click(screen.getByRole('link', { name: 'Legs' }));
+      await userEvent.click(screen.getByRole('link', { name: 'Legs' }));
       expect(
         screen.getByRole('heading', { name: 'Squat' })
       ).toBeInTheDocument();
@@ -292,7 +292,7 @@ describe('App', () => {
         screen.getByRole('img', { name: /no image available/i })
       ).toBeInTheDocument();
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('link', { name: /back to muscle groups/i })
       );
       expect(screen.getAllByRole('link', { name: 'Chest' })).toHaveLength(1);
@@ -302,13 +302,13 @@ describe('App', () => {
       mockWgerFetch({ fail: true });
       await renderApp('/exercises');
 
-      userEvent.click(screen.getByRole('link', { name: 'Chest' }));
+      await userEvent.click(screen.getByRole('link', { name: 'Chest' }));
       expect(await screen.findByRole('alert')).toHaveTextContent(
         /could not be loaded/i
       );
 
       mockWgerFetch();
-      userEvent.click(screen.getByRole('button', { name: /try again/i }));
+      await userEvent.click(screen.getByRole('button', { name: /try again/i }));
       expect(
         await screen.findByRole('heading', { name: 'Bench Press' })
       ).toBeInTheDocument();
@@ -319,12 +319,12 @@ describe('App', () => {
     it('switches the app to German and loads German exercise names', async () => {
       await renderApp('/exercises');
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /switch language to german/i })
       );
       expect(localStorage.getItem('language')).toBe('"de"');
 
-      userEvent.click(screen.getByRole('link', { name: 'Brust' }));
+      await userEvent.click(screen.getByRole('link', { name: 'Brust' }));
       expect(
         await screen.findByRole('heading', { name: 'Bankdrücken' })
       ).toBeInTheDocument();
@@ -342,7 +342,7 @@ describe('App', () => {
       await renderApp('/plans');
 
       expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: 'Delete workout plan Push' })
       );
       expect(readPlans().map(plan => plan.id)).toEqual(['plan2']);

@@ -3,22 +3,22 @@ import userEvent from '@testing-library/user-event';
 import DayExercisesForm from './DayExercisesForm';
 import { renderWithProviders } from '../../test-utils';
 
-function fillExercise({ muscle = 'Legs', exercise, weight, repetitions, sets }) {
+async function fillExercise({ muscle = 'Legs', exercise, weight, repetitions, sets }) {
   if (muscle) {
-    userEvent.selectOptions(screen.getByLabelText(/muscle/i), muscle);
+    await userEvent.selectOptions(screen.getByLabelText(/muscle/i), muscle);
   }
-  userEvent.type(screen.getByLabelText(/exercise:/i), exercise);
-  userEvent.type(screen.getByLabelText(/weight/i), weight);
-  userEvent.type(screen.getByLabelText(/repetitions/i), repetitions);
-  userEvent.type(screen.getByLabelText(/sets/i), sets);
+  await userEvent.type(screen.getByLabelText(/exercise:/i), exercise);
+  await userEvent.type(screen.getByLabelText(/weight/i), weight);
+  await userEvent.type(screen.getByLabelText(/repetitions/i), repetitions);
+  await userEvent.type(screen.getByLabelText(/sets/i), sets);
 }
 
 describe('DayExercisesForm', () => {
   beforeEach(() => localStorage.clear());
 
-  it('shows empty fields, no muscle selected and an add button', () => {
+  it('shows empty fields, no muscle selected and an add button', async () => {
     renderWithProviders(
-      <DayExercisesForm day="monday" onAddExercise={jest.fn()} />
+      <DayExercisesForm day="monday" onAddExercise={vi.fn()} />
     );
 
     const inputMuscle = screen.getByRole('combobox', { name: /muscle/i });
@@ -37,20 +37,20 @@ describe('DayExercisesForm', () => {
     ).toBeInTheDocument();
   });
 
-  it('adds an exercise, accepts decimal weights and keeps the muscle selected', () => {
-    const onAddExercise = jest.fn();
+  it('adds an exercise, accepts decimal weights and keeps the muscle selected', async () => {
+    const onAddExercise = vi.fn();
     renderWithProviders(
       <DayExercisesForm day="monday" onAddExercise={onAddExercise} />
     );
 
-    fillExercise({
+    await fillExercise({
       exercise: ' Squat ',
       weight: '12.5',
       repetitions: '10',
       sets: '3',
     });
     expect(screen.getByLabelText(/weight/i)).toBeValid();
-    userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
+    await userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
 
     expect(onAddExercise).toHaveBeenCalledWith({
       id: expect.any(String),
@@ -66,30 +66,30 @@ describe('DayExercisesForm', () => {
     );
   });
 
-  it('does not add an exercise without a muscle', () => {
-    const onAddExercise = jest.fn();
+  it('does not add an exercise without a muscle', async () => {
+    const onAddExercise = vi.fn();
     renderWithProviders(
       <DayExercisesForm day="monday" onAddExercise={onAddExercise} />
     );
 
-    fillExercise({
+    await fillExercise({
       muscle: null,
       exercise: 'Squat',
       weight: '20',
       repetitions: '10',
       sets: '3',
     });
-    userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
+    await userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
 
     expect(onAddExercise).not.toHaveBeenCalled();
   });
 
-  it('lists the exercises of the day and removes one', () => {
-    const onRemoveExercise = jest.fn();
+  it('lists the exercises of the day and removes one', async () => {
+    const onRemoveExercise = vi.fn();
     renderWithProviders(
       <DayExercisesForm
         day="monday"
-        onAddExercise={jest.fn()}
+        onAddExercise={vi.fn()}
         onRemoveExercise={onRemoveExercise}
         exercises={[
           {
@@ -108,7 +108,7 @@ describe('DayExercisesForm', () => {
     expect(within(list).getByText('Bench Press')).toBeInTheDocument();
     expect(within(list).getByText('Chest')).toBeInTheDocument();
 
-    userEvent.click(
+    await userEvent.click(
       screen.getByRole('button', { name: /remove bench press/i })
     );
     expect(onRemoveExercise).toHaveBeenCalledWith('e1');
@@ -124,32 +124,32 @@ describe('DayExercisesForm', () => {
       sets: '4',
     };
 
-    function renderWithExercise(props = {}) {
+    async function renderWithExercise(props = {}) {
       renderWithProviders(
         <DayExercisesForm
           day="monday"
           exercises={[benchPress]}
-          onAddExercise={jest.fn()}
-          onUpdateExercise={jest.fn()}
-          onRemoveExercise={jest.fn()}
+          onAddExercise={vi.fn()}
+          onUpdateExercise={vi.fn()}
+          onRemoveExercise={vi.fn()}
           {...props}
         />
       );
-      userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
+      await userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
     }
 
-    it('loads the exercise into the form and saves the changes', () => {
-      const onUpdateExercise = jest.fn();
-      const onAddExercise = jest.fn();
-      renderWithExercise({ onUpdateExercise, onAddExercise });
+    it('loads the exercise into the form and saves the changes', async () => {
+      const onUpdateExercise = vi.fn();
+      const onAddExercise = vi.fn();
+      await renderWithExercise({ onUpdateExercise, onAddExercise });
 
       expect(screen.getByRole('combobox', { name: /muscle/i })).toHaveValue(
         'chest'
       );
       expect(screen.getByLabelText(/weight/i)).toHaveValue(60);
-      userEvent.clear(screen.getByLabelText(/repetitions/i));
-      userEvent.type(screen.getByLabelText(/repetitions/i), '10');
-      userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
+      await userEvent.clear(screen.getByLabelText(/repetitions/i));
+      await userEvent.type(screen.getByLabelText(/repetitions/i), '10');
+      await userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
 
       expect(onUpdateExercise).toHaveBeenCalledWith({
         ...benchPress,
@@ -161,11 +161,11 @@ describe('DayExercisesForm', () => {
       ).toBeInTheDocument();
     });
 
-    it('can be cancelled', () => {
-      const onUpdateExercise = jest.fn();
-      renderWithExercise({ onUpdateExercise });
+    it('can be cancelled', async () => {
+      const onUpdateExercise = vi.fn();
+      await renderWithExercise({ onUpdateExercise });
 
-      userEvent.click(screen.getByRole('button', { name: /cancel/i }));
+      await userEvent.click(screen.getByRole('button', { name: /cancel/i }));
 
       expect(screen.getByLabelText(/exercise:/i)).toHaveValue('');
       expect(
@@ -174,11 +174,11 @@ describe('DayExercisesForm', () => {
       expect(onUpdateExercise).not.toHaveBeenCalled();
     });
 
-    it('stops editing when the exercise is removed', () => {
-      const onRemoveExercise = jest.fn();
-      renderWithExercise({ onRemoveExercise });
+    it('stops editing when the exercise is removed', async () => {
+      const onRemoveExercise = vi.fn();
+      await renderWithExercise({ onRemoveExercise });
 
-      userEvent.click(
+      await userEvent.click(
         screen.getByRole('button', { name: /remove bench press/i })
       );
 

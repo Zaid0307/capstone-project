@@ -4,6 +4,7 @@ import ExerciseDetails from './ExerciseDetails';
 import ItemHeader from '../ui/ItemHeader';
 import ToggleButton from '../ui/ToggleButton';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { muscleLabel } from '../../utils/workoutPlan';
 
@@ -37,7 +38,7 @@ export default function PlanMuscle({ muscle }) {
 const Card = styled.li`
   width: 95%;
   margin: 5px 0 10px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 `;
@@ -48,5 +49,5 @@ const Title = styled.h4`
 
 const ExerciseBox = styled.div`
   border: 1px solid ${colors.white};
-  border-radius: 15px;
+  border-radius: ${radii.large};
 `;

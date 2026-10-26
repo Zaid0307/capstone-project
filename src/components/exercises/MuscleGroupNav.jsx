@@ -4,6 +4,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import muscleIcons from './muscleIcons';
 import { MUSCLE_GROUP_NAMES } from '../../api/wger';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
@@ -33,7 +34,7 @@ const linkStyle = css`
   justify-content: center;
   align-items: center;
   width: 100%;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   color: ${colors.text};
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;

@@ -16,8 +16,8 @@ const WEEKDAY_LABELS = [
 describe('PlanDetailsForm', () => {
   beforeEach(() => localStorage.clear());
 
-  it('shows a name field, 7 unchecked day checkboxes, a description and a submit button', () => {
-    renderWithProviders(<PlanDetailsForm onSubmit={jest.fn()} />);
+  it('shows a name field, 7 unchecked day checkboxes, a description and a submit button', async () => {
+    renderWithProviders(<PlanDetailsForm onSubmit={vi.fn()} />);
 
     const inputTitle = screen.getByLabelText(/Workout plan name/i);
     expect(inputTitle).toHaveAttribute('type', 'text');
@@ -40,17 +40,17 @@ describe('PlanDetailsForm', () => {
     );
   });
 
-  it('submits the plan with the days in week order', () => {
-    const onSubmit = jest.fn();
+  it('submits the plan with the days in week order', async () => {
+    const onSubmit = vi.fn();
     renderWithProviders(<PlanDetailsForm onSubmit={onSubmit} />);
 
-    userEvent.type(screen.getByLabelText(/Workout plan name/i), ' Push Pull ');
-    userEvent.type(screen.getByLabelText(/description/i), 'Three days');
-    userEvent.click(screen.getByLabelText(/friday/i));
-    userEvent.click(screen.getByLabelText(/monday/i));
-    userEvent.click(screen.getByLabelText(/wednesday/i));
-    userEvent.click(screen.getByLabelText(/wednesday/i));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.type(screen.getByLabelText(/Workout plan name/i), ' Push Pull ');
+    await userEvent.type(screen.getByLabelText(/description/i), 'Three days');
+    await userEvent.click(screen.getByLabelText(/friday/i));
+    await userEvent.click(screen.getByLabelText(/monday/i));
+    await userEvent.click(screen.getByLabelText(/wednesday/i));
+    await userEvent.click(screen.getByLabelText(/wednesday/i));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
     const plan = onSubmit.mock.calls[0][0];
@@ -63,35 +63,35 @@ describe('PlanDetailsForm', () => {
     expect(new Set(plan.days.map(({ id }) => id)).size).toBe(2);
   });
 
-  it('does not submit without a name', () => {
-    const onSubmit = jest.fn();
+  it('does not submit without a name', async () => {
+    const onSubmit = vi.fn();
     renderWithProviders(<PlanDetailsForm onSubmit={onSubmit} />);
 
-    userEvent.type(screen.getByLabelText(/Workout plan name/i), '   ');
-    userEvent.click(screen.getByLabelText(/monday/i));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.type(screen.getByLabelText(/Workout plan name/i), '   ');
+    await userEvent.click(screen.getByLabelText(/monday/i));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
-  it('does not submit without a training day and shows a hint', () => {
-    const onSubmit = jest.fn();
+  it('does not submit without a training day and shows a hint', async () => {
+    const onSubmit = vi.fn();
     renderWithProviders(<PlanDetailsForm onSubmit={onSubmit} />);
 
-    userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Push');
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Push');
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
     expect(onSubmit).not.toHaveBeenCalled();
     expect(screen.getByRole('alert')).toHaveTextContent(
       /at least one training day/i
     );
 
-    userEvent.click(screen.getByLabelText(/monday/i));
+    await userEvent.click(screen.getByLabelText(/monday/i));
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
-  it('is prefilled when editing and keeps the ids', () => {
-    const onSubmit = jest.fn();
+  it('is prefilled when editing and keeps the ids', async () => {
+    const onSubmit = vi.fn();
     renderWithProviders(
       <PlanDetailsForm
         onSubmit={onSubmit}
@@ -117,9 +117,9 @@ describe('PlanDetailsForm', () => {
     expect(screen.getByLabelText(/thursday/i)).toBeChecked();
     expect(screen.getByLabelText(/friday/i)).not.toBeChecked();
 
-    userEvent.click(screen.getByLabelText(/thursday/i));
-    userEvent.click(screen.getByLabelText(/sunday/i));
-    userEvent.click(screen.getByRole('button', { name: /next/i }));
+    await userEvent.click(screen.getByLabelText(/thursday/i));
+    await userEvent.click(screen.getByLabelText(/sunday/i));
+    await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
     const plan = onSubmit.mock.calls[0][0];
     expect(plan.id).toBe('plan1');
@@ -128,8 +128,8 @@ describe('PlanDetailsForm', () => {
     expect(plan.days[1].id).not.toBe('day-thu');
   });
 
-  it('is shown in German', () => {
-    renderWithProviders(<PlanDetailsForm onSubmit={jest.fn()} />, {
+  it('is shown in German', async () => {
+    renderWithProviders(<PlanDetailsForm onSubmit={vi.fn()} />, {
       language: 'de',
     });
 

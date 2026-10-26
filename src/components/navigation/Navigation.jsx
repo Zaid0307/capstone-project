@@ -5,6 +5,7 @@ import { MdFormatAlignJustify } from 'react-icons/md';
 import { ImHome } from 'react-icons/im';
 import LanguageSwitch from './LanguageSwitch';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
@@ -36,7 +37,7 @@ const NavItem = styled(NavLink)`
   text-decoration: none;
   &.active {
     margin: 5px;
-    border-radius: 15px;
+    border-radius: ${radii.large};
     background: ${colors.surface};
     color: ${colors.primary};
   }

@@ -7,6 +7,7 @@ import IconButton from '../ui/IconButton';
 import ItemHeader from '../ui/ItemHeader';
 import ToggleButton from '../ui/ToggleButton';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { dayLabel, sortDays } from '../../utils/workoutPlan';
 import { routes } from '../../routes';
@@ -84,13 +85,13 @@ export default function WorkoutPlanCard({ plan, onDeletePlan, onDeleteDay }) {
 const Card = styled.article`
   margin: 15px 10px;
   padding: 10px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 `;
 
 const Header = styled(ItemHeader)`
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.secondary};
   color: ${colors.text};
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;

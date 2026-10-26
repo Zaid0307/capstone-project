@@ -49,7 +49,7 @@ export const wgerResponses = {
 };
 
 export function mockWgerFetch({ fail = false } = {}) {
-  global.fetch = jest.fn(url => {
+  global.fetch = vi.fn(url => {
     if (fail) {
       return Promise.resolve({ ok: false, status: 500 });
     }

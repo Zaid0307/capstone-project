@@ -1,6 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
+import { cssVariableDeclarations, fonts } from './tokens';
 
 export default createGlobalStyle`
+  :root {
+    ${cssVariableDeclarations()}
+  }
 
   * {
     box-sizing: border-box;
@@ -8,8 +12,7 @@ export default createGlobalStyle`
     padding: 0;
   }
   body {
-    
-    font-family: sans-serif;
+    font-family: ${fonts.body};
     font-size: 112.5%;
   }
   input, label, button, textarea {

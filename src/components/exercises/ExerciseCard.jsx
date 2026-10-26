@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { BiDumbbell } from 'react-icons/bi';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
 export default function ExerciseCard({ exercise }) {
@@ -35,7 +36,7 @@ const Card = styled.article`
   max-width: calc(100vw - 20px);
   height: 150px;
   padding: 10px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
@@ -60,7 +61,7 @@ const imageBox = `
   align-self: center;
   flex-shrink: 0;
   margin-right: 15px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.white};
 `;
 

@@ -6,6 +6,7 @@ import { ErrorText } from './formStyles';
 import Button from '../ui/Button';
 import Center from '../ui/Center';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
   buildWorkoutPlan,
@@ -69,7 +70,7 @@ export default function PlanForm({ onSave, initialPlan }) {
     <>
       <PlanName>{details.nameOfWorkout}</PlanName>
       <Center>
-        <Button variant="secondary" onClick={() => setIsEditingDetails(true)}>
+        <Button $variant="secondary" onClick={() => setIsEditingDetails(true)}>
           {t('planForm.editDetails')}
         </Button>
       </Center>
@@ -103,7 +104,7 @@ export default function PlanForm({ onSave, initialPlan }) {
         </SaveError>
       )}
       <Center>
-        <Button variant="secondary" onClick={handleSave}>
+        <Button $variant="secondary" onClick={handleSave}>
           {t(isEditing ? 'planForm.saveChanges' : 'planForm.save')}
         </Button>
       </Center>
@@ -123,7 +124,7 @@ const PlanName = styled.h2`
   display: flex;
   justify-content: center;
   margin: 5px 10px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
   color: ${colors.text};
 `;
@@ -131,7 +132,7 @@ const PlanName = styled.h2`
 const SaveError = styled(ErrorText)`
   margin: 0 15px;
   padding: 5px;
-  border-radius: 5px;
+  border-radius: ${radii.small};
   background-color: ${colors.surface};
   font-size: 1rem;
   text-align: center;

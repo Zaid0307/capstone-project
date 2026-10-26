@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 
 const Message = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ const Message = styled.div`
   gap: 10px;
   margin: 20px;
   padding: 15px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
   color: ${colors.text};
   text-align: center;

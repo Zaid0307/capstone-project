@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 
 const variants = {
   primary: css`
@@ -20,12 +21,12 @@ const Button = styled.button.attrs(props => ({
   align-items: center;
   gap: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: ${radii.small};
   font-size: 1rem;
   font-weight: 500;
   padding: 5px 10px;
   margin: 5px 0;
-  ${props => variants[props.variant ?? 'primary']}
+  ${props => variants[props.$variant ?? 'primary']}
   &:hover {
     background-color: ${colors.primary};
     color: ${colors.hoverText};

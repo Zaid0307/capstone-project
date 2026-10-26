@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import muscleIcons from './muscleIcons';
 import { MUSCLE_GROUP_NAMES } from '../../api/wger';
 import { colors } from '../../styles/colors';
+import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
@@ -43,7 +44,7 @@ const Tile = styled(Link)`
   justify-content: center;
   align-items: center;
   padding: 5px;
-  border-radius: 15px;
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
   color: ${colors.text};
   text-decoration: none;

@@ -20,13 +20,14 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 
 ## Tech Stack
 
-- React
-- React Hooks
-- React Router
-- React Testing Library / Jest
+- React 19
+- React Router 7
+- styled-components 6
+- Vite 8
+- Vitest 5 and React Testing Library
+- ESLint
+- Storybook 10
 - JavaScript
-- Storybook
-- styled-components
 - wger.de API
 - localStorage
 - npm
@@ -34,12 +35,15 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 
 ## Project Setup
 
+- Requires Node.js 22.12 or newer
 - Clone this repository
 - You don't need an API key
 - Install all dependencies with `$ npm install`
-- Run app in dev mode with `$ npm start`
+- Run app in dev mode with `$ npm run dev` (or `$ npm start`)
 - Server: [http://localhost:3000/](http://localhost:3000/)
-- Run tests via `$ npm run test`
+- Run tests via `$ npm test` (watch mode: `$ npm run test:watch`)
+- Check the code with `$ npm run lint`
+- Build for production with `$ npm run build` (output in `build/`)
 - Run Storybook with `$ npm run storybook`
 
 ## Languages
@@ -62,8 +66,9 @@ src/
   hooks/        useExercises (API data), useWorkoutPlans (localStorage)
   i18n/         translations and language context
   pages/        one component per route
-  styles/       global styles and colors
+  styles/       design tokens (colors, fonts, radii) and global styles
   utils/        pure functions for workout plan data
   routes.js     all paths of the app
 docs/images/    screenshots for this README
+design-handoff/ handoff package for the UI/UX design
 ```
