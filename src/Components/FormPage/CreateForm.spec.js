@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import CreateForm from './CreateForm';
 
 describe('CreateForm', () => {
-  it('shows 2 input fields with the type (text), 7 checkboxes with the txpe (checkbox) and the default value (false). Show one Submit Button', () => {
+  it('shows 2 input fields with the type (text), 7 checkboxes with the type (checkbox) and the default value (false). Show one Submit Button', () => {
     render(<CreateForm />);
 
     const inputTitle = screen.getByLabelText(/Workout plan name/i);
     const checkboxMonday = screen.getByLabelText(/monday/i);
-    const checkboxTuseday = screen.getByLabelText(/tuseday/i);
+    const checkboxTuesday = screen.getByLabelText(/tuesday/i);
     const checkboxWednesday = screen.getByLabelText(/wednesday/i);
     const checkboxThursday = screen.getByLabelText(/thursday/i);
     const checkboxFriday = screen.getByLabelText(/friday/i);
@@ -24,9 +24,9 @@ describe('CreateForm', () => {
     expect(checkboxMonday).toBeInTheDocument();
     expect(checkboxMonday).toHaveAttribute('type', 'checkbox');
     expect(checkboxMonday.checked).toEqual(false);
-    expect(checkboxTuseday).toBeInTheDocument();
-    expect(checkboxTuseday).toHaveAttribute('type', 'checkbox');
-    expect(checkboxTuseday.checked).toEqual(false);
+    expect(checkboxTuesday).toBeInTheDocument();
+    expect(checkboxTuesday).toHaveAttribute('type', 'checkbox');
+    expect(checkboxTuesday.checked).toEqual(false);
     expect(checkboxWednesday).toBeInTheDocument();
     expect(checkboxWednesday).toHaveAttribute('type', 'checkbox');
     expect(checkboxWednesday.checked).toEqual(false);

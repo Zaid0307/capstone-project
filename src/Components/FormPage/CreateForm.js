@@ -9,7 +9,7 @@ export default function CreateForm({ onSubmit }) {
     workOutName: '',
     description: '',
   });
-  const [days, setDays] = useState();
+  const [days, setDays] = useState({});
 
   function onCheck(event) {
     const { name, checked } = event.target;
@@ -24,11 +24,9 @@ export default function CreateForm({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const daysAsArray = Object.entries(days).map(element => {
-      if (element[1]) {
-        return { day: element[0], id: nanoid() };
-      }
-    });
+    const daysAsArray = Object.entries(days)
+      .filter(([, checked]) => checked)
+      .map(([day]) => ({ day, id: nanoid() }));
 
     onSubmit({
       id: nanoid(),

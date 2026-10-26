@@ -19,16 +19,6 @@ export default function MusclesMap({ muscle }) {
   );
 }
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
-    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  border-radius: 15px;
-  margin: 5px 0px 10px 0px;
-  width: 95%;
-`;
-
 const StyledMuscleBox = styled.div`
   justify-content: center;
   display: flex;

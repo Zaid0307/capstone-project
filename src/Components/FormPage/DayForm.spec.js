@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 describe('DayForm', () => {
   it('Show 5 empty input fields with the Type (Text) and one Submit Button', () => {
-    render(<DayForm />);
+    render(<DayForm day="monday" onSubmit={() => {}} />);
 
     const inputMuscle = screen.getByRole('combobox', { name: /Muscle:/i });
     const inputExercise = screen.getByLabelText(/exercise/i);
@@ -15,7 +15,7 @@ describe('DayForm', () => {
       name: /add exercise/i,
     });
 
-    expect(inputMuscle).toHaveValue('Arms');
+    expect(inputMuscle).toHaveValue('Select a muscle');
     userEvent.selectOptions(inputMuscle, 'Legs');
     expect(inputMuscle).toHaveValue('Legs');
     expect(inputExercise).toBeInTheDocument();

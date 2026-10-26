@@ -13,7 +13,7 @@ export default function DayForm({ onSubmit, day }) {
     weight: '',
     repetitions: '',
     sets: '',
-    muscle: '',
+    muscle: 'Select a muscle',
   });
 
   function handleSubmit(event) {
@@ -65,7 +65,7 @@ export default function DayForm({ onSubmit, day }) {
   return (
     <>
       <FormBox>
-        <ScreenReaderOnly id="formSpan" Create your workout sessions />
+        <ScreenReaderOnly id="formSpan">Create your workout sessions</ScreenReaderOnly>
         <form
           autoComplete="off"
           aria-labelledby="formSpan"

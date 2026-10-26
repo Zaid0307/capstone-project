@@ -4,7 +4,7 @@ export default function Card({ item, images }) {
   const regex = /(<([^>]+)>)/gi;
 
   const renderImg = images.filter(
-    img => img.exercise_base == item.exercise_base
+    img => img.exercise_base === item.exercise_base
   );
 
   const img = renderImg.map(img => img.image);
