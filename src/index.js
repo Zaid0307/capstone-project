@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import GlobalStyles from './GlobalStyles.js';
 import { BrowserRouter } from 'react-router-dom';
+import { LanguageProvider } from './i18n/LanguageContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <GlobalStyles />
-      <App />
+      <LanguageProvider>
+        <GlobalStyles />
+        <App />
+      </LanguageProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

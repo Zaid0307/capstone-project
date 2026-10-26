@@ -37,7 +37,7 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 - Clone this repository
 - You don't need an API key
 - Install all dependencies with `$ npm install`
-- Run app in dev mode with `$ npm run dev`
+- Run app in dev mode with `$ npm start`
 - Server: [http://localhost:3000/](http://localhost:3000/)
 - Run tests via `$ npm run test`
 - Run Storybook with `$ npm run storybook`

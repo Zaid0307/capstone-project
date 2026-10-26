@@ -9,4 +9,9 @@ export default {
 const Template = args => <DayForm {...args} />;
 
 export const Default = Template.bind({});
-Default.args = { day: "monday" };
+Default.args = {
+  day: "monday",
+  exercises: [],
+  onAddExercise: () => {},
+  onRemoveExercise: () => {},
+};

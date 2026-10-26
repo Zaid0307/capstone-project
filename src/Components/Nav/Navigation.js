@@ -3,19 +3,24 @@ import { NavLink } from 'react-router-dom';
 import { BiDumbbell } from 'react-icons/bi';
 import { MdFormatAlignJustify } from 'react-icons/md';
 import { ImHome } from 'react-icons/im';
+import { useTranslation } from '../../i18n/LanguageContext';
+import LanguageSwitch from './LanguageSwitch';
 
 export default function Navigation() {
+  const { t } = useTranslation();
+
   return (
     <Nav>
-      <LinkStyled to="/Create_Plan">
+      <LinkStyled to="/Create_Plan" aria-label={t('nav.createPlan')}>
         <MdFormatAlignJustify size={40} />
       </LinkStyled>
-      <LinkStyled to="/home">
+      <LinkStyled to="/home" aria-label={t('nav.exercises')}>
         <ImHome size={40} />
       </LinkStyled>
-      <LinkStyled to="/Workoutplans">
+      <LinkStyled to="/Workoutplans" aria-label={t('nav.workoutPlans')}>
         <BiDumbbell size={40} />
       </LinkStyled>
+      <LanguageSwitch />
     </Nav>
   );
 }

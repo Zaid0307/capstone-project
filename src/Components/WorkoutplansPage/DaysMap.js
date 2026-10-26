@@ -4,17 +4,29 @@ import { BiHide } from 'react-icons/bi';
 import WorkoutPlanMuscles from './WorkouPlanMuscles';
 import { useState } from 'react';
 import { MdOutlineDeleteForever } from 'react-icons/md';
+import { useTranslation } from '../../i18n/LanguageContext';
+import { dayLabel } from '../../utils/workoutPlan';
 
 export default function DaysMap({ day, handleDeleteDays, itemId }) {
+  const { t } = useTranslation();
   const [showDay, setShowDay] = useState(false);
+  const label = dayLabel(day.day, t);
+
   return (
     <StyledDayBox>
       <TestDayContainer>
-        <StyledDay>{day.day.toUpperCase()}</StyledDay>
-        <DeleteButton onClick={() => handleDeleteDays(day.id, itemId)}>
+        <StyledDay>{label.toUpperCase()}</StyledDay>
+        <DeleteButton
+          aria-label={t('plans.deleteDay', { day: label })}
+          onClick={() => handleDeleteDays(day.id, itemId)}
+        >
           <MdOutlineDeleteForever />
         </DeleteButton>
-        <Button onClick={() => setShowDay(!showDay)}>
+        <Button
+          aria-label={t(showDay ? 'plans.hide' : 'plans.show', { name: label })}
+          aria-expanded={showDay}
+          onClick={() => setShowDay(!showDay)}
+        >
           {showDay ? <BiHide /> : <BiShow />}
         </Button>
       </TestDayContainer>
@@ -37,6 +49,7 @@ const StyledDayBox = styled.div`
 `;
 
 const TestDayContainer = styled.div`
+  position: relative;
   justify-content: center;
   display: flex;
   width: 100%;
@@ -56,7 +69,7 @@ const Button = styled.button`
   border: none;
   outline: none;
   position: absolute;
-  right: 40px;
+  right: 15px;
   color: #283a45;
 `;
 
@@ -66,6 +79,6 @@ const DeleteButton = styled.button`
   border: none;
   outline: none;
   position: absolute;
-  right: 70px;
+  right: 45px;
   color: #283a45;
 `;

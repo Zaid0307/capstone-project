@@ -4,12 +4,14 @@ import { BsPlusCircle } from 'react-icons/bs';
 import Center from '../Components/Styles/Center';
 import { useNavigate } from 'react-router-dom';
 import Navigation from '../Components/Nav/Navigation';
+import { useTranslation } from '../i18n/LanguageContext';
+
 export default function WorkoutplansPage({
   data,
   handleDeleteCard,
   handleDeleteDays,
-  handleDeleteMusles,
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   function handleCreateWorkout() {
@@ -18,22 +20,19 @@ export default function WorkoutplansPage({
   return (
     <GridWrap>
       <Background>
-        {data.map(function (item, index) {
-          return (
-            <div key={`plan${index}`}>
-              <WorkoutPlans
-                item={item}
-                handleDeleteCard={handleDeleteCard}
-                handleDeleteDays={handleDeleteDays}
-                handleDeleteMusles={handleDeleteMusles}
-              />
-            </div>
-          );
-        })}
+        {data.length === 0 && <EmptyText>{t('plans.empty')}</EmptyText>}
+        {data.map(item => (
+          <WorkoutPlans
+            key={item.id}
+            item={item}
+            handleDeleteCard={handleDeleteCard}
+            handleDeleteDays={handleDeleteDays}
+          />
+        ))}
         <Center>
           <Button onClick={handleCreateWorkout}>
             <BsPlusCircle size={20} />
-            <span>Create new Workoutplan</span>
+            <span>{t('plans.create')}</span>
           </Button>
         </Center>
       </Background>
@@ -50,6 +49,12 @@ const GridWrap = styled.div`
 const Background = styled.div`
   background: radial-gradient(#85c1c7, #5e888c, #344b59);
   height: 100%;
+`;
+
+const EmptyText = styled.p`
+  padding: 20px;
+  text-align: center;
+  color: #d5dee8;
 `;
 
 const Button = styled.button`

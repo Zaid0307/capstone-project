@@ -4,13 +4,11 @@ import styled from 'styled-components';
 export default function WorkoutPlanMuscles({ day }) {
   return (
     <>
-      {day.muscles.map(function (muscle, index) {
-        return (
-          <Card key={`muscle${index}`}>
-            <MusclesMap muscle={muscle} />
-          </Card>
-        );
-      })}
+      {(day.muscles ?? []).map(muscle => (
+        <Card key={muscle.id ?? muscle.name}>
+          <MusclesMap muscle={muscle} />
+        </Card>
+      ))}
     </>
   );
 }

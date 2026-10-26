@@ -6,13 +6,11 @@ export default function BacktoTopButton() {
   const [backtoTop, setBacktoTop] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 500) {
-        setBacktoTop(true);
-      } else {
-        setBacktoTop(false);
-      }
-    });
+    function handleScroll() {
+      setBacktoTop(window.scrollY > 500);
+    }
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scroleToTop = () => {

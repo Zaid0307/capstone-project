@@ -1,17 +1,25 @@
 import img from '../Img/fitness.png';
 import styled from 'styled-components';
+import { useTranslation } from '../../i18n/LanguageContext';
+import LanguageSwitch from '../Nav/LanguageSwitch';
 
 export default function LandingPage({ handleLandingpage }) {
+  const { t } = useTranslation();
+
   return (
     <BackgroundImg>
-      <TextContent>Create your Workoutplan</TextContent>
+      <SwitchBox>
+        <LanguageSwitch />
+      </SwitchBox>
+      <TextContent>{t('landing.title')}</TextContent>
 
-      <Button onClick={handleLandingpage}>Let´s Go</Button>
+      <Button onClick={handleLandingpage}>{t('landing.start')}</Button>
     </BackgroundImg>
   );
 }
 
 const BackgroundImg = styled.div`
+  position: relative;
   background-image: url(${img});
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,6 +28,14 @@ const BackgroundImg = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+`;
+
+const SwitchBox = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 40px;
+  display: flex;
 `;
 
 const TextContent = styled.h1`

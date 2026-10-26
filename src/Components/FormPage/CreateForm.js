@@ -3,17 +3,22 @@ import styled from 'styled-components';
 import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
 import Center from '../Styles/Center';
 import { nanoid } from 'nanoid';
+import { useTranslation } from '../../i18n/LanguageContext';
+import { WEEKDAYS } from '../../utils/workoutPlan';
 
 export default function CreateForm({ onSubmit }) {
+  const { t } = useTranslation();
   const [formInfo, setFormInfo] = useState({
     workOutName: '',
     description: '',
   });
-  const [days, setDays] = useState({});
+  const [days, setDays] = useState([]);
+  const [showDaysError, setShowDaysError] = useState(false);
 
   function onCheck(event) {
     const { name, checked } = event.target;
-    setDays({ ...days, [name]: checked });
+    setDays(checked ? [...days, name] : days.filter(day => day !== name));
+    setShowDaysError(false);
   }
 
   function onChange(event) {
@@ -24,128 +29,83 @@ export default function CreateForm({ onSubmit }) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const daysAsArray = Object.entries(days)
-      .filter(([, checked]) => checked)
-      .map(([day]) => ({ day, id: nanoid() }));
+    if (!formInfo.workOutName.trim()) {
+      return;
+    }
+    if (days.length === 0) {
+      setShowDaysError(true);
+      return;
+    }
 
     onSubmit({
       id: nanoid(),
-      nameOfWorkout: formInfo.workOutName,
-      description: formInfo.description,
-      days: daysAsArray,
+      nameOfWorkout: formInfo.workOutName.trim(),
+      description: formInfo.description.trim(),
+      days: WEEKDAYS.filter(day => days.includes(day)).map(day => ({
+        day,
+        id: nanoid(),
+      })),
     });
   }
 
   return (
     <PageBox>
       <StyledCenterBox>
-        <Title id="fromH2">Create your Workout plan</Title>
+        <Title id="fromH2">{t('createForm.title')}</Title>
       </StyledCenterBox>
 
       <form onSubmit={handleSubmit} autoComplete="off" aria-labelledby="fromH2">
         <StyledInputBox>
-          <label htmlFor="nameOfWorkout">Workout plan name:</label>
+          <label htmlFor="nameOfWorkout">{t('createForm.name')}</label>
           <StyledInput
             onChange={onChange}
             name="workOutName"
             maxLength="100"
             id="nameOfWorkout"
             type="text"
-            placeholder="Name your Workout plan*"
+            placeholder={t('createForm.namePlaceholder')}
             value={formInfo.workOutName}
+            pattern=".*\S.*"
             required
           />
         </StyledInputBox>
 
-        <TitleCheckbox>Choose your training days*:</TitleCheckbox>
-        <div>
-          <StyledCheckBox>
-            <InputCheck
-              id="monday"
-              name="monday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="monday">Monday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="tuesday"
-              name="tuesday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="tuesday">Tuesday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="wednesday"
-              name="wednesday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="wednesday">Wednesday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="thursday"
-              name="thursday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="thursday"> Thursday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="friday"
-              name="friday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="friday">Friday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="saturday"
-              name="saturday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="saturday">Saturday</StyledLabel>
-          </StyledCheckBox>
-
-          <StyledCheckBox>
-            <InputCheck
-              id="sunday"
-              name="sunday"
-              onChange={onCheck}
-              type="checkbox"
-            />
-            <StyledLabel htmlFor="sunday">Sunday</StyledLabel>
-          </StyledCheckBox>
-        </div>
+        <fieldset aria-describedby={showDaysError ? 'daysError' : undefined}>
+          <TitleCheckbox as="legend">{t('createForm.days')}</TitleCheckbox>
+          {WEEKDAYS.map(day => (
+            <StyledCheckBox key={day}>
+              <InputCheck
+                id={day}
+                name={day}
+                onChange={onCheck}
+                type="checkbox"
+                checked={days.includes(day)}
+              />
+              <StyledLabel htmlFor={day}>{t(`day.${day}`)}</StyledLabel>
+            </StyledCheckBox>
+          ))}
+          {showDaysError && (
+            <ErrorText id="daysError" role="alert">
+              {t('createForm.errorNoDays')}
+            </ErrorText>
+          )}
+        </fieldset>
         <StyledInputBox>
           <label htmlFor="discripeUrPlan">
-            <ScreenReaderOnly>Description</ScreenReaderOnly>
+            <ScreenReaderOnly>{t('createForm.description')}</ScreenReaderOnly>
           </label>
           <StyledInput
-            required
             onChange={onChange}
             name="description"
             maxLength="200"
             id="discripeUrPlan"
             type="text"
-            placeholder="Add a description for your Workout plan ..."
+            placeholder={t('createForm.descriptionPlaceholder')}
             value={formInfo.description}
           />
         </StyledInputBox>
         <Center>
-          <SubmitButton onClick={handleSubmit}>Create</SubmitButton>
+          <SubmitButton type="submit">{t('createForm.submit')}</SubmitButton>
         </Center>
       </form>
     </PageBox>
@@ -160,6 +120,9 @@ const PageBox = styled.div`
   padding: 5px;
   background-color: #d5dee8;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  fieldset {
+    border: none;
+  }
 `;
 
 const StyledCenterBox = styled.div`
@@ -178,6 +141,11 @@ const TitleCheckbox = styled.p`
   color: #496b73;
 `;
 
+const ErrorText = styled.p`
+  color: #a12a2a;
+  font-size: 0.9rem;
+`;
+
 const StyledInputBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -192,7 +160,7 @@ const StyledInput = styled.input`
   font-size: 1rem;
   padding-left: 0.25rem;
   padding-top: 0.25rem;
-  min-width: 20rem;
+  min-width: min(20rem, 100%);
   background-color: transparent;
   width: 100%;
   &:focus {
@@ -212,6 +180,9 @@ const InputCheck = styled.input`
   position: absolute;
   &:checked + label::before {
     background-color: #344b59;
+  }
+  &:focus-visible + label::before {
+    outline: 2px solid #283a45;
   }
 `;
 

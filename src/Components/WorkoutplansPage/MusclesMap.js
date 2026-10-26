@@ -3,14 +3,25 @@ import styled from 'styled-components';
 import { BiShow } from 'react-icons/bi';
 import { BiHide } from 'react-icons/bi';
 import WorkoutplanExersice from './WorkoutplanExercise';
+import { useTranslation } from '../../i18n/LanguageContext';
+import { muscleLabel } from '../../utils/workoutPlan';
 
 export default function MusclesMap({ muscle }) {
+  const { t } = useTranslation();
   const [showMucsle, setShowMucsle] = useState(false);
+  const label = muscleLabel(muscle.name, t);
+
   return (
     <>
       <StyledMuscleBox>
-        <StyledMuscle>{muscle.name}</StyledMuscle>
-        <Button onClick={() => setShowMucsle(!showMucsle)}>
+        <StyledMuscle>{label}</StyledMuscle>
+        <Button
+          aria-label={t(showMucsle ? 'plans.hide' : 'plans.show', {
+            name: label,
+          })}
+          aria-expanded={showMucsle}
+          onClick={() => setShowMucsle(!showMucsle)}
+        >
           {showMucsle ? <BiHide /> : <BiShow />}
         </Button>
       </StyledMuscleBox>
@@ -20,6 +31,7 @@ export default function MusclesMap({ muscle }) {
 }
 
 const StyledMuscleBox = styled.div`
+  position: relative;
   justify-content: center;
   display: flex;
   border-radius: 15px;
@@ -37,6 +49,6 @@ const Button = styled.button`
   border: none;
   outline: none;
   position: absolute;
-  right: 40px;
+  right: 15px;
   color: #283a45;
 `;

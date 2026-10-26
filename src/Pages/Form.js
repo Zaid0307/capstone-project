@@ -4,51 +4,79 @@ import DayForm from '../Components/FormPage/DayForm';
 import styled from 'styled-components';
 import Center from '../Components/Styles/Center';
 import Navigation from '../Components/Nav/Navigation';
-export default function Form({ onAddWorkoutPlan }) {
-  const [workoutPlan, setWorkoutPlan] = useState({});
-  const [toggleForm, setToggleForm] = useState(false);
+import { useTranslation } from '../i18n/LanguageContext';
+import {
+  buildWorkoutPlan,
+  dayLabel,
+  getDaysWithoutExercises,
+} from '../utils/workoutPlan';
 
-  function handleCreateForm(newWorkoutPlan) {
-    setWorkoutPlan(newWorkoutPlan);
-    setToggleForm(true);
+export default function Form({ onAddWorkoutPlan }) {
+  const { t } = useTranslation();
+  const [workoutPlan, setWorkoutPlan] = useState(null);
+  const [exercisesByDay, setExercisesByDay] = useState({});
+  const [showSaveError, setShowSaveError] = useState(false);
+
+  const daysWithoutExercises = workoutPlan
+    ? getDaysWithoutExercises(workoutPlan, exercisesByDay)
+    : [];
+
+  function handleAddExercise(day, exercise) {
+    setExercisesByDay({
+      ...exercisesByDay,
+      [day]: [...(exercisesByDay[day] ?? []), exercise],
+    });
   }
 
-  function createDayExercises(updatedDay) {
-    const daysAndExercises = workoutPlan.days.map(day => {
-      if (day.day === updatedDay.day) {
-        return updatedDay;
-      }
-      return day;
+  function handleRemoveExercise(day, exerciseId) {
+    setExercisesByDay({
+      ...exercisesByDay,
+      [day]: exercisesByDay[day].filter(exercise => exercise.id !== exerciseId),
     });
+  }
 
-    setWorkoutPlan({ ...workoutPlan, days: daysAndExercises });
+  function handleSave() {
+    if (daysWithoutExercises.length > 0) {
+      setShowSaveError(true);
+      return;
+    }
+    onAddWorkoutPlan(buildWorkoutPlan(workoutPlan, exercisesByDay));
   }
 
   return (
     <GridWrap>
       <Background>
-        {!toggleForm ? (
+        {!workoutPlan ? (
           <CenterComponent>
-            <CreateForm onSubmit={handleCreateForm} />
+            <CreateForm onSubmit={setWorkoutPlan} />
           </CenterComponent>
         ) : (
           <>
             <StyledCenterBox>
               <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
             </StyledCenterBox>
-            {workoutPlan.days.map(day => {
-              return (
-                <DayForm
-                  key={day.day}
-                  onSubmit={createDayExercises}
-                  day={day.day}
-                />
-              );
-            })}
+            {workoutPlan.days.map(({ day }) => (
+              <DayForm
+                key={day}
+                day={day}
+                exercises={exercisesByDay[day]}
+                onAddExercise={exercise => handleAddExercise(day, exercise)}
+                onRemoveExercise={exerciseId =>
+                  handleRemoveExercise(day, exerciseId)
+                }
+              />
+            ))}
+            {showSaveError && daysWithoutExercises.length > 0 && (
+              <ErrorText role="alert">
+                {t('form.errorEmptyDays', {
+                  days: daysWithoutExercises
+                    .map(day => dayLabel(day, t))
+                    .join(', '),
+                })}
+              </ErrorText>
+            )}
             <Center>
-              <OnClickButton onClick={() => onAddWorkoutPlan(workoutPlan)}>
-                Save all changes
-              </OnClickButton>
+              <OnClickButton onClick={handleSave}>{t('form.save')}</OnClickButton>
             </Center>
           </>
         )}
@@ -81,6 +109,15 @@ const CenterComponent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const ErrorText = styled.p`
+  margin: 0 15px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #d5dee8;
+  color: #a12a2a;
+  text-align: center;
 `;
 
 const OnClickButton = styled.button`

@@ -1,37 +1,28 @@
 import styled from 'styled-components';
+import { BiDumbbell } from 'react-icons/bi';
+import { useTranslation } from '../../i18n/LanguageContext';
 
-export default function Card({ item, images }) {
-  const regex = /(<([^>]+)>)/gi;
-
-  const renderImg = images.filter(
-    img => img.exercise_base === item.exercise_base
-  );
-
-  const img = renderImg.map(img => img.image);
+export default function Card({ exercise }) {
+  const { t } = useTranslation();
 
   return (
     <StyledDiv>
-      <StyledTitle>{item.name}</StyledTitle>
+      <StyledTitle>{exercise.name}</StyledTitle>
       <DiscriptionDiv>
-        {renderImg.length === 0 ? (
-          <Img1
-            src="https://img.icons8.com/carbon-copy/100/000000/no-image.png"
-            alt="noImg"
-            width="80"
-            height="80"
-          />
+        {exercise.image ? (
+          <Img1 src={exercise.image} alt={exercise.name} height="80" />
         ) : (
-          <Img1 src={img[0]} alt="" height="80" />
+          <Placeholder role="img" aria-label={t('exercises.noImage')}>
+            <BiDumbbell size={50} />
+          </Placeholder>
         )}
-        <STyledDescription>
-          {item.description.replace(regex, '')}
-        </STyledDescription>
+        <STyledDescription>{exercise.description}</STyledDescription>
       </DiscriptionDiv>
     </StyledDiv>
   );
 }
 
-const StyledTitle = styled.div`
+const StyledTitle = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
 `;
@@ -40,7 +31,7 @@ const STyledDescription = styled.p`
   font-size: small;
 `;
 
-const StyledDiv = styled.div`
+const StyledDiv = styled.article`
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   padding: 10px;
   margin: 5px;
@@ -49,6 +40,7 @@ const StyledDiv = styled.div`
   flex-direction: column;
   background-color: #d5dee8;
   width: 350px;
+  max-width: calc(100vw - 20px);
   height: 150px;
 `;
 
@@ -59,7 +51,7 @@ const DiscriptionDiv = styled.div`
   display: flex;
   word-wrap: wrap;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
 
 const Img1 = styled.img`
@@ -68,5 +60,21 @@ const Img1 = styled.img`
   border-radius: 15px;
   margin-right: 15px;
   padding: 5px;
-  border: 2px solid 283a45;
+  border: 2px solid #283a45;
+  max-width: 100px;
+  object-fit: contain;
+`;
+
+const Placeholder = styled.div`
+  align-self: center;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+  border-radius: 15px;
+  background-color: snow;
+  color: #5e888c;
 `;

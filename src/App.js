@@ -3,16 +3,19 @@ import WorkoutplansPage from './Pages/WorkoutplansPage';
 import { useLocalStorage } from 'usehooks-ts';
 import Form from './Pages/Form';
 import ExerciseAndMuscleOverview from './Pages/ExerciseAndMuscleOverview';
-import UseMuscles from './Components/Fetch/UseMuscles';
+import useExercises from './hooks/useExercises';
 import LandingPage from './Components/LandingPage/LandingPage';
+import { useTranslation } from './i18n/LanguageContext';
+import { deleteDay, deletePlan } from './utils/workoutPlan';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
-  const { shoulders, arms, legs, abs, chest, back, images } = UseMuscles();
+  const { language } = useTranslation();
+  const exercises = useExercises(language);
   const navigate = useNavigate();
 
   function handleLandingpage() {
-    navigate('/Home');
+    navigate('/home');
   }
 
   function createCard(newCard) {
@@ -20,27 +23,15 @@ export default function App() {
     navigate('/Workoutplans');
   }
 
-  function handleDeleteCard(perId) {
-    const deleteData = data.filter(dData => dData.id !== perId);
-    setData(deleteData);
+  function handleDeleteCard(planId) {
+    setData(deletePlan(data, planId));
   }
 
-  function handleDeleteDays(perId, workoutId) {
-    const days = data.map(newData => newData.days);
-    const newDays = days[0].filter(dDays => dDays.id !== perId);
-    const workoutToUpdate = data.find(workout => workout.id === workoutId);
-    const workoutToUpdateIndex = data.findIndex(
-      workout => workout.id === workoutId
-    );
-    const updatedWorkout = { ...workoutToUpdate, days: newDays };
-    const newData = data.slice();
-    newData[workoutToUpdateIndex] = updatedWorkout;
-
-    setData(newData);
+  function handleDeleteDays(dayId, planId) {
+    setData(deleteDay(data, planId, dayId));
   }
 
   return (
-    // <GridWrap>
     <Routes>
       <Route
         path="/"
@@ -52,17 +43,7 @@ export default function App() {
       />
       <Route
         path="/home"
-        element={
-          <ExerciseAndMuscleOverview
-            shoulders={shoulders}
-            images={images}
-            arms={arms}
-            legs={legs}
-            abs={abs}
-            chest={chest}
-            back={back}
-          />
-        }
+        element={<ExerciseAndMuscleOverview {...exercises} />}
       />
       <Route
         path="/Workoutplans"
