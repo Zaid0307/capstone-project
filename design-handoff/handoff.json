@@ -1,0 +1,1139 @@
+{
+  "meta": {
+    "app": "GetFit!",
+    "documentTitleToday": "Workout Plan",
+    "date": "2026-10-27",
+    "codeVersion": {
+      "branch": "ueberarbeitung",
+      "commit": "c4ed677 + Umstellung auf Vite/React 19 (noch nicht committet)"
+    },
+    "language": "de",
+    "statusValues": {
+      "implemented": "Im Code vorhanden und getestet",
+      "planned": "Vom Nutzer ausdrücklich gewünscht, noch nicht umgesetzt",
+      "suggested": "Angeregt, aber vom Nutzer nicht bestätigt – nicht ohne Rückfrage gestalten"
+    },
+    "documents": [
+      "README.md",
+      "01-seiten-und-navigation.md",
+      "02-komponenten.md",
+      "03-inhalte-und-daten.md",
+      "04-grafikbedarf.md",
+      "05-technik.md",
+      "06-user-flows.md",
+      "07-offene-punkte.md"
+    ]
+  },
+  "responsibilities": {
+    "designerAgent": [
+      "UI/UX aller Seiten und Komponenten",
+      "Farbpalette",
+      "Typografie",
+      "Icons",
+      "Illustrationen",
+      "Zustände",
+      "Responsive-Verhalten",
+      "App-Icons"
+    ],
+    "graphicsAgent": [
+      "Fitnessfiguren Mann und Frau",
+      "Muskelkarten",
+      "Übungsanimationen"
+    ],
+    "development": [
+      "Umsetzung",
+      "Funktionen",
+      "Datenmodell",
+      "Tests"
+    ],
+    "notDecidedInThisHandoff": [
+      "finale Farben",
+      "Schriftarten",
+      "visuelles Design"
+    ]
+  },
+  "currentVisualState": {
+    "note": "Nur Ist-Zustand, darf vollständig ersetzt werden.",
+    "colorsFile": "src/styles/tokens.js",
+    "globalStylesFile": "src/styles/GlobalStyles.js",
+    "font": "System sans-serif",
+    "darkMode": false,
+    "tokensFile": "src/styles/tokens.js",
+    "cssVariables": [
+      "--color-*",
+      "--font-*",
+      "--radius-*"
+    ]
+  },
+  "languages": {
+    "supported": [
+      "de",
+      "en"
+    ],
+    "default": "Browsersprache, sonst en",
+    "persisted": "localStorage-Schlüssel 'language'",
+    "uiTextsFile": "src/i18n/translations.js",
+    "uiTextCount": 90,
+    "notes": [
+      "Deutsche Texte sind oft deutlich länger als englische.",
+      "Übungstexte fallen auf Englisch zurück, wenn keine deutsche Übersetzung existiert."
+    ]
+  },
+  "navigation": {
+    "bottomBar": {
+      "status": "implemented",
+      "visibleOn": [
+        "exercises",
+        "muscle-group",
+        "plans",
+        "plan-new",
+        "plan-edit"
+      ],
+      "position": "unten fixiert, heute 48 px hoch",
+      "items": [
+        {
+          "id": "nav-create",
+          "target": "/plans/new",
+          "icon": "Liste",
+          "a11yLabel": {
+            "de": "Trainingsplan erstellen",
+            "en": "Create workout plan"
+          }
+        },
+        {
+          "id": "nav-exercises",
+          "target": "/exercises",
+          "icon": "Haus",
+          "a11yLabel": {
+            "de": "Übungen",
+            "en": "Exercises"
+          },
+          "activeAlsoOnSubroutes": true
+        },
+        {
+          "id": "nav-plans",
+          "target": "/plans",
+          "icon": "Hantel",
+          "a11yLabel": {
+            "de": "Meine Trainingspläne",
+            "en": "My workout plans"
+          },
+          "activeOnlyExact": true
+        },
+        {
+          "id": "nav-language",
+          "type": "button",
+          "content": "Kürzel der jeweils anderen Sprache (DE/EN)"
+        }
+      ],
+      "visibleTextLabels": false
+    },
+    "muscleGroupBar": {
+      "status": "implemented",
+      "visibleOn": [
+        "muscle-group"
+      ],
+      "position": "oben, sticky",
+      "items": [
+        "Zurück zur Auswahl",
+        "chest",
+        "back",
+        "abs",
+        "shoulders",
+        "arms",
+        "legs"
+      ]
+    },
+    "redirects": {
+      "/home": "/exercises",
+      "/Workoutplans": "/plans",
+      "/Create_Plan": "/plans/new",
+      "/exercises/<unbekannt>": "/exercises",
+      "*": "/"
+    }
+  },
+  "pages": [
+    {
+      "id": "landing",
+      "route": "/",
+      "status": "implemented",
+      "bottomNav": false,
+      "content": [
+        "Vollflächiges Hintergrundbild",
+        "Überschrift",
+        "Start-Button → /exercises",
+        "Sprachumschalter oben rechts"
+      ],
+      "texts": {
+        "title": {
+          "de": "Erstelle deinen Trainingsplan",
+          "en": "Create your Workoutplan"
+        },
+        "start": {
+          "de": "Los geht´s",
+          "en": "Let´s Go"
+        }
+      },
+      "screenshot": "screenshots/landing.png"
+    },
+    {
+      "id": "exercises",
+      "route": "/exercises",
+      "status": "implemented",
+      "bottomNav": true,
+      "content": [
+        "Raster aus 6 Muskelgruppen-Kacheln (Bild und Name) → /exercises/:muscle"
+      ],
+      "components": [
+        "MuscleGroupPicker"
+      ],
+      "screenshot": "screenshots/exercises-muscle-groups.png"
+    },
+    {
+      "id": "muscle-group",
+      "route": "/exercises/:muscle",
+      "params": {
+        "muscle": [
+          "chest",
+          "back",
+          "abs",
+          "shoulders",
+          "arms",
+          "legs"
+        ]
+      },
+      "status": "implemented",
+      "bottomNav": true,
+      "content": [
+        "Muskelgruppen-Leiste",
+        "Übungskarten alphabetisch (ca. 100–250 je Gruppe)",
+        "Nach-oben-Button ab 500 px Scrollweite"
+      ],
+      "components": [
+        "MuscleGroupNav",
+        "ExerciseCard",
+        "BackToTopButton",
+        "Message",
+        "Button"
+      ],
+      "states": [
+        "loading",
+        "error-with-retry",
+        "empty",
+        "list"
+      ],
+      "screenshot": "screenshots/exercises-group-loading.png"
+    },
+    {
+      "id": "plans",
+      "route": "/plans",
+      "status": "implemented",
+      "bottomNav": true,
+      "content": [
+        "Liste aufklappbarer Pläne (Plan → Tag → Muskelgruppe → Übungen)",
+        "Button 'Neuen Trainingsplan erstellen' → /plans/new"
+      ],
+      "components": [
+        "WorkoutPlanCard",
+        "PlanDay",
+        "PlanMuscle",
+        "ExerciseDetails"
+      ],
+      "states": [
+        "empty",
+        "list",
+        "plan-expanded",
+        "day-expanded",
+        "muscle-expanded"
+      ],
+      "actions": [
+        "Plan bearbeiten",
+        "Plan löschen (Rückfrage)",
+        "Tag löschen (Rückfrage)",
+        "auf-/zuklappen auf 3 Ebenen"
+      ],
+      "screenshot": "screenshots/plans-empty.png"
+    },
+    {
+      "id": "plan-new",
+      "route": "/plans/new",
+      "status": "implemented",
+      "bottomNav": true,
+      "steps": [
+        {
+          "step": 1,
+          "name": "Plandetails",
+          "components": [
+            "PlanDetailsForm"
+          ],
+          "primaryAction": {
+            "de": "Weiter",
+            "en": "Next"
+          }
+        },
+        {
+          "step": 2,
+          "name": "Übungen pro Tag",
+          "components": [
+            "DayExercisesForm",
+            "ExerciseListItem"
+          ],
+          "secondaryAction": {
+            "de": "Name und Tage bearbeiten",
+            "en": "Edit name and days"
+          },
+          "primaryAction": {
+            "de": "Trainingsplan speichern",
+            "en": "Save workout plan"
+          }
+        }
+      ],
+      "afterSave": "/plans",
+      "screenshot": "screenshots/plan-new-details.png"
+    },
+    {
+      "id": "plan-edit",
+      "route": "/plans/:planId/edit",
+      "status": "implemented",
+      "bottomNav": true,
+      "sameAs": "plan-new",
+      "differences": [
+        "Startet in Schritt 2",
+        "Alles vorausgefüllt",
+        "Titel Schritt 1: 'Trainingsplan bearbeiten'",
+        "Speichern: 'Änderungen speichern'"
+      ],
+      "states": [
+        "form",
+        "not-found"
+      ],
+      "afterSave": "/plans"
+    }
+  ],
+  "components": [
+    {
+      "id": "Button",
+      "path": "src/components/ui/Button.js",
+      "status": "implemented",
+      "variants": [
+        "primary",
+        "secondary"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus"
+      ]
+    },
+    {
+      "id": "IconButton",
+      "path": "src/components/ui/IconButton.js",
+      "status": "implemented",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed"
+      ],
+      "a11y": "immer mit aria-label"
+    },
+    {
+      "id": "ToggleButton",
+      "path": "src/components/ui/ToggleButton.jsx",
+      "status": "implemented",
+      "states": [
+        "collapsed",
+        "expanded",
+        "focus"
+      ],
+      "icon": "Auge offen/geschlossen"
+    },
+    {
+      "id": "ItemHeader",
+      "path": "src/components/ui/ItemHeader.jsx",
+      "status": "implemented",
+      "structure": "Titel zentriert, Aktionen rechts"
+    },
+    {
+      "id": "Message",
+      "path": "src/components/ui/Message.js",
+      "status": "implemented",
+      "usedFor": [
+        "loading",
+        "error",
+        "empty",
+        "not-found"
+      ]
+    },
+    {
+      "id": "PageLayout",
+      "path": "src/components/layout/PageLayout.jsx",
+      "status": "implemented",
+      "structure": "Inhalt + untere Navigation"
+    },
+    {
+      "id": "BackToTopButton",
+      "path": "src/components/layout/BackToTopButton.jsx",
+      "status": "implemented",
+      "states": [
+        "hidden",
+        "visible",
+        "hover",
+        "focus"
+      ],
+      "showAfterScrollPx": 500
+    },
+    {
+      "id": "Navigation",
+      "path": "src/components/navigation/Navigation.jsx",
+      "status": "implemented",
+      "states": [
+        "default",
+        "active",
+        "focus"
+      ]
+    },
+    {
+      "id": "LanguageSwitch",
+      "path": "src/components/navigation/LanguageSwitch.jsx",
+      "status": "implemented",
+      "content": "DE oder EN"
+    },
+    {
+      "id": "MuscleGroupPicker",
+      "path": "src/components/exercises/MuscleGroupPicker.jsx",
+      "status": "implemented",
+      "items": 6,
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "pressed"
+      ]
+    },
+    {
+      "id": "MuscleGroupNav",
+      "path": "src/components/exercises/MuscleGroupNav.jsx",
+      "status": "implemented",
+      "states": [
+        "default",
+        "active",
+        "focus"
+      ]
+    },
+    {
+      "id": "ExerciseCard",
+      "path": "src/components/exercises/ExerciseCard.jsx",
+      "status": "implemented",
+      "fields": [
+        "name",
+        "image oder Platzhalter",
+        "description"
+      ],
+      "states": [
+        "with-image",
+        "without-image",
+        "short-text",
+        "long-text"
+      ],
+      "notes": [
+        "Bilder werden verzögert geladen",
+        "Heute feste Kartenhöhe, Text scrollt innerhalb der Karte"
+      ]
+    },
+    {
+      "id": "WorkoutPlanCard",
+      "path": "src/components/workoutPlans/WorkoutPlanCard.jsx",
+      "status": "implemented",
+      "actions": [
+        "edit",
+        "delete",
+        "toggle"
+      ],
+      "states": [
+        "collapsed",
+        "expanded",
+        "with-description",
+        "without-description",
+        "without-days (nur bei alten Daten)"
+      ]
+    },
+    {
+      "id": "PlanDay",
+      "path": "src/components/workoutPlans/PlanDay.jsx",
+      "status": "implemented",
+      "actions": [
+        "delete",
+        "toggle"
+      ],
+      "states": [
+        "collapsed",
+        "expanded",
+        "without-muscles"
+      ]
+    },
+    {
+      "id": "PlanMuscle",
+      "path": "src/components/workoutPlans/PlanMuscle.jsx",
+      "status": "implemented",
+      "actions": [
+        "toggle"
+      ],
+      "states": [
+        "collapsed",
+        "expanded"
+      ]
+    },
+    {
+      "id": "ExerciseDetails",
+      "path": "src/components/workoutPlans/ExerciseDetails.jsx",
+      "status": "implemented",
+      "fields": [
+        "exercise",
+        "weight (kg)",
+        "repetitions",
+        "sets"
+      ]
+    },
+    {
+      "id": "PlanForm",
+      "path": "src/components/planForm/PlanForm.jsx",
+      "status": "implemented",
+      "states": [
+        "step-details",
+        "step-exercises",
+        "error-days-without-exercises"
+      ]
+    },
+    {
+      "id": "PlanDetailsForm",
+      "path": "src/components/planForm/PlanDetailsForm.jsx",
+      "status": "implemented",
+      "fields": [
+        {
+          "name": "name",
+          "type": "text",
+          "required": true,
+          "maxLength": 100
+        },
+        {
+          "name": "days",
+          "type": "checkbox x7",
+          "required": "mindestens 1"
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "required": false,
+          "maxLength": 200
+        }
+      ],
+      "states": [
+        "empty",
+        "prefilled",
+        "error-no-days",
+        "required-name (Browser-Meldung)",
+        "checkbox-checked",
+        "checkbox-focus"
+      ]
+    },
+    {
+      "id": "DayExercisesForm",
+      "path": "src/components/planForm/DayExercisesForm.jsx",
+      "status": "implemented",
+      "fields": [
+        {
+          "name": "muscle",
+          "type": "select",
+          "required": true,
+          "options": [
+            "chest",
+            "back",
+            "abs",
+            "shoulders",
+            "arms",
+            "legs"
+          ]
+        },
+        {
+          "name": "exercise",
+          "type": "text",
+          "required": true,
+          "maxLength": 50
+        },
+        {
+          "name": "weight",
+          "type": "number",
+          "required": true,
+          "min": 0,
+          "decimals": true,
+          "unit": "kg"
+        },
+        {
+          "name": "repetitions",
+          "type": "number",
+          "required": true,
+          "min": 1
+        },
+        {
+          "name": "sets",
+          "type": "number",
+          "required": true,
+          "min": 1
+        }
+      ],
+      "states": [
+        "add-mode",
+        "edit-mode",
+        "list-empty",
+        "list-filled"
+      ]
+    },
+    {
+      "id": "ExerciseListItem",
+      "path": "src/components/planForm/ExerciseListItem.jsx",
+      "status": "implemented",
+      "actions": [
+        "edit",
+        "remove (ohne Rückfrage)"
+      ],
+      "states": [
+        "default",
+        "editing"
+      ]
+    },
+    {
+      "id": "ConfirmDialog",
+      "status": "implemented",
+      "implementation": "Browser-Dialog window.confirm, nicht gestaltbar",
+      "usedFor": [
+        "Plan löschen",
+        "Tag löschen",
+        "letzten Tag löschen (bietet an, den ganzen Plan zu löschen)"
+      ],
+      "note": "Ein eigener Dialog ist möglich, wenn das Design ihn vorsieht"
+    },
+    {
+      "id": "GenderSwitch",
+      "status": "planned",
+      "note": "Ort und Form offen (O1)"
+    },
+    {
+      "id": "MuscleFigureView",
+      "status": "planned",
+      "note": "Figur vorne/hinten mit hervorgehobener Muskelgruppe, Grafiken vom Grafik-Agenten"
+    },
+    {
+      "id": "ExerciseAnimationPlayer",
+      "status": "planned",
+      "note": "Ort und Bedienung offen (O3)"
+    },
+    {
+      "id": "Charts",
+      "status": "suggested",
+      "note": "Nur bei Bestätigung von O4"
+    }
+  ],
+  "data": {
+    "exerciseSource": {
+      "provider": "wger.de REST API",
+      "loadedAt": "App-Start, ca. 0,5 MB",
+      "totalExercises": 932,
+      "withImage": 279,
+      "withVideo": 46,
+      "perGroup": {
+        "chest": 104,
+        "back": 185,
+        "abs": 125,
+        "shoulders": 135,
+        "arms": 164,
+        "legs": 245
+      },
+      "displayedFields": [
+        "name",
+        "description",
+        "image"
+      ],
+      "loadedNotDisplayed": [
+        "video",
+        "musclesSecondary"
+      ],
+      "videoLicense": "CC-BY-SA, Autor nennen"
+    },
+    "muscleGroups": {
+      "chest": {
+        "de": "Brust",
+        "en": "Chest"
+      },
+      "back": {
+        "de": "Rücken",
+        "en": "Back"
+      },
+      "abs": {
+        "de": "Bauch",
+        "en": "Abs"
+      },
+      "shoulders": {
+        "de": "Schultern",
+        "en": "Shoulders"
+      },
+      "arms": {
+        "de": "Arme",
+        "en": "Arms"
+      },
+      "legs": {
+        "de": "Beine",
+        "en": "Legs"
+      }
+    },
+    "workoutPlan": {
+      "storage": "localStorage-Schlüssel 'workoutPlans' (früher 'data')",
+      "accounts": false,
+      "shape": {
+        "id": "string",
+        "nameOfWorkout": "string (max. 100)",
+        "description": "string (max. 200, optional)",
+        "days": [
+          {
+            "id": "string",
+            "day": "monday … sunday (immer in Wochenreihenfolge)",
+            "muscles": [
+              {
+                "id": "string",
+                "name": "Muskelgruppen-Schlüssel",
+                "exercises": [
+                  {
+                    "id": "string",
+                    "muscle": "Muskelgruppen-Schlüssel",
+                    "exercise": "Freitext (max. 50)",
+                    "weight": "Zahl in kg",
+                    "repetitions": "Zahl ≥ 1",
+                    "sets": "Zahl ≥ 1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "note": "Übungen im Plan sind Freitext ohne Verknüpfung zur Übungsdatenbank"
+    }
+  },
+  "graphics": {
+    "icons": {
+      "owner": "designerAgent",
+      "format": "SVG, einfarbig (currentColor), 24-px-Raster",
+      "items": [
+        {
+          "id": "icon-create-plan",
+          "where": "untere Navigation",
+          "currentSizePx": 40,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-exercises",
+          "where": "untere Navigation",
+          "currentSizePx": 40,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-plans",
+          "where": "untere Navigation",
+          "currentSizePx": 40,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-back",
+          "where": "Muskelgruppen-Leiste",
+          "currentSizePx": 30,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-back-to-top",
+          "where": "schwebender Button",
+          "currentSizePx": 30,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-edit",
+          "where": "Planskarte, Übung im Formular",
+          "currentSizePx": 20,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-delete",
+          "where": "Planskarte, Tag, Übung im Formular",
+          "currentSizePx": 20,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-show",
+          "where": "Plan, Tag, Muskelgruppe",
+          "currentSizePx": 20,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-hide",
+          "where": "Plan, Tag, Muskelgruppe",
+          "currentSizePx": 20,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-add",
+          "where": "Button 'Neuen Trainingsplan erstellen'",
+          "currentSizePx": 20,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-exercise-placeholder",
+          "where": "Übungskarte ohne Bild",
+          "currentSizePx": 50,
+          "status": "implemented"
+        },
+        {
+          "id": "icon-checkbox-check",
+          "where": "Wochentage",
+          "currentSizePx": 16,
+          "status": "implemented"
+        }
+      ]
+    },
+    "muscleGroupImages": {
+      "owner": "graphicsAgent (Grafik) + designerAgent (Layout)",
+      "status": "implemented mit externen Platzhaltern, müssen ersetzt werden",
+      "uses": [
+        {
+          "where": "MuscleGroupPicker-Kachel",
+          "currentWidthPx": 80,
+          "count": 6
+        },
+        {
+          "where": "MuscleGroupNav",
+          "currentWidthPx": 30,
+          "count": 6
+        }
+      ]
+    },
+    "figures": {
+      "owner": "graphicsAgent",
+      "status": "planned",
+      "userRequirements": [
+        "männliche und weibliche Ansicht",
+        "muskulös",
+        "Haare, kein Gesicht",
+        "Muskelgruppen hervorgehoben, vorne und hinten"
+      ],
+      "perGender": {
+        "baseFront": 1,
+        "baseBack": 1,
+        "highlightsPerGroupFrontBack": 12
+      },
+      "total": 28,
+      "format": "SVG oder PNG transparent, mindestens 1.000 px hoch, ohne Text und Rahmen",
+      "alignment": "Alle Varianten einer Ansicht exakt deckungsgleich",
+      "references": [
+        "docs/images/Design Agent/Neon Muskel-Charakterbogen in Blau und Grün.png",
+        "docs/images/Design Agent/Neonblaues und -grünes Charakterdesign-Sheet.png"
+      ],
+      "warnings": [
+        "Keine Markenlogos (Schuhe in den Referenzbögen zeigen ein markenähnliches Logo)"
+      ]
+    },
+    "exerciseAnimations": {
+      "owner": "graphicsAgent",
+      "status": "planned",
+      "placement": "offen (O3)",
+      "formats": [
+        "MP4 H.264",
+        "animiertes WebP",
+        "GIF",
+        "SVG/CSS",
+        "Lottie nur nach Abstimmung"
+      ],
+      "avoid": [
+        "HEVC/H.265",
+        ".MOV"
+      ]
+    },
+    "illustrations": [
+      {
+        "id": "landing-background",
+        "where": "landing",
+        "status": "implemented (Foto)",
+        "note": "Vollflächig, Hoch- und Querformat"
+      },
+      {
+        "id": "empty-plans",
+        "where": "plans",
+        "status": "optional",
+        "note": "heute nur Text"
+      },
+      {
+        "id": "error-exercises",
+        "where": "muscle-group",
+        "status": "optional",
+        "note": "heute nur Text"
+      },
+      {
+        "id": "loading-indicator",
+        "where": "muscle-group",
+        "status": "optional",
+        "note": "heute nur Text"
+      }
+    ],
+    "appIcons": {
+      "owner": "designerAgent",
+      "status": "fehlen (in public/index.html referenziert)",
+      "files": [
+        {
+          "name": "favicon.ico",
+          "sizes": [
+            16,
+            32,
+            48
+          ]
+        },
+        {
+          "name": "logo192.png",
+          "size": "192x192"
+        },
+        {
+          "name": "logo512.png",
+          "size": "512x512"
+        },
+        {
+          "name": "apple-touch-icon.png",
+          "size": "180x180"
+        }
+      ],
+      "alsoNeeded": "Theme-Farbe für manifest.json"
+    },
+    "deliveryRules": [
+      "Icons und einfarbige Grafiken als SVG",
+      "Fotos als WebP oder PNG in 2×",
+      "Dateinamen klein mit Bindestrichen",
+      "Richtwerte: Icons < 5 KB, Figuren < 200 KB"
+    ]
+  },
+  "technical": {
+    "framework": "React 19, Build mit Vite 8",
+    "routing": "React Router 7",
+    "styling": "styled-components 6, Design-Tokens als CSS-Variablen (src/styles/tokens.js)",
+    "icons": "react-icons (austauschbar)",
+    "tests": "Vitest + React Testing Library (67 Tests), ESLint",
+    "storybook": {
+      "version": 10,
+      "stories": [
+        "PlanDetailsForm",
+        "DayExercisesForm",
+        "Navigation"
+      ]
+    },
+    "hosting": "Vercel",
+    "fonts": "Google Fonts oder WOFF2 mit Web-Lizenz möglich, heute System-Schrift",
+    "devices": {
+      "optimizedFor": "Handy (geprüft bei 390 px)",
+      "breakpoints": "keine",
+      "tabletDesktop": "offen (O5)",
+      "nativeApp": false,
+      "darkMode": "offen (O6)"
+    },
+    "accessibilityImplemented": [
+      "aria-labels für Icon-Buttons",
+      "aria-expanded",
+      "aria-pressed",
+      "role=alert/status",
+      "lang-Attribut",
+      "Tastaturbedienung der Checkboxen"
+    ],
+    "constraints": [
+      "Übungsdaten aus wger sind nicht gestaltbar (Länge, Sprache, Bildformat schwanken)",
+      "Browser-Bestätigungsdialoge nicht gestaltbar",
+      "Keine Konten, Daten nur lokal",
+      "Nur frei lizenzierte Grafiken, Schriften und Icons, keine Markenlogos"
+    ]
+  },
+  "userFlows": [
+    {
+      "id": "F1",
+      "name": "Erster Besuch",
+      "status": "implemented",
+      "steps": [
+        "landing",
+        "optional Sprache",
+        "Los geht´s → exercises"
+      ]
+    },
+    {
+      "id": "F2",
+      "name": "Übungen entdecken",
+      "status": "implemented",
+      "steps": [
+        "exercises",
+        "Kachel → muscle-group (loading → list | error+retry | empty)",
+        "Gruppe wechseln über Leiste",
+        "Nach-oben-Button",
+        "Zurück"
+      ]
+    },
+    {
+      "id": "F3",
+      "name": "Plan erstellen",
+      "status": "implemented",
+      "steps": [
+        "plan-new Schritt 1 (Validierung Name, Tage)",
+        "Schritt 2 Übungen hinzufügen/bearbeiten/entfernen",
+        "optional zurück zu Schritt 1",
+        "Speichern (Validierung: jeder Tag ≥ 1 Übung) → plans"
+      ]
+    },
+    {
+      "id": "F4",
+      "name": "Plan ansehen",
+      "status": "implemented",
+      "steps": [
+        "plans",
+        "Plan aufklappen",
+        "Tag aufklappen",
+        "Muskelgruppe aufklappen"
+      ]
+    },
+    {
+      "id": "F5",
+      "name": "Plan bearbeiten",
+      "status": "implemented",
+      "steps": [
+        "plans → Stift",
+        "plan-edit Schritt 2",
+        "Übung bearbeiten (speichern/abbrechen)",
+        "optional Schritt 1",
+        "Änderungen speichern → plans"
+      ]
+    },
+    {
+      "id": "F6",
+      "name": "Löschen",
+      "status": "implemented",
+      "steps": [
+        "Papierkorb an Plan oder Tag",
+        "Rückfrage",
+        "OK entfernt, Abbrechen behält",
+        "Letzter Tag eines Plans: Rückfrage, ob der ganze Plan gelöscht werden soll"
+      ]
+    },
+    {
+      "id": "F7",
+      "name": "Sprache wechseln",
+      "status": "implemented",
+      "steps": [
+        "Sprachumschalter",
+        "Texte sofort, Übungen werden nachgeladen"
+      ]
+    },
+    {
+      "id": "F8",
+      "name": "Alte/ungültige Adresse",
+      "status": "implemented",
+      "steps": [
+        "Weiterleitung, keine eigene 404-Seite"
+      ]
+    },
+    {
+      "id": "F9",
+      "name": "Ansicht Mann/Frau wechseln",
+      "status": "planned",
+      "open": [
+        "Ort",
+        "Speicherung"
+      ]
+    },
+    {
+      "id": "F10",
+      "name": "Muskelgruppe auf Figur ansehen",
+      "status": "planned",
+      "open": [
+        "Einbindung in F2"
+      ]
+    },
+    {
+      "id": "F11",
+      "name": "Übungsanimation ansehen",
+      "status": "planned",
+      "open": [
+        "Ort",
+        "Bedienung"
+      ]
+    },
+    {
+      "id": "F12",
+      "name": "Training protokollieren und auswerten",
+      "status": "suggested",
+      "open": [
+        "alles, nicht bestätigt"
+      ]
+    }
+  ],
+  "plannedFeatures": [
+    {
+      "id": "gender-view",
+      "status": "planned",
+      "source": "Nutzerwunsch: Ansicht für Männer und Frauen mit männlichen und weiblichen Figuren und Farben"
+    },
+    {
+      "id": "muscle-figures",
+      "status": "planned",
+      "source": "Nutzerwunsch: einheitliche, eigene Muskelgrafiken, Muskelgruppen hervorgehoben"
+    },
+    {
+      "id": "exercise-animations",
+      "status": "planned",
+      "source": "Nutzerwunsch: eigene Animationen bzw. Videos zu Übungen"
+    },
+    {
+      "id": "training-history",
+      "status": "suggested",
+      "source": "Nutzer nannte SmartGym als Anregung für Analyse-Features, nicht bestätigt"
+    }
+  ],
+  "openQuestions": [
+    {
+      "id": "O1",
+      "question": "Wo wird zwischen Mann und Frau umgeschaltet?"
+    },
+    {
+      "id": "O2",
+      "question": "Welche Farben bekommen die Figuren? (Entwürfe: rot/lavendel bzw. blau/grün)"
+    },
+    {
+      "id": "O3",
+      "question": "Wo und wie werden Übungsanimationen gezeigt?"
+    },
+    {
+      "id": "O4",
+      "question": "Kommen Trainingsverlauf, Muskel-Analyse und Statistiken?"
+    },
+    {
+      "id": "O5",
+      "question": "Tablet- und Desktop-Gestaltung?"
+    },
+    {
+      "id": "O6",
+      "question": "Dark Mode?"
+    },
+    {
+      "id": "O7",
+      "question": "Bleibt der Name 'GetFit!'?"
+    }
+  ],
+  "screenshots": {
+    "viewport": "390 x 844 px",
+    "language": "de",
+    "files": {
+      "landing": "screenshots/landing.png",
+      "exercises": "screenshots/exercises-muscle-groups.png",
+      "muscle-group (loading)": "screenshots/exercises-group-loading.png",
+      "plans (empty)": "screenshots/plans-empty.png",
+      "plan-new (step 1)": "screenshots/plan-new-details.png"
+    }
+  }
+}
