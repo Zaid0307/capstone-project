@@ -6,13 +6,15 @@ import { nanoid } from 'nanoid';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { WEEKDAYS } from '../../utils/workoutPlan';
 
-export default function CreateForm({ onSubmit }) {
+export default function CreateForm({ onSubmit, initialPlan }) {
   const { t } = useTranslation();
   const [formInfo, setFormInfo] = useState({
-    workOutName: '',
-    description: '',
+    workOutName: initialPlan?.nameOfWorkout ?? '',
+    description: initialPlan?.description ?? '',
   });
-  const [days, setDays] = useState([]);
+  const [days, setDays] = useState(
+    initialPlan?.days.map(({ day }) => day) ?? []
+  );
   const [showDaysError, setShowDaysError] = useState(false);
 
   function onCheck(event) {
@@ -37,13 +39,15 @@ export default function CreateForm({ onSubmit }) {
       return;
     }
 
+    // Keep the ids of existing days so a day stays the same day when editing.
+    const existingDays = initialPlan?.days ?? [];
     onSubmit({
-      id: nanoid(),
+      id: initialPlan?.id ?? nanoid(),
       nameOfWorkout: formInfo.workOutName.trim(),
       description: formInfo.description.trim(),
       days: WEEKDAYS.filter(day => days.includes(day)).map(day => ({
         day,
-        id: nanoid(),
+        id: existingDays.find(existing => existing.day === day)?.id ?? nanoid(),
       })),
     });
   }
@@ -51,7 +55,9 @@ export default function CreateForm({ onSubmit }) {
   return (
     <PageBox>
       <StyledCenterBox>
-        <Title id="fromH2">{t('createForm.title')}</Title>
+        <Title id="fromH2">
+          {t(initialPlan ? 'createForm.editTitle' : 'createForm.title')}
+        </Title>
       </StyledCenterBox>
 
       <form onSubmit={handleSubmit} autoComplete="off" aria-labelledby="fromH2">
@@ -105,7 +111,9 @@ export default function CreateForm({ onSubmit }) {
           />
         </StyledInputBox>
         <Center>
-          <SubmitButton type="submit">{t('createForm.submit')}</SubmitButton>
+          <SubmitButton type="submit">
+            {t(initialPlan ? 'createForm.next' : 'createForm.submit')}
+          </SubmitButton>
         </Center>
       </form>
     </PageBox>

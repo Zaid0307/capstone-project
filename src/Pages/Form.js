@@ -9,29 +9,38 @@ import {
   buildWorkoutPlan,
   dayLabel,
   getDaysWithoutExercises,
+  splitWorkoutPlan,
 } from '../utils/workoutPlan';
 
-export default function Form({ onAddWorkoutPlan }) {
+// Without initialPlan a new plan is created, otherwise initialPlan is edited.
+export default function Form({ onSave, initialPlan }) {
   const { t } = useTranslation();
-  const [workoutPlan, setWorkoutPlan] = useState(null);
-  const [exercisesByDay, setExercisesByDay] = useState({});
+  const [initialValues] = useState(() =>
+    initialPlan ? splitWorkoutPlan(initialPlan) : null
+  );
+  const [workoutPlan, setWorkoutPlan] = useState(
+    initialValues?.details ?? null
+  );
+  const [exercisesByDay, setExercisesByDay] = useState(
+    initialValues?.exercisesByDay ?? {}
+  );
+  const [isEditingDetails, setIsEditingDetails] = useState(!initialPlan);
   const [showSaveError, setShowSaveError] = useState(false);
 
   const daysWithoutExercises = workoutPlan
     ? getDaysWithoutExercises(workoutPlan, exercisesByDay)
     : [];
 
-  function handleAddExercise(day, exercise) {
-    setExercisesByDay({
-      ...exercisesByDay,
-      [day]: [...(exercisesByDay[day] ?? []), exercise],
-    });
+  function handleDetailsSubmit(details) {
+    setWorkoutPlan(details);
+    setIsEditingDetails(false);
+    setShowSaveError(false);
   }
 
-  function handleRemoveExercise(day, exerciseId) {
+  function updateDay(day, update) {
     setExercisesByDay({
       ...exercisesByDay,
-      [day]: exercisesByDay[day].filter(exercise => exercise.id !== exerciseId),
+      [day]: update(exercisesByDay[day] ?? []),
     });
   }
 
@@ -40,29 +49,50 @@ export default function Form({ onAddWorkoutPlan }) {
       setShowSaveError(true);
       return;
     }
-    onAddWorkoutPlan(buildWorkoutPlan(workoutPlan, exercisesByDay));
+    onSave(buildWorkoutPlan(workoutPlan, exercisesByDay));
   }
 
   return (
     <GridWrap>
       <Background>
-        {!workoutPlan ? (
+        {isEditingDetails ? (
           <CenterComponent>
-            <CreateForm onSubmit={setWorkoutPlan} />
+            <CreateForm
+              onSubmit={handleDetailsSubmit}
+              initialPlan={workoutPlan ?? undefined}
+            />
           </CenterComponent>
         ) : (
           <>
             <StyledCenterBox>
               <StyledH2>{workoutPlan.nameOfWorkout}</StyledH2>
             </StyledCenterBox>
+            <Center>
+              <OnClickButton onClick={() => setIsEditingDetails(true)}>
+                {t('form.backToDetails')}
+              </OnClickButton>
+            </Center>
             {workoutPlan.days.map(({ day }) => (
               <DayForm
                 key={day}
                 day={day}
                 exercises={exercisesByDay[day]}
-                onAddExercise={exercise => handleAddExercise(day, exercise)}
+                onAddExercise={exercise =>
+                  updateDay(day, exercises => [...exercises, exercise])
+                }
+                onUpdateExercise={updatedExercise =>
+                  updateDay(day, exercises =>
+                    exercises.map(exercise =>
+                      exercise.id === updatedExercise.id
+                        ? updatedExercise
+                        : exercise
+                    )
+                  )
+                }
                 onRemoveExercise={exerciseId =>
-                  handleRemoveExercise(day, exerciseId)
+                  updateDay(day, exercises =>
+                    exercises.filter(exercise => exercise.id !== exerciseId)
+                  )
                 }
               />
             ))}
@@ -76,7 +106,9 @@ export default function Form({ onAddWorkoutPlan }) {
               </ErrorText>
             )}
             <Center>
-              <OnClickButton onClick={handleSave}>{t('form.save')}</OnClickButton>
+              <OnClickButton onClick={handleSave}>
+                {t(initialPlan ? 'form.saveChanges' : 'form.save')}
+              </OnClickButton>
             </Center>
           </>
         )}

@@ -1,26 +1,43 @@
 import styled from 'styled-components';
-import { MdOutlineDeleteForever } from 'react-icons/md';
+import { MdOutlineDeleteForever, MdOutlineEdit } from 'react-icons/md';
 import SpaceBetween from '../Styles/SpaceBetween';
 import Center from '../Styles/Center';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { muscleLabel } from '../../utils/workoutPlan';
 
-export default function ListedExercise({ newCards, onRemove }) {
+export default function ListedExercise({
+  newCards,
+  isEditing = false,
+  onEdit,
+  onRemove,
+}) {
   const { t } = useTranslation();
 
   return (
-    <StyledBox>
+    <StyledBox isEditing={isEditing}>
       <Center>
         <p>{muscleLabel(newCards.muscle, t)}</p>
-        {onRemove && (
-          <RemoveButton
-            type="button"
-            aria-label={t('exercise.remove', { name: newCards.exercise })}
-            onClick={onRemove}
-          >
-            <MdOutlineDeleteForever />
-          </RemoveButton>
-        )}
+        <Actions>
+          {onEdit && (
+            <IconButton
+              type="button"
+              aria-label={t('exercise.edit', { name: newCards.exercise })}
+              aria-pressed={isEditing}
+              onClick={onEdit}
+            >
+              <MdOutlineEdit />
+            </IconButton>
+          )}
+          {onRemove && (
+            <IconButton
+              type="button"
+              aria-label={t('exercise.remove', { name: newCards.exercise })}
+              onClick={onRemove}
+            >
+              <MdOutlineDeleteForever />
+            </IconButton>
+          )}
+        </Actions>
       </Center>
       <SpaceBetween>
         <p>{t('exercise.exercise')}</p> <p>{newCards.exercise}</p>
@@ -40,16 +57,21 @@ export default function ListedExercise({ newCards, onRemove }) {
 
 const StyledBox = styled.div`
   position: relative;
-  border: 1px solid lightgray;
+  border: 1px solid ${props => (props.isEditing ? '#283a45' : 'lightgray')};
   padding: 2px;
   margin: 5px 0 5px 0;
   border-radius: 5px;
 `;
 
-const RemoveButton = styled.button`
+const Actions = styled.div`
   position: absolute;
   right: 5px;
   top: 2px;
+  display: flex;
+  gap: 5px;
+`;
+
+const IconButton = styled.button`
   background-color: transparent;
   border: none;
   font-size: 1.3rem;

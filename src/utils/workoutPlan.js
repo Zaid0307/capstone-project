@@ -61,6 +61,33 @@ export function buildWorkoutPlan(plan, exercisesByDay) {
   };
 }
 
+// Turns a saved plan back into the editable shape used by the form.
+export function splitWorkoutPlan(plan) {
+  const exercisesByDay = {};
+  (plan.days ?? []).forEach(({ day, muscles = [] }) => {
+    exercisesByDay[day] = muscles.flatMap(muscle =>
+      (muscle.exercises ?? []).map(exercise => ({
+        ...exercise,
+        id: exercise.id ?? nanoid(),
+        muscle: normalizeMuscle(exercise.muscle ?? muscle.name),
+      }))
+    );
+  });
+
+  return {
+    details: {
+      ...plan,
+      description: plan.description ?? '',
+      days: sortDays(plan.days ?? []).map(({ id, day }) => ({ id, day })),
+    },
+    exercisesByDay,
+  };
+}
+
+export function updatePlan(plans, updatedPlan) {
+  return plans.map(plan => (plan.id === updatedPlan.id ? updatedPlan : plan));
+}
+
 export function deletePlan(plans, planId) {
   return plans.filter(plan => plan.id !== planId);
 }

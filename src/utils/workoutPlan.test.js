@@ -7,6 +7,8 @@ import {
   muscleLabel,
   normalizeMuscle,
   sortDays,
+  splitWorkoutPlan,
+  updatePlan,
 } from './workoutPlan';
 import { translate } from '../i18n/translations';
 
@@ -113,6 +115,64 @@ describe('buildWorkoutPlan', () => {
         wednesday: [],
       })
     ).toEqual(['wednesday']);
+  });
+});
+
+describe('splitWorkoutPlan', () => {
+  it('turns a saved plan into details and exercises per day', () => {
+    const { details, exercisesByDay } = splitWorkoutPlan({
+      id: 'plan',
+      nameOfWorkout: 'Push',
+      days: [
+        {
+          id: 'd2',
+          day: 'friday',
+          muscles: [
+            {
+              id: 'm1',
+              name: 'Stomach',
+              exercises: [{ exercise: 'Crunch', muscle: 'Stomach' }],
+            },
+          ],
+        },
+        { id: 'd1', day: 'monday' },
+      ],
+    });
+
+    expect(details).toEqual({
+      id: 'plan',
+      nameOfWorkout: 'Push',
+      description: '',
+      days: [
+        { id: 'd1', day: 'monday' },
+        { id: 'd2', day: 'friday' },
+      ],
+    });
+    expect(exercisesByDay.monday).toEqual([]);
+    expect(exercisesByDay.friday).toEqual([
+      { id: expect.any(String), exercise: 'Crunch', muscle: 'abs' },
+    ]);
+  });
+
+  it('survives a round trip through buildWorkoutPlan', () => {
+    const plan = buildWorkoutPlan(
+      { id: 'p', nameOfWorkout: 'Legs', description: '', days: [{ id: 'd', day: 'monday' }] },
+      { monday: [{ id: 'e', muscle: 'legs', exercise: 'Squat' }] }
+    );
+    const { details, exercisesByDay } = splitWorkoutPlan(plan);
+    expect(details.days).toEqual([{ id: 'd', day: 'monday' }]);
+    expect(exercisesByDay).toEqual({
+      monday: [{ id: 'e', muscle: 'legs', exercise: 'Squat' }],
+    });
+  });
+});
+
+describe('updatePlan', () => {
+  it('replaces the plan with the same id', () => {
+    const updated = { ...plans[1], nameOfWorkout: 'Pull v2' };
+    const result = updatePlan(plans, updated);
+    expect(result[0]).toBe(plans[0]);
+    expect(result[1]).toBe(updated);
   });
 });
 

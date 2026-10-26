@@ -41,6 +41,8 @@ const translations = {
       'Add a description for your Workout plan ...',
     'createForm.submit': 'Create',
     'createForm.errorNoDays': 'Please choose at least one training day.',
+    'createForm.editTitle': 'Edit your Workout plan',
+    'createForm.next': 'Next',
 
     'dayForm.formLabel': 'Add exercises for {day}',
     'dayForm.muscle': 'Muscle:',
@@ -53,22 +55,33 @@ const translations = {
     'dayForm.sets': 'Sets:',
     'dayForm.add': 'Add exercise',
     'dayForm.noExercises': 'No exercises added yet.',
+    'dayForm.update': 'Save exercise',
+    'dayForm.cancelEdit': 'Cancel',
 
     'exercise.exercise': 'Exercise:',
     'exercise.weight': 'Weight:',
     'exercise.repetitions': 'Repetitions:',
     'exercise.sets': 'Sets:',
     'exercise.remove': 'Remove {name}',
+    'exercise.edit': 'Edit {name}',
 
     'form.save': 'Save workout plan',
+    'form.saveChanges': 'Save changes',
+    'form.backToDetails': 'Edit name and days',
     'form.errorEmptyDays': 'Add at least one exercise for: {days}',
 
     'plans.create': 'Create new Workoutplan',
     'plans.empty': 'You have no workout plans yet.',
+    'plans.edit': 'Edit workout plan {name}',
     'plans.delete': 'Delete workout plan {name}',
     'plans.deleteDay': 'Delete {day}',
+    'plans.confirmDelete':
+      'Do you really want to delete the workout plan "{name}"?',
+    'plans.confirmDeleteDay': 'Do you really want to delete {day} from "{name}"?',
     'plans.show': 'Show {name}',
     'plans.hide': 'Hide {name}',
+    'plans.notFound': 'This workout plan does not exist.',
+    'plans.backToPlans': 'Back to my workout plans',
   },
   de: {
     'landing.title': 'Erstelle deinen Trainingsplan',
@@ -112,6 +125,8 @@ const translations = {
       'Füge eine Beschreibung für deinen Trainingsplan hinzu ...',
     'createForm.submit': 'Erstellen',
     'createForm.errorNoDays': 'Bitte wähle mindestens einen Trainingstag.',
+    'createForm.editTitle': 'Trainingsplan bearbeiten',
+    'createForm.next': 'Weiter',
 
     'dayForm.formLabel': 'Übungen für {day} hinzufügen',
     'dayForm.muscle': 'Muskel:',
@@ -124,22 +139,33 @@ const translations = {
     'dayForm.sets': 'Sätze:',
     'dayForm.add': 'Übung hinzufügen',
     'dayForm.noExercises': 'Noch keine Übungen hinzugefügt.',
+    'dayForm.update': 'Übung speichern',
+    'dayForm.cancelEdit': 'Abbrechen',
 
     'exercise.exercise': 'Übung:',
     'exercise.weight': 'Gewicht:',
     'exercise.repetitions': 'Wiederholungen:',
     'exercise.sets': 'Sätze:',
     'exercise.remove': '{name} entfernen',
+    'exercise.edit': '{name} bearbeiten',
 
     'form.save': 'Trainingsplan speichern',
+    'form.saveChanges': 'Änderungen speichern',
+    'form.backToDetails': 'Name und Tage bearbeiten',
     'form.errorEmptyDays': 'Füge mindestens eine Übung hinzu für: {days}',
 
     'plans.create': 'Neuen Trainingsplan erstellen',
     'plans.empty': 'Du hast noch keine Trainingspläne.',
+    'plans.edit': 'Trainingsplan {name} bearbeiten',
     'plans.delete': 'Trainingsplan {name} löschen',
     'plans.deleteDay': '{day} löschen',
+    'plans.confirmDelete':
+      'Möchtest du den Trainingsplan „{name}“ wirklich löschen?',
+    'plans.confirmDeleteDay': 'Möchtest du {day} aus „{name}“ wirklich löschen?',
     'plans.show': '{name} anzeigen',
     'plans.hide': '{name} ausblenden',
+    'plans.notFound': 'Diesen Trainingsplan gibt es nicht.',
+    'plans.backToPlans': 'Zurück zu meinen Trainingsplänen',
   },
 };
 

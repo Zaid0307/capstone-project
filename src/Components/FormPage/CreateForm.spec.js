@@ -90,6 +90,43 @@ describe('CreateForm', () => {
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
+  it('is prefilled when editing and keeps the ids', () => {
+    const onSubmit = jest.fn();
+    renderWithProviders(
+      <CreateForm
+        onSubmit={onSubmit}
+        initialPlan={{
+          id: 'plan1',
+          nameOfWorkout: 'Push',
+          description: 'Chest day',
+          days: [
+            { id: 'day-mon', day: 'monday' },
+            { id: 'day-thu', day: 'thursday' },
+          ],
+        }}
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', { name: /edit your workout plan/i })
+    ).toBeInTheDocument();
+    expect(screen.getByLabelText(/Workout plan name/i)).toHaveValue('Push');
+    expect(screen.getByLabelText(/description/i)).toHaveValue('Chest day');
+    expect(screen.getByLabelText(/monday/i)).toBeChecked();
+    expect(screen.getByLabelText(/thursday/i)).toBeChecked();
+    expect(screen.getByLabelText(/friday/i)).not.toBeChecked();
+
+    userEvent.click(screen.getByLabelText(/thursday/i));
+    userEvent.click(screen.getByLabelText(/sunday/i));
+    userEvent.click(screen.getByRole('button', { name: /next/i }));
+
+    const plan = onSubmit.mock.calls[0][0];
+    expect(plan.id).toBe('plan1');
+    expect(plan.days[0]).toEqual({ id: 'day-mon', day: 'monday' });
+    expect(plan.days[1].day).toBe('sunday');
+    expect(plan.days[1].id).not.toBe('day-thu');
+  });
+
   it('is shown in German', () => {
     renderWithProviders(<CreateForm onSubmit={jest.fn()} />, {
       language: 'de',

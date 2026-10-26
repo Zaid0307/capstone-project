@@ -66,10 +66,12 @@ describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
     mockWgerFetch();
+    window.confirm = jest.fn(() => true);
   });
 
   afterEach(() => {
     delete global.fetch;
+    delete window.confirm;
   });
 
   describe('workout plans page', () => {
@@ -115,6 +117,9 @@ describe('App', () => {
       userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
       userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
 
+      expect(window.confirm).toHaveBeenCalledWith(
+        'Do you really want to delete Friday from "Legacy"?'
+      );
       const [push, legacy] = readPlans();
       expect(push).toEqual(savedPlans[0]);
       expect(legacy.days.map(day => day.id)).toEqual(['p2-tue']);
@@ -131,10 +136,84 @@ describe('App', () => {
         screen.getByRole('button', { name: 'Delete workout plan Push' })
       );
 
+      expect(window.confirm).toHaveBeenCalledWith(
+        'Do you really want to delete the workout plan "Push"?'
+      );
       expect(readPlans().map(plan => plan.id)).toEqual(['plan2']);
       expect(
         screen.queryByRole('heading', { name: 'Push' })
       ).not.toBeInTheDocument();
+    });
+
+    it('keeps plan and day when deleting is cancelled', async () => {
+      window.confirm = jest.fn(() => false);
+      savePlans(savedPlans);
+      await renderApp('/Workoutplans');
+
+      userEvent.click(
+        screen.getByRole('button', { name: 'Delete workout plan Push' })
+      );
+      userEvent.click(screen.getByRole('button', { name: 'Show Legacy' }));
+      userEvent.click(screen.getByRole('button', { name: 'Delete Friday' }));
+
+      expect(window.confirm).toHaveBeenCalledTimes(2);
+      expect(readPlans()).toEqual(savedPlans);
+      expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
+    });
+  });
+
+  describe('editing a plan', () => {
+    it('changes an exercise and saves the plan in place', async () => {
+      savePlans(savedPlans);
+      await renderApp('/Workoutplans');
+
+      userEvent.click(
+        screen.getByRole('button', { name: 'Edit workout plan Push' })
+      );
+      userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
+      userEvent.clear(screen.getByLabelText(/weight/i));
+      userEvent.type(screen.getByLabelText(/weight/i), '65');
+      userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
+      userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+
+      expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
+      const [push, legacy] = readPlans();
+      expect(push.id).toBe('plan1');
+      expect(push.days[0].muscles[0].exercises[0]).toMatchObject({
+        id: 'e1',
+        exercise: 'Bench Press',
+        weight: '65',
+      });
+      expect(legacy).toEqual(savedPlans[1]);
+    });
+
+    it('edits a plan saved by an older version', async () => {
+      savePlans(savedPlans);
+      await renderApp('/Workoutplans/plan2/edit');
+
+      expect(
+        within(screen.getByRole('list', { name: 'Tuesday' })).getByText('Crunch')
+      ).toBeInTheDocument();
+      expect(screen.getByText(/no exercises added yet/i)).toBeInTheDocument();
+
+      userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        'Add at least one exercise for: Friday'
+      );
+    });
+
+    it('shows a message for an unknown plan', async () => {
+      await renderApp('/Workoutplans/missing/edit');
+
+      expect(screen.getByRole('alert')).toHaveTextContent(
+        /this workout plan does not exist/i
+      );
+      userEvent.click(
+        screen.getByRole('link', { name: /back to my workout plans/i })
+      );
+      expect(
+        screen.getByText(/you have no workout plans yet/i)
+      ).toBeInTheDocument();
     });
   });
 

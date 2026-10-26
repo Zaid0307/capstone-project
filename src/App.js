@@ -6,7 +6,8 @@ import ExerciseAndMuscleOverview from './Pages/ExerciseAndMuscleOverview';
 import useExercises from './hooks/useExercises';
 import LandingPage from './Components/LandingPage/LandingPage';
 import { useTranslation } from './i18n/LanguageContext';
-import { deleteDay, deletePlan } from './utils/workoutPlan';
+import EditPlanPage from './Pages/EditPlanPage';
+import { deleteDay, deletePlan, updatePlan } from './utils/workoutPlan';
 
 export default function App() {
   const [data, setData] = useLocalStorage('data', []);
@@ -20,6 +21,11 @@ export default function App() {
 
   function createCard(newCard) {
     setData([...data, newCard]);
+    navigate('/Workoutplans');
+  }
+
+  function handleUpdatePlan(updatedPlan) {
+    setData(updatePlan(data, updatedPlan));
     navigate('/Workoutplans');
   }
 
@@ -39,7 +45,11 @@ export default function App() {
       />
       <Route
         path="/Create_Plan"
-        element={<Form onAddWorkoutPlan={createCard} />}
+        element={<Form onSave={createCard} />}
+      />
+      <Route
+        path="/Workoutplans/:planId/edit"
+        element={<EditPlanPage plans={data} onSave={handleUpdatePlan} />}
       />
       <Route
         path="/home"

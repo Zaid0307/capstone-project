@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { BiShow } from 'react-icons/bi';
 import { BiHide } from 'react-icons/bi';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import WorkoutPlanDay from './WorkoutPlanDay';
-import { MdOutlineDeleteForever } from 'react-icons/md';
+import { MdOutlineDeleteForever, MdOutlineEdit } from 'react-icons/md';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { dayLabel } from '../../utils/workoutPlan';
 
 export default function WorkoutPlans({
   item,
@@ -12,17 +14,41 @@ export default function WorkoutPlans({
   handleDeleteDays,
 }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [showTitle, setShowTitle] = useState(false);
   const name = item.nameOfWorkout;
+
+  function handleDelete() {
+    if (window.confirm(t('plans.confirmDelete', { name }))) {
+      handleDeleteCard(item.id);
+    }
+  }
+
+  function handleDeleteDay(dayId, planId) {
+    const { day } = item.days.find(day => day.id === dayId);
+    const question = t('plans.confirmDeleteDay', {
+      day: dayLabel(day, t),
+      name,
+    });
+    if (window.confirm(question)) {
+      handleDeleteDays(dayId, planId);
+    }
+  }
 
   return (
     <WorkoutBox>
       <Day>
         <StyledCenterBox>
           <PlanName>{name}</PlanName>
+          <EditButton
+            aria-label={t('plans.edit', { name })}
+            onClick={() => navigate(`/Workoutplans/${item.id}/edit`)}
+          >
+            <MdOutlineEdit />
+          </EditButton>
           <DeleteButton
             aria-label={t('plans.delete', { name })}
-            onClick={() => handleDeleteCard(item.id)}
+            onClick={handleDelete}
           >
             <MdOutlineDeleteForever />
           </DeleteButton>
@@ -39,7 +65,7 @@ export default function WorkoutPlans({
             {item.description && (
               <Description>{item.description}</Description>
             )}
-            <WorkoutPlanDay item={item} handleDeleteDays={handleDeleteDays} />
+            <WorkoutPlanDay item={item} handleDeleteDays={handleDeleteDay} />
           </>
         ) : null}
       </Day>
@@ -70,7 +96,7 @@ const StyledCenterBox = styled.div`
   width: 100%;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
-  padding: 5px 80px;
+  padding: 5px 105px;
   border-radius: 15px;
 `;
 
@@ -92,6 +118,15 @@ const Button = styled.button`
   outline: none;
   position: absolute;
   right: 15px;
+  color: #283a45;
+`;
+const EditButton = styled.button`
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 75px;
   color: #283a45;
 `;
 const DeleteButton = styled.button`

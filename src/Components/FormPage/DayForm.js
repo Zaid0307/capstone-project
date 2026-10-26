@@ -1,6 +1,5 @@
 import ScreenReaderOnly from '../Styles/ScreenReaderOnly';
 import SpaceBetween from '../Styles/SpaceBetween';
-import Center from '../Styles/Center';
 import styled from 'styled-components';
 import { useState } from 'react';
 import ListedExercise from './ListedExercise';
@@ -21,10 +20,12 @@ export default function DayForm({
   day,
   exercises = [],
   onAddExercise,
+  onUpdateExercise,
   onRemoveExercise,
 }) {
   const { t } = useTranslation();
   const [exercise, setExercise] = useState(EMPTY_EXERCISE);
+  const [editingId, setEditingId] = useState(null);
   const formLabelId = `formSpan${day}`;
 
   function handleSubmit(event) {
@@ -32,12 +33,32 @@ export default function DayForm({
     if (!exercise.muscle || !exercise.exercise.trim()) {
       return;
     }
-    onAddExercise({
-      ...exercise,
-      exercise: exercise.exercise.trim(),
-      id: nanoid(),
-    });
+    const trimmedExercise = { ...exercise, exercise: exercise.exercise.trim() };
+    if (editingId) {
+      onUpdateExercise({ ...trimmedExercise, id: editingId });
+      setEditingId(null);
+    } else {
+      onAddExercise({ ...trimmedExercise, id: nanoid() });
+    }
     setExercise({ ...EMPTY_EXERCISE, muscle: exercise.muscle });
+  }
+
+  function handleEdit(listedExercise) {
+    const { id, ...values } = listedExercise;
+    setEditingId(id);
+    setExercise({ ...EMPTY_EXERCISE, ...values });
+  }
+
+  function handleCancelEdit() {
+    setEditingId(null);
+    setExercise({ ...EMPTY_EXERCISE, muscle: exercise.muscle });
+  }
+
+  function handleRemove(exerciseId) {
+    if (exerciseId === editingId) {
+      handleCancelEdit();
+    }
+    onRemoveExercise(exerciseId);
   }
 
   function handleOnChange(event) {
@@ -133,9 +154,16 @@ export default function DayForm({
             onChange={handleOnChange}
           />
         </SpaceBetween>
-        <Center>
-          <OnClickButton type="submit">{t('dayForm.add')}</OnClickButton>
-        </Center>
+        <ButtonRow>
+          <OnClickButton type="submit">
+            {t(editingId ? 'dayForm.update' : 'dayForm.add')}
+          </OnClickButton>
+          {editingId && (
+            <OnClickButton type="button" onClick={handleCancelEdit}>
+              {t('dayForm.cancelEdit')}
+            </OnClickButton>
+          )}
+        </ButtonRow>
       </form>
 
       {exercises.length === 0 ? (
@@ -146,7 +174,9 @@ export default function DayForm({
             <li key={listedExercise.id}>
               <ListedExercise
                 newCards={listedExercise}
-                onRemove={() => onRemoveExercise(listedExercise.id)}
+                isEditing={listedExercise.id === editingId}
+                onEdit={() => handleEdit(listedExercise)}
+                onRemove={() => handleRemove(listedExercise.id)}
               />
             </li>
           ))}
@@ -155,6 +185,12 @@ export default function DayForm({
     </FormBox>
   );
 }
+
+const ButtonRow = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+`;
 
 const EmptyText = styled.p`
   text-align: center;
