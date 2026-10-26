@@ -72,7 +72,7 @@ Diese Bögen zeigen den Mann in Blau und die Frau in Grün, im zweifarbigen Sten
 
 - Gewünscht sind Animationen bzw. Videos zu den Übungen.
 - Wo sie in der App erscheinen und wie sie bedient werden, ist noch nicht festgelegt.
-- In der Datenbank haben heute nur 46 Übungen ein Video (wger, Lizenz CC-BY-SA, Autor muss genannt werden).
+- Die eigene Übungsdatenbank hat 97 Übungen ohne Bilder oder Videos. Pro Übung wird also mindestens ein Bild oder eine Animation gebraucht, für Mann und Frau.
 
 **Unterstützte Formate:** siehe [05-technik.md](05-technik.md).
 
@@ -82,9 +82,7 @@ Diese Bögen zeigen den Mann in Blau und die Frau in Grün, im zweifarbigen Sten
 |---|---|---|---|
 | Hintergrundbild der Startseite | `landing` | implementiert (Foto) | Füllt den ganzen Bildschirm. Querformat, Hochformat und Ausschnitt müssen funktionieren. Austausch erlaubt. |
 | Illustration für Leerzustand „Keine Pläne“ | `plans` | heute nur Text | optional, Entscheidung Design |
-| Illustration für Fehlerzustand | `muscle-group` | heute nur Text | optional, Entscheidung Design |
-| Ladeanzeige | `muscle-group` | heute nur Text | optional (Spinner, Skelett o. Ä.) |
-| Bilder der Übungen | Übungskarte | implementiert | Kommen aus der Datenbank, nicht gestaltbar. Das Design muss sehr unterschiedliche Seitenverhältnisse und die Bildgröße 80 px hoch und bis 100 px breit tragen. |
+| Bilder der Übungen | Übungskarte | heute Platzhalter | Kommen künftig vom Grafik-Agenten (Figuren in Übungspose bzw. Animation). Größe und Rahmen legt das Design fest. |
 
 ## App-Icons und Metadaten (Designer-Agent)
 

@@ -8,9 +8,9 @@
 | Routing | React Router 7 |
 | Styling | styled-components 6 (CSS-in-JS). Farben, Schrift und Eckenradien stehen als Design-Tokens zentral in `src/styles/tokens.js` und werden als CSS-Variablen bereitgestellt (`--color-…`, `--font-…`, `--radius-…`). Globale Styles: `src/styles/GlobalStyles.js`. |
 | Icons | react-icons (austauschbar gegen eigene SVGs) |
-| Daten | Übungen von der wger-API, Pläne und Sprache im `localStorage` des Browsers |
+| Daten | Eigene Übungsdatenbank im Code (`src/data/`), Pläne und Sprache im `localStorage` des Browsers. Ein Backend wird geprüft (siehe O11). |
 | Konten / Server | keine |
-| Tests | Vitest und React Testing Library (67 Tests), ESLint |
+| Tests | Vitest und React Testing Library (160 Tests), ESLint |
 | Komponentenkatalog | Storybook 10 mit Stories für `PlanDetailsForm`, `DayExercisesForm` und `Navigation` |
 | Hosting | Vercel (Demo: capstone-project-lake.vercel.app) |
 
@@ -54,8 +54,8 @@ Für das Design bedeutet das: ausreichende Kontraste in allen Zuständen, sichtb
 
 ## Einschränkungen
 
-- **Daten aus der Datenbank sind nicht gestaltbar:** Übungsnamen, Beschreibungen und Bilder kommen so, wie wger sie liefert. Längen, Sprachen und Bildformate schwanken stark (siehe [03-inhalte-und-daten.md](03-inhalte-und-daten.md)).
-- **Ladezeit:** Beim Start werden etwa 0,5 MB Übungsdaten geladen. Grafiken sollten die App nicht deutlich schwerer machen. Richtwert: Icons unter 5 KB, Figuren unter 200 KB je Datei.
+- **Textlängen:** Übungsnamen und Beschreibungen sind eigene Texte mit begrenzter Länge (siehe [03-inhalte-und-daten.md](03-inhalte-und-daten.md)). Nutzereingaben im Plan sind dagegen frei.
+- **Dateigröße:** Die ganze App ist heute rund 120 KB (gzip) groß, inklusive Übungsdaten. Grafiken sollten sie nicht deutlich schwerer machen. Richtwert: Icons unter 5 KB, Figuren unter 200 KB je Datei.
 - **Bestätigungsdialoge** sind heute Browser-Dialoge und lassen sich nicht gestalten (siehe [02-komponenten.md](02-komponenten.md)).
 - **Keine Konten:** Pläne liegen nur in diesem Browser auf diesem Gerät.
 - **Rechte:** Alle Grafiken, Schriften und Icons müssen frei bzw. mit einer passenden Lizenz nutzbar sein. Keine Markenlogos.

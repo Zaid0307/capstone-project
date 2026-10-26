@@ -68,11 +68,11 @@ Screenshot: [screenshots/exercises-muscle-groups.png](screenshots/exercises-musc
 ### `muscle-group`: Übungen einer Muskelgruppe (implementiert)
 
 - Oben die Muskelgruppen-Leiste
-- Darunter eine Liste von Übungskarten, alphabetisch sortiert, je nach Gruppe etwa 100 bis 250 Übungen
+- Darunter eine Liste von Übungskarten, alphabetisch sortiert, je nach Gruppe 9 bis 31 Übungen
 - „Nach oben“-Button, sobald mehr als 500 px gescrollt wurde
-- Zustände: Laden, Fehler mit „Erneut versuchen“, leer, Liste (siehe [02-komponenten.md](02-komponenten.md))
+- Zustände: Liste, leer (siehe [02-komponenten.md](02-komponenten.md)). Die Übungen sind Teil der App und sofort da, es gibt keinen Lade- oder Fehlerzustand.
 
-Screenshot (Ladezustand): [screenshots/exercises-group-loading.png](screenshots/exercises-group-loading.png)
+Screenshot: [screenshots/exercises-group.png](screenshots/exercises-group.png)
 
 ### `plans`: Meine Trainingspläne (implementiert)
 
@@ -124,4 +124,25 @@ Diese Punkte sind gewünscht, ihre genaue Platzierung ist aber **noch nicht fest
 | `gender-view` | Ansicht für Mann und Frau mit männlichen und weiblichen Figuren | geplant | `exercises`, `muscle-group`, voraussichtlich weitere |
 | `muscle-figures` | Muskelfiguren statt der heutigen Muskelgruppen-Bilder, mit hervorgehobener Muskelgruppe von vorne und hinten | geplant | `exercises`, `muscle-group` |
 | `exercise-animations` | Übungsanimationen bzw. Videos zu Übungen | geplant | Ort offen (voraussichtlich Übungskarte) |
-| `training-history` | Trainingsverlauf, Muskel-Analyse, Statistiken | vorgeschlagen | nicht festgelegt |
+| `plan-templates` | Plan-Vorlagen: Vorlage auswählen, als eigenen Plan übernehmen und bearbeiten | geplant | neue Seiten, siehe unten |
+| `account` | Konto: Registrierung, Anmeldung, Passwort vergessen, Konto löschen, Daten exportieren | geplant | neue Seiten |
+| `profile-settings` | Profil und Einstellungen (z. B. Sprache, Ansicht Mann/Frau, Einwilligungen) | geplant | neue Seite |
+| `tracking` | Training aus einem Plan starten, Sätze eintragen, Trainingsverlauf | geplant | neue Seiten |
+| `analytics` | Auswertungen pro Nutzer, filterbar | geplant | neue Seite |
+| `dashboard` | Standard-Dashboard und eigenes, anpassbares Dashboard | geplant | neue Seiten |
+| `goals` | Ziele setzen und Fortschritt verfolgen | geplant | neue Seite oder Teil des Dashboards |
+| `health-connections` | Daten aus Gesundheits-Apps übernehmen, zuerst per Import der Apple-Health-Exportdatei | geplant | neue Seite |
+
+Für diese Bereiche hat der Nutzer das **Ziel** bestätigt, nicht die Details. Inhalte, Kennzahlen, Filter und Reihenfolge stehen als **Vorschlag** im Gesamtkonzept: [../docs/gesamtkonzept.md](../docs/gesamtkonzept.md). Bitte vor dem Gestalten beim Nutzer klären, welche davon gelten (siehe O12).
+
+## Geplant: Plan-Vorlagen (`plan-templates`)
+
+Vom Nutzer bestätigt: Es soll fertige Trainingsplan-Vorlagen geben, die man als eigenen Plan übernimmt und dann bearbeitet. Die Daten dafür liegen vor (30 Vorlagen aus dem Grafik-Paket, Details in [03-inhalte-und-daten.md](03-inhalte-und-daten.md)). Routen, Navigation und Darstellung sind **noch nicht festgelegt**.
+
+Was feststeht:
+- Es gibt eine **Liste der Vorlagen** und eine **Ansicht einer Vorlage** mit ihren Trainingstagen und Übungen.
+- Eine Vorlage wird **nicht verändert**. Der Nutzer übernimmt sie als Kopie in „Meine Trainingspläne“ und bearbeitet dort die Kopie.
+- Vorlagen enthalten mehr als heutige Pläne: Wiederholungs**bereiche** (z. B. 8–12), Übungen nach Zeit (z. B. 30 Sekunden), Pausenzeiten, Ruhetage und Zyklen, die nicht an Wochentage gebunden sind (z. B. 4 Tage). Das Plan-Formular und die Planansicht müssen das später ebenfalls darstellen können.
+- Jede Vorlage hat Sicherheits- und Fortschrittshinweise, die sichtbar bleiben müssen.
+
+Was offen ist, steht in [07-offene-punkte.md](07-offene-punkte.md) (O8–O10).

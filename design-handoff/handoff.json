@@ -21,7 +21,8 @@
       "04-grafikbedarf.md",
       "05-technik.md",
       "06-user-flows.md",
-      "07-offene-punkte.md"
+      "07-offene-punkte.md",
+      "../docs/gesamtkonzept.md"
     ]
   },
   "responsibilities": {
@@ -206,23 +207,20 @@
       "bottomNav": true,
       "content": [
         "Muskelgruppen-Leiste",
-        "Übungskarten alphabetisch (ca. 100–250 je Gruppe)",
+        "Übungskarten alphabetisch (9–31 je Gruppe)",
         "Nach-oben-Button ab 500 px Scrollweite"
       ],
       "components": [
         "MuscleGroupNav",
         "ExerciseCard",
         "BackToTopButton",
-        "Message",
-        "Button"
+        "Message"
       ],
       "states": [
-        "loading",
-        "error-with-retry",
-        "empty",
-        "list"
+        "list",
+        "empty"
       ],
-      "screenshot": "screenshots/exercises-group-loading.png"
+      "screenshot": "screenshots/exercises-group.png"
     },
     {
       "id": "plans",
@@ -308,6 +306,101 @@
         "not-found"
       ],
       "afterSave": "/plans"
+    },
+    {
+      "id": "plan-templates",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Liste der Vorlagen",
+        "Ansicht einer Vorlage mit Tagen, Ruhetagen und Einträgen",
+        "Als eigenen Plan übernehmen"
+      ],
+      "rules": [
+        "Original bleibt unverändert, bearbeitet wird eine Kopie",
+        "Sicherheits- und Fortschrittshinweise bleiben sichtbar"
+      ],
+      "open": [
+        "Route und Navigation (O8)",
+        "Filter (O8)",
+        "Athleten-Vorlagen (O9)"
+      ]
+    },
+    {
+      "id": "account",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Registrierung",
+        "Anmeldung per E-Mail oder Google",
+        "Passwort vergessen",
+        "Konto löschen",
+        "Daten exportieren",
+        "App bleibt ohne Konto nutzbar"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "profile-settings",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Sprache",
+        "Ansicht Mann/Frau",
+        "Einwilligungen"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "tracking",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Training aus Plan starten",
+        "Sätze eintragen",
+        "Trainingsverlauf"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "analytics",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Auswertungen pro Nutzer",
+        "Filter"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "dashboard",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Standard-Dashboard",
+        "eigenes, anpassbares Dashboard"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "goals",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Ziele anlegen",
+        "Fortschritt"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
+    },
+    {
+      "id": "health-connections",
+      "route": null,
+      "status": "planned",
+      "content": [
+        "Import der Apple-Health-Exportdatei (ZIP)",
+        "keine automatische Anbindung (kein Mac)"
+      ],
+      "details": "nur Ziel bestätigt, Inhalte als Vorschlag in docs/gesamtkonzept.md"
     }
   ],
   "components": [
@@ -359,8 +452,6 @@
       "path": "src/components/ui/Message.js",
       "status": "implemented",
       "usedFor": [
-        "loading",
-        "error",
         "empty",
         "not-found"
       ]
@@ -427,17 +518,14 @@
       "status": "implemented",
       "fields": [
         "name",
-        "image oder Platzhalter",
+        "Platzhalter (Bilder folgen vom Grafik-Agenten)",
         "description"
       ],
       "states": [
-        "with-image",
-        "without-image",
         "short-text",
         "long-text"
       ],
       "notes": [
-        "Bilder werden verzögert geladen",
         "Heute feste Kartenhöhe, Text scrollt innerhalb der Karte"
       ]
     },
@@ -632,33 +720,47 @@
       "id": "Charts",
       "status": "suggested",
       "note": "Nur bei Bestätigung von O4"
+    },
+    {
+      "id": "TemplateList",
+      "status": "planned",
+      "note": "Form offen (O8)"
+    },
+    {
+      "id": "TemplateDetail",
+      "status": "planned",
+      "note": "Tage inkl. Ruhetage, Einträge mit Sätzen, Wiederholungsbereich oder Dauer, Pause, RIR, Hinweise"
     }
   ],
   "data": {
     "exerciseSource": {
-      "provider": "wger.de REST API",
-      "loadedAt": "App-Start, ca. 0,5 MB",
-      "totalExercises": 932,
-      "withImage": 279,
-      "withVideo": 46,
+      "provider": "eigene Übungsdatenbank im Code (src/data/)",
+      "totalExercises": 97,
       "perGroup": {
-        "chest": 104,
-        "back": 185,
-        "abs": 125,
-        "shoulders": 135,
-        "arms": 164,
-        "legs": 245
+        "chest": 12,
+        "back": 22,
+        "abs": 9,
+        "shoulders": 12,
+        "arms": 12,
+        "legs": 31
       },
+      "withoutGroup": 8,
+      "languages": [
+        "de",
+        "en"
+      ],
       "displayedFields": [
         "name",
-        "description",
-        "image"
+        "description"
       ],
-      "loadedNotDisplayed": [
-        "video",
-        "musclesSecondary"
+      "notDisplayedYet": [
+        "category",
+        "equipment",
+        "primary muscles",
+        "secondary muscles"
       ],
-      "videoLicense": "CC-BY-SA, Autor nennen"
+      "images": "keine, folgen vom Grafik-Agenten",
+      "review": "Beschreibungen und Muskelzuordnungen redaktionell, nicht fachlich geprüft"
     },
     "muscleGroups": {
       "chest": {
@@ -717,6 +819,40 @@
         ]
       },
       "note": "Übungen im Plan sind Freitext ohne Verknüpfung zur Übungsdatenbank"
+    },
+    "planTemplates": {
+      "status": "Daten vorhanden, Funktion geplant",
+      "source": "docs/images/Design Agent/fitness-graphics-v0.7/data/training-plans.json",
+      "count": 30,
+      "original": 23,
+      "athleteInspired": 7,
+      "entries": 656,
+      "distinctExercises": 69,
+      "entryFields": [
+        "exercise_id",
+        "sets",
+        "dose (Wiederholungsbereich oder Sekunden)",
+        "rest_seconds",
+        "rir_target"
+      ],
+      "dayTypes": [
+        "workout",
+        "rest",
+        "mobility",
+        "pilates",
+        "boxing"
+      ],
+      "planFields": [
+        "name",
+        "description",
+        "goals",
+        "level",
+        "setting",
+        "weekly_training_days",
+        "cycle_days",
+        "progression",
+        "safety"
+      ]
     }
   },
   "graphics": {
@@ -867,18 +1003,6 @@
         "where": "plans",
         "status": "optional",
         "note": "heute nur Text"
-      },
-      {
-        "id": "error-exercises",
-        "where": "muscle-group",
-        "status": "optional",
-        "note": "heute nur Text"
-      },
-      {
-        "id": "loading-indicator",
-        "where": "muscle-group",
-        "status": "optional",
-        "note": "heute nur Text"
       }
     ],
     "appIcons": {
@@ -920,7 +1044,7 @@
     "routing": "React Router 7",
     "styling": "styled-components 6, Design-Tokens als CSS-Variablen (src/styles/tokens.js)",
     "icons": "react-icons (austauschbar)",
-    "tests": "Vitest + React Testing Library (67 Tests), ESLint",
+    "tests": "Vitest + React Testing Library (160 Tests), ESLint",
     "storybook": {
       "version": 10,
       "stories": [
@@ -947,7 +1071,7 @@
       "Tastaturbedienung der Checkboxen"
     ],
     "constraints": [
-      "Übungsdaten aus wger sind nicht gestaltbar (Länge, Sprache, Bildformat schwanken)",
+      "Übungstexte sind eigene Texte mit begrenzter Länge",
       "Browser-Bestätigungsdialoge nicht gestaltbar",
       "Keine Konten, Daten nur lokal",
       "Nur frei lizenzierte Grafiken, Schriften und Icons, keine Markenlogos"
@@ -970,7 +1094,7 @@
       "status": "implemented",
       "steps": [
         "exercises",
-        "Kachel → muscle-group (loading → list | error+retry | empty)",
+        "Kachel → muscle-group (Liste sofort sichtbar)",
         "Gruppe wechseln über Leiste",
         "Nach-oben-Button",
         "Zurück"
@@ -1027,7 +1151,7 @@
       "status": "implemented",
       "steps": [
         "Sprachumschalter",
-        "Texte sofort, Übungen werden nachgeladen"
+        "Alle Texte inkl. Übungen wechseln sofort"
       ]
     },
     {
@@ -1065,11 +1189,27 @@
       ]
     },
     {
+      "id": "F13",
+      "name": "Plan-Vorlage übernehmen",
+      "status": "planned",
+      "steps": [
+        "Vorlage ansehen",
+        "als eigenen Plan kopieren",
+        "Kopie bearbeiten"
+      ],
+      "open": [
+        "Einstieg",
+        "Navigation",
+        "Filter",
+        "Darstellung"
+      ]
+    },
+    {
       "id": "F12",
       "name": "Training protokollieren und auswerten",
-      "status": "suggested",
+      "status": "planned",
       "open": [
-        "alles, nicht bestätigt"
+        "Details siehe docs/gesamtkonzept.md (Vorschlag)"
       ]
     }
   ],
@@ -1090,9 +1230,24 @@
       "source": "Nutzerwunsch: eigene Animationen bzw. Videos zu Übungen"
     },
     {
-      "id": "training-history",
-      "status": "suggested",
-      "source": "Nutzer nannte SmartGym als Anregung für Analyse-Features, nicht bestätigt"
+      "id": "plan-templates",
+      "status": "planned",
+      "source": "Nutzer hat bestätigt: Vorlagen wählen, als eigenen Plan kopieren und bearbeiten"
+    },
+    {
+      "id": "account-and-sync",
+      "status": "planned",
+      "source": "Nutzer: Login und Pläne pro Nutzer speichern"
+    },
+    {
+      "id": "tracking-analytics-dashboard-goals",
+      "status": "planned",
+      "source": "Nutzer: Auswertung und Tracking pro Nutzer, filterbar, Dashboard, eigenes Dashboard, Ziele"
+    },
+    {
+      "id": "health-integrations",
+      "status": "planned",
+      "source": "Nutzer: Apple Health und andere Apps anbinden, um Fitnessdaten zu übernehmen"
     }
   ],
   "openQuestions": [
@@ -1110,7 +1265,7 @@
     },
     {
       "id": "O4",
-      "question": "Kommen Trainingsverlauf, Muskel-Analyse und Statistiken?"
+      "question": "Erledigt: Tracking, Auswertung und Dashboard sind geplant (siehe O12)"
     },
     {
       "id": "O5",
@@ -1123,6 +1278,30 @@
     {
       "id": "O7",
       "question": "Bleibt der Name 'GetFit!'?"
+    },
+    {
+      "id": "O8",
+      "question": "Navigation und Filter der Plan-Vorlagen?"
+    },
+    {
+      "id": "O9",
+      "question": "Athleten-Vorlagen mit echten Namen erlaubt?"
+    },
+    {
+      "id": "O10",
+      "question": "Wo erscheinen Cardio- und Boxübungen?"
+    },
+    {
+      "id": "O11",
+      "question": "Backend-Anbieter später (Vorschlag Supabase). Entschieden: Login per E-Mail und Google, Apple zurückgestellt; App ohne Konto nutzbar; nicht öffentlich."
+    },
+    {
+      "id": "O12",
+      "question": "Welche Auswertungen, Dashboard-Elemente, Filter und Ziele genau?"
+    },
+    {
+      "id": "O13",
+      "question": "Entschieden: kein Mac, keine native iPhone-App; Apple Health per Import der Exportdatei."
     }
   ],
   "screenshots": {
@@ -1131,9 +1310,9 @@
     "files": {
       "landing": "screenshots/landing.png",
       "exercises": "screenshots/exercises-muscle-groups.png",
-      "muscle-group (loading)": "screenshots/exercises-group-loading.png",
       "plans (empty)": "screenshots/plans-empty.png",
-      "plan-new (step 1)": "screenshots/plan-new-details.png"
+      "plan-new (step 1)": "screenshots/plan-new-details.png",
+      "muscle-group": "screenshots/exercises-group.png"
     }
   }
 }

@@ -11,11 +11,9 @@ Alle Flows sind **implementiert**, außer dort, wo es anders steht.
 ## F2: Übungen entdecken
 
 1. Muskelgruppen-Auswahl: Kachel antippen, zum Beispiel „Brust“
-2. `/exercises/chest`: Die Übungen werden geladen (Ladezustand)
-   - **Erfolg:** Liste der Übungskarten
-   - **Fehler:** Hinweis mit „Erneut versuchen“, der Button lädt neu
-   - **Leer:** Hinweis „keine Übungen gefunden“
-3. In der Muskelgruppen-Leiste eine andere Gruppe antippen: Die Liste wechselt ohne erneutes Laden
+2. `/exercises/chest`: Liste der Übungskarten, sofort sichtbar
+   - **Leer:** Hinweis „keine Übungen gefunden“ (bei den heutigen Daten nicht der Fall)
+3. In der Muskelgruppen-Leiste eine andere Gruppe antippen: Die Liste wechselt
 4. Weit gescrollt: Der „Nach oben“-Button erscheint
 5. Zurück-Pfeil oder Zurück-Taste des Browsers führt zur Muskelgruppen-Auswahl
 
@@ -60,7 +58,7 @@ Alle Flows sind **implementiert**, außer dort, wo es anders steht.
 
 ## F7: Sprache wechseln
 
-Von jeder Seite aus über den Sprachumschalter. Alle Texte wechseln sofort, und die Übungen werden in der neuen Sprache nachgeladen.
+Von jeder Seite aus über den Sprachumschalter. Alle Texte wechseln sofort, auch die Übungsnamen und Beschreibungen.
 
 ## F8: Alte oder ungültige Adresse
 
@@ -73,4 +71,5 @@ Alte Lesezeichen und unbekannte Adressen werden weitergeleitet (siehe [01-seiten
 | Ansicht Mann/Frau wechseln | geplant | Es soll eine männliche und eine weibliche Ansicht geben | Wo umgeschaltet wird, ob die Wahl gespeichert wird |
 | Muskelgruppe auf der Figur ansehen | geplant | Figur mit hervorgehobener Gruppe, vorne und hinten | Einbindung in F2 |
 | Übungsanimation ansehen | geplant | Animationen bzw. Videos zu Übungen | Ort, Bedienung |
-| Training protokollieren und auswerten | vorgeschlagen | Der Nutzer hat SmartGym als Anregung für „Analyse-Features“ genannt | Alles, nicht bestätigt |
+| Plan-Vorlage übernehmen | geplant | Vorlage ansehen, als eigenen Plan kopieren, Kopie bearbeiten. Das Original bleibt unverändert. | Einstieg, Navigation, Filter, Darstellung |
+| Anmelden, Training protokollieren, auswerten, Ziele verfolgen, Gesundheitsdaten übernehmen | geplant | Ziel vom Nutzer bestätigt | Abläufe im Detail offen, Vorschlag in `docs/gesamtkonzept.md` |

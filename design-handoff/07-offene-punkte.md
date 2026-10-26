@@ -9,10 +9,16 @@ Diese Punkte sind **nicht entschieden**. Bitte nicht eigenmächtig festlegen, so
 | O1 | Wo wird zwischen Mann und Frau umgeschaltet: einmal in einer Einstellung, direkt auf den Seiten, oder beides? | Wurde gefragt, ist noch unbeantwortet. Eine Einstellungsseite gibt es heute nicht. |
 | O2 | Welche Farben bekommen die Figuren? | Ein Entwurf zeigt Mann rot und Frau lavendel, die Referenzbögen zeigen Mann blau und Frau grün. Der Nutzer wünschte „männliche Farben“ und „weibliche Farben“. |
 | O3 | Wo und wie werden Übungsanimationen bzw. Videos gezeigt? | Gewünscht, Ort und Bedienung offen |
-| O4 | Sollen Trainingsverlauf, Muskel-Analyse und Statistiken kommen? | Nur als Anregung genannt („SmartGym … deren Figuren und Analyse-Features“), nicht bestätigt |
+| O4 | ~~Sollen Trainingsverlauf, Muskel-Analyse und Statistiken kommen?~~ | **Entschieden:** Ja, Tracking, Auswertung, Dashboard und Ziele sind geplant. Details siehe O12. |
 | O5 | Soll die App auch für Tablet und Desktop gestaltet werden? | Heute nur Handy |
 | O6 | Soll es einen Dark Mode geben? | Heute nicht vorhanden. Die Referenzbögen der Figuren haben einen schwarzen Hintergrund. |
 | O7 | Bleibt der App-Name „GetFit!“? | Steht in der README, der Seitentitel lautet heute „Workout Plan“ |
+| O8 | Wo erscheinen die Plan-Vorlagen in der Navigation, und nach welchen Merkmalen lassen sie sich filtern? | Daten erlauben Ziel, Niveau, Ort, Tage pro Woche; entschieden ist nichts |
+| O9 | Dürfen die 7 Vorlagen „inspiriert von“ echten Athleten (z. B. Arnold Schwarzenegger) mit Namen erscheinen? | Persönlichkeits- und Namensrechte sind ungeklärt, das Grafik-Paket warnt selbst. Bis zur Klärung werden sie nicht eingebaut. |
+| O10 | Wo erscheinen Cardio- und Boxübungen? | Sie haben keine Hauptmuskeln und fehlen deshalb in der Muskelgruppen-Ansicht. In Vorlagen kommen sie vor. |
+| O11 | Welches Backend? | Backend ist beschlossen, Anbieter (Vorschlag Supabase) wird später entschieden. **Entschieden:** Anmeldung per E-Mail und Google (Apple zurückgestellt, kostenpflichtig). Die App bleibt **ohne Konto nutzbar**. Die App wird **nicht öffentlich** veröffentlicht. |
+| O12 | Welche Auswertungen, Dashboard-Elemente, Filter und Ziele genau? | Ziel bestätigt, Inhalte nur als Vorschlag im Gesamtkonzept (`docs/gesamtkonzept.md`, Abschnitt 3) |
+| O13 | ~~Native iPhone-App für Apple Health?~~ | **Entschieden:** Kein Mac vorhanden, daher keine native iPhone-App. Apple-Health-Daten kommen über den Import der Exportdatei im Browser. |
 
 ## Abhängigkeiten zum Grafik-Agenten
 

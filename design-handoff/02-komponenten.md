@@ -9,7 +9,7 @@ Textbutton mit zwei Varianten.
 
 | Variante | Einsatz heute |
 |---|---|
-| `primary` | „Weiter“, „Übung hinzufügen“, „Übung speichern“, „Abbrechen“, „Erneut versuchen“, „Los geht´s“ |
+| `primary` | „Weiter“, „Übung hinzufügen“, „Übung speichern“, „Abbrechen“, „Los geht´s“ |
 | `secondary` | „Name und Tage bearbeiten“, „Trainingsplan speichern“, „Änderungen speichern“ |
 
 Zustände: normal, Hover, Fokus (Tastatur). Ein deaktivierter Zustand wird heute nicht genutzt.
@@ -28,7 +28,7 @@ Zustände: zugeklappt, aufgeklappt (`aria-expanded`). Beschriftung: „{Name} an
 Kopfzeile mit zentriertem Titel und Aktionsbuttons rechts. Wird verwendet in Planskarte, Trainingstag, Muskelgruppe im Plan und Übung im Formular.
 
 ### Message: `ui/Message.js`
-Hinweisbox für Laden, Fehler, Leerzustand und „nicht gefunden“. Kann einen Button oder Link enthalten.
+Hinweisbox für Leerzustand und „nicht gefunden“. Kann einen Button oder Link enthalten.
 
 ### Center, ScreenReaderOnly
 Nur für Layout und Barrierefreiheit, ohne eigene Gestaltung.
@@ -67,11 +67,10 @@ Karte für eine Übung aus der Datenbank.
 | Element | Inhalt |
 |---|---|
 | Titel | Übungsname |
-| Bild | Bild aus der Datenbank, sonst Platzhalter-Icon (Hantel) |
+| Bild | Heute immer Platzhalter-Icon (Hantel). Bilder bzw. Animationen pro Übung kommen vom Grafik-Agenten. |
 | Text | Beschreibung als Fließtext |
 
 - Die Karte hat heute eine feste Höhe, längere Beschreibungen scrollen innerhalb der Karte.
-- Bilder werden erst geladen, wenn sie in den sichtbaren Bereich kommen.
 - Zustände: mit Bild, ohne Bild (Platzhalter), sehr kurzer bzw. sehr langer Text.
 
 ## Trainingspläne anzeigen (`workoutPlans/`)
@@ -158,6 +157,8 @@ Für die bestätigten Pläne in [07-offene-punkte.md](07-offene-punkte.md) werde
 | Umschalter Mann/Frau | geplant | Ort und Form offen (Einstellung oder auf den Seiten) |
 | Muskelfigur-Ansicht (vorne und hinten, hervorgehobene Gruppe) | geplant | Grafiken vom Grafik-Agenten, Rahmen und Platzierung vom Design |
 | Animations- bzw. Videoplayer für Übungen | geplant | Bedienelemente (Abspielen, Pause, Wiederholen) noch nicht festgelegt |
-| Diagramme und Statistiken | vorgeschlagen | nicht bestätigt, bitte nicht ohne Rückfrage gestalten |
+| Vorlagen-Liste und Vorlagen-Ansicht | geplant | Inhalte siehe [03-inhalte-und-daten.md](03-inhalte-und-daten.md), Form offen |
+| Anzeige von Wiederholungsbereich, Zeit, Pause, Ruhetag | geplant | gehört zu den Plan-Vorlagen und später zu eigenen Plänen |
+| Diagramme, Kennzahlen, Filter, Dashboard-Elemente, Ziel-Fortschritt | geplant | Ziel bestätigt, Inhalte offen (O12), Vorschlag in `docs/gesamtkonzept.md` |
 
 Filter gibt es in der App heute nicht. Die Auswahl der Muskelgruppe ist die einzige Filterfunktion.
