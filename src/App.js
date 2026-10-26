@@ -1,70 +1,64 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import WorkoutplansPage from './Pages/WorkoutplansPage';
-import { useLocalStorage } from 'usehooks-ts';
-import Form from './Pages/Form';
-import ExerciseAndMuscleOverview from './Pages/ExerciseAndMuscleOverview';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import ExercisesPage from './pages/ExercisesPage';
+import WorkoutPlansPage from './pages/WorkoutPlansPage';
+import CreatePlanPage from './pages/CreatePlanPage';
+import EditPlanPage from './pages/EditPlanPage';
 import useExercises from './hooks/useExercises';
-import LandingPage from './Components/LandingPage/LandingPage';
+import useWorkoutPlans from './hooks/useWorkoutPlans';
 import { useTranslation } from './i18n/LanguageContext';
-import EditPlanPage from './Pages/EditPlanPage';
-import { deleteDay, deletePlan, updatePlan } from './utils/workoutPlan';
+import { legacyRedirects, routes } from './routes';
 
 export default function App() {
-  const [data, setData] = useLocalStorage('data', []);
   const { language } = useTranslation();
   const exercises = useExercises(language);
+  const { plans, addPlan, updatePlan, deletePlan, deleteDay } =
+    useWorkoutPlans();
   const navigate = useNavigate();
 
-  function handleLandingpage() {
-    navigate('/home');
+  function handleCreatePlan(plan) {
+    addPlan(plan);
+    navigate(routes.plans);
   }
 
-  function createCard(newCard) {
-    setData([...data, newCard]);
-    navigate('/Workoutplans');
-  }
-
-  function handleUpdatePlan(updatedPlan) {
-    setData(updatePlan(data, updatedPlan));
-    navigate('/Workoutplans');
-  }
-
-  function handleDeleteCard(planId) {
-    setData(deletePlan(data, planId));
-  }
-
-  function handleDeleteDays(dayId, planId) {
-    setData(deleteDay(data, planId, dayId));
+  function handleUpdatePlan(plan) {
+    updatePlan(plan);
+    navigate(routes.plans);
   }
 
   return (
     <Routes>
+      <Route path={routes.landing} element={<LandingPage />} />
       <Route
-        path="/"
-        element={<LandingPage handleLandingpage={handleLandingpage} />}
+        path={routes.exercises}
+        element={<ExercisesPage {...exercises} />}
       />
       <Route
-        path="/Create_Plan"
-        element={<Form onSave={createCard} />}
+        path={routes.muscleGroup(':muscle')}
+        element={<ExercisesPage {...exercises} />}
       />
       <Route
-        path="/Workoutplans/:planId/edit"
-        element={<EditPlanPage plans={data} onSave={handleUpdatePlan} />}
-      />
-      <Route
-        path="/home"
-        element={<ExerciseAndMuscleOverview {...exercises} />}
-      />
-      <Route
-        path="/Workoutplans"
+        path={routes.plans}
         element={
-          <WorkoutplansPage
-            data={data}
-            handleDeleteCard={handleDeleteCard}
-            handleDeleteDays={handleDeleteDays}
+          <WorkoutPlansPage
+            plans={plans}
+            onDeletePlan={deletePlan}
+            onDeleteDay={deleteDay}
           />
         }
       />
+      <Route
+        path={routes.newPlan}
+        element={<CreatePlanPage onSave={handleCreatePlan} />}
+      />
+      <Route
+        path={routes.editPlan(':planId')}
+        element={<EditPlanPage plans={plans} onSave={handleUpdatePlan} />}
+      />
+      {Object.entries(legacyRedirects).map(([from, to]) => (
+        <Route key={from} path={from} element={<Navigate to={to} replace />} />
+      ))}
+      <Route path="*" element={<Navigate to={routes.landing} replace />} />
     </Routes>
   );
 }
