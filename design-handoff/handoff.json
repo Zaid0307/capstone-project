@@ -16,6 +16,7 @@
     "documents": [
       "README.md",
       "CHANGELOG.md",
+      "feedback-entwicklung.md",
       "01-seiten-und-navigation.md",
       "02-komponenten.md",
       "03-inhalte-und-daten.md",
@@ -27,7 +28,8 @@
     ],
     "communication": {
       "developmentToDesign": "design-handoff/ (Änderungen in CHANGELOG.md)",
-      "designToDevelopment": "design-handoff/from-design/"
+      "designToDevelopment": "design-handoff/from-design/",
+      "repository": "https://github.com/Zaid0307/capstone-project/tree/ueberarbeitung"
     }
   },
   "responsibilities": {

@@ -26,6 +26,7 @@ Jede Funktion ist mit einem Status versehen:
 
 ## Kommunikation
 
+- Der aktuelle Stand liegt auf GitHub im Branch **`ueberarbeitung`**: https://github.com/Zaid0307/capstone-project/tree/ueberarbeitung
 - Jede Änderung der Entwicklung steht in [CHANGELOG.md](CHANGELOG.md), neueste oben.
 - Antworten, Fragen und Lieferungen des Designs bitte in **`from-design/`** ablegen. Die Entwicklung schaut dort nach.
 
@@ -34,6 +35,7 @@ Jede Funktion ist mit einem Status versehen:
 | Datei | Inhalt |
 |---|---|
 | [CHANGELOG.md](CHANGELOG.md) | Änderungen seit der ersten Fassung |
+| [feedback-entwicklung.md](feedback-entwicklung.md) | Rückmeldung der Entwicklung an Grafik- und Design-Agent |
 | [handoff.json](handoff.json) | Zentrale, maschinenlesbare Fassung aller Angaben |
 | [01-seiten-und-navigation.md](01-seiten-und-navigation.md) | Alle Seiten, Routen, Navigation und Funktionen |
 | [02-komponenten.md](02-komponenten.md) | Alle Komponenten mit ihren Zuständen |

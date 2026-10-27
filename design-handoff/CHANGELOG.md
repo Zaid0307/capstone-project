@@ -9,6 +9,7 @@ Hier trägt die Entwicklung jede Änderung an App und Übergabe ein, die das Des
 
 ## 27.10.2026
 
+- **Rückmeldung der Entwicklung** an Grafik- und Design-Agent: [feedback-entwicklung.md](feedback-entwicklung.md). Darin stehen Fehler im Grafik-Paket (G1–G4), Hinweise zu den Figuren (G5–G9) und Bitten an das Design (D1–D8).
 - **Plan-Vorlagen als Daten in der App:** 23 Vorlagen auf Deutsch und Englisch (`src/data/planTemplates.json`). Die 7 Athleten-Vorlagen sind nicht enthalten (O9). Noch keine Oberfläche, die Seiten dafür sind weiterhin offen (O8).
 - **Neue Muskelgruppe „Sonstiges“ / „Other“** für Übungen ohne Muskelgruppe (Cardio, Boxen). Sie ist im Plan-Formular wählbar und erscheint in der Planansicht als letzte Gruppe.
 - **Neue Zeile in der Übungsanzeige:** „Reserve (Wdh.)“ / „Reps in reserve“. Erscheint nur bei Übungen aus Vorlagen.
