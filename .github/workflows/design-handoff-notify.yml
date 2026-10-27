@@ -1,0 +1,44 @@
+# Opens an issue when the design agent delivers something into
+# design-handoff/from-design/, so the owner gets a GitHub notification.
+# Runs only on GitHub; costs nothing for a public repository.
+name: Design handoff – new delivery
+
+on:
+  push:
+    paths:
+      - 'design-handoff/from-design/**'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open an issue for the new delivery
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const folder = 'design-handoff/from-design/';
+            const files = new Set();
+            for (const commit of context.payload.commits ?? []) {
+              for (const file of [...commit.added, ...commit.modified, ...commit.removed]) {
+                if (file.startsWith(folder)) files.add(file);
+              }
+            }
+            const branch = context.ref.replace('refs/heads/', '');
+            const list = [...files].map(file => `- \`${file}\``).join('\n') || '- (Dateien siehe Commit)';
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Neue Lieferung vom Design-Agenten (${branch})`,
+              body: [
+                `Im Ordner \`${folder}\` hat sich etwas geändert (Branch \`${branch}\`).`,
+                '',
+                list,
+                '',
+                `Commit: ${context.sha}`,
+                `Von: ${context.payload.pusher?.name ?? 'unbekannt'}`,
+              ].join('\n'),
+            });
