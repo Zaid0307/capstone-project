@@ -34,7 +34,8 @@ export default function PlanForm({ onSave, initialPlan }) {
     : [];
 
   function handleDetailsSubmit(newDetails) {
-    setDetails(newDetails);
+    // Merge, so plan data the details form does not know (e.g. template hints) is kept.
+    setDetails(current => ({ ...current, ...newDetails }));
     setIsEditingDetails(false);
     setShowSaveError(false);
   }

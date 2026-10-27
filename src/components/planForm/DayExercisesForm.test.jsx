@@ -146,6 +146,30 @@ describe('DayExercisesForm', () => {
     expect(within(list).getByText('45 s')).toBeInTheDocument();
   });
 
+  it('offers Other for exercises without a muscle group', async () => {
+    const { container, onAddEntry } = renderForm();
+
+    await userEvent.selectOptions(screen.getByRole('combobox', { name: /muscle/i }), 'Other');
+    const options = [...container.querySelectorAll('datalist option')].map(option => option.value);
+    expect(options).toContain('Jump rope');
+    expect(options).not.toContain('Barbell bench press');
+
+    await userEvent.type(field(/exercise:/i), 'Jump rope');
+    await userEvent.type(field(/duration/i), '60');
+    await userEvent.type(field(/sets/i), '3');
+    await userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
+    expect(onAddEntry).toHaveBeenCalledWith(expect.objectContaining({ exerciseId: 'jump_rope', muscle: 'other' }));
+  });
+
+  it('keeps fields the form does not edit, such as a template target', async () => {
+    const { onUpdateEntry } = renderForm({ entries: [{ ...benchPress, rirTarget: 2 }] });
+
+    await userEvent.click(screen.getByRole('button', { name: /edit barbell bench press/i }));
+    await userEvent.click(screen.getByRole('button', { name: /save exercise/i }));
+
+    expect(onUpdateEntry).toHaveBeenCalledWith({ ...benchPress, rirTarget: 2 });
+  });
+
   describe('editing an entry', () => {
     async function startEditing(props) {
       const handlers = renderForm({ entries: [benchPress], ...props });

@@ -53,7 +53,9 @@ Plan (Modellversion 2)
       └─ Pause in Sekunden   (optional)
 ```
 
-Angezeigt werden die Einträge eines Tages gruppiert nach Muskelgruppe. Das Format der Einträge entspricht dem der Plan-Vorlagen, eine Vorlage lässt sich also direkt als eigener Plan übernehmen.
+Angezeigt werden die Einträge eines Tages gruppiert nach Muskelgruppe. Übungen ohne Muskelgruppe (Cardio, Boxen) stehen unter „Sonstiges“.
+
+Aus einer Vorlage kopierte Pläne haben zusätzlich: Tagesnamen, pro Übung eine Ziel-Reserve in Wiederholungen (RIR), sowie Hinweise zu Fortschritt, Erholung und Sicherheit und die Empfehlung einer ärztlichen Abklärung. Davon wird heute nur die Reserve angezeigt. Das Format der Einträge entspricht dem der Plan-Vorlagen, eine Vorlage lässt sich also direkt als eigener Plan übernehmen.
 
 ## Inhalte pro Seite
 
@@ -66,18 +68,18 @@ Angezeigt werden die Einträge eines Tages gruppiert nach Muskelgruppe. Das Form
 | `plan-new` / `plan-edit` Schritt 1 | Titel, Name, 7 Wochentage, Beschreibung |
 | `plan-new` / `plan-edit` Schritt 2 | Planname, pro Tag das Formular und die Liste der Übungen |
 
-## Plan-Vorlagen (Daten vorhanden, Funktion geplant)
+## Plan-Vorlagen (Daten in der App, Oberfläche geplant)
 
-Quelle: `data/training-plans.json` im Grafik-Paket. 30 Vorlagen, davon 23 eigene und 7 „inspiriert von“ bekannten Athleten (siehe O9).
+In der App: `src/data/planTemplates.json`, 23 Vorlagen auf Deutsch und Englisch, importiert aus dem Grafik-Paket. Die 7 Vorlagen „inspiriert von“ bekannten Athleten sind nicht enthalten (siehe O9). Alle 23 haben einen 7-Tage-Zyklus (Montag bis Sonntag).
 
 | Feld | Inhalt |
 |---|---|
-| Name, Beschreibung | Deutsch (Englisch fehlt noch) |
+| Name, Beschreibung | Deutsch und Englisch |
 | Ziel | z. B. Muskelaufbau, Kraft, Mobility |
 | Niveau | Einsteiger bis Fortgeschrittene |
 | Ort | Studio, zu Hause, gemischt |
 | Trainingstage pro Woche und Zykluslänge | z. B. 3 Tage pro Woche, Zyklus 7 Tage; eine Vorlage hat einen 4-Tage-Zyklus |
-| Tage | Training, Ruhetag, Mobility, Pilates oder Boxen, jeweils mit Namen |
+| Tage | Montag bis Sonntag, jeweils Training, Ruhetag, Mobility, Pilates oder Boxen, mit Namen und teils einem Hinweis |
 | Einträge pro Tag | Übung (aus der Übungsdatenbank), Sätze, Wiederholungsbereich **oder** Dauer in Sekunden, Pause in Sekunden, Ziel-Reserve (RIR) |
 | Fortschritt | Text, wie die Belastung gesteigert wird |
 | Sicherheit | Hinweise, z. B. ärztliche Freigabe bei Schmerzen oder Schwangerschaft |

@@ -1,0 +1,8473 @@
+[
+ {
+  "id": "hypertrophy_fullbody_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Muskelaufbau Ganzkörper 3 Tage",
+   "en": "Muscle building full body, 3 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper B",
+     "en": "Full body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 10
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "hypertrophy_upperlower_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Muskelaufbau Ober-/Unterkörper 4 Tage",
+   "en": "Muscle building upper/lower, 4 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy"
+  ],
+  "level": "intermediate",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper A",
+     "en": "Lower body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper B",
+     "en": "Upper body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "overhead_triceps_extension",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper B",
+     "en": "Lower body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "hypertrophy_ppl_6",
+  "version": "1.0.0",
+  "name": {
+   "de": "Push/Pull/Legs 6 Tage",
+   "en": "Push/Pull/Legs, 6 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy"
+  ],
+  "level": "advanced",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 6,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Fortgeschrittenes Programm. Wöchentlichen Umfang und Erholung beobachten, nicht als Anfängerstandard.",
+    "en": "Advanced programme. Watch your weekly volume and recovery; not a standard for beginners."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Push: Brust/Schultern/Trizeps",
+     "en": "Push: chest/shoulders/triceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Pull: Rücken/Bizeps",
+     "en": "Pull: back/biceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "chest_supported_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "face_pull",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Legs: Beine",
+     "en": "Legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Push: Brust/Schultern/Trizeps",
+     "en": "Push: chest/shoulders/triceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Pull: Rücken/Bizeps",
+     "en": "Pull: back/biceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "chest_supported_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "face_pull",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "workout",
+    "name": {
+     "de": "Legs: Beine",
+     "en": "Legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "hypertrophy_chest_back_split_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Brust/Rücken- und Bein-Fokus",
+   "en": "Chest/back and leg focus"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy"
+  ],
+  "level": "intermediate",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Brust/Rücken",
+     "en": "Chest/back"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_chest_fly",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "face_pull",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper A",
+     "en": "Lower body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Schultern/Arme",
+     "en": "Shoulders/arms"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "overhead_triceps_extension",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper B",
+     "en": "Lower body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "hypertrophy_5day_bodypart",
+  "version": "1.0.0",
+  "name": {
+   "de": "Fünf-Tage-Bodybuilding-Split",
+   "en": "Five-day bodybuilding split"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy"
+  ],
+  "level": "advanced",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 5,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Brust/Trizeps",
+     "en": "Chest/triceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_chest_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Rücken/Bizeps",
+     "en": "Back/biceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Beine schwer (kontrolliert)",
+     "en": "Heavy legs (controlled)"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 8
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Schultern/Trizeps",
+     "en": "Shoulders/triceps"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "workout",
+    "name": {
+     "de": "Glute-Fokus",
+     "en": "Glute focus"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 4,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "strength_hypertrophy_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Kraft & Muskelmasse",
+   "en": "Strength & muscle mass"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "strength"
+  ],
+  "level": "advanced",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper A",
+     "en": "Lower body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper B",
+     "en": "Upper body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "overhead_triceps_extension",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper B",
+     "en": "Lower body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "gym_short_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Kompakt 30–45 Min",
+   "en": "Compact 30–45 min"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "time_efficient"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "gym",
+  "audience": "all",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Kurztraining A",
+     "en": "Short workout A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Kurztraining B",
+     "en": "Short workout B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Kurztraining A",
+     "en": "Short workout A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "bodyweight_beginner_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Einstieg mit Eigengewicht",
+   "en": "Getting started with bodyweight"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "general_fitness",
+   "strength"
+  ],
+  "level": "beginner",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Ganzkörper",
+     "en": "Home gym full body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Ganzkörper",
+     "en": "Home gym full body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "home_band_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Home Gym mit Widerstandsbändern",
+   "en": "Home gym with resistance bands"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "home"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Oberkörper",
+     "en": "Home gym upper body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_triceps_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Beine",
+     "en": "Home gym legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "banded_good_morning",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Ganzkörper",
+     "en": "Home gym full body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "home_band_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Home Gym 4 Tage",
+   "en": "Home gym, 4 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "home"
+  ],
+  "level": "intermediate",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Oberkörper",
+     "en": "Home gym upper body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_triceps_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Beine",
+     "en": "Home gym legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "banded_good_morning",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Oberkörper",
+     "en": "Home gym upper body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_triceps_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Beine",
+     "en": "Home gym legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "banded_good_morning",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "home_heavybag_band_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Home Gym + Boxsack + Bänder",
+   "en": "Home gym + heavy bag + bands"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "conditioning",
+   "boxing"
+  ],
+  "level": "intermediate",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Boxsack erfordert stabile Befestigung, intakte Handschuhe und Handbandagen; Technik vor Schlagkraft.",
+    "en": "A heavy bag needs a secure mount, intact gloves and hand wraps; technique before power."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Oberkörper",
+     "en": "Home gym upper body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_triceps_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Beine",
+     "en": "Home gym legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "banded_good_morning",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "boxing",
+    "name": {
+     "de": "Boxsack Technik (nicht maximale Schlagkraft)",
+     "en": "Heavy bag technique (not maximum power)"
+    },
+    "note": {
+     "de": "Technik, leichte bis moderate Intensität. Hände bandagieren, Boxhandschuhe; Anfänger idealerweise mit qualifiziertem Coach. Keine maximalen Schläge.",
+     "en": "Technique at light to moderate intensity. Wrap your hands and wear boxing gloves; beginners ideally with a qualified coach. No maximum punches."
+    },
+    "entries": [
+     {
+      "exerciseId": "shadow_boxing",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 90
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_cross",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab_cross",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Ganzkörper",
+     "en": "Home gym full body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "boxing_technical_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Boxsack Grundtechnik + Kraft",
+   "en": "Heavy bag basics + strength"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "boxing",
+   "general_fitness"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "boxing",
+    "name": {
+     "de": "Boxsack Technik (nicht maximale Schlagkraft)",
+     "en": "Heavy bag technique (not maximum power)"
+    },
+    "note": {
+     "de": "Technik, leichte bis moderate Intensität. Hände bandagieren, Boxhandschuhe; Anfänger idealerweise mit qualifiziertem Coach. Keine maximalen Schläge.",
+     "en": "Technique at light to moderate intensity. Wrap your hands and wear boxing gloves; beginners ideally with a qualified coach. No maximum punches."
+    },
+    "entries": [
+     {
+      "exerciseId": "shadow_boxing",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 90
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_cross",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab_cross",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Ganzkörper",
+     "en": "Home gym full body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "boxing",
+    "name": {
+     "de": "Boxsack Technik (nicht maximale Schlagkraft)",
+     "en": "Heavy bag technique (not maximum power)"
+    },
+    "note": {
+     "de": "Technik, leichte bis moderate Intensität. Hände bandagieren, Boxhandschuhe; Anfänger idealerweise mit qualifiziertem Coach. Keine maximalen Schläge.",
+     "en": "Technique at light to moderate intensity. Wrap your hands and wear boxing gloves; beginners ideally with a qualified coach. No maximum punches."
+    },
+    "entries": [
+     {
+      "exerciseId": "shadow_boxing",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 90
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_cross",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab_cross",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "boxing_and_strength_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Boxen + Muskelaufbau",
+   "en": "Boxing + muscle building"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "boxing",
+   "hypertrophy"
+  ],
+  "level": "intermediate",
+  "setting": "mixed",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "boxing",
+    "name": {
+     "de": "Boxsack Technik (nicht maximale Schlagkraft)",
+     "en": "Heavy bag technique (not maximum power)"
+    },
+    "note": {
+     "de": "Technik, leichte bis moderate Intensität. Hände bandagieren, Boxhandschuhe; Anfänger idealerweise mit qualifiziertem Coach. Keine maximalen Schläge.",
+     "en": "Technique at light to moderate intensity. Wrap your hands and wear boxing gloves; beginners ideally with a qualified coach. No maximum punches."
+    },
+    "entries": [
+     {
+      "exerciseId": "shadow_boxing",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 90
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_cross",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab_cross",
+      "sets": 3,
+      "dose": {
+       "unit": "seconds",
+       "value": 60
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper A",
+     "en": "Lower body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "boxing",
+    "name": {
+     "de": "Boxsack Ausdauer",
+     "en": "Heavy bag endurance"
+    },
+    "note": {
+     "de": "Intensität dem Technikstand anpassen; keine Ermüdungs-Schläge mit zusammenbrechender Technik.",
+     "en": "Match the intensity to your technique; no tired punches with failing technique."
+    },
+    "entries": [
+     {
+      "exerciseId": "shadow_boxing",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 120
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_jab_cross",
+      "sets": 4,
+      "dose": {
+       "unit": "seconds",
+       "value": 90
+      },
+      "restSeconds": 75,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "heavy_bag_hook",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 45
+      },
+      "restSeconds": 90,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "mobility_strength_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Gesunder Muskelaufbau + Mobility",
+   "en": "Healthy muscle building + mobility"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "mobility"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "mixed",
+  "audience": "all",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper B",
+     "en": "Full body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 10
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "mobility_daily_light",
+  "version": "1.0.0",
+  "name": {
+   "de": "Mobility, Stretching und Regeneration",
+   "en": "Mobility, stretching and recovery"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "mobility",
+   "flexibility"
+  ],
+  "level": "all_levels",
+  "setting": "home",
+  "audience": "all",
+  "weeklyTrainingDays": 6,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Die Einheiten sind leichte Beweglichkeitseinheiten, kein tägliches intensives Krafttraining.",
+    "en": "These are light mobility sessions, not daily intense strength training."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_strength_glutes_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Glutes & Muskelaufbau – 4 Tage",
+   "en": "Glutes & muscle building – 4 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "glutes",
+   "hypertrophy"
+  ],
+  "level": "intermediate",
+  "setting": "gym",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Glute-Fokus",
+     "en": "Glute focus"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 4,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper B",
+     "en": "Lower body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper B",
+     "en": "Upper body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "overhead_triceps_extension",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_strength_pilates_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Kraft + Pilates – 4 Tage",
+   "en": "Strength + Pilates – 4 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "pilates",
+   "mobility"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "mixed",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper B",
+     "en": "Full body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 10
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates B: Balance",
+     "en": "Pilates B: balance"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_swimming",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_side_kick",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "side_plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 20
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "child_pose",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 45
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_pilates_beginner_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Pilates Einstieg",
+   "en": "Pilates for beginners"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "pilates",
+   "mobility"
+  ],
+  "level": "beginner",
+  "setting": "home",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates B: Balance",
+     "en": "Pilates B: balance"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_swimming",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_side_kick",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "side_plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 20
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "child_pose",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 45
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_pilates_strength_5",
+  "version": "1.0.0",
+  "name": {
+   "de": "Pilates & definierter Muskelaufbau",
+   "en": "Pilates & defined muscle building"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "pilates",
+   "hypertrophy"
+  ],
+  "level": "intermediate",
+  "setting": "mixed",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 5,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Glute-Fokus",
+     "en": "Glute focus"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 4,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Beine/Körpermitte",
+     "en": "Legs/core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "step_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates B: Balance",
+     "en": "Pilates B: balance"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_swimming",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_side_kick",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "side_plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 20
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "child_pose",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 45
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_home_glutes_band_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Home-Workout Glutes & Bänder",
+   "en": "Home workout: glutes & bands"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "glutes",
+   "hypertrophy",
+   "home"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "home",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Für Glutes & Beintraining mit Band: passende Bandspannung und Verankerung beachten; Hip-Thrust mit Langhantel erfordert Gerät, andernfalls Glute-Bridge wählen.",
+    "en": "For glute and leg training with bands, use suitable band tension and anchoring; the barbell hip thrust needs equipment, otherwise choose the glute bridge."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Beine",
+     "en": "Home gym legs"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "banded_good_morning",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lateral_band_walk",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 15,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Home Gym Oberkörper",
+     "en": "Home gym upper body"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_triceps_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Home Ganzkörper (ersetzt Gym-Übungen)",
+     "en": "Home full body (replaces gym exercises)"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "band_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "push_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "band_external_rotation",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_fullbody_strength_3",
+  "version": "1.0.0",
+  "name": {
+   "de": "Starker Ganzkörper für Frauen",
+   "en": "Strong full body for women"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "strength"
+  ],
+  "level": "beginner_intermediate",
+  "setting": "gym",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 3,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "wednesday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper B",
+     "en": "Full body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "reverse_lunge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 10
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "glute_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Ganzkörper A",
+     "en": "Full body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "goblet_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "one_arm_dumbbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_rdl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_mobility_stretch_4",
+  "version": "1.0.0",
+  "name": {
+   "de": "Beweglichkeit & Pilates",
+   "en": "Flexibility & Pilates"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "pilates",
+   "mobility"
+  ],
+  "level": "all_levels",
+  "setting": "home",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 4,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "thursday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates B: Balance",
+     "en": "Pilates B: balance"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_swimming",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_side_kick",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "side_plank",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 20
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "dead_bug",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "child_pose",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 45
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "mobility",
+    "name": {
+     "de": "Mobility und Dehnen",
+     "en": "Mobility and stretching"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "standing_shoulder_car",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 30,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "hip_flexor_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "thoracic_open_book",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "wall_pec_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "seconds",
+       "value": 30
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ },
+ {
+  "id": "women_athlete_5",
+  "version": "1.0.0",
+  "name": {
+   "de": "Athletisch & muskulös – 5 Tage",
+   "en": "Athletic & muscular – 5 days"
+  },
+  "description": {
+   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
+   "en": "Original, fully editable training programme. No individual medical advice."
+  },
+  "note": {
+   "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
+   "en": "Training principles are generally not tied to a gender; shown according to the chosen goal profile."
+  },
+  "goals": [
+   "hypertrophy",
+   "strength",
+   "pilates"
+  ],
+  "level": "advanced",
+  "setting": "gym",
+  "audience": "women_interest",
+  "weeklyTrainingDays": 5,
+  "progression": {
+   "instruction": {
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+   },
+   "repsInReserve": {
+    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
+    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+   },
+   "recovery": {
+    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
+    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+   }
+  },
+  "safety": {
+   "caution": {
+    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
+    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+   },
+   "medicalClearance": true
+  },
+  "days": [
+   {
+    "day": "monday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper A",
+     "en": "Upper body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_lat_pulldown",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "incline_dumbbell_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "seated_cable_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "triceps_pushdown",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "tuesday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper A",
+     "en": "Lower body A"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "barbell_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 180,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "romanian_deadlift",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "wednesday",
+    "type": "pilates",
+    "name": {
+     "de": "Pilates A: Core",
+     "en": "Pilates A: core"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pilates_hundred",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 50
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_single_leg_stretch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_bridge",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "pilates_clamshell",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 15
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "bird_dog",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 45,
+      "rirTarget": null
+     },
+     {
+      "exerciseId": "cat_cow",
+      "sets": 1,
+      "dose": {
+       "unit": "seconds",
+       "value": 40
+      },
+      "restSeconds": 20,
+      "rirTarget": null
+     }
+    ]
+   },
+   {
+    "day": "thursday",
+    "type": "workout",
+    "name": {
+     "de": "Oberkörper B",
+     "en": "Upper body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "pull_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 10
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_bench_press",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_shoulder_press",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "reverse_fly",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "hammer_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "overhead_triceps_extension",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "friday",
+    "type": "workout",
+    "name": {
+     "de": "Unterkörper B",
+     "en": "Lower body B"
+    },
+    "note": null,
+    "entries": [
+     {
+      "exerciseId": "hip_thrust",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 120,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "leg_extension",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "lying_leg_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 75,
+      "rirTarget": 2
+     }
+    ]
+   },
+   {
+    "day": "saturday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   },
+   {
+    "day": "sunday",
+    "type": "rest",
+    "name": {
+     "de": "Pause",
+     "en": "Rest"
+    },
+    "note": {
+     "de": "Regeneration, leichte Alltagsbewegung optional.",
+     "en": "Recovery; light everyday movement is optional."
+    },
+    "entries": []
+   }
+  ]
+ }
+]

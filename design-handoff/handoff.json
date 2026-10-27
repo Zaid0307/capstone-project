@@ -586,7 +586,8 @@
         "sets",
         "repetitions (8–12) oder duration (45 s)",
         "weight (optional)",
-        "rest (optional)"
+        "rest (optional)",
+        "reps in reserve (nur Vorlagen)"
       ]
     },
     {
@@ -814,6 +815,11 @@
       "legs": {
         "de": "Beine",
         "en": "Legs"
+      },
+      "other": {
+        "de": "Sonstiges",
+        "en": "Other",
+        "note": "nur in Plänen, für Übungen ohne Muskelgruppe"
       }
     },
     "workoutPlan": {
@@ -846,11 +852,11 @@
       "note": "Einträge verweisen auf die Übungsdatenbank, Freitext bleibt möglich; ältere Pläne werden automatisch umgewandelt"
     },
     "planTemplates": {
-      "status": "Daten vorhanden, Funktion geplant",
+      "status": "Daten in der App (src/data/planTemplates.json), Oberfläche geplant",
       "source": "docs/images/Design Agent/fitness-graphics-v0.7/data/training-plans.json",
-      "count": 30,
+      "count": 23,
       "original": 23,
-      "athleteInspired": 7,
+      "athleteInspired": "nicht enthalten (O9)",
       "entries": 656,
       "distinctExercises": 69,
       "entryFields": [
@@ -877,7 +883,12 @@
         "cycle_days",
         "progression",
         "safety"
-      ]
+      ],
+      "languages": [
+        "de",
+        "en"
+      ],
+      "cycle": "alle 7 Tage, Montag bis Sonntag"
     }
   },
   "graphics": {

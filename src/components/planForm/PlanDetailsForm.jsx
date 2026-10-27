@@ -38,16 +38,15 @@ export default function PlanDetailsForm({ onSubmit, initialDetails, isEditing })
       return;
     }
 
-    // Keep the ids of existing days so a day stays the same day when editing.
+    // Keep existing days as they are (id, name, …), so a day stays the same day when editing.
     const existingDays = initialDetails?.days ?? [];
     onSubmit({
       id: initialDetails?.id ?? nanoid(),
       nameOfWorkout: name.trim(),
       description: description.trim(),
-      days: WEEKDAYS.filter(day => days.includes(day)).map(day => ({
-        day,
-        id: existingDays.find(existing => existing.day === day)?.id ?? nanoid(),
-      })),
+      days: WEEKDAYS.filter(day => days.includes(day)).map(
+        day => existingDays.find(existing => existing.day === day) ?? { day, id: nanoid() }
+      ),
     });
   }
 

@@ -16,6 +16,8 @@ export default [
     plugins: { 'react-hooks': reactHooks },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // Allows dropping a field with a rest pattern: const { entries, ...day } = value.
+      'no-unused-vars': ['error', { ignoreRestSiblings: true }],
     },
   },
   {

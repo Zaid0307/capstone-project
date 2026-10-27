@@ -68,7 +68,9 @@ src/
   pages/        one component per route
   styles/       design tokens (colors, fonts, radii) and global styles
   utils/        pure functions for workout plan data
+  storage/      plan store (localStorage today, backend later)
   routes.js     all paths of the app
 docs/images/    screenshots for this README
+scripts/        import of plan templates from the graphics package
 design-handoff/ handoff package for the UI/UX design
 ```

@@ -12,6 +12,7 @@ export default function ExerciseDetails({ entry }) {
     [dose.unit === 'seconds' ? 'exercise.duration' : 'exercise.repetitions', formatDose(dose)],
     entry.weight !== null && ['exercise.weight', `${entry.weight} kg`],
     entry.restSeconds !== null && ['exercise.rest', `${entry.restSeconds} s`],
+    entry.rirTarget !== null && entry.rirTarget !== undefined && ['exercise.rir', entry.rirTarget],
   ].filter(Boolean);
 
   return (

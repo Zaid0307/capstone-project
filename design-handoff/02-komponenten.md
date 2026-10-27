@@ -93,7 +93,7 @@ Zustände: zugeklappt, aufgeklappt, ohne Muskelgruppen (bei alten Daten möglich
 - Aufgeklappt: eine `ExerciseDetails` pro Übung
 
 ### ExerciseDetails: `workoutPlans/ExerciseDetails.jsx`
-Liste aus Beschriftung und Wert: Übung (Name aus der Datenbank in der aktuellen Sprache, sonst Freitext), Sätze, Wiederholungen („8–12“ oder „10“) **oder** Dauer („45 s“), Gewicht („60 kg“, nur wenn angegeben), Pause („90 s“, nur wenn angegeben). Wird auch im Formular verwendet.
+Liste aus Beschriftung und Wert: Übung (Name aus der Datenbank in der aktuellen Sprache, sonst Freitext), Sätze, Wiederholungen („8–12“ oder „10“) **oder** Dauer („45 s“), Gewicht („60 kg“, nur wenn angegeben), Pause („90 s“, nur wenn angegeben), Reserve in Wiederholungen (nur bei Übungen aus Vorlagen). Wird auch im Formular verwendet.
 
 ## Formulare (`planForm/`)
 
@@ -121,7 +121,7 @@ Ein Block pro Trainingstag.
 
 | Feld | Typ | Regeln |
 |---|---|---|
-| Muskel | Auswahlliste mit 6 Muskelgruppen und Platzhalter „Bitte auswählen“ | Pflicht. Wird automatisch gesetzt, wenn eine Übung aus der Datenbank gewählt wird. |
+| Muskel | Auswahlliste mit 6 Muskelgruppen, „Sonstiges“ und Platzhalter „Bitte auswählen“ | Pflicht. Wird automatisch gesetzt, wenn eine Übung aus der Datenbank gewählt wird. |
 | Übung | Text mit Vorschlagsliste aus der Übungsdatenbank, gefiltert nach gewählter Muskelgruppe | Pflicht, max. 50 Zeichen. Eigene Übungen als Freitext sind erlaubt. |
 | Gemessen in | Auswahl „Wiederholungen“ oder „Zeit“ | Wird bei Übungen wie Unterarmstütz oder Dehnungen automatisch auf „Zeit“ gesetzt |
 | Wiederholungen von / bis | 2 Zahlen | „von“ Pflicht (≥ 1), „bis“ optional und nicht kleiner als „von“ |

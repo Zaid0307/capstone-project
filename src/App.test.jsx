@@ -4,6 +4,7 @@ import App from './App';
 import { renderWithProviders } from './test-utils';
 import { LEGACY_STORAGE_KEY, STORAGE_KEY } from './storage/localPlanStore';
 import { migratePlan } from './utils/workoutPlan';
+import { templateById, templateToPlan } from './data/planTemplates';
 
 const savedPlans = [
   {
@@ -187,6 +188,34 @@ describe('App', () => {
       expect(
         screen.getByRole('button', { name: 'Delete Monday' })
       ).toBeInTheDocument();
+    });
+  });
+
+  describe('plans copied from a template', () => {
+    it('shows cardio and boxing exercises under Other with their targets', async () => {
+      const plan = templateToPlan(templateById('boxing_technical_3'), 'en');
+      savePlans([plan]);
+      await renderApp('/plans');
+
+      await userEvent.click(screen.getByRole('button', { name: `Show ${plan.nameOfWorkout}` }));
+      const day = plan.days.find(item => item.entries.some(entry => entry.muscle === 'other'));
+      const dayName = day.day[0].toUpperCase() + day.day.slice(1);
+      await userEvent.click(screen.getByRole('button', { name: `Show ${dayName}` }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Other' }));
+
+      const entry = day.entries.find(item => item.muscle === 'other');
+      expect(screen.getByText(entry.exercise)).toBeInTheDocument();
+    });
+
+    it('shows the repetitions in reserve of a template exercise', async () => {
+      const plan = templateToPlan(templateById('hypertrophy_fullbody_3'), 'en');
+      savePlans([plan]);
+      await renderApp('/plans');
+
+      await userEvent.click(screen.getByRole('button', { name: `Show ${plan.nameOfWorkout}` }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Monday' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Show Legs' }));
+      expect(screen.getAllByText('Reps in reserve:').length).toBeGreaterThan(0);
     });
   });
 

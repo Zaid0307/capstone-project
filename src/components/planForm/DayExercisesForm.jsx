@@ -6,10 +6,10 @@ import { ErrorText, FormCard, FormTitle, Input, Label } from './formStyles';
 import Button from '../ui/Button';
 import ScreenReaderOnly from '../ui/ScreenReaderOnly';
 import { EXERCISES, exerciseGroups } from '../../data/exerciseLibrary';
-import { MUSCLE_GROUP_NAMES } from '../../data/muscleGroups';
 import { colors } from '../../styles/colors';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
+  PLAN_MUSCLES,
   dayLabel,
   defaultMuscleOf,
   entryName,
@@ -88,9 +88,11 @@ export default function DayExercisesForm({
   // Suggestions for the exercise field, limited to the chosen muscle group.
   const suggestions = useMemo(
     () =>
-      EXERCISES.filter(
-        exercise => !values.muscle || exerciseGroups(exercise).includes(values.muscle)
-      )
+      EXERCISES.filter(exercise => {
+        const groups = exerciseGroups(exercise);
+        if (!values.muscle) return true;
+        return values.muscle === 'other' ? groups.length === 0 : groups.includes(values.muscle);
+      })
         .map(exercise => exercise.name[language] ?? exercise.name.en)
         .sort((a, b) => a.localeCompare(b, language)),
     [values.muscle, language]
@@ -114,7 +116,7 @@ export default function DayExercisesForm({
     const match = findLibraryExercise(text);
     const next = { ...values, exercise: text, exerciseId: match?.id ?? null };
     if (match && values.exerciseId !== match.id) {
-      next.muscle = values.muscle || defaultMuscleOf(match.id);
+      next.muscle = values.muscle || defaultMuscleOf(match.id) || 'other';
       next.doseUnit = TIMED_CATEGORIES.includes(match.category) ? 'seconds' : 'repetitions';
     }
     setValues(next);
@@ -131,7 +133,9 @@ export default function DayExercisesForm({
       return;
     }
     if (editingId) {
-      onUpdateEntry({ ...entry, id: editingId });
+      // Keep fields the form does not edit, such as the target from a template.
+      const original = entries.find(item => item.id === editingId);
+      onUpdateEntry({ ...original, ...entry, id: editingId });
     } else {
       onAddEntry({ ...entry, id: nanoid() });
     }
@@ -184,7 +188,7 @@ export default function DayExercisesForm({
             <option value="" disabled>
               {t('dayExercises.chooseMuscle')}
             </option>
-            {MUSCLE_GROUP_NAMES.map(muscle => (
+            {PLAN_MUSCLES.map(muscle => (
               <option key={muscle} value={muscle}>
                 {t(`muscle.${muscle}`)}
               </option>

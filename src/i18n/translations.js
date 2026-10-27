@@ -19,6 +19,7 @@ const translations = {
     'muscle.shoulders': 'Shoulders',
     'muscle.arms': 'Arms',
     'muscle.legs': 'Legs',
+    'muscle.other': 'Other',
 
     'day.monday': 'Monday',
     'day.tuesday': 'Tuesday',
@@ -70,6 +71,7 @@ const translations = {
     'exercise.duration': 'Duration:',
     'exercise.sets': 'Sets:',
     'exercise.rest': 'Rest:',
+    'exercise.rir': 'Reps in reserve:',
     'exercise.edit': 'Edit {name}',
     'exercise.remove': 'Remove {name}',
 
@@ -111,6 +113,7 @@ const translations = {
     'muscle.shoulders': 'Schultern',
     'muscle.arms': 'Arme',
     'muscle.legs': 'Beine',
+    'muscle.other': 'Sonstiges',
 
     'day.monday': 'Montag',
     'day.tuesday': 'Dienstag',
@@ -162,6 +165,7 @@ const translations = {
     'exercise.duration': 'Dauer:',
     'exercise.sets': 'Sätze:',
     'exercise.rest': 'Pause:',
+    'exercise.rir': 'Reserve (Wdh.):',
     'exercise.edit': '{name} bearbeiten',
     'exercise.remove': '{name} entfernen',
 

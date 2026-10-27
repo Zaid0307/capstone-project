@@ -24,9 +24,13 @@ export function normalizeMuscle(name = '') {
   return LEGACY_MUSCLE_NAMES[lowerCaseName] ?? lowerCaseName;
 }
 
+// Muscle groups an entry of a plan can belong to: the six groups plus 'other'
+// for exercises without a muscle group, such as cardio and boxing.
+export const PLAN_MUSCLES = [...MUSCLE_GROUP_NAMES, 'other'];
+
 export function muscleLabel(name, t) {
   const muscle = normalizeMuscle(name);
-  return MUSCLE_GROUP_NAMES.includes(muscle) ? t(`muscle.${muscle}`) : name;
+  return PLAN_MUSCLES.includes(muscle) ? t(`muscle.${muscle}`) : name;
 }
 
 export function dayLabel(day, t) {
@@ -110,9 +114,11 @@ export function migratePlan(plan) {
 }
 
 // Groups entries by muscle group in the fixed group order, for display.
+// Entries without a known group are shown under 'other'.
 export function groupEntriesByMuscle(entries) {
-  return MUSCLE_GROUP_NAMES.filter(muscle => entries.some(entry => entry.muscle === muscle)).map(
-    muscle => ({ name: muscle, entries: entries.filter(entry => entry.muscle === muscle) })
+  const groupOf = entry => (MUSCLE_GROUP_NAMES.includes(entry.muscle) ? entry.muscle : 'other');
+  return PLAN_MUSCLES.filter(muscle => entries.some(entry => groupOf(entry) === muscle)).map(
+    muscle => ({ name: muscle, entries: entries.filter(entry => groupOf(entry) === muscle) })
   );
 }
 
@@ -126,7 +132,7 @@ export function buildWorkoutPlan(details, entriesByDay) {
   return {
     ...details,
     schemaVersion: PLAN_SCHEMA_VERSION,
-    days: details.days.map(({ id, day }) => ({ id, day, entries: entriesByDay[day] ?? [] })),
+    days: details.days.map(day => ({ ...day, entries: entriesByDay[day.day] ?? [] })),
   };
 }
 
@@ -136,7 +142,7 @@ export function splitWorkoutPlan(plan) {
   const entriesByDay = Object.fromEntries(current.days.map(({ day, entries }) => [day, entries]));
   const { days, ...rest } = current;
   return {
-    details: { ...rest, days: sortDays(days).map(({ id, day }) => ({ id, day })) },
+    details: { ...rest, days: sortDays(days).map(({ entries, ...day }) => day) },
     entriesByDay,
   };
 }
