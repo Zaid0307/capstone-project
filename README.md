@@ -72,5 +72,6 @@ src/
   routes.js     all paths of the app
 docs/images/    screenshots for this README
 scripts/        import of plan templates from the graphics package
+supabase/       prepared backend schema and setup guide (not set up yet)
 design-handoff/ handoff package for the UI/UX design
 ```

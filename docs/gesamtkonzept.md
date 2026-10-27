@@ -122,7 +122,7 @@ Mit Konten und Trainingsdaten wird die App datenschutzrechtlich relevant. Das is
 | Phase | Inhalt | Braucht |
 |---|---|---|
 | **0 – erledigt** | Plan-Speicher als austauschbare Schnittstelle (heute Browser, später Backend). Planmodell 2: Übungen aus der Datenbank oder Freitext, Wiederholungsbereiche oder Dauer, Pausen, optionales Gewicht. Alte Pläne werden automatisch umgewandelt. | – |
-| **1 – Konto** | Supabase einrichten, Anmeldung, Pläne pro Nutzer, Übernahme lokaler Pläne, Konto löschen und Daten exportieren, Datenschutzerklärung | dein Supabase-Konto, Design der Anmeldeseiten |
+| **1 – Konto** (vorbereitet: Datenbankschema, Backend-Speicher, Übernahme lokaler Pläne, Anleitung in `supabase/README.md`) | Supabase einrichten, Anmeldung, Pläne pro Nutzer, Übernahme lokaler Pläne, Konto löschen und Daten exportieren, Datenschutzerklärung | dein Supabase-Konto, Design der Anmeldeseiten |
 | **2 – Tracking** | Training aus einem Plan starten, Sätze eintragen, Verlauf | Design |
 | **3 – Analyse** | Auswertungen, Filter, Standard-Dashboard, eigenes Dashboard, Ziele | Design, Muskelfiguren für die Muskelkarte |
 | **4 – Gesundheitsdaten** | Import der Apple-Health-Exportdatei, Körperwerte | Einwilligung, Datenschutz |
