@@ -1,25 +1,24 @@
 import styled from 'styled-components';
 import Navigation from '../navigation/Navigation';
-import { pageBackground } from '../../styles/colors';
+import { navigationOffset, sizes, space } from '../../styles/tokens';
 
 export default function PageLayout({ children }) {
   return (
-    <GridWrap>
+    <>
       <Main>{children}</Main>
       <Navigation />
-    </GridWrap>
+    </>
   );
 }
-
-const GridWrap = styled.div`
-  display: grid;
-  grid-template-rows: auto 48px;
-  min-height: 100vh;
-`;
 
 const Main = styled.main`
   display: flex;
   flex-direction: column;
-  background: ${pageBackground};
-  padding-bottom: 15px;
+  gap: ${space.xl};
+  width: 100%;
+  min-width: 0;
+  max-width: ${sizes.contentMax};
+  margin: 0 auto;
+  /* Room for the fixed navigation at the bottom. */
+  padding: ${space.xl} ${space.lg} calc(${navigationOffset} + ${space.lg});
 `;

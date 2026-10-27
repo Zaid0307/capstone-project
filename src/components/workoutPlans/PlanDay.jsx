@@ -5,8 +5,7 @@ import PlanMuscle from './PlanMuscle';
 import IconButton from '../ui/IconButton';
 import ItemHeader from '../ui/ItemHeader';
 import ToggleButton from '../ui/ToggleButton';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import { colors, fontSizes, radii, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { dayLabel, groupEntriesByMuscle } from '../../utils/workoutPlan';
 
@@ -18,7 +17,12 @@ export default function PlanDay({ day, onDelete }) {
   return (
     <Card>
       <ItemHeader
-        title={<Title>{label.toUpperCase()}</Title>}
+        title={
+          <>
+            <Title>{label}</Title>
+            {day.name && <DayName>{day.name}</DayName>}
+          </>
+        }
         actions={
           <>
             <IconButton
@@ -36,32 +40,44 @@ export default function PlanDay({ day, onDelete }) {
         }
       />
       {isExpanded && (
-        <MuscleList>
-          {groupEntriesByMuscle(day.entries ?? []).map(muscle => (
-            <PlanMuscle key={muscle.name} muscle={muscle} />
-          ))}
-        </MuscleList>
+        <>
+          {day.note && <Note>{day.note}</Note>}
+          <MuscleList>
+            {groupEntriesByMuscle(day.entries ?? []).map(muscle => (
+              <PlanMuscle key={muscle.name} muscle={muscle} />
+            ))}
+          </MuscleList>
+        </>
       )}
     </Card>
   );
 }
 
+// Levels differ by surface tone and heading, not by more indentation.
 const Card = styled.li`
-  margin: 10px 0;
-  border-radius: ${radii.large};
-  color: ${colors.text};
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 2px 6px 2px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: ${space.md};
+  padding: ${space.md};
+  border-radius: ${radii.small};
+  background-color: ${colors.surfaceMuted};
 `;
 
 const Title = styled.h3`
-  font-size: 1.4rem;
-  letter-spacing: 0.2em;
+  font-size: ${fontSizes.lead};
+`;
+
+const DayName = styled.p`
+  color: ${colors.textMuted};
+`;
+
+const Note = styled.p`
+  color: ${colors.textMuted};
 `;
 
 const MuscleList = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: ${space.sm};
   list-style: none;
 `;

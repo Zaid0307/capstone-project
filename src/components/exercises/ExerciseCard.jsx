@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 import { BiDumbbell } from 'react-icons/bi';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import {
+  colors,
+  fontSizes,
+  radii,
+  shadows,
+  space,
+} from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
 export default function ExerciseCard({ exercise }) {
@@ -9,22 +14,17 @@ export default function ExerciseCard({ exercise }) {
 
   return (
     <Card>
-      <Title>{exercise.name}</Title>
-      <Content>
+      <Header>
         {exercise.image ? (
-          <Image
-            src={exercise.image}
-            alt={exercise.name}
-            height="80"
-            loading="lazy"
-          />
+          <Image src={exercise.image} alt={exercise.name} loading="lazy" />
         ) : (
           <Placeholder role="img" aria-label={t('exercises.noImage')}>
-            <BiDumbbell size={50} />
+            <BiDumbbell />
           </Placeholder>
         )}
-        <Description>{exercise.description}</Description>
-      </Content>
+        <Title>{exercise.name}</Title>
+      </Header>
+      <p>{exercise.description}</p>
     </Card>
   );
 }
@@ -32,53 +32,43 @@ export default function ExerciseCard({ exercise }) {
 const Card = styled.article`
   display: flex;
   flex-direction: column;
-  width: 350px;
-  max-width: calc(100vw - 20px);
-  height: 150px;
-  padding: 10px;
+  gap: ${space.md};
+  min-width: 0;
+  padding: ${space.lg};
   border-radius: ${radii.large};
   background-color: ${colors.surface};
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: ${shadows.card};
 `;
 
-const Title = styled.h3`
-  font-size: 1.2rem;
-  font-weight: 600;
-`;
-
-const Content = styled.div`
+const Header = styled.div`
   display: flex;
-  margin: 5px;
-  padding: 10px;
-  overflow-y: auto;
+  align-items: center;
+  gap: ${space.md};
 `;
 
-const Description = styled.p`
-  font-size: small;
-`;
-
-const imageBox = `
-  align-self: center;
-  flex-shrink: 0;
-  margin-right: 15px;
-  border-radius: ${radii.large};
-  background-color: ${colors.white};
+const Title = styled.h2`
+  min-width: 0;
+  font-size: ${fontSizes.lead};
 `;
 
 const Image = styled.img`
-  ${imageBox}
-  max-width: 100px;
-  padding: 5px;
-  border: 2px solid ${colors.text};
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: ${radii.small};
   object-fit: contain;
 `;
 
-const Placeholder = styled.div`
-  ${imageBox}
-  display: flex;
+// Without a real exercise image only a small symbol, not a large empty box.
+const Placeholder = styled.span`
+  display: inline-flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
-  color: ${colors.secondary};
+  width: 40px;
+  height: 40px;
+  border-radius: ${radii.small};
+  background-color: ${colors.surfaceMuted};
+  color: ${colors.textMuted};
+  font-size: 1.5rem;
 `;

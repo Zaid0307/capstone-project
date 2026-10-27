@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { entryName, formatDose } from '../../utils/workoutPlan';
 
@@ -10,7 +11,7 @@ export default function ExerciseDetails({ entry }) {
     ['exercise.exercise', entryName(entry, language)],
     ['exercise.sets', entry.sets],
     [dose.unit === 'seconds' ? 'exercise.duration' : 'exercise.repetitions', formatDose(dose)],
-    entry.weight !== null && ['exercise.weight', `${entry.weight} kg`],
+    entry.weight !== null && ['exercise.weight', `${entry.weight.toLocaleString(language)} kg`],
     entry.restSeconds !== null && ['exercise.rest', `${entry.restSeconds} s`],
     entry.rirTarget !== null && entry.rirTarget !== undefined && ['exercise.rir', entry.rirTarget],
   ].filter(Boolean);
@@ -28,12 +29,21 @@ export default function ExerciseDetails({ entry }) {
 }
 
 const List = styled.dl`
-  padding: 5px;
+  padding: ${space.sm} 0;
 `;
 
+// Label and value side by side; the value moves below when space is short.
 const Row = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
-  padding: 2px 5px;
+  column-gap: ${space.md};
+  dt {
+    color: ${colors.textMuted};
+  }
+  dd {
+    margin-left: auto;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
 `;

@@ -1,11 +1,25 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
-import { ErrorText, FormCard, FormTitle, Input, Label } from './formStyles';
+import { BiCheck } from 'react-icons/bi';
+import {
+  ErrorText,
+  Field,
+  FormCard,
+  FormTitle,
+  Input,
+  Label,
+  StepText,
+} from './formStyles';
 import Button from '../ui/Button';
-import Center from '../ui/Center';
-import ScreenReaderOnly from '../ui/ScreenReaderOnly';
-import { colors } from '../../styles/colors';
+import {
+  colors,
+  fontWeights,
+  motion,
+  radii,
+  sizes,
+  space,
+} from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { WEEKDAYS } from '../../utils/workoutPlan';
 
@@ -52,11 +66,14 @@ export default function PlanDetailsForm({ onSubmit, initialDetails, isEditing })
 
   return (
     <FormCard>
-      <FormTitle id="planDetailsTitle">
-        {t(isEditing ? 'planDetails.editTitle' : 'planDetails.createTitle')}
-      </FormTitle>
+      <div>
+        <StepText>{t('planForm.step', { step: 1 })}</StepText>
+        <FormTitle as="h1" id="planDetailsTitle">
+          {t(isEditing ? 'planDetails.editTitle' : 'planDetails.createTitle')}
+        </FormTitle>
+      </div>
 
-      <form
+      <Form
         onSubmit={handleSubmit}
         autoComplete="off"
         aria-labelledby="planDetailsTitle"
@@ -77,18 +94,23 @@ export default function PlanDetailsForm({ onSubmit, initialDetails, isEditing })
 
         <Fieldset aria-describedby={showDaysError ? 'daysError' : undefined}>
           <Legend>{t('planDetails.days')}</Legend>
-          {WEEKDAYS.map(day => (
-            <CheckboxRow key={day}>
-              <Checkbox
-                id={day}
-                name={day}
-                type="checkbox"
-                checked={days.includes(day)}
-                onChange={handleDayChange}
-              />
-              <CheckboxLabel htmlFor={day}>{t(`day.${day}`)}</CheckboxLabel>
-            </CheckboxRow>
-          ))}
+          <DayOptions>
+            {WEEKDAYS.map(day => (
+              <DayOption key={day}>
+                <Checkbox
+                  id={day}
+                  name={day}
+                  type="checkbox"
+                  checked={days.includes(day)}
+                  onChange={handleDayChange}
+                />
+                <DayLabel htmlFor={day}>
+                  <BiCheck aria-hidden="true" />
+                  {t(`day.${day}`)}
+                </DayLabel>
+              </DayOption>
+            ))}
+          </DayOptions>
           {showDaysError && (
             <ErrorText id="daysError" role="alert">
               {t('planDetails.errorNoDays')}
@@ -97,9 +119,7 @@ export default function PlanDetailsForm({ onSubmit, initialDetails, isEditing })
         </Fieldset>
 
         <Field>
-          <label htmlFor="planDescription">
-            <ScreenReaderOnly>{t('planDetails.description')}</ScreenReaderOnly>
-          </label>
+          <Label htmlFor="planDescription">{t('planDetails.description')}</Label>
           <Input
             id="planDescription"
             type="text"
@@ -109,56 +129,84 @@ export default function PlanDetailsForm({ onSubmit, initialDetails, isEditing })
             onChange={event => setDescription(event.target.value)}
           />
         </Field>
-        <Center>
+        <div>
           <Button type="submit">{t('planDetails.next')}</Button>
-        </Center>
-      </form>
+        </div>
+      </Form>
     </FormCard>
   );
 }
 
-const Field = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
-  min-width: min(20rem, 100%);
-  padding: 20px 0;
+  gap: ${space.xl};
 `;
 
 const Fieldset = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  gap: ${space.sm};
+  min-width: 0;
   border: none;
 `;
 
 const Legend = styled.legend`
-  padding-bottom: 20px;
-  color: ${colors.primary};
+  margin-bottom: ${space.sm};
+  font-weight: ${fontWeights.medium};
 `;
 
-const CheckboxRow = styled.div`
+// The weekdays wrap onto as many lines as they need.
+const DayOptions = styled.div`
   display: flex;
-  align-items: center;
-  margin-bottom: 0.5em;
+  flex-wrap: wrap;
+  gap: ${space.sm};
 `;
 
+const DayOption = styled.div`
+  position: relative;
+`;
+
+// The real checkbox stays in the page for keyboard and screen readers;
+// the label next to it is what people see and tap.
 const Checkbox = styled.input`
   position: absolute;
+  top: 0;
+  left: 0;
   opacity: 0;
-  &:checked + label::before {
-    background-color: ${colors.dark};
+  width: 1px;
+  height: 1px;
+  &:focus-visible + label {
+    outline: 3px solid ${colors.focus};
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px ${colors.white};
   }
-  &:focus-visible + label::before {
-    outline: 2px solid ${colors.text};
+  &:checked + label {
+    border-color: ${colors.primary};
+    background-color: ${colors.primary};
+    color: ${colors.onPrimary};
+  }
+  &:checked + label svg {
+    visibility: visible;
   }
 `;
 
-const CheckboxLabel = styled.label`
-  display: flex;
-  color: ${colors.primary};
-  &::before {
-    content: '';
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.5em;
-    border: 0.09em solid ${colors.primary};
-    border-radius: 0.15em;
+const DayLabel = styled.label`
+  display: inline-flex;
+  align-items: center;
+  gap: ${space.xs};
+  min-height: ${sizes.touchTarget};
+  padding: 0 ${space.md} 0 ${space.sm};
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.pill};
+  background-color: ${colors.surface};
+  cursor: pointer;
+  transition: background-color ${motion.fast}, border-color ${motion.fast};
+  svg {
+    visibility: hidden;
+    font-size: 1.25rem;
+  }
+  &:hover {
+    border-color: ${colors.text};
   }
 `;

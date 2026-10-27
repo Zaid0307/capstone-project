@@ -9,9 +9,10 @@ const translations = {
 
     'language.switchLabel': 'Switch language to German',
 
-    'nav.createPlan': 'Create workout plan',
+    'nav.label': 'Main navigation',
+    'nav.newPlan': 'New',
     'nav.exercises': 'Exercises',
-    'nav.workoutPlans': 'My workout plans',
+    'nav.plans': 'Plans',
 
     'muscle.chest': 'Chest',
     'muscle.back': 'Back',
@@ -30,7 +31,10 @@ const translations = {
     'day.sunday': 'Sunday',
 
     'exercises.empty': 'No exercises found for this muscle group.',
+    'exercises.title': 'Exercises',
+    'exercises.groups': 'Muscle groups',
     'exercises.back': 'Back to muscle groups',
+    'exercises.backShort': 'Back',
     'exercises.noImage': 'No image available',
 
     'planDetails.createTitle': 'Create your Workout plan',
@@ -38,7 +42,7 @@ const translations = {
     'planDetails.name': 'Workout plan name:',
     'planDetails.namePlaceholder': 'Name your Workout plan*',
     'planDetails.days': 'Choose your training days*:',
-    'planDetails.description': 'Description',
+    'planDetails.description': 'Description (optional)',
     'planDetails.descriptionPlaceholder':
       'Add a description for your Workout plan ...',
     'planDetails.next': 'Next',
@@ -72,15 +76,18 @@ const translations = {
     'exercise.sets': 'Sets:',
     'exercise.rest': 'Rest:',
     'exercise.rir': 'Reps in reserve:',
+    'exercise.editing': 'Being edited',
     'exercise.edit': 'Edit {name}',
     'exercise.remove': 'Remove {name}',
 
+    'planForm.step': 'Step {step} of 2',
     'planForm.save': 'Save workout plan',
     'planForm.saveChanges': 'Save changes',
     'planForm.editDetails': 'Edit name and days',
     'planForm.errorEmptyDays': 'Add at least one exercise for: {days}',
 
-    'plans.create': 'Create new Workoutplan',
+    'plans.title': 'My workout plans',
+    'plans.create': 'New workout plan',
     'plans.empty': 'You have no workout plans yet.',
     'plans.edit': 'Edit workout plan {name}',
     'plans.delete': 'Delete workout plan {name}',
@@ -92,6 +99,11 @@ const translations = {
       '{day} is the last day of "{name}". Do you want to delete the whole workout plan?',
     'plans.notFound': 'This workout plan does not exist.',
     'plans.backToPlans': 'Back to my workout plans',
+    'plans.hints.progression': 'Progression',
+    'plans.hints.recovery': 'Recovery',
+    'plans.hints.safety': 'Safety',
+    'plans.hints.medicalClearance':
+      'If you are unsure whether this training suits you, check with a doctor before you start.',
   },
   de: {
     'common.show': '{name} anzeigen',
@@ -103,9 +115,10 @@ const translations = {
 
     'language.switchLabel': 'Sprache auf Englisch umstellen',
 
-    'nav.createPlan': 'Trainingsplan erstellen',
+    'nav.label': 'Hauptnavigation',
+    'nav.newPlan': 'Neu',
     'nav.exercises': 'Übungen',
-    'nav.workoutPlans': 'Meine Trainingspläne',
+    'nav.plans': 'Pläne',
 
     'muscle.chest': 'Brust',
     'muscle.back': 'Rücken',
@@ -124,7 +137,10 @@ const translations = {
     'day.sunday': 'Sonntag',
 
     'exercises.empty': 'Für diese Muskelgruppe wurden keine Übungen gefunden.',
+    'exercises.title': 'Übungen',
+    'exercises.groups': 'Muskelgruppen',
     'exercises.back': 'Zurück zu den Muskelgruppen',
+    'exercises.backShort': 'Zurück',
     'exercises.noImage': 'Kein Bild vorhanden',
 
     'planDetails.createTitle': 'Erstelle deinen Trainingsplan',
@@ -132,7 +148,7 @@ const translations = {
     'planDetails.name': 'Name des Trainingsplans:',
     'planDetails.namePlaceholder': 'Benenne deinen Trainingsplan*',
     'planDetails.days': 'Wähle deine Trainingstage*:',
-    'planDetails.description': 'Beschreibung',
+    'planDetails.description': 'Beschreibung (optional)',
     'planDetails.descriptionPlaceholder':
       'Füge eine Beschreibung für deinen Trainingsplan hinzu ...',
     'planDetails.next': 'Weiter',
@@ -166,15 +182,18 @@ const translations = {
     'exercise.sets': 'Sätze:',
     'exercise.rest': 'Pause:',
     'exercise.rir': 'Reserve (Wdh.):',
+    'exercise.editing': 'Wird bearbeitet',
     'exercise.edit': '{name} bearbeiten',
     'exercise.remove': '{name} entfernen',
 
+    'planForm.step': 'Schritt {step} von 2',
     'planForm.save': 'Trainingsplan speichern',
     'planForm.saveChanges': 'Änderungen speichern',
     'planForm.editDetails': 'Name und Tage bearbeiten',
     'planForm.errorEmptyDays': 'Füge mindestens eine Übung hinzu für: {days}',
 
-    'plans.create': 'Neuen Trainingsplan erstellen',
+    'plans.title': 'Meine Trainingspläne',
+    'plans.create': 'Neuer Trainingsplan',
     'plans.empty': 'Du hast noch keine Trainingspläne.',
     'plans.edit': 'Trainingsplan {name} bearbeiten',
     'plans.delete': 'Trainingsplan {name} löschen',
@@ -186,6 +205,11 @@ const translations = {
       '{day} ist der letzte Tag in „{name}“. Möchtest du den ganzen Trainingsplan löschen?',
     'plans.notFound': 'Diesen Trainingsplan gibt es nicht.',
     'plans.backToPlans': 'Zurück zu meinen Trainingsplänen',
+    'plans.hints.progression': 'Fortschritt',
+    'plans.hints.recovery': 'Erholung',
+    'plans.hints.safety': 'Sicherheit',
+    'plans.hints.medicalClearance':
+      'Wenn du unsicher bist, ob das Training zu dir passt, lass es vor dem Start ärztlich abklären.',
   },
 };
 

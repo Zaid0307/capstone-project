@@ -207,6 +207,30 @@ describe('App', () => {
       expect(screen.getByText(entry.exercise)).toBeInTheDocument();
     });
 
+    it('shows the safety hint without expanding the plan', async () => {
+      const plan = templateToPlan(templateById('hypertrophy_fullbody_3'), 'en');
+      savePlans([plan]);
+      await renderApp('/plans');
+
+      expect(screen.getByRole('heading', { name: 'Safety' })).toBeInTheDocument();
+      expect(screen.getByText(plan.hints.safety)).toBeInTheDocument();
+      expect(screen.getByText(/check with a doctor/i)).toBeInTheDocument();
+      expect(screen.queryByRole('heading', { name: 'Progression' })).not.toBeInTheDocument();
+    });
+
+    it('shows the template hints and day names of an expanded plan', async () => {
+      const plan = templateToPlan(templateById('hypertrophy_fullbody_3'), 'en');
+      savePlans([plan]);
+      await renderApp('/plans');
+
+      await userEvent.click(screen.getByRole('button', { name: `Show ${plan.nameOfWorkout}` }));
+
+      expect(screen.getByRole('heading', { name: 'Progression' })).toBeInTheDocument();
+      expect(screen.getByText(plan.hints.progression)).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'Recovery' })).toBeInTheDocument();
+      expect(screen.getAllByText(plan.days[0].name).length).toBeGreaterThan(0);
+    });
+
     it('shows the repetitions in reserve of a template exercise', async () => {
       const plan = templateToPlan(templateById('hypertrophy_fullbody_3'), 'en');
       savePlans([plan]);
@@ -216,6 +240,17 @@ describe('App', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Show Monday' }));
       await userEvent.click(screen.getByRole('button', { name: 'Show Legs' }));
       expect(screen.getAllByText('Reps in reserve:').length).toBeGreaterThan(0);
+    });
+  });
+
+  describe('plans without a template', () => {
+    it('show no hint sections', async () => {
+      savePlans(savedPlans);
+      await renderApp('/plans');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Show Push' }));
+      expect(screen.queryByRole('heading', { name: 'Safety' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('heading', { name: 'Progression' })).not.toBeInTheDocument();
     });
   });
 
@@ -283,9 +318,11 @@ describe('App', () => {
   it('creates a plan and shows it on the plans page', async () => {
     await renderApp('/plans/new');
 
+    expect(screen.getByText('Step 1 of 2')).toBeInTheDocument();
     await userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Legs');
     await userEvent.click(screen.getByLabelText('Saturday'));
     await userEvent.click(screen.getByRole('button', { name: /next/i }));
+    expect(screen.getByText('Step 2 of 2')).toBeInTheDocument();
 
     await userEvent.type(screen.getByLabelText(/exercise:/i), 'Barbell squat');
     await userEvent.type(screen.getByLabelText(/repetitions from/i), '5');
@@ -336,7 +373,7 @@ describe('App', () => {
       await renderApp('/exercises/arms');
 
       const names = screen
-        .getAllByRole('heading', { level: 3 })
+        .getAllByRole('heading', { level: 2 })
         .map(heading => heading.textContent);
       expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'en')));
       expect(names).toContain('Hammer curl');
@@ -361,7 +398,7 @@ describe('App', () => {
       ).toBeInTheDocument();
 
       expect(
-        screen.getByRole('link', { name: 'Meine Trainingspläne' })
+        screen.getByRole('link', { name: 'Pläne' })
       ).toBeInTheDocument();
       expect(document.documentElement.lang).toBe('de');
     });
@@ -381,7 +418,7 @@ describe('App', () => {
 
     it.each([
       ['/home', 'link', 'Chest'],
-      ['/Workoutplans', 'button', /create new workoutplan/i],
+      ['/Workoutplans', 'button', /new workout plan/i],
       ['/Create_Plan', 'button', /next/i],
     ])('redirects %s to the new page', async (path, role, name) => {
       await renderApp(path);

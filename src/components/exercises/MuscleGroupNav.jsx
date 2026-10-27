@@ -1,64 +1,110 @@
 import { Link, NavLink } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
-import muscleIcons from './muscleIcons';
+import MuscleIcon from './MuscleIcon';
+import PageTitle from '../ui/PageTitle';
 import { MUSCLE_GROUP_NAMES } from '../../data/muscleGroups';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import {
+  colors,
+  fontSizes,
+  fontWeights,
+  motion,
+  radii,
+  sizes,
+  space,
+} from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
-export default function MuscleGroupNav() {
+// Header of a muscle group page: back link, group name and links to the other groups.
+// NavLink marks the current group with aria-current="page".
+export default function MuscleGroupNav({ muscle }) {
   const { t } = useTranslation();
 
   return (
-    <Nav aria-label={t('nav.exercises')}>
+    <Header>
       <BackLink to={routes.exercises} aria-label={t('exercises.back')}>
-        <BiArrowBack size={30} />
+        <BiArrowBack aria-hidden="true" />
+        {t('exercises.backShort')}
       </BackLink>
-      {MUSCLE_GROUP_NAMES.map(muscle => (
-        <MuscleLink
-          key={muscle}
-          to={routes.muscleGroup(muscle)}
-          aria-label={t(`muscle.${muscle}`)}
-        >
-          <img src={muscleIcons[muscle]} alt="" width="30" />
-        </MuscleLink>
-      ))}
-    </Nav>
+      <PageTitle>{t(`muscle.${muscle}`)}</PageTitle>
+      <GroupNav aria-label={t('exercises.groups')}>
+        <GroupList>
+          {MUSCLE_GROUP_NAMES.map(name => (
+            <li key={name}>
+              <GroupLink to={routes.muscleGroup(name)}>
+                <MuscleIcon muscle={name} size={28} />
+                {t(`muscle.${name}`)}
+              </GroupLink>
+            </li>
+          ))}
+        </GroupList>
+      </GroupNav>
+    </Header>
   );
 }
 
-const linkStyle = css`
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  border-radius: ${radii.large};
-  color: ${colors.text};
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${space.md};
+  min-width: 0;
 `;
 
 const BackLink = styled(Link)`
-  ${linkStyle}
-`;
-
-const MuscleLink = styled(NavLink)`
-  ${linkStyle}
-  &.active {
-    background-color: ${colors.surface};
+  display: inline-flex;
+  align-items: center;
+  gap: ${space.sm};
+  min-height: ${sizes.touchTarget};
+  padding: 0 ${space.md} 0 ${space.sm};
+  border-radius: ${radii.small};
+  color: ${colors.text};
+  font-weight: ${fontWeights.medium};
+  text-decoration: none;
+  &:hover {
+    background-color: ${colors.surfaceMuted};
   }
 `;
 
-const Nav = styled.nav`
-  position: sticky;
-  top: 0;
-  z-index: 1;
+const GroupNav = styled.nav`
+  align-self: stretch;
+  min-width: 0;
+`;
+
+// Scrolls sideways; the padding keeps focus rings from being cut off.
+const GroupList = styled.ul`
   display: flex;
-  justify-content: space-between;
-  height: 48px;
-  margin-bottom: 20px;
-  padding: 5px;
-  background-color: ${colors.primary};
+  gap: ${space.sm};
+  margin: calc(-1 * ${space.sm});
+  padding: ${space.sm};
+  overflow-x: auto;
+  list-style: none;
+`;
+
+const GroupLink = styled(NavLink)`
+  display: inline-flex;
+  align-items: center;
+  gap: ${space.sm};
+  min-height: ${sizes.touchTarget};
+  padding: ${space.xs} ${space.md};
+  border: 2px solid transparent;
+  border-radius: ${radii.pill};
+  background-color: ${colors.surface};
+  color: ${colors.text};
+  font-size: ${fontSizes.caption};
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background-color ${motion.fast};
+  &:hover {
+    background-color: ${colors.highlight};
+  }
+  &:active {
+    background-color: ${colors.surfaceMuted};
+  }
+  &[aria-current='page'] {
+    border-color: ${colors.primary};
+    background-color: ${colors.highlight};
+    font-weight: ${fontWeights.medium};
+  }
 `;

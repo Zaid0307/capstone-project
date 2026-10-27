@@ -1,55 +1,97 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { BiDumbbell } from 'react-icons/bi';
-import { MdFormatAlignJustify } from 'react-icons/md';
-import { ImHome } from 'react-icons/im';
+import { BiDumbbell, BiListUl, BiPlusCircle } from 'react-icons/bi';
 import LanguageSwitch from './LanguageSwitch';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import {
+  colors,
+  fontSizes,
+  fontWeights,
+  motion,
+  radii,
+  shadows,
+  sizes,
+  space,
+} from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
+// Bottom navigation. NavLink marks the current page with aria-current="page".
 export default function Navigation() {
   const { t } = useTranslation();
 
   return (
-    <Nav>
-      <NavItem to={routes.newPlan} aria-label={t('nav.createPlan')}>
-        <MdFormatAlignJustify size={40} />
+    <Nav aria-label={t('nav.label')}>
+      <NavItem to={routes.newPlan}>
+        <BiPlusCircle aria-hidden="true" />
+        <span>{t('nav.newPlan')}</span>
       </NavItem>
-      <NavItem to={routes.exercises} aria-label={t('nav.exercises')}>
-        <ImHome size={40} />
+      <NavItem to={routes.exercises}>
+        <BiDumbbell aria-hidden="true" />
+        <span>{t('nav.exercises')}</span>
       </NavItem>
-      <NavItem to={routes.plans} end aria-label={t('nav.workoutPlans')}>
-        <BiDumbbell size={40} />
+      <NavItem to={routes.plans} end>
+        <BiListUl aria-hidden="true" />
+        <span>{t('nav.plans')}</span>
       </NavItem>
-      <LanguageSwitch />
+      <Switch />
     </Nav>
   );
 }
 
-const NavItem = styled(NavLink)`
+const Nav = styled.nav`
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
   display: flex;
+  align-items: center;
+  gap: ${space.xs};
+  min-height: ${sizes.navigationHeight};
+  padding: ${space.xs} ${space.sm} calc(${space.xs} + env(safe-area-inset-bottom, 0px));
+  background-color: ${colors.surface};
+  box-shadow: ${shadows.navigation};
+`;
+
+const NavItem = styled(NavLink)`
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  color: ${colors.surface};
+  min-width: 0;
+  min-height: 56px;
+  padding: ${space.xs};
+  border-radius: ${radii.small};
+  color: ${colors.text};
+  font-size: ${fontSizes.caption};
+  text-align: center;
   text-decoration: none;
-  &.active {
-    margin: 5px;
-    border-radius: ${radii.large};
-    background: ${colors.surface};
-    color: ${colors.primary};
+  transition: background-color ${motion.fast};
+  svg {
+    font-size: 1.5rem;
+  }
+  &:hover {
+    background-color: ${colors.surfaceMuted};
+  }
+  &[aria-current='page'] {
+    background-color: ${colors.highlight};
+    font-weight: ${fontWeights.medium};
+  }
+  /* A bar on top marks the current page without relying on color alone. */
+  &[aria-current='page']::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    right: 25%;
+    height: 3px;
+    border-radius: ${radii.pill};
+    background-color: ${colors.primary};
   }
 `;
 
-const Nav = styled.nav`
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: space-between;
-  height: 48px;
-  border-top: 1px solid ${colors.surface};
-  background: ${colors.primary};
-  color: white;
+const Switch = styled(LanguageSwitch)`
+  margin: 0 ${space.xs};
 `;

@@ -2,11 +2,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import PlanDetailsForm from './PlanDetailsForm';
 import DayExercisesForm from './DayExercisesForm';
-import { ErrorText } from './formStyles';
+import { ErrorText, StepText } from './formStyles';
 import Button from '../ui/Button';
-import Center from '../ui/Center';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import PageTitle from '../ui/PageTitle';
+import { space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
   buildWorkoutPlan,
@@ -57,24 +56,25 @@ export default function PlanForm({ onSave, initialPlan }) {
 
   if (isEditingDetails) {
     return (
-      <Centered>
-        <PlanDetailsForm
-          onSubmit={handleDetailsSubmit}
-          initialDetails={details}
-          isEditing={isEditing}
-        />
-      </Centered>
+      <PlanDetailsForm
+        onSubmit={handleDetailsSubmit}
+        initialDetails={details}
+        isEditing={isEditing}
+      />
     );
   }
 
   return (
     <>
-      <PlanName>{details.nameOfWorkout}</PlanName>
-      <Center>
+      <Header>
+        <div>
+          <StepText>{t('planForm.step', { step: 2 })}</StepText>
+          <PageTitle>{details.nameOfWorkout}</PageTitle>
+        </div>
         <Button $variant="secondary" onClick={() => setIsEditingDetails(true)}>
           {t('planForm.editDetails')}
         </Button>
-      </Center>
+      </Header>
       {details.days.map(({ day }) => (
         <DayExercisesForm
           key={day}
@@ -91,44 +91,34 @@ export default function PlanForm({ onSave, initialPlan }) {
           }
         />
       ))}
-      {showSaveError && daysWithoutExercises.length > 0 && (
-        <SaveError role="alert">
-          {t('planForm.errorEmptyDays', {
-            days: daysWithoutExercises.map(day => dayLabel(day, t)).join(', '),
-          })}
-        </SaveError>
-      )}
-      <Center>
-        <Button $variant="secondary" onClick={handleSave}>
-          {t(isEditing ? 'planForm.saveChanges' : 'planForm.save')}
-        </Button>
-      </Center>
+      <SaveArea>
+        {showSaveError && daysWithoutExercises.length > 0 && (
+          <ErrorText role="alert">
+            {t('planForm.errorEmptyDays', {
+              days: daysWithoutExercises.map(day => dayLabel(day, t)).join(', '),
+            })}
+          </ErrorText>
+        )}
+        <div>
+          <Button onClick={handleSave}>
+            {t(isEditing ? 'planForm.saveChanges' : 'planForm.save')}
+          </Button>
+        </div>
+      </SaveArea>
     </>
   );
 }
 
-const Centered = styled.div`
-  flex-grow: 1;
+const Header = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: ${space.md};
 `;
 
-const PlanName = styled.h2`
+const SaveArea = styled.div`
   display: flex;
-  justify-content: center;
-  margin: 5px 10px;
-  border-radius: ${radii.large};
-  background-color: ${colors.surface};
-  color: ${colors.text};
-`;
-
-const SaveError = styled(ErrorText)`
-  margin: 0 15px;
-  padding: 5px;
-  border-radius: ${radii.small};
-  background-color: ${colors.surface};
-  font-size: 1rem;
-  text-align: center;
+  flex-direction: column;
+  gap: ${space.sm};
 `;

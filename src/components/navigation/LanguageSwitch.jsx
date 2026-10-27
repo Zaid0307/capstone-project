@@ -1,15 +1,22 @@
 import styled from 'styled-components';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import {
+  colors,
+  fontSizes,
+  fontWeights,
+  motion,
+  radii,
+  sizes,
+} from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
-export default function LanguageSwitch() {
+export default function LanguageSwitch({ className }) {
   const { language, setLanguage, t } = useTranslation();
   const nextLanguage = language === 'de' ? 'en' : 'de';
 
   return (
     <Button
       type="button"
+      className={className}
       lang={nextLanguage}
       aria-label={t('language.switchLabel')}
       onClick={() => setLanguage(nextLanguage)}
@@ -21,11 +28,19 @@ export default function LanguageSwitch() {
 
 const Button = styled.button`
   flex-shrink: 0;
-  width: 48px;
-  margin: 5px;
-  border: 1px solid ${colors.surface};
-  border-radius: ${radii.large};
+  min-width: ${sizes.touchTarget};
+  min-height: ${sizes.touchTarget};
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.pill};
   background-color: transparent;
-  color: ${colors.surface};
-  font-weight: bold;
+  color: ${colors.text};
+  font-size: ${fontSizes.caption};
+  font-weight: ${fontWeights.bold};
+  transition: background-color ${motion.fast};
+  &:hover {
+    background-color: ${colors.surfaceMuted};
+  }
+  &:active {
+    background-color: ${colors.highlight};
+  }
 `;

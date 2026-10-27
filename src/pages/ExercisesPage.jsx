@@ -9,6 +9,7 @@ import MuscleGroupPicker from '../components/exercises/MuscleGroupPicker';
 import Message from '../components/ui/Message';
 import { exercisesByGroup } from '../data/exerciseLibrary';
 import { MUSCLE_GROUP_NAMES } from '../data/muscleGroups';
+import { space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
 
@@ -32,24 +33,26 @@ export default function ExercisesPage() {
 
   return (
     <PageLayout>
-      <MuscleGroupNav />
+      <MuscleGroupNav muscle={muscle} />
       <BackToTopButton />
-      <CardList>
-        {exercises.length === 0 ? (
-          <Message>{t('exercises.empty')}</Message>
-        ) : (
-          exercises.map(exercise => (
-            <ExerciseCard key={exercise.id} exercise={exercise} />
-          ))
-        )}
-      </CardList>
+      {exercises.length === 0 ? (
+        <Message>{t('exercises.empty')}</Message>
+      ) : (
+        <CardList>
+          {exercises.map(exercise => (
+            <li key={exercise.id}>
+              <ExerciseCard exercise={exercise} />
+            </li>
+          ))}
+        </CardList>
+      )}
     </PageLayout>
   );
 }
 
-const CardList = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+const CardList = styled.ul`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: ${space.md};
+  list-style: none;
 `;

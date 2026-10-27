@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { BiArrowToTop } from 'react-icons/bi';
 import styled from 'styled-components';
-import { colors } from '../../styles/colors';
+import IconButton from '../ui/IconButton';
+import { colors, navigationOffset, shadows, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
 const SCROLL_THRESHOLD = 500;
+
+const prefersReducedMotion = () =>
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
 
 export default function BackToTopButton() {
   const { t } = useTranslation();
@@ -24,24 +28,23 @@ export default function BackToTopButton() {
 
   return (
     <Button
-      type="button"
       aria-label={t('common.backToTop')}
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      onClick={() =>
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' })
+      }
     >
-      <BiArrowToTop size={30} />
+      <BiArrowToTop />
     </Button>
   );
 }
 
-const Button = styled.button`
+// Floats over the content, so it needs its own surface to stay readable.
+const Button = styled(IconButton)`
   position: fixed;
-  bottom: 60px;
-  right: 10px;
-  display: inline-flex;
-  width: 30px;
-  height: 30px;
-  border: 2px solid ${colors.text};
-  border-radius: 50%;
-  background-color: ${colors.primary};
-  color: white;
+  right: ${space.lg};
+  bottom: calc(${navigationOffset} + ${space.lg});
+  z-index: 2;
+  border: 1px solid ${colors.border};
+  background-color: ${colors.surface};
+  box-shadow: ${shadows.card};
 `;

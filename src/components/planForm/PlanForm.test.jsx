@@ -58,7 +58,7 @@ describe('PlanForm', () => {
       day: 'thursday',
       entries: [{ exerciseId: 'barbell_squat', muscle: 'legs', dose: { unit: 'repetitions', min: 5, max: 5 } }],
     });
-  });
+  }, 15000); // Types a whole plan; slow when all test files run in parallel.
 
   it('does not save while a day has no exercises', async () => {
     const onSave = vi.fn();

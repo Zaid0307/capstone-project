@@ -2,11 +2,11 @@ import { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import { nanoid } from 'nanoid';
 import ExerciseListItem from './ExerciseListItem';
-import { ErrorText, FormCard, FormTitle, Input, Label } from './formStyles';
+import { ErrorText, Field, FormCard, FormTitle, Input, Label, Select } from './formStyles';
 import Button from '../ui/Button';
 import ScreenReaderOnly from '../ui/ScreenReaderOnly';
 import { EXERCISES, exerciseGroups } from '../../data/exerciseLibrary';
-import { colors } from '../../styles/colors';
+import { colors, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
   PLAN_MUSCLES,
@@ -155,10 +155,11 @@ export default function DayExercisesForm({
     onRemoveEntry(entryId);
   }
 
+  const rangeErrorId = fieldId('repsRangeError');
   const numberField = (name, props = {}) => (
-    <Row key={name}>
+    <Field key={name}>
       <Label htmlFor={fieldId(name)}>{t(`dayExercises.${name}`)}</Label>
-      <FieldInput
+      <Input
         id={fieldId(name)}
         name={name}
         type="number"
@@ -166,7 +167,7 @@ export default function DayExercisesForm({
         onChange={handleChange}
         {...props}
       />
-    </Row>
+    </Field>
   );
 
   return (
@@ -174,11 +175,11 @@ export default function DayExercisesForm({
       <ScreenReaderOnly id={formLabelId}>
         {t('dayExercises.formLabel', { day: label })}
       </ScreenReaderOnly>
-      <form autoComplete="off" aria-labelledby={formLabelId} onSubmit={handleSubmit}>
-        <FormTitle as="h3">{label.toUpperCase()}</FormTitle>
-        <Row>
+      <FormTitle>{label}</FormTitle>
+      <Form autoComplete="off" aria-labelledby={formLabelId} onSubmit={handleSubmit}>
+        <Field>
           <Label htmlFor={fieldId('muscle')}>{t('dayExercises.muscle')}</Label>
-          <select
+          <Select
             id={fieldId('muscle')}
             name="muscle"
             required
@@ -193,11 +194,11 @@ export default function DayExercisesForm({
                 {t(`muscle.${muscle}`)}
               </option>
             ))}
-          </select>
-        </Row>
-        <Row>
+          </Select>
+        </Field>
+        <Field>
           <Label htmlFor={fieldId('exercise')}>{t('dayExercises.exercise')}</Label>
-          <FieldInput
+          <Input
             id={fieldId('exercise')}
             name="exercise"
             type="text"
@@ -213,10 +214,10 @@ export default function DayExercisesForm({
               <option key={name} value={name} />
             ))}
           </datalist>
-        </Row>
-        <Row>
+        </Field>
+        <Field>
           <Label htmlFor={fieldId('doseUnit')}>{t('dayExercises.doseType')}</Label>
-          <select
+          <Select
             id={fieldId('doseUnit')}
             name="doseUnit"
             value={values.doseUnit}
@@ -224,34 +225,50 @@ export default function DayExercisesForm({
           >
             <option value="repetitions">{t('dayExercises.doseRepetitions')}</option>
             <option value="seconds">{t('dayExercises.doseSeconds')}</option>
-          </select>
-        </Row>
+          </Select>
+        </Field>
         {values.doseUnit === 'repetitions' ? (
           <>
-            {numberField('repsMin', { required: true, min: '1', inputMode: 'numeric', placeholder: '8' })}
-            {numberField('repsMax', { min: '1', inputMode: 'numeric', placeholder: '12' })}
+            <TwoColumns>
+              {numberField('repsMin', { required: true, min: '1', inputMode: 'numeric', placeholder: '8' })}
+              {numberField('repsMax', {
+                min: '1',
+                inputMode: 'numeric',
+                placeholder: '12',
+                'aria-invalid': showRangeError || undefined,
+                'aria-describedby': showRangeError ? rangeErrorId : undefined,
+              })}
+            </TwoColumns>
             {showRangeError && (
-              <ErrorText role="alert">{t('dayExercises.errorRepsRange')}</ErrorText>
+              <ErrorText id={rangeErrorId} role="alert">
+                {t('dayExercises.errorRepsRange')}
+              </ErrorText>
             )}
           </>
         ) : (
           numberField('seconds', { required: true, min: '1', inputMode: 'numeric', placeholder: '30' })
         )}
-        {numberField('sets', { required: true, min: '1', inputMode: 'numeric', placeholder: '3' })}
+        <TwoColumns>
+          {numberField('sets', { required: true, min: '1', inputMode: 'numeric', placeholder: '3' })}
+          {numberField('rest', { min: '0', inputMode: 'numeric', placeholder: '90' })}
+        </TwoColumns>
         {numberField('weight', {
           min: '0',
           step: 'any',
           inputMode: 'decimal',
           placeholder: t('dayExercises.weightPlaceholder'),
         })}
-        {numberField('rest', { min: '0', inputMode: 'numeric', placeholder: '90' })}
         <ButtonRow>
           <Button type="submit">
             {t(editingId ? 'dayExercises.update' : 'dayExercises.add')}
           </Button>
-          {editingId && <Button onClick={resetForm}>{t('dayExercises.cancelEdit')}</Button>}
+          {editingId && (
+            <Button $variant="secondary" onClick={resetForm}>
+              {t('dayExercises.cancelEdit')}
+            </Button>
+          )}
         </ButtonRow>
-      </form>
+      </Form>
 
       {entries.length === 0 ? (
         <EmptyText>{t('dayExercises.empty')}</EmptyText>
@@ -272,37 +289,33 @@ export default function DayExercisesForm({
   );
 }
 
-const Row = styled.div`
+const Form = styled.form`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  padding: 5px;
-  /* Let labels and fields shrink, so long labels never widen the page. */
-  & > * {
-    min-width: 0;
-  }
-  select {
-    max-width: 60%;
-  }
+  flex-direction: column;
+  gap: ${space.lg};
 `;
 
-const FieldInput = styled(Input)`
-  flex: 0 1 220px;
+// Two fields side by side; below each other when space is short.
+const TwoColumns = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(8rem, 100%), 1fr));
+  gap: ${space.lg};
+  align-items: end;
 `;
 
 const ButtonRow = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: ${space.sm};
 `;
 
 const EmptyText = styled.p`
-  margin: 5px 0;
-  color: ${colors.primary};
-  text-align: center;
+  color: ${colors.textMuted};
 `;
 
 const ExerciseList = styled.ul`
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: ${space.sm};
   list-style: none;
 `;

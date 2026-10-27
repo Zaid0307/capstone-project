@@ -1,47 +1,80 @@
-import styled from 'styled-components';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import styled, { css } from 'styled-components';
+import {
+  colors,
+  fontSizes,
+  fontWeights,
+  radii,
+  shadows,
+  sizes,
+  space,
+} from '../../styles/tokens';
 
 export const FormCard = styled.section`
   display: flex;
   flex-direction: column;
-  margin: 0 15px 15px;
-  padding: 5px;
-  border-radius: ${radii.small};
+  gap: ${space.lg};
+  min-width: 0;
+  padding: ${space.lg};
+  border-radius: ${radii.large};
   background-color: ${colors.surface};
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  box-shadow: ${shadows.card};
 `;
 
 export const FormTitle = styled.h2`
+  font-size: ${fontSizes.section};
+`;
+
+// "Step 1 of 2" above a form title.
+export const StepText = styled.p`
+  color: ${colors.textMuted};
+  font-size: ${fontSizes.caption};
+`;
+
+// A label above its field.
+export const Field = styled.div`
   display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 5px;
-  border-radius: ${radii.small};
-  background-color: ${colors.secondary};
-  color: ${colors.text};
-  font-size: 1.3rem;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  flex-direction: column;
+  gap: ${space.xs};
+  min-width: 0;
 `;
 
 export const Label = styled.label`
-  color: ${colors.primary};
+  font-weight: ${fontWeights.medium};
 `;
 
-export const Input = styled.input`
+const fieldStyle = css`
   width: 100%;
-  padding: 0.25rem 0 0 0.25rem;
-  border: none;
-  border-bottom: 0.5px solid ${colors.secondary};
-  background-color: transparent;
-  font-size: 1rem;
-  &:focus {
-    border-color: ${colors.primary};
-    outline: none;
+  min-height: ${sizes.inputHeight};
+  padding: 0 ${space.md};
+  border: 1px solid ${colors.border};
+  border-radius: ${radii.small};
+  background-color: ${colors.surface};
+  color: ${colors.text};
+  &:hover {
+    border-color: ${colors.textMuted};
+  }
+  &[aria-invalid='true'] {
+    border: 2px solid ${colors.error};
+  }
+  &::placeholder {
+    color: ${colors.textMuted};
   }
 `;
 
+export const Input = styled.input`
+  ${fieldStyle}
+  &[type='number'] {
+    font-variant-numeric: tabular-nums;
+  }
+`;
+
+export const Select = styled.select`
+  ${fieldStyle}
+`;
+
 export const ErrorText = styled.p`
+  padding: ${space.sm} ${space.md};
+  border-radius: ${radii.small};
+  background-color: ${colors.errorSurface};
   color: ${colors.error};
-  font-size: 0.9rem;
 `;

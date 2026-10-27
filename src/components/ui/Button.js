@@ -1,15 +1,30 @@
 import styled, { css } from 'styled-components';
-import { colors } from '../../styles/colors';
-import { radii } from '../../styles/tokens';
+import { colors, fontWeights, motion, radii, sizes, space } from '../../styles/tokens';
 
 const variants = {
   primary: css`
-    background-color: ${colors.text};
-    color: ${colors.surface};
+    border-color: ${colors.primary};
+    background-color: ${colors.primary};
+    color: ${colors.onPrimary};
+    &:hover:not(:disabled) {
+      border-color: ${colors.primaryHover};
+      background-color: ${colors.primaryHover};
+    }
+    &:active:not(:disabled) {
+      border-color: ${colors.primaryActive};
+      background-color: ${colors.primaryActive};
+    }
   `,
   secondary: css`
+    border-color: ${colors.border};
     background-color: ${colors.surface};
     color: ${colors.text};
+    &:hover:not(:disabled) {
+      background-color: ${colors.surfaceMuted};
+    }
+    &:active:not(:disabled) {
+      background-color: ${colors.highlight};
+    }
   `,
 };
 
@@ -19,17 +34,20 @@ const Button = styled.button.attrs(props => ({
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  border: none;
+  gap: ${space.sm};
+  min-height: ${sizes.touchTarget};
+  max-width: 100%;
+  padding: ${space.sm} ${space.lg};
+  border: 1px solid;
   border-radius: ${radii.small};
-  font-size: 1rem;
-  font-weight: 500;
-  padding: 5px 10px;
-  margin: 5px 0;
+  font-weight: ${fontWeights.medium};
+  text-align: center;
+  transition: background-color ${motion.fast}, border-color ${motion.fast};
   ${props => variants[props.$variant ?? 'primary']}
-  &:hover {
-    background-color: ${colors.primary};
-    color: ${colors.hoverText};
+  &:disabled {
+    border-color: ${colors.disabledSurface};
+    background-color: ${colors.disabledSurface};
+    color: ${colors.disabledText};
   }
 `;
 

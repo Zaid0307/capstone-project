@@ -108,6 +108,9 @@ describe('DayExercisesForm', () => {
 
     expect(onAddEntry).not.toHaveBeenCalled();
     expect(screen.getByRole('alert')).toHaveTextContent(/must not be lower/i);
+    // The error belongs to the field it is about.
+    expect(field(/^to/i)).toHaveAttribute('aria-invalid', 'true');
+    expect(field(/^to/i)).toHaveAccessibleDescription(/must not be lower/i);
   });
 
   it('does not add an exercise without a muscle', async () => {
@@ -133,14 +136,14 @@ describe('DayExercisesForm', () => {
 
   it('lists the entries in the current language', () => {
     renderForm(
-      { entries: [benchPress, { ...benchPress, id: 'e2', exerciseId: 'plank', muscle: 'abs', dose: { unit: 'seconds', value: 45 }, weight: null, restSeconds: null }] },
+      { entries: [{ ...benchPress, weight: 62.5 }, { ...benchPress, id: 'e2', exerciseId: 'plank', muscle: 'abs', dose: { unit: 'seconds', value: 45 }, weight: null, restSeconds: null }] },
       { language: 'de' }
     );
 
     const list = screen.getByRole('list', { name: /montag/i });
     expect(within(list).getByText('Langhantel-Bankdrücken')).toBeInTheDocument();
     expect(within(list).getByText('6–8')).toBeInTheDocument();
-    expect(within(list).getByText('60 kg')).toBeInTheDocument();
+    expect(within(list).getByText('62,5 kg')).toBeInTheDocument();
     expect(within(list).getByText('120 s')).toBeInTheDocument();
     expect(within(list).getByText('Unterarmstütz')).toBeInTheDocument();
     expect(within(list).getByText('45 s')).toBeInTheDocument();
@@ -176,6 +179,15 @@ describe('DayExercisesForm', () => {
       await userEvent.click(screen.getByRole('button', { name: /edit barbell bench press/i }));
       return handlers;
     }
+
+    it('marks the entry that is being edited', async () => {
+      await startEditing();
+
+      expect(screen.getByText('Being edited')).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /edit barbell bench press/i })
+      ).toHaveAttribute('aria-pressed', 'true');
+    });
 
     it('loads the entry into the form and saves the changes', async () => {
       const { onUpdateEntry, onAddEntry } = await startEditing();

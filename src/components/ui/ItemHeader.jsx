@@ -1,30 +1,34 @@
 import styled from 'styled-components';
+import { space } from '../../styles/tokens';
 
-// A centered title with action buttons on the right.
+// A title on the left with action buttons on the right. Both wrap when space is short.
 export default function ItemHeader({ title, actions, className }) {
   return (
     <Header className={className}>
-      <Spacer aria-hidden="true" />
-      {title}
+      <Title>{title}</Title>
       <Actions>{actions}</Actions>
     </Header>
   );
 }
 
 const Header = styled.div`
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
+  gap: ${space.sm};
   width: 100%;
-  padding: 5px 10px;
-  text-align: center;
 `;
 
-const Spacer = styled.span``;
+const Title = styled.div`
+  flex: 1 1 10rem;
+  min-width: 0;
+`;
 
 const Actions = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 5px;
+  gap: ${space.xs};
+  margin-left: auto;
 `;

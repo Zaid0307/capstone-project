@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import img from '../assets/fitness.png';
 import Button from '../components/ui/Button';
 import LanguageSwitch from '../components/navigation/LanguageSwitch';
+import { colors, fontSizes, radii, shadows, space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
 
@@ -11,43 +12,52 @@ export default function LandingPage() {
   const navigate = useNavigate();
 
   return (
-    <BackgroundImg>
+    <Page>
       <SwitchBox>
         <LanguageSwitch />
       </SwitchBox>
-      <Title>{t('landing.title')}</Title>
-      <StartButton onClick={() => navigate(routes.exercises)}>
-        {t('landing.start')}
-      </StartButton>
-    </BackgroundImg>
+      <Panel>
+        <Title>{t('landing.title')}</Title>
+        <Button onClick={() => navigate(routes.exercises)}>{t('landing.start')}</Button>
+      </Panel>
+    </Page>
   );
 }
 
-const BackgroundImg = styled.main`
-  position: relative;
-  background-image: url(${img});
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
+// The photo is only decoration; all text sits on an opaque panel.
+const Page = styled.main`
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: space-around;
+  gap: ${space.lg};
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: ${space.lg} ${space.lg} calc(${space.xxl} + env(safe-area-inset-bottom, 0px));
+  background: ${colors.dark} url(${img}) center / cover no-repeat;
 `;
 
 const SwitchBox = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 40px;
+  align-self: flex-end;
+  margin-bottom: auto;
+  border-radius: ${radii.pill};
+  background-color: ${colors.surface};
+`;
+
+const Panel = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${space.lg};
+  width: 100%;
+  max-width: 28rem;
+  padding: ${space.xl} ${space.lg};
+  border-radius: ${radii.large};
+  background-color: ${colors.surface};
+  box-shadow: ${shadows.card};
+  text-align: center;
 `;
 
 const Title = styled.h1`
-  text-align: center;
-  color: white;
-`;
-
-const StartButton = styled(Button)`
-  width: 150px;
+  font-size: ${fontSizes.hero};
 `;
