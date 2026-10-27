@@ -1,0 +1,56 @@
+﻿[
+    {
+        "foreground":  "text",
+        "background":  "surface",
+        "ratio":  14.63,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "textMuted",
+        "background":  "surface",
+        "ratio":  6.83,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "text",
+        "background":  "secondary",
+        "ratio":  12.58,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "text",
+        "background":  "highlight",
+        "ratio":  12.07,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "onPrimary",
+        "background":  "primary",
+        "ratio":  7.56,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "onPrimary",
+        "background":  "primaryHover",
+        "ratio":  9.65,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "onPrimary",
+        "background":  "primaryActive",
+        "ratio":  12.27,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "error",
+        "background":  "errorSurface",
+        "ratio":  6.73,
+        "passesNormalText45":  true
+    },
+    {
+        "foreground":  "disabledText",
+        "background":  "disabledSurface",
+        "ratio":  5.47,
+        "passesNormalText45":  true
+    }
+]

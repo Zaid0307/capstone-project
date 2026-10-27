@@ -29,7 +29,7 @@ Die Entwicklung hat das Paket ausgewertet. Übernommen wurden der Übungskatalog
 - Die 7 Vorlagen „inspiriert von“ bekannten Athleten, bis Namens- und Persönlichkeitsrechte geklärt sind (O9). Das Paket weist selbst darauf hin.
 - Die Fotokandidaten aus `legend-image-rights.json`.
 
-**Hinweis zur Ablage:** Das Paket liegt beim Nutzer lokal unter `docs/images/Design Agent/` und ist **nicht auf GitHub**. Verweise darauf in dieser Übergabe sind nur lokal nachvollziehbar.
+**Hinweis zur Ablage:** Das Paket liegt unter `design-handoff/fitness-graphics/`. Antwort des Grafik-Agenten auf G1–G9: `design-handoff/fitness-graphics/documentation/GETFIT-APP-HANDOFF-V11.md`.
 
 ## An den Design-Agenten
 
@@ -43,3 +43,34 @@ Die Entwicklung hat das Paket ausgewertet. Übernommen wurden der Übungskatalog
 | D6 | Neue Daten ohne Darstellung | Aus Vorlagen kopierte Pläne haben Tagesnamen und Hinweise zu Fortschritt, Erholung und Sicherheit. Für diese gibt es noch keine Anzeige, siehe [CHANGELOG.md](CHANGELOG.md). |
 | D7 | Reihenfolge | Für die Entwicklung als Nächstes am hilfreichsten: Tokens (D1), dann die bestehenden Seiten, dann die Plan-Vorlagen (O8), danach Konto und Tracking. |
 | D8 | Offene Fragen | O8 bis O13 sind Fragen an den Nutzer. Bitte nicht eigenmächtig entscheiden, sondern Varianten vorschlagen. |
+
+## Umsetzung der Design-Übergabe 1 (`from-design/antwort-design-v1.md`)
+
+> **Hinweis zur STOPP-Anweisung** (`from-design/00-mockup-abnahme-zuerst.md`, `from-design/00-aktueller-auftrag.md`): Die Umsetzung unten lief bereits, als die Anweisung einging, und ist lokal committet (`e4f7d15`). Wie verlangt ist sie dokumentiert und **nicht** zurückgesetzt. Ob sie bleibt, bis das Mockup abgenommen ist, oder zurückgenommen wird, entscheidet der Nutzer. Bis dahin beginnt die Entwicklung keine weitere Designumsetzung. Die Figuren-Abnahme (`from-design/figuren-abnahme/`) ist gesehen; Rückmeldung dazu gibt der Nutzer.
+
+Stand: 27.10.2026. Alle Tests (215) und die Code-Prüfung laufen durch. Screenshots bei 390 px: [screenshots/design-v1-390/](screenshots/design-v1-390/).
+
+**Übernommen:**
+
+| Nr. | Umsetzung |
+|---|---|
+| D1 | Alle Tokens aus `design-tokens-v1.json` stehen unverändert in `src/styles/tokens.js` und werden als CSS-Variablen ausgegeben. Grundschrift jetzt 1rem mit Zeilenhöhe 1,5 (vorher 112,5 Prozent), Systemschrift, Überschriften brechen um, Trainingszahlen mit tabellarischen Ziffern. Die alte Farbverlaufs-Fläche ist durch `background` ersetzt. Die Kontrastwerte aus `kontrastpruefung-v1.json` sind nachgerechnet und stimmen. |
+| D2 | Bedienelemente mindestens 44 × 44 px. Fokus global über `:focus-visible` (3 px `focus`, 3 px Abstand, weißer Zwischenring). Hauptbutton, Sekundärbutton, IconButton, Sprachumschalter, Felder, Tages-Auswahl, Navigation und Muskelkacheln haben die angegebenen Zustände. Deaktiviert mit `disabledSurface`/`disabledText`. Fehler stehen als Text am Feld (`aria-invalid`, `aria-describedby`). Bei `prefers-reduced-motion` gibt es keine Übergänge und kein sanftes Scrollen. Löschbestätigungen bleiben die nativen Dialoge. |
+| D3/D4 | 16 px Seitenrand, maximal 720 px Inhalt, Abstände 12/16/24 px. Navigation fest unten mit 72 px plus Safe Area und sichtbaren Kurztexten (Neu, Übungen, Pläne, DE/EN); die aktuelle Seite hat `highlight`, einen Balken oben und `aria-current`. Seiten: Start mit Text auf deckender Fläche; Übungen mit Titel und Kacheln in zwei Spalten (eine bei Platzmangel); Übungsgruppe mit Zurück-Link, Gruppenname und horizontal scrollbarer Gruppenleiste; Karten ohne feste Höhe und ohne innere Scrollfläche, kleines Hantelsymbol statt Leerbild; Meine Pläne mit Titel, Button und Leerzustand mit genau einer Aktion; Plan-Ebenen über Überschriften und Flächentöne statt Einrückung; Formular mit „Schritt 1 von 2“ / „Schritt 2 von 2“, Labels oben, Wochentage umbrechend, Zahlenfelder zweispaltig mit Umbruch, Speichern im Dokumentfluss. „Wird bearbeitet“ ist als Text sichtbar. |
+| D5 | Fehlt die Grafik einer Muskelgruppe oder lädt sie nicht, erscheint ein neutrales Symbol. Die Figuren und die Muskelhervorhebung sind noch nicht eingebaut. |
+| D6 | Tagesname unter dem Wochentag. Fortschritt (mit Reserve-Wiederholungen) und Erholung als beschriftete Abschnitte unter der Beschreibung. Sicherheit steht immer sichtbar in der Plankarte, auch zugeklappt. Leere Werte erzeugen keinen Abschnitt. Neue Datenfelder gibt es nicht. |
+
+**Bitte prüfen (eigene Entscheidungen der Entwicklung, wo die Übergabe nichts festlegt):**
+
+1. **Nach-oben-Button:** Er schwebt über dem Inhalt. Eine transparente Fläche wäre dort nicht lesbar, deshalb hat er `surface`, Rahmen `border` und Schatten `card`.
+2. **Icons der Navigation:** Plus-Kreis (Neu), Hantel (Übungen) und Liste (Pläne). Vorher stand ein Haus-Symbol für Übungen.
+3. **Hinweis zur ärztlichen Abklärung:** Alle Vorlagen haben `medicalClearance: true`. Die App zeigt dazu im Sicherheitsabschnitt einen Satz, den die Entwicklung formuliert hat: „Wenn du unsicher bist, ob das Training zu dir passt, lass es vor dem Start ärztlich abklären.“ Bitte Wortlaut bestätigen oder ersetzen.
+4. **Tagesnotiz:** Ist in einer Vorlage eine Notiz zum Tag vorhanden, steht sie im aufgeklappten Tag unter dem Tagesnamen.
+5. **Plantitel im Schritt 2** ist die Seitenüberschrift (h1); darunter steht der Sekundärbutton „Name und Tage bearbeiten“.
+6. **Gewicht** wird jetzt im Zahlenformat der Sprache gezeigt (Deutsch „22,5 kg“).
+
+**Noch offen bzw. nicht geprüft:**
+
+- 200 Prozent Textvergrößerung und eine echte Prüfung mit Screenreader stehen noch aus. Die Layouts brechen um (Kachelraster, Zahlenfelder, Kopfzeilen), eine Sichtprüfung bei 200 Prozent fehlt.
+- Der Sprachumschalter zeigt sichtbar „EN“ bzw. „DE“, sein Name für Screenreader ist „Sprache auf Englisch umstellen“. Sichtbarer Text und Name stimmen damit nicht überein. Vorschlag willkommen.
+- Desktop (O5) und Dark Mode (O6) sind wie vorgesehen nicht gestaltet.

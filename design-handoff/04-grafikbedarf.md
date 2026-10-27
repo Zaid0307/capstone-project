@@ -61,8 +61,8 @@ Daraus ergeben sich für Mann und Frau zusammen **28 Bilder**. Die Entwicklung k
 **Lieferformat:** SVG, oder PNG mit transparentem Hintergrund, mindestens 1.000 px hoch. Kein Text und kein Rahmen im Bild.
 
 **Vorhandene Referenzen** (vom Nutzer erstellt, nicht final):
-- `docs/images/Design Agent/Neon Muskel-Charakterbogen in Blau und Grün.png`
-- `docs/images/Design Agent/Neonblaues und -grünes Charakterdesign-Sheet.png`
+- `design-handoff/fitness-graphics/Neon Muskel-Charakterbogen in Blau und Grün.png`
+- `design-handoff/fitness-graphics/Neonblaues und -grünes Charakterdesign-Sheet.png`
 
 Diese Bögen zeigen den Mann in Blau und die Frau in Grün, im zweifarbigen Stencil-Stil. Ein früherer Entwurf zeigte den Mann in Rot und die Frau in Lavendel. Die endgültigen Farben sind offen (siehe [07-offene-punkte.md](07-offene-punkte.md)).
 

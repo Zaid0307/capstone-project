@@ -7,7 +7,7 @@ Diese Punkte sind **nicht entschieden**. Bitte nicht eigenmächtig festlegen, so
 | Nr. | Frage | Kontext |
 |---|---|---|
 | O1 | Wo wird zwischen Mann und Frau umgeschaltet: einmal in einer Einstellung, direkt auf den Seiten, oder beides? | Wurde gefragt, ist noch unbeantwortet. Eine Einstellungsseite gibt es heute nicht. |
-| O2 | Welche Farben bekommen die Figuren? | Ein Entwurf zeigt Mann rot und Frau lavendel, die Referenzbögen zeigen Mann blau und Frau grün. Der Nutzer wünschte „männliche Farben“ und „weibliche Farben“. |
+| O2 | ~~Welche Farben bekommen die Figuren?~~ | **Entschieden (laut Grafik-Paket V1.1 vom Nutzer bestätigt):** Mann Königsblau/Schwarz, Frau Königsgrün/Schwarz. |
 | O3 | Wo und wie werden Übungsanimationen bzw. Videos gezeigt? | Gewünscht, Ort und Bedienung offen |
 | O4 | ~~Sollen Trainingsverlauf, Muskel-Analyse und Statistiken kommen?~~ | **Entschieden:** Ja, Tracking, Auswertung, Dashboard und Ziele sind geplant. Details siehe O12. |
 | O5 | Soll die App auch für Tablet und Desktop gestaltet werden? | Heute nur Handy |

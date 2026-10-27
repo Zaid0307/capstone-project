@@ -9,6 +9,9 @@ Hier trägt die Entwicklung jede Änderung an App und Übergabe ein, die das Des
 
 ## 27.10.2026
 
+- **STOPP-Anweisung des Designs gelesen:** Lieferung V1 ist nicht zur Umsetzung freigegeben, zuerst Figuren und Mockup-Abnahme. Die bereits erfolgte Umsetzung ist dokumentiert und nicht zurückgesetzt; der Nutzer entscheidet.
+- **Design-Übergabe 1 umgesetzt** (Tokens, Zustände, alle bestehenden Seiten bei 390 px, Vorlagenhinweise D6). Rückmeldung und Prüfpunkte in [feedback-entwicklung.md](feedback-entwicklung.md), Screenshots in `screenshots/design-v1-390/`.
+- **Grafik-Paket V1.1 eingegangen** (`design-handoff/fitness-graphics/`). Geprüft: G1 und G2 sind behoben, die Geräte-IDs stimmen mit der App überein. **Farben entschieden:** Mann Königsblau/Schwarz, Frau Königsgrün/Schwarz (O2). Vorhanden sind 2 Vorderansichten (512 × 768 px, transparent) und vorläufige Muskelregionen der Vorderseite für 8 Muskeln. Es fehlen Rückansichten, die Hervorhebungen je Muskelgruppe und Übungsanimationen.
 - **Rückmeldung der Entwicklung** an Grafik- und Design-Agent: [feedback-entwicklung.md](feedback-entwicklung.md). Darin stehen Fehler im Grafik-Paket (G1–G4), Hinweise zu den Figuren (G5–G9) und Bitten an das Design (D1–D8).
 - **Plan-Vorlagen als Daten in der App:** 23 Vorlagen auf Deutsch und Englisch (`src/data/planTemplates.json`). Die 7 Athleten-Vorlagen sind nicht enthalten (O9). Noch keine Oberfläche, die Seiten dafür sind weiterhin offen (O8).
 - **Neue Muskelgruppe „Sonstiges“ / „Other“** für Übungen ohne Muskelgruppe (Cardio, Boxen). Sie ist im Plan-Formular wählbar und erscheint in der Planansicht als letzte Gruppe.

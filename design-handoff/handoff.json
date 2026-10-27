@@ -855,7 +855,7 @@
     },
     "planTemplates": {
       "status": "Daten in der App (src/data/planTemplates.json), Oberfläche geplant",
-      "source": "docs/images/Design Agent/fitness-graphics-v0.7/data/training-plans.json",
+      "source": "design-handoff/fitness-graphics/fitness-graphics-v0.7/data/training-plans.json",
       "count": 23,
       "original": 23,
       "athleteInspired": "nicht enthalten (O9)",
@@ -1006,12 +1006,23 @@
       "format": "SVG oder PNG transparent, mindestens 1.000 px hoch, ohne Text und Rahmen",
       "alignment": "Alle Varianten einer Ansicht exakt deckungsgleich",
       "references": [
-        "docs/images/Design Agent/Neon Muskel-Charakterbogen in Blau und Grün.png",
-        "docs/images/Design Agent/Neonblaues und -grünes Charakterdesign-Sheet.png"
+        "design-handoff/fitness-graphics/Neon Muskel-Charakterbogen in Blau und Grün.png",
+        "design-handoff/fitness-graphics/Neonblaues und -grünes Charakterdesign-Sheet.png"
       ],
       "warnings": [
         "Keine Markenlogos (Schuhe in den Referenzbögen zeigen ein markenähnliches Logo)"
-      ]
+      ],
+      "decidedColors": {
+        "male": "royal blue / black",
+        "female": "royal green / black"
+      },
+      "delivered": {
+        "frontPng512x768": 2,
+        "frontRegionSvgProvisional": 2,
+        "backViews": 0,
+        "highlights": 0,
+        "exerciseAnimations": 0
+      }
     },
     "exerciseAnimations": {
       "owner": "graphicsAgent",
@@ -1295,7 +1306,7 @@
     },
     {
       "id": "O2",
-      "question": "Welche Farben bekommen die Figuren? (Entwürfe: rot/lavendel bzw. blau/grün)"
+      "question": "Entschieden: Mann Königsblau/Schwarz, Frau Königsgrün/Schwarz"
     },
     {
       "id": "O3",
