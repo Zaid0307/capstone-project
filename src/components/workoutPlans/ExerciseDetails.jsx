@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { entryName, formatDose } from '../../utils/workoutPlan';
 
-// Shows the values of one exercise of a workout plan.
-export default function ExerciseDetails({ exercise }) {
-  const { t } = useTranslation();
+// Shows the values of one exercise entry of a workout plan.
+export default function ExerciseDetails({ entry }) {
+  const { t, language } = useTranslation();
+  const { dose } = entry;
   const rows = [
-    ['exercise.exercise', exercise.exercise],
-    ['exercise.weight', `${exercise.weight} kg`],
-    ['exercise.repetitions', exercise.repetitions],
-    ['exercise.sets', exercise.sets],
-  ];
+    ['exercise.exercise', entryName(entry, language)],
+    ['exercise.sets', entry.sets],
+    [dose.unit === 'seconds' ? 'exercise.duration' : 'exercise.repetitions', formatDose(dose)],
+    entry.weight !== null && ['exercise.weight', `${entry.weight} kg`],
+    entry.restSeconds !== null && ['exercise.rest', `${entry.restSeconds} s`],
+  ].filter(Boolean);
 
   return (
     <List>

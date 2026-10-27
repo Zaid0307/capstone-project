@@ -2,7 +2,8 @@ import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { renderWithProviders } from './test-utils';
-import { LEGACY_STORAGE_KEY, STORAGE_KEY } from './hooks/useWorkoutPlans';
+import { LEGACY_STORAGE_KEY, STORAGE_KEY } from './storage/localPlanStore';
+import { migratePlan } from './utils/workoutPlan';
 
 const savedPlans = [
   {
@@ -118,7 +119,7 @@ describe('App', () => {
         'Do you really want to delete Friday from "Legacy"?'
       );
       const [push, legacy] = readPlans();
-      expect(push).toEqual(savedPlans[0]);
+      expect(push).toEqual(migratePlan(savedPlans[0]));
       expect(legacy.days.map(day => day.id)).toEqual(['p2-tue']);
       expect(
         screen.queryByRole('button', { name: 'Delete Friday' })
@@ -206,12 +207,18 @@ describe('App', () => {
       expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
       const [push, legacy] = readPlans();
       expect(push.id).toBe('plan1');
-      expect(push.days[0].muscles[0].exercises[0]).toMatchObject({
+      expect(push.days[0].entries[0]).toMatchObject({
         id: 'e1',
         exercise: 'Bench Press',
-        weight: '65',
+        weight: 65,
       });
-      expect(legacy).toEqual(savedPlans[1]);
+      expect(legacy).toMatchObject({
+        id: 'plan2',
+        days: [
+          { id: 'p2-fri', entries: [] },
+          { id: 'p2-tue', entries: [{ exercise: 'Crunch', muscle: 'abs' }] },
+        ],
+      });
     });
 
     it('edits a plan saved by an older version', async () => {
@@ -251,19 +258,20 @@ describe('App', () => {
     await userEvent.click(screen.getByLabelText('Saturday'));
     await userEvent.click(screen.getByRole('button', { name: /next/i }));
 
-    await userEvent.selectOptions(screen.getByLabelText(/muscle/i), 'Legs');
-    await userEvent.type(screen.getByLabelText(/exercise:/i), 'Squat');
-    await userEvent.type(screen.getByLabelText(/weight/i), '80');
-    await userEvent.type(screen.getByLabelText(/repetitions/i), '5');
+    await userEvent.type(screen.getByLabelText(/exercise:/i), 'Barbell squat');
+    await userEvent.type(screen.getByLabelText(/repetitions from/i), '5');
     await userEvent.type(screen.getByLabelText(/sets/i), '5');
+    await userEvent.type(screen.getByLabelText(/weight/i), '80');
     await userEvent.click(screen.getByRole('button', { name: /add exercise/i }));
     await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
 
     expect(screen.getByRole('heading', { name: 'Legs' })).toBeInTheDocument();
     expect(readPlans()).toHaveLength(1);
-    expect(readPlans()[0].days[0].muscles[0].exercises[0].exercise).toBe(
-      'Squat'
-    );
+    expect(readPlans()[0].days[0].entries[0]).toMatchObject({
+      exerciseId: 'barbell_squat',
+      muscle: 'legs',
+      weight: 80,
+    });
   });
 
   describe('exercise overview', () => {

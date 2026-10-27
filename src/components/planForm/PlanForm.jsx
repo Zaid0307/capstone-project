@@ -23,14 +23,14 @@ export default function PlanForm({ onSave, initialPlan }) {
     initialPlan ? splitWorkoutPlan(initialPlan) : null
   );
   const [details, setDetails] = useState(initialValues?.details ?? null);
-  const [exercisesByDay, setExercisesByDay] = useState(
-    initialValues?.exercisesByDay ?? {}
+  const [entriesByDay, setEntriesByDay] = useState(
+    initialValues?.entriesByDay ?? {}
   );
   const [isEditingDetails, setIsEditingDetails] = useState(!isEditing);
   const [showSaveError, setShowSaveError] = useState(false);
 
   const daysWithoutExercises = details
-    ? getDaysWithoutExercises(details, exercisesByDay)
+    ? getDaysWithoutExercises(details, entriesByDay)
     : [];
 
   function handleDetailsSubmit(newDetails) {
@@ -40,9 +40,9 @@ export default function PlanForm({ onSave, initialPlan }) {
   }
 
   function updateDay(day, update) {
-    setExercisesByDay({
-      ...exercisesByDay,
-      [day]: update(exercisesByDay[day] ?? []),
+    setEntriesByDay({
+      ...entriesByDay,
+      [day]: update(entriesByDay[day] ?? []),
     });
   }
 
@@ -51,7 +51,7 @@ export default function PlanForm({ onSave, initialPlan }) {
       setShowSaveError(true);
       return;
     }
-    onSave(buildWorkoutPlan(details, exercisesByDay));
+    onSave(buildWorkoutPlan(details, entriesByDay));
   }
 
   if (isEditingDetails) {
@@ -78,21 +78,15 @@ export default function PlanForm({ onSave, initialPlan }) {
         <DayExercisesForm
           key={day}
           day={day}
-          exercises={exercisesByDay[day]}
-          onAddExercise={exercise =>
-            updateDay(day, exercises => [...exercises, exercise])
-          }
-          onUpdateExercise={updated =>
-            updateDay(day, exercises =>
-              exercises.map(exercise =>
-                exercise.id === updated.id ? updated : exercise
-              )
+          entries={entriesByDay[day]}
+          onAddEntry={entry => updateDay(day, entries => [...entries, entry])}
+          onUpdateEntry={updated =>
+            updateDay(day, entries =>
+              entries.map(entry => (entry.id === updated.id ? updated : entry))
             )
           }
-          onRemoveExercise={exerciseId =>
-            updateDay(day, exercises =>
-              exercises.filter(exercise => exercise.id !== exerciseId)
-            )
+          onRemoveEntry={entryId =>
+            updateDay(day, entries => entries.filter(entry => entry.id !== entryId))
           }
         />
       ))}

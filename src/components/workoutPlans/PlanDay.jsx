@@ -8,7 +8,7 @@ import ToggleButton from '../ui/ToggleButton';
 import { colors } from '../../styles/colors';
 import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
-import { dayLabel } from '../../utils/workoutPlan';
+import { dayLabel, groupEntriesByMuscle } from '../../utils/workoutPlan';
 
 export default function PlanDay({ day, onDelete }) {
   const { t } = useTranslation();
@@ -37,8 +37,8 @@ export default function PlanDay({ day, onDelete }) {
       />
       {isExpanded && (
         <MuscleList>
-          {(day.muscles ?? []).map(muscle => (
-            <PlanMuscle key={muscle.id ?? muscle.name} muscle={muscle} />
+          {groupEntriesByMuscle(day.entries ?? []).map(muscle => (
+            <PlanMuscle key={muscle.name} muscle={muscle} />
           ))}
         </MuscleList>
       )}

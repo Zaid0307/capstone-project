@@ -6,31 +6,32 @@ import ItemHeader from '../ui/ItemHeader';
 import { colors } from '../../styles/colors';
 import { radii } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
-import { muscleLabel } from '../../utils/workoutPlan';
+import { entryName, muscleLabel } from '../../utils/workoutPlan';
 
 export default function ExerciseListItem({
-  exercise,
+  entry,
   isEditing = false,
   onEdit,
   onRemove,
 }) {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const name = entryName(entry, language);
 
   return (
     <Item $isEditing={isEditing}>
       <ItemHeader
-        title={<p>{muscleLabel(exercise.muscle, t)}</p>}
+        title={<p>{muscleLabel(entry.muscle, t)}</p>}
         actions={
           <>
             <IconButton
-              aria-label={t('exercise.edit', { name: exercise.exercise })}
+              aria-label={t('exercise.edit', { name })}
               aria-pressed={isEditing}
               onClick={onEdit}
             >
               <MdOutlineEdit />
             </IconButton>
             <IconButton
-              aria-label={t('exercise.remove', { name: exercise.exercise })}
+              aria-label={t('exercise.remove', { name })}
               onClick={onRemove}
             >
               <MdOutlineDeleteForever />
@@ -38,7 +39,7 @@ export default function ExerciseListItem({
           </>
         }
       />
-      <ExerciseDetails exercise={exercise} />
+      <ExerciseDetails entry={entry} />
     </Item>
   );
 }

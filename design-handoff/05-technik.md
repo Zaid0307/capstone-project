@@ -10,7 +10,7 @@
 | Icons | react-icons (austauschbar gegen eigene SVGs) |
 | Daten | Eigene Übungsdatenbank im Code (`src/data/`), Pläne und Sprache im `localStorage` des Browsers. Ein Backend wird geprüft (siehe O11). |
 | Konten / Server | keine |
-| Tests | Vitest und React Testing Library (160 Tests), ESLint |
+| Tests | Vitest und React Testing Library (170 Tests), ESLint |
 | Komponentenkatalog | Storybook 10 mit Stories für `PlanDetailsForm`, `DayExercisesForm` und `Navigation` |
 | Hosting | Vercel (Demo: capstone-project-lake.vercel.app) |
 

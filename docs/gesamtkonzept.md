@@ -34,7 +34,7 @@ Fest in der App (kein Backend nötig): Übungsdatenbank, Muskeln, Plan-Vorlagen,
 | Baustein | Inhalt | Status |
 |---|---|---|
 | Übungsdatenbank | 97 Übungen, 39 Muskeln, Geräte, Deutsch und Englisch | **fertig** |
-| Pläne | eigene Pläne erstellen und bearbeiten | **fertig** (lokal im Browser) |
+| Pläne | eigene Pläne erstellen und bearbeiten, mit Übungen aus der Datenbank, Wiederholungsbereichen, Dauer und Pausen | **fertig** (lokal im Browser, Speicher austauschbar) |
 | Plan-Vorlagen | 30 Vorlagen übernehmen und anpassen | Daten da, Funktion geplant |
 | Konto | Registrierung, Anmeldung, Passwort vergessen, Konto löschen | geplant |
 | Synchronisation | Pläne pro Nutzer im Backend, lokale Pläne werden beim ersten Anmelden übernommen | geplant |
@@ -121,7 +121,7 @@ Mit Konten und Trainingsdaten wird die App datenschutzrechtlich relevant. Das is
 
 | Phase | Inhalt | Braucht |
 |---|---|---|
-| **0 – jetzt** | Speicherung hinter eine Schnittstelle legen (später einfach umschaltbar). Datenmodell der Pläne erweitern: Übungs-IDs aus der Datenbank, Wiederholungsbereiche, Zeit, Pausen. | nichts |
+| **0 – erledigt** | Plan-Speicher als austauschbare Schnittstelle (heute Browser, später Backend). Planmodell 2: Übungen aus der Datenbank oder Freitext, Wiederholungsbereiche oder Dauer, Pausen, optionales Gewicht. Alte Pläne werden automatisch umgewandelt. | – |
 | **1 – Konto** | Supabase einrichten, Anmeldung, Pläne pro Nutzer, Übernahme lokaler Pläne, Konto löschen und Daten exportieren, Datenschutzerklärung | dein Supabase-Konto, Design der Anmeldeseiten |
 | **2 – Tracking** | Training aus einem Plan starten, Sätze eintragen, Verlauf | Design |
 | **3 – Analyse** | Auswertungen, Filter, Standard-Dashboard, eigenes Dashboard, Ziele | Design, Muskelfiguren für die Muskelkarte |

@@ -26,9 +26,9 @@ export default function PlanMuscle({ muscle }) {
         }
       />
       {isExpanded &&
-        (muscle.exercises ?? []).map((exercise, index) => (
-          <ExerciseBox key={exercise.id ?? index}>
-            <ExerciseDetails exercise={exercise} />
+        muscle.entries.map(entry => (
+          <ExerciseBox key={entry.id}>
+            <ExerciseDetails entry={entry} />
           </ExerciseBox>
         ))}
     </Card>

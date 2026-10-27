@@ -24,10 +24,16 @@ Jede Funktion ist mit einem Status versehen:
 | `geplant` | Vom Nutzer ausdrücklich gewünscht, noch nicht umgesetzt |
 | `vorgeschlagen` | Angeregt, aber vom Nutzer **nicht bestätigt**. Nicht gestalten, ohne Rückfrage. |
 
+## Kommunikation
+
+- Jede Änderung der Entwicklung steht in [CHANGELOG.md](CHANGELOG.md), neueste oben.
+- Antworten, Fragen und Lieferungen des Designs bitte in **`from-design/`** ablegen. Die Entwicklung schaut dort nach.
+
 ## Inhalt
 
 | Datei | Inhalt |
 |---|---|
+| [CHANGELOG.md](CHANGELOG.md) | Änderungen seit der ersten Fassung |
 | [handoff.json](handoff.json) | Zentrale, maschinenlesbare Fassung aller Angaben |
 | [01-seiten-und-navigation.md](01-seiten-und-navigation.md) | Alle Seiten, Routen, Navigation und Funktionen |
 | [02-komponenten.md](02-komponenten.md) | Alle Komponenten mit ihren Zuständen |

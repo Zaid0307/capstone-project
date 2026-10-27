@@ -2,6 +2,7 @@ import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import PlanForm from './PlanForm';
 import { renderWithProviders } from '../../test-utils';
+import { PLAN_SCHEMA_VERSION } from '../../utils/workoutPlan';
 
 async function createPlan(name, days) {
   await userEvent.type(screen.getByLabelText(/Workout plan name/i), name);
@@ -11,18 +12,17 @@ async function createPlan(name, days) {
   await userEvent.click(screen.getByRole('button', { name: /next/i }));
 }
 
-async function addExercise(dayName, { muscle, exercise, weight, repetitions, sets }) {
-  const dayForm = screen.getByRole('form', {
-    name: new RegExp(`exercises for ${dayName}`, 'i'),
-  });
-  const form = within(dayForm);
-  await userEvent.selectOptions(form.getByLabelText(/muscle/i), muscle);
+async function addExercise(dayName, { muscle, exercise, reps, sets, weight }) {
+  const form = within(screen.getByRole('form', { name: new RegExp(`exercises for ${dayName}`, 'i') }));
+  if (muscle) await userEvent.selectOptions(form.getByLabelText(/muscle/i), muscle);
   await userEvent.type(form.getByLabelText(/exercise:/i), exercise);
-  await userEvent.type(form.getByLabelText(/weight/i), weight);
-  await userEvent.type(form.getByLabelText(/repetitions/i), repetitions);
+  await userEvent.type(form.getByLabelText(/repetitions from/i), reps);
   await userEvent.type(form.getByLabelText(/sets/i), sets);
+  if (weight) await userEvent.type(form.getByLabelText(/weight/i), weight);
   await userEvent.click(form.getByRole('button', { name: /add exercise/i }));
 }
+
+const save = name => userEvent.click(screen.getByRole('button', { name }));
 
 describe('PlanForm', () => {
   beforeEach(() => localStorage.clear());
@@ -33,52 +33,30 @@ describe('PlanForm', () => {
 
     await createPlan('Upper / Lower', ['Thursday', 'Monday']);
 
-    expect(
-      screen.getByRole('heading', { name: 'Upper / Lower' })
-    ).toBeInTheDocument();
-    const dayForms = screen.getAllByRole('form');
-    expect(dayForms.map(form => form.getAttribute('aria-labelledby'))).toEqual(
-      ['dayExercises-monday', 'dayExercises-thursday']
-    );
+    expect(screen.getByRole('heading', { name: 'Upper / Lower' })).toBeInTheDocument();
+    expect(screen.getAllByRole('form').map(form => form.getAttribute('aria-labelledby'))).toEqual([
+      'dayExercises-monday',
+      'dayExercises-thursday',
+    ]);
 
-    await addExercise('Monday', {
-      muscle: 'Chest',
-      exercise: 'Bench Press',
-      weight: '60',
-      repetitions: '8',
-      sets: '4',
-    });
-    await addExercise('Monday', {
-      muscle: 'Arms',
-      exercise: 'Curl',
-      weight: '12.5',
-      repetitions: '12',
-      sets: '3',
-    });
-    await addExercise('Thursday', {
-      muscle: 'Legs',
-      exercise: 'Squat',
-      weight: '80',
-      repetitions: '5',
-      sets: '5',
-    });
-
-    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await addExercise('Monday', { exercise: 'Barbell bench press', reps: '8', sets: '4', weight: '60' });
+    await addExercise('Monday', { muscle: 'Arms', exercise: 'My curl', reps: '12', sets: '3', weight: '12.5' });
+    await addExercise('Thursday', { exercise: 'Barbell squat', reps: '5', sets: '5', weight: '80' });
+    await save(/save workout plan/i);
 
     expect(onSave).toHaveBeenCalledTimes(1);
     const plan = onSave.mock.calls[0][0];
-    expect(plan.nameOfWorkout).toBe('Upper / Lower');
-    expect(plan.days).toHaveLength(2);
+    expect(plan).toMatchObject({ nameOfWorkout: 'Upper / Lower', schemaVersion: PLAN_SCHEMA_VERSION });
     expect(plan.days[0]).toMatchObject({
       day: 'monday',
-      muscles: [
-        { name: 'chest', exercises: [{ exercise: 'Bench Press' }] },
-        { name: 'arms', exercises: [{ exercise: 'Curl', weight: '12.5' }] },
+      entries: [
+        { exerciseId: 'barbell_bench_press', muscle: 'chest', sets: 4, weight: 60 },
+        { exerciseId: null, exercise: 'My curl', muscle: 'arms', weight: 12.5 },
       ],
     });
     expect(plan.days[1]).toMatchObject({
       day: 'thursday',
-      muscles: [{ name: 'legs', exercises: [{ exercise: 'Squat' }] }],
+      entries: [{ exerciseId: 'barbell_squat', muscle: 'legs', dose: { unit: 'repetitions', min: 5, max: 5 } }],
     });
   });
 
@@ -87,19 +65,11 @@ describe('PlanForm', () => {
     renderWithProviders(<PlanForm onSave={onSave} />);
 
     await createPlan('Push', ['Monday', 'Friday']);
-    await addExercise('Monday', {
-      muscle: 'Chest',
-      exercise: 'Bench Press',
-      weight: '60',
-      repetitions: '8',
-      sets: '4',
-    });
-    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await addExercise('Monday', { exercise: 'Push-up', reps: '10', sets: '3' });
+    await save(/save workout plan/i);
 
     expect(onSave).not.toHaveBeenCalled();
-    expect(screen.getByRole('alert')).toHaveTextContent(
-      'Add at least one exercise for: Friday'
-    );
+    expect(screen.getByRole('alert')).toHaveTextContent('Add at least one exercise for: Friday');
   });
 
   it('removes an exercise before saving', async () => {
@@ -107,27 +77,13 @@ describe('PlanForm', () => {
     renderWithProviders(<PlanForm onSave={onSave} />);
 
     await createPlan('Push', ['Monday']);
-    await addExercise('Monday', {
-      muscle: 'Chest',
-      exercise: 'Bench Press',
-      weight: '60',
-      repetitions: '8',
-      sets: '4',
-    });
-    await addExercise('Monday', {
-      muscle: 'Chest',
-      exercise: 'Typo',
-      weight: '1',
-      repetitions: '1',
-      sets: '1',
-    });
+    await addExercise('Monday', { exercise: 'Push-up', reps: '10', sets: '3' });
+    await addExercise('Monday', { exercise: 'Typo', reps: '1', sets: '1' });
     await userEvent.click(screen.getByRole('button', { name: /remove typo/i }));
-    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await save(/save workout plan/i);
 
     const [monday] = onSave.mock.calls[0][0].days;
-    expect(monday.muscles[0].exercises.map(e => e.exercise)).toEqual([
-      'Bench Press',
-    ]);
+    expect(monday.entries.map(entry => entry.exerciseId)).toEqual(['push_up']);
   });
 
   it('keeps the exercises when going back to change the days', async () => {
@@ -135,34 +91,22 @@ describe('PlanForm', () => {
     renderWithProviders(<PlanForm onSave={onSave} />);
 
     await createPlan('Push', ['Monday']);
-    await addExercise('Monday', {
-      muscle: 'Chest',
-      exercise: 'Bench Press',
-      weight: '60',
-      repetitions: '8',
-      sets: '4',
-    });
+    await addExercise('Monday', { exercise: 'Push-up', reps: '10', sets: '3' });
     await userEvent.click(screen.getByRole('button', { name: /edit name and days/i }));
     expect(screen.getByLabelText('Monday')).toBeChecked();
     await userEvent.click(screen.getByLabelText('Friday'));
     await userEvent.click(screen.getByRole('button', { name: /next/i }));
-
-    await addExercise('Friday', {
-      muscle: 'Legs',
-      exercise: 'Squat',
-      weight: '80',
-      repetitions: '5',
-      sets: '5',
-    });
-    await userEvent.click(screen.getByRole('button', { name: /save workout plan/i }));
+    await addExercise('Friday', { exercise: 'Barbell squat', reps: '5', sets: '5' });
+    await save(/save workout plan/i);
 
     const plan = onSave.mock.calls[0][0];
     expect(plan.days.map(day => day.day)).toEqual(['monday', 'friday']);
-    expect(plan.days[0].muscles[0].exercises[0].exercise).toBe('Bench Press');
+    expect(plan.days[0].entries[0].exerciseId).toBe('push_up');
   });
 });
 
 describe('PlanForm in edit mode', () => {
+  // Saved by an older app version, so editing also migrates it.
   const plan = {
     id: 'plan1',
     nameOfWorkout: 'Push',
@@ -175,16 +119,7 @@ describe('PlanForm in edit mode', () => {
           {
             id: 'm1',
             name: 'chest',
-            exercises: [
-              {
-                id: 'e1',
-                muscle: 'chest',
-                exercise: 'Bench Press',
-                weight: '60',
-                repetitions: '8',
-                sets: '4',
-              },
-            ],
+            exercises: [{ id: 'e1', muscle: 'chest', exercise: 'Bench Press', weight: '60', repetitions: '8', sets: '4' }],
           },
         ],
       },
@@ -195,16 +130,7 @@ describe('PlanForm in edit mode', () => {
           {
             id: 'm2',
             name: 'arms',
-            exercises: [
-              {
-                id: 'e2',
-                muscle: 'arms',
-                exercise: 'Curl',
-                weight: '10',
-                repetitions: '12',
-                sets: '3',
-              },
-            ],
+            exercises: [{ id: 'e2', muscle: 'arms', exercise: 'Curl', weight: '10', repetitions: '12', sets: '3' }],
           },
         ],
       },
@@ -213,18 +139,12 @@ describe('PlanForm in edit mode', () => {
 
   beforeEach(() => localStorage.clear());
 
-  it('shows the saved exercises of every day', async () => {
+  it('shows the saved exercises of every day', () => {
     renderWithProviders(<PlanForm initialPlan={plan} onSave={vi.fn()} />);
 
     expect(screen.getByRole('heading', { name: 'Push' })).toBeInTheDocument();
-    expect(
-      within(screen.getByRole('list', { name: 'Monday' })).getByText(
-        'Bench Press'
-      )
-    ).toBeInTheDocument();
-    expect(
-      within(screen.getByRole('list', { name: 'Thursday' })).getByText('Curl')
-    ).toBeInTheDocument();
+    expect(within(screen.getByRole('list', { name: 'Monday' })).getByText('Bench Press')).toBeInTheDocument();
+    expect(within(screen.getByRole('list', { name: 'Thursday' })).getByText('Curl')).toBeInTheDocument();
   });
 
   it('changes an exercise and keeps the ids of plan, days and exercises', async () => {
@@ -232,27 +152,26 @@ describe('PlanForm in edit mode', () => {
     renderWithProviders(<PlanForm initialPlan={plan} onSave={onSave} />);
 
     await userEvent.click(screen.getByRole('button', { name: /edit bench press/i }));
-    const monday = within(
-      screen.getByRole('form', { name: /exercises for monday/i })
-    );
+    const monday = within(screen.getByRole('form', { name: /exercises for monday/i }));
     expect(monday.getByLabelText(/exercise:/i)).toHaveValue('Bench Press');
     await userEvent.clear(monday.getByLabelText(/weight/i));
     await userEvent.type(monday.getByLabelText(/weight/i), '62.5');
     await userEvent.click(monday.getByRole('button', { name: /save exercise/i }));
-    await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+    await save(/save changes/i);
 
     const saved = onSave.mock.calls[0][0];
-    expect(saved.id).toBe('plan1');
-    expect(saved.description).toBe('Chest day');
+    expect(saved).toMatchObject({ id: 'plan1', description: 'Chest day', schemaVersion: PLAN_SCHEMA_VERSION });
     expect(saved.days.map(day => day.id)).toEqual(['day-mon', 'day-thu']);
-    expect(saved.days[0].muscles[0].exercises).toEqual([
+    expect(saved.days[0].entries).toEqual([
       {
         id: 'e1',
-        muscle: 'chest',
+        exerciseId: null,
         exercise: 'Bench Press',
-        weight: '62.5',
-        repetitions: '8',
-        sets: '4',
+        muscle: 'chest',
+        sets: 4,
+        dose: { unit: 'repetitions', min: 8, max: 8 },
+        weight: 62.5,
+        restSeconds: null,
       },
     ]);
   });
@@ -267,7 +186,7 @@ describe('PlanForm in edit mode', () => {
     await userEvent.type(screen.getByLabelText(/Workout plan name/i), 'Push v2');
     await userEvent.click(screen.getByLabelText('Thursday'));
     await userEvent.click(screen.getByRole('button', { name: /next/i }));
-    await userEvent.click(screen.getByRole('button', { name: /save changes/i }));
+    await save(/save changes/i);
 
     const saved = onSave.mock.calls[0][0];
     expect(saved.nameOfWorkout).toBe('Push v2');

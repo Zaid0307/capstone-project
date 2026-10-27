@@ -15,6 +15,7 @@
     },
     "documents": [
       "README.md",
+      "CHANGELOG.md",
       "01-seiten-und-navigation.md",
       "02-komponenten.md",
       "03-inhalte-und-daten.md",
@@ -23,7 +24,11 @@
       "06-user-flows.md",
       "07-offene-punkte.md",
       "../docs/gesamtkonzept.md"
-    ]
+    ],
+    "communication": {
+      "developmentToDesign": "design-handoff/ (Änderungen in CHANGELOG.md)",
+      "designToDevelopment": "design-handoff/from-design/"
+    }
   },
   "responsibilities": {
     "designerAgent": [
@@ -578,9 +583,10 @@
       "status": "implemented",
       "fields": [
         "exercise",
-        "weight (kg)",
-        "repetitions",
-        "sets"
+        "sets",
+        "repetitions (8–12) oder duration (45 s)",
+        "weight (optional)",
+        "rest (optional)"
       ]
     },
     {
@@ -634,33 +640,39 @@
           "name": "muscle",
           "type": "select",
           "required": true,
-          "options": [
-            "chest",
-            "back",
-            "abs",
-            "shoulders",
-            "arms",
-            "legs"
-          ]
+          "note": "automatisch bei Übung aus der Datenbank"
         },
         {
           "name": "exercise",
-          "type": "text",
+          "type": "text + Vorschlagsliste",
           "required": true,
-          "maxLength": 50
+          "maxLength": 50,
+          "freeTextAllowed": true
         },
         {
-          "name": "weight",
-          "type": "number",
-          "required": true,
-          "min": 0,
-          "decimals": true,
-          "unit": "kg"
+          "name": "doseUnit",
+          "type": "select",
+          "options": [
+            "repetitions",
+            "seconds"
+          ]
         },
         {
-          "name": "repetitions",
+          "name": "repsMin",
           "type": "number",
-          "required": true,
+          "required": "bei Wiederholungen",
+          "min": 1
+        },
+        {
+          "name": "repsMax",
+          "type": "number",
+          "required": false,
+          "rule": "nicht kleiner als repsMin"
+        },
+        {
+          "name": "seconds",
+          "type": "number",
+          "required": "bei Zeit",
           "min": 1
         },
         {
@@ -668,11 +680,27 @@
           "type": "number",
           "required": true,
           "min": 1
+        },
+        {
+          "name": "weight",
+          "type": "number",
+          "required": false,
+          "min": 0,
+          "decimals": true,
+          "unit": "kg"
+        },
+        {
+          "name": "rest",
+          "type": "number",
+          "required": false,
+          "min": 0,
+          "unit": "s"
         }
       ],
       "states": [
         "add-mode",
         "edit-mode",
+        "error-reps-range",
         "list-empty",
         "list-filled"
       ]
@@ -789,36 +817,33 @@
       }
     },
     "workoutPlan": {
-      "storage": "localStorage-Schlüssel 'workoutPlans' (früher 'data')",
+      "storage": "Plan-Speicher-Schnittstelle (src/storage), heute localStorage-Schlüssel workoutPlans, später Backend",
       "accounts": false,
       "shape": {
         "id": "string",
+        "schemaVersion": 2,
         "nameOfWorkout": "string (max. 100)",
         "description": "string (max. 200, optional)",
         "days": [
           {
             "id": "string",
-            "day": "monday … sunday (immer in Wochenreihenfolge)",
-            "muscles": [
+            "day": "monday … sunday",
+            "entries": [
               {
                 "id": "string",
-                "name": "Muskelgruppen-Schlüssel",
-                "exercises": [
-                  {
-                    "id": "string",
-                    "muscle": "Muskelgruppen-Schlüssel",
-                    "exercise": "Freitext (max. 50)",
-                    "weight": "Zahl in kg",
-                    "repetitions": "Zahl ≥ 1",
-                    "sets": "Zahl ≥ 1"
-                  }
-                ]
+                "exerciseId": "ID aus der Übungsdatenbank oder null",
+                "exercise": "Freitext bzw. Name (max. 50)",
+                "muscle": "Muskelgruppen-Schlüssel",
+                "sets": "Zahl ≥ 1",
+                "dose": "{ unit: 'repetitions', min, max } oder { unit: 'seconds', value }",
+                "weight": "Zahl in kg oder null",
+                "restSeconds": "Zahl oder null"
               }
             ]
           }
         ]
       },
-      "note": "Übungen im Plan sind Freitext ohne Verknüpfung zur Übungsdatenbank"
+      "note": "Einträge verweisen auf die Übungsdatenbank, Freitext bleibt möglich; ältere Pläne werden automatisch umgewandelt"
     },
     "planTemplates": {
       "status": "Daten vorhanden, Funktion geplant",
@@ -1044,7 +1069,7 @@
     "routing": "React Router 7",
     "styling": "styled-components 6, Design-Tokens als CSS-Variablen (src/styles/tokens.js)",
     "icons": "react-icons (austauschbar)",
-    "tests": "Vitest + React Testing Library (160 Tests), ESLint",
+    "tests": "Vitest + React Testing Library (170 Tests), ESLint",
     "storybook": {
       "version": 10,
       "stories": [

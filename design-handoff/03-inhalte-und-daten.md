@@ -37,22 +37,23 @@ Insgesamt 97 Übungen. Anzahl je Gruppe: Brust 12, Rücken 22, Bauch 9, Schulter
 
 ## Trainingsplan (Datenmodell, implementiert)
 
-Gespeichert im Browser (`localStorage`). Es gibt keine Benutzerkonten und keinen Server.
+Gespeichert im Browser (`localStorage`) über einen austauschbaren Plan-Speicher, später auch im Backend. Pläne älterer App-Versionen werden automatisch umgewandelt.
 
 ```
-Plan
+Plan (Modellversion 2)
 ├─ Name                (Text, max. 100)
 ├─ Beschreibung        (Text, max. 200, optional)
 └─ Trainingstage[]     (1 bis 7, immer in Wochenreihenfolge Mo → So)
-   └─ Muskelgruppen[]  (automatisch nach den Übungen gruppiert)
-      └─ Übungen[]
-         ├─ Übung             (Text, max. 50)
-         ├─ Gewicht in kg     (Zahl, Dezimal erlaubt)
-         ├─ Wiederholungen    (Zahl ≥ 1)
-         └─ Sätze             (Zahl ≥ 1)
+   └─ Einträge[]
+      ├─ Übung               (Verweis auf die Übungsdatenbank oder Freitext, max. 50)
+      ├─ Muskelgruppe        (eine der 6 Gruppen)
+      ├─ Sätze               (Zahl ≥ 1)
+      ├─ Wiederholungen von–bis (z. B. 8–12)  ODER  Dauer in Sekunden
+      ├─ Gewicht in kg       (optional, Dezimal erlaubt)
+      └─ Pause in Sekunden   (optional)
 ```
 
-Die Übungen im Plan sind **Freitext**. Sie sind nicht mit der Übungsdatenbank verknüpft, es gibt also im Plan weder Bild noch Beschreibung zu einer Übung.
+Angezeigt werden die Einträge eines Tages gruppiert nach Muskelgruppe. Das Format der Einträge entspricht dem der Plan-Vorlagen, eine Vorlage lässt sich also direkt als eigener Plan übernehmen.
 
 ## Inhalte pro Seite
 

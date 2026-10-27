@@ -93,7 +93,7 @@ Zustände: zugeklappt, aufgeklappt, ohne Muskelgruppen (bei alten Daten möglich
 - Aufgeklappt: eine `ExerciseDetails` pro Übung
 
 ### ExerciseDetails: `workoutPlans/ExerciseDetails.jsx`
-Liste aus Beschriftung und Wert: Übung, Gewicht (in kg), Wiederholungen, Sätze. Wird auch im Formular verwendet.
+Liste aus Beschriftung und Wert: Übung (Name aus der Datenbank in der aktuellen Sprache, sonst Freitext), Sätze, Wiederholungen („8–12“ oder „10“) **oder** Dauer („45 s“), Gewicht („60 kg“, nur wenn angegeben), Pause („90 s“, nur wenn angegeben). Wird auch im Formular verwendet.
 
 ## Formulare (`planForm/`)
 
@@ -121,18 +121,22 @@ Ein Block pro Trainingstag.
 
 | Feld | Typ | Regeln |
 |---|---|---|
-| Muskel | Auswahlliste mit 6 Muskelgruppen und Platzhalter „Bitte auswählen“ | Pflicht |
-| Übung | Text | Pflicht, max. 50 Zeichen |
-| Gewicht | Zahl | Pflicht, ≥ 0, Dezimalstellen erlaubt (z. B. 12,5) |
-| Wiederholungen | Zahl | Pflicht, ≥ 1 |
+| Muskel | Auswahlliste mit 6 Muskelgruppen und Platzhalter „Bitte auswählen“ | Pflicht. Wird automatisch gesetzt, wenn eine Übung aus der Datenbank gewählt wird. |
+| Übung | Text mit Vorschlagsliste aus der Übungsdatenbank, gefiltert nach gewählter Muskelgruppe | Pflicht, max. 50 Zeichen. Eigene Übungen als Freitext sind erlaubt. |
+| Gemessen in | Auswahl „Wiederholungen“ oder „Zeit“ | Wird bei Übungen wie Unterarmstütz oder Dehnungen automatisch auf „Zeit“ gesetzt |
+| Wiederholungen von / bis | 2 Zahlen | „von“ Pflicht (≥ 1), „bis“ optional und nicht kleiner als „von“ |
+| Dauer in Sekunden | Zahl, nur bei „Zeit“ | Pflicht, ≥ 1 |
 | Sätze | Zahl | Pflicht, ≥ 1 |
+| Gewicht in kg | Zahl | **optional**, ≥ 0, Dezimalstellen erlaubt. Leer bedeutet Körpergewicht. |
+| Pause in Sekunden | Zahl | optional, ≥ 0 |
 
 Zustände:
 - **Hinzufügen:** Button „Übung hinzufügen“
 - **Bearbeiten:** Felder mit den Werten der gewählten Übung gefüllt, Buttons „Übung speichern“ und „Abbrechen“, die bearbeitete Übung in der Liste hervorgehoben
+- **Fehler:** „Die obere Wiederholungszahl darf nicht kleiner sein als die untere.“
 - Liste leer: „Noch keine Übungen hinzugefügt.“
 - Liste mit Übungen (`ExerciseListItem`)
-- Nach dem Hinzufügen bleibt die gewählte Muskelgruppe ausgewählt, die übrigen Felder werden geleert
+- Nach dem Hinzufügen bleiben Muskelgruppe und „Gemessen in“ ausgewählt, die übrigen Felder werden geleert
 
 ### ExerciseListItem: `planForm/ExerciseListItem.jsx`
 Übung in der Formularliste: Kopfzeile mit Muskelgruppe, Bearbeiten und Entfernen, darunter `ExerciseDetails`.

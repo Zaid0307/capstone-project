@@ -38,4 +38,3 @@ Diese Punkte gehören zur Entwicklung. Sie sind hier aufgeführt, weil sie das D
 - Die Muskelgruppen-Bilder werden heute von einer fremden Seite geladen und müssen ersetzt werden.
 - App-Icons und `manifest.json` fehlen (siehe [04-grafikbedarf.md](04-grafikbedarf.md)).
 - Bestätigungsdialoge sind Browser-Dialoge und lassen sich nicht gestalten.
-- Im Plan sind die Übungen Freitext ohne Verbindung zur Übungsdatenbank. Bilder oder Animationen können deshalb im Plan heute nicht angezeigt werden.
