@@ -67,11 +67,11 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | E28 | App · App-Leitung (Claude Code) | Figurwahl in den Einstellungen mit kleiner Vorschau und Umschalter an der Figur | Offen · G02 |
 | E29 | App · App-Leitung (Claude Code) | Speicherfehler: „Erneut versuchen“; Daten später in Supabase (Konto) statt nur lokal | Offen · Nutzerentscheidung Supabase |
 | E30 | App · App-Leitung (Claude Code) | Neue Übungen `sit_up` und `easy_run` in Übungskarten aufnehmen (spätere Animation) | Offen · Grafik, nicht Beta 1 |
-| E31 | App · App-Leitung mit 6 Katalog-Helfern | Übungskatalog V2: große Übungsliste (Geräte, Bänder, Körpergewicht, Yoga, Mobility, Pilates, Cardio, Boxen) mit Ausführung, Muskelrollen (primär, sekundär, Stabilisator, gedehnt) und Bewegungsdaten für Animationen. Format: [README](../../uebungskatalog-v2/README.md), Prüfer `scripts/validate_exercise_catalog.py` | In Arbeit · 6 Bereiche parallel (brust-ruecken, schultern-arme, beine-gesaess, rumpf-pilates, mobility-dehnen-yoga, cardio-boxen-athletik) |
+| E31 | App · App-Leitung mit 6 Katalog-Helfern | Übungskatalog V2: große Übungsliste (Geräte, Bänder, Körpergewicht, Yoga, Mobility, Pilates, Cardio, Boxen) mit Ausführung, Muskelrollen (primär, sekundär, Stabilisator, gedehnt) und Bewegungsdaten für Animationen. Format: [README](../../uebungskatalog-v2/README.md), Prüfer `scripts/validate_exercise_catalog.py` | Erledigt · 432 Übungen in 6 Bereichen, Prüfer 0 Meldungen · Quellen einzelner Bereiche noch gegenprüfen |
 | E32 | App · App-Leitung | Katalog V2 in die App übernehmen (Daten, Geräte, Stabilisator-Rolle, gedehnte Muskeln, Ausführung in der Übungsvorschau) | Offen · E31 |
 | E33 | App · App-Leitung | Testphase ohne Backend vorbereiten: „Meine Daten exportieren“ (JSON) und „Trainingsdaten löschen“ mit Bestätigung in den Einstellungen | Erledigt · `src/utils/dataExport.js`, `SettingsPage.jsx`, Tests |
-| E34 | App · App-Leitung | Backend Testphase: Supabase (Frankfurt) + Vercel, offene Registrierung; Tabelle `workouts` (`supabase/migrations/0002_workouts.sql`) und `remoteWorkoutStore` vorbereitet | Blockiert · Nutzer legt Konten an, Erlaubnis für `@supabase/supabase-js`, Commit/Push |
-| E35 | App · App-Leitung | Vor dem ersten Tester: Datenschutzerklärung mit Einwilligung, Hinweis „Testversion“, Konto löschen | Offen · E34 |
+| E34 | App · App-Leitung | Backend Testphase: Supabase (Frankfurt) + Vercel, offene Registrierung; Tabelle `workouts` (`supabase/migrations/0002_workouts.sql`) und `remoteWorkoutStore` vorbereitet | In Prüfung · Supabase `getfit` (Frankfurt) mit Tabellen, Anmeldung/Konto/Datenschutzseite in der App, online unter https://getfit-rosy.vercel.app · offen: GitHub-Verbindung in Vercel |
+| E35 | App · App-Leitung | Vor dem ersten Tester: Datenschutzerklärung mit Einwilligung, Hinweis „Testversion“, Konto löschen | In Arbeit · Datenschutzerklärung als Entwurf (`src/pages/PrivacyPage.jsx`), Einwilligung beim Registrieren, Konto löschen fertig · Verantwortlicher muss vom Nutzer eingetragen werden |
 
 
 ## Neue visuelle Richtung
@@ -96,9 +96,10 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | R09H | Grafikleitung | Desktop-Auswertung je Richtung und Darstellung der Muskelrollen mit Figurenstudien ergänzen | Prüfung · [Desktop-Vergleich](../redesign/r09-desktop.html), Pfade und Syntax geprüft |
 | R09I | Grafik-Kritiker | Beide Richtungen im Browser mit Tastatur, Hell/Dunkel und den Zielgrößen prüfen | Erledigt · [Browserbefunde](nachrichten/r09i-grafik-kritiker-browserpruefung.md) · Nachtest R09L |
 | R09F1 | Grafikleitung | Helle Feldränder auf mindestens 3:1 anheben | Prüfung · [Messung](nachrichten/r09f1-grafik-feldraender.md) |
-| R09J | Grafikleitung | Fokus nach Wechsel zwischen Heute und Training an die neue Überschrift setzen | Prüfung · Skript-Syntax bestanden |
-| R09K | Grafikleitung | Rollenfarben bei Muskelauswahl erhalten und Auswahl mit eigener Kontur zeigen | Prüfung · Skript-Syntax bestanden |
-| R09L | Grafik-Kritiker | Fokus und Rollen im Browser erneut prüfen, Tastaturfolge ergänzen | In Arbeit · Grafik-Kritiker prüft die Änderungen R09J–K |
+| R09J | Grafikleitung | Fokus nach Wechsel zwischen Heute und Training an die neue Überschrift setzen | Erledigt · [Chrome-Nachtest R09L](nachrichten/r09l-grafik-kritiker-tastatur-und-rollen.md) |
+| R09K | Grafikleitung | Rollenfarben bei Muskelauswahl erhalten und Auswahl mit eigener Kontur zeigen | Erledigt · [Chrome-Nachtest R09L](nachrichten/r09l-grafik-kritiker-tastatur-und-rollen.md) |
+| R09L | Grafik-Kritiker | Fokus und Rollen im Browser erneut prüfen, Tastaturfolge ergänzen | Erledigt · [Chrome-Nachtest](nachrichten/r09l-grafik-kritiker-tastatur-und-rollen.md) |
 | R09N | Atlas-Agent · defensive Codeprüfung | Eingabepfade, dynamisches HTML, externe Ressourcen und Datenspeicherung der lokalen Entwürfe prüfen | Erledigt · [Statischer Prüfbericht](nachrichten/r09n-grafik-codepruefung.md) |
 | R09O | Grafikleitung | Lokale SVG-Masken im Mobilentwurf passiv als Bilder einbinden | Prüfung · [Raster](../redesign/richtung-a.html) und [Journal](../redesign/richtung-b.html) |
 | R09P | Grafikleitung | Dynamische Texte und Diagrammwerte für App-Daten defensiv über DOM und geprüfte Werte ausgeben | Offen · R09N |
+

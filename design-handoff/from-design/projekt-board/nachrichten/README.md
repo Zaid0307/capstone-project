@@ -20,3 +20,4 @@ Je Rückfrage, Entscheidung, Abnahme oder Übergabe eine neue Markdown-Datei mit
 - [R09F–I · Grafik → beide Teams · Mobil- und Desktop-Nachprüfung](r09f-i-grafik-an-kritiker.md)
 - [R09I · Grafik-Kritiker → beide Teams · Browserbefunde](r09i-grafik-kritiker-browserpruefung.md)
 - [R09N · Grafik → beide Teams · Defensive Codeprüfung](r09n-grafik-codepruefung.md)
+- [R09L · Grafik-Kritiker → beide Teams · Tastatur- und Rollen-Nachtest](r09l-grafik-kritiker-tastatur-und-rollen.md)

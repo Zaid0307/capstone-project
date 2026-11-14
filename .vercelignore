@@ -1,0 +1,13 @@
+# Only the app is uploaded to Vercel: no local secrets, no graphics package,
+# no hand-over and planning documents.
+.env*
+design-handoff
+docs
+supabase
+scripts
+build
+storybook-static
+node_modules
+.storybook
+**/*.test.js
+**/*.test.jsx

@@ -1,4 +1,4 @@
-# Backend (Supabase) – beschlossen, noch nicht eingerichtet
+# Backend (Supabase) – eingerichtet
 
 Stand: 14.11.2026. **Entscheidung des Nutzers (14.11.2026):** Supabase als Backend (kostenloser Tarif, Region Frankfurt), Vercel als Hosting (kostenloser Hobby-Tarif, verbunden mit dem GitHub-Repository), und in der Testphase darf sich **jeder mit dem Link** registrieren. Alles hier ist vorbereitet, aber **noch nicht gegen eine echte Datenbank getestet**.
 
@@ -44,3 +44,10 @@ Tabellen für eigene Dashboards und Ziele fehlen bewusst. Ihre Inhalte sind noch
 - **Verbindung für die Entwicklung (kostenlos, ohne Installation):** Der Nutzer meldet sich einmal im Terminal an: `npx supabase login` und `npx vercel login` (öffnen jeweils den Browser). Danach kann die Entwicklung Migrationen einspielen (`npx supabase link`, `npx supabase db push`) und Deployments prüfen. Zugangsdaten landen nie im Repository.
 - **Registrierung offen** (Nutzerentscheidung): Damit die kostenlose E-Mail-Grenze von Supabase nicht stört, später einen kostenlosen SMTP-Dienst eintragen, falls viele Tester gleichzeitig kommen.
 - **Vor dem ersten Tester:** Datenschutzerklärung und Einwilligung in der App (Tabelle `consents` ist da), DPA mit Supabase, Hinweis „Testversion“ in der App, Konto löschen und Daten exportieren.
+
+## Stand 14.11.2026, eingerichtet
+
+- Supabase-Projekt `getfit` (Region eu-central-1, Frankfurt, kostenloser Tarif), Migrationen 0001 und 0002 eingespielt, E-Mail-Bestätigung an, Passwort mindestens 8 Zeichen, Weiterleitungen auf die Vercel-Adresse und localhost.
+- Vercel-Projekt `getfit`, Produktionsadresse **https://getfit-rosy.vercel.app**, Umgebungsvariablen `VITE_SUPABASE_URL` und `VITE_SUPABASE_ANON_KEY` (öffentlich, Typ „config“) für Production und Preview. `.vercelignore` lädt nur die App hoch.
+- Auth-Einstellungen stehen in `supabase/config.toml`; ändern, `npx supabase config diff` prüfen, dann `npx supabase config push`.
+- Offen: GitHub-Verbindung in Vercel (automatische Veröffentlichung), Name/Kontakt des Verantwortlichen in der Datenschutzerklärung, Google-Anmeldung, eigener SMTP-Dienst bei vielen Testern (Supabase-Grenze: wenige E-Mails pro Stunde).
