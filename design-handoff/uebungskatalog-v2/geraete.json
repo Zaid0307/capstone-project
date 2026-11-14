@@ -1,0 +1,746 @@
+{
+ "version": "2.0.0-entwurf",
+ "note": "Geräte für den Übungskatalog V2. Neue IDs werden nach Abschluss in src/data/equipment.js übernommen. Maße und bewegliche Teile ergänzt das Grafik-Team bei Bedarf (Karte G07).",
+ "kinds": [
+  "free_weight",
+  "machine",
+  "bench_rack",
+  "band",
+  "bodyweight_aid",
+  "cardio_machine",
+  "combat",
+  "mobility_aid",
+  "surface"
+ ],
+ "equipment": [
+  {
+   "id": "anchor",
+   "name": {
+    "de": "Befestigungspunkt",
+    "en": "Anchor point"
+   },
+   "kind": "band",
+   "status": "bestehend"
+  },
+  {
+   "id": "assist_band",
+   "name": {
+    "de": "Klimmzug-Band",
+    "en": "Pull-up assist band"
+   },
+   "kind": "band",
+   "status": "bestehend"
+  },
+  {
+   "id": "barbell",
+   "name": {
+    "de": "Langhantel",
+    "en": "Barbell"
+   },
+   "kind": "free_weight",
+   "status": "bestehend"
+  },
+  {
+   "id": "bench_flat",
+   "name": {
+    "de": "Flachbank",
+    "en": "Flat bench"
+   },
+   "kind": "bench_rack",
+   "status": "bestehend"
+  },
+  {
+   "id": "boxing_gloves",
+   "name": {
+    "de": "Boxhandschuhe",
+    "en": "Boxing gloves"
+   },
+   "kind": "combat",
+   "status": "bestehend"
+  },
+  {
+   "id": "cable_machine",
+   "name": {
+    "de": "Kabelzug",
+    "en": "Cable machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "chest_press_machine",
+   "name": {
+    "de": "Brustpresse",
+    "en": "Chest press machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "dip_station",
+   "name": {
+    "de": "Barren",
+    "en": "Dip station"
+   },
+   "kind": "bodyweight_aid",
+   "status": "bestehend"
+  },
+  {
+   "id": "dumbbells",
+   "name": {
+    "de": "Kurzhanteln",
+    "en": "Dumbbells"
+   },
+   "kind": "free_weight",
+   "status": "bestehend"
+  },
+  {
+   "id": "ez_bar",
+   "name": {
+    "de": "SZ-Stange",
+    "en": "EZ bar"
+   },
+   "kind": "free_weight",
+   "status": "bestehend"
+  },
+  {
+   "id": "hack_squat_machine",
+   "name": {
+    "de": "Hackenschmidt-Maschine",
+    "en": "Hack squat machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "hand_wraps",
+   "name": {
+    "de": "Bandagen",
+    "en": "Hand wraps"
+   },
+   "kind": "combat",
+   "status": "bestehend"
+  },
+  {
+   "id": "heavy_bag",
+   "name": {
+    "de": "Boxsack",
+    "en": "Heavy bag"
+   },
+   "kind": "combat",
+   "status": "bestehend"
+  },
+  {
+   "id": "incline_bench",
+   "name": {
+    "de": "Schrägbank",
+    "en": "Incline bench"
+   },
+   "kind": "bench_rack",
+   "status": "bestehend"
+  },
+  {
+   "id": "jump_rope",
+   "name": {
+    "de": "Springseil",
+    "en": "Jump rope"
+   },
+   "kind": "cardio_machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "leg_curl_machine",
+   "name": {
+    "de": "Beinbeuger-Maschine",
+    "en": "Leg curl machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "leg_extension_machine",
+   "name": {
+    "de": "Beinstrecker-Maschine",
+    "en": "Leg extension machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "leg_press_machine",
+   "name": {
+    "de": "Beinpresse",
+    "en": "Leg press machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "mat",
+   "name": {
+    "de": "Matte",
+    "en": "Mat"
+   },
+   "kind": "surface",
+   "status": "bestehend"
+  },
+  {
+   "id": "miniband",
+   "name": {
+    "de": "Miniband",
+    "en": "Mini band"
+   },
+   "kind": "band",
+   "status": "bestehend"
+  },
+  {
+   "id": "pad",
+   "name": {
+    "de": "Polster",
+    "en": "Pad"
+   },
+   "kind": "surface",
+   "status": "bestehend"
+  },
+  {
+   "id": "preacher_bench",
+   "name": {
+    "de": "Scottbank",
+    "en": "Preacher bench"
+   },
+   "kind": "bench_rack",
+   "status": "bestehend"
+  },
+  {
+   "id": "pullover_machine",
+   "name": {
+    "de": "Überzugmaschine",
+    "en": "Pullover machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "pullup_bar",
+   "name": {
+    "de": "Klimmzugstange",
+    "en": "Pull-up bar"
+   },
+   "kind": "bodyweight_aid",
+   "status": "bestehend"
+  },
+  {
+   "id": "rack",
+   "name": {
+    "de": "Hantelablage / Rack",
+    "en": "Rack"
+   },
+   "kind": "bench_rack",
+   "status": "bestehend"
+  },
+  {
+   "id": "resistance_band",
+   "name": {
+    "de": "Widerstandsband",
+    "en": "Resistance band"
+   },
+   "kind": "band",
+   "status": "bestehend"
+  },
+  {
+   "id": "smith_machine",
+   "name": {
+    "de": "Multipresse",
+    "en": "Smith machine"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "step",
+   "name": {
+    "de": "Stufe",
+    "en": "Step"
+   },
+   "kind": "surface",
+   "status": "bestehend"
+  },
+  {
+   "id": "stretch_strap",
+   "name": {
+    "de": "Dehngurt",
+    "en": "Stretch strap"
+   },
+   "kind": "mobility_aid",
+   "status": "bestehend"
+  },
+  {
+   "id": "t_bar_station",
+   "name": {
+    "de": "T-Bar-Station",
+    "en": "T-bar station"
+   },
+   "kind": "machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "treadmill",
+   "name": {
+    "de": "Laufband",
+    "en": "Treadmill"
+   },
+   "kind": "cardio_machine",
+   "status": "bestehend"
+  },
+  {
+   "id": "wall",
+   "name": {
+    "de": "Wand",
+    "en": "Wall"
+   },
+   "kind": "surface",
+   "status": "bestehend"
+  },
+  {
+   "id": "kettlebell",
+   "name": {
+    "de": "Kettlebell",
+    "en": "Kettlebell"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "medicine_ball",
+   "name": {
+    "de": "Medizinball",
+    "en": "Medicine ball"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "slam_ball",
+   "name": {
+    "de": "Slamball",
+    "en": "Slam ball"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "weight_plate",
+   "name": {
+    "de": "Hantelscheibe",
+    "en": "Weight plate"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "trap_bar",
+   "name": {
+    "de": "Trap-Bar (Hexbar)",
+    "en": "Trap bar (hex bar)"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "landmine",
+   "name": {
+    "de": "Landmine-Halterung",
+    "en": "Landmine attachment"
+   },
+   "kind": "bench_rack",
+   "status": "neu"
+  },
+  {
+   "id": "weighted_vest",
+   "name": {
+    "de": "Gewichtsweste",
+    "en": "Weighted vest"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "ankle_weights",
+   "name": {
+    "de": "Gewichtsmanschetten",
+    "en": "Ankle weights"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "sandbag",
+   "name": {
+    "de": "Sandsack (Training)",
+    "en": "Sandbag"
+   },
+   "kind": "free_weight",
+   "status": "neu"
+  },
+  {
+   "id": "adjustable_bench",
+   "name": {
+    "de": "Verstellbare Bank",
+    "en": "Adjustable bench"
+   },
+   "kind": "bench_rack",
+   "status": "neu"
+  },
+  {
+   "id": "decline_bench",
+   "name": {
+    "de": "Negativbank",
+    "en": "Decline bench"
+   },
+   "kind": "bench_rack",
+   "status": "neu"
+  },
+  {
+   "id": "back_extension_bench",
+   "name": {
+    "de": "Hyperextension-Bank",
+    "en": "Back extension bench"
+   },
+   "kind": "bench_rack",
+   "status": "neu"
+  },
+  {
+   "id": "plyo_box",
+   "name": {
+    "de": "Sprungkasten",
+    "en": "Plyo box"
+   },
+   "kind": "surface",
+   "status": "neu"
+  },
+  {
+   "id": "lat_pulldown_machine",
+   "name": {
+    "de": "Latzug-Maschine",
+    "en": "Lat pulldown machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "seated_row_machine",
+   "name": {
+    "de": "Ruder-Maschine (sitzend)",
+    "en": "Seated row machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "shoulder_press_machine",
+   "name": {
+    "de": "Schulterpresse",
+    "en": "Shoulder press machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "pec_deck_machine",
+   "name": {
+    "de": "Butterfly-Maschine",
+    "en": "Pec deck machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "reverse_fly_machine",
+   "name": {
+    "de": "Reverse-Butterfly-Maschine",
+    "en": "Reverse fly machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "hip_abductor_machine",
+   "name": {
+    "de": "Abduktoren-Maschine",
+    "en": "Hip abductor machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "hip_adductor_machine",
+   "name": {
+    "de": "Adduktoren-Maschine",
+    "en": "Hip adductor machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "glute_kickback_machine",
+   "name": {
+    "de": "Gesäß-Maschine (Kickback)",
+    "en": "Glute kickback machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "calf_raise_machine",
+   "name": {
+    "de": "Wadenmaschine",
+    "en": "Calf raise machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "seated_calf_machine",
+   "name": {
+    "de": "Wadenmaschine sitzend",
+    "en": "Seated calf raise machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "hip_thrust_machine",
+   "name": {
+    "de": "Hip-Thrust-Maschine",
+    "en": "Hip thrust machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "assisted_pullup_machine",
+   "name": {
+    "de": "Klimmzug-/Dip-Maschine mit Unterstützung",
+    "en": "Assisted pull-up/dip machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "ab_crunch_machine",
+   "name": {
+    "de": "Bauchmaschine",
+    "en": "Ab crunch machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "rotary_torso_machine",
+   "name": {
+    "de": "Rotationsmaschine",
+    "en": "Rotary torso machine"
+   },
+   "kind": "machine",
+   "status": "neu"
+  },
+  {
+   "id": "suspension_trainer",
+   "name": {
+    "de": "Schlingentrainer",
+    "en": "Suspension trainer"
+   },
+   "kind": "bodyweight_aid",
+   "status": "neu"
+  },
+  {
+   "id": "gymnastic_rings",
+   "name": {
+    "de": "Turnringe",
+    "en": "Gymnastic rings"
+   },
+   "kind": "bodyweight_aid",
+   "status": "neu"
+  },
+  {
+   "id": "parallettes",
+   "name": {
+    "de": "Parallettes",
+    "en": "Parallettes"
+   },
+   "kind": "bodyweight_aid",
+   "status": "neu"
+  },
+  {
+   "id": "ab_wheel",
+   "name": {
+    "de": "Bauchroller",
+    "en": "Ab wheel"
+   },
+   "kind": "bodyweight_aid",
+   "status": "neu"
+  },
+  {
+   "id": "stability_ball",
+   "name": {
+    "de": "Gymnastikball",
+    "en": "Stability ball"
+   },
+   "kind": "mobility_aid",
+   "status": "neu"
+  },
+  {
+   "id": "bosu_ball",
+   "name": {
+    "de": "Balance-Halbkugel",
+    "en": "Balance half ball"
+   },
+   "kind": "mobility_aid",
+   "status": "neu"
+  },
+  {
+   "id": "foam_roller",
+   "name": {
+    "de": "Faszienrolle",
+    "en": "Foam roller"
+   },
+   "kind": "mobility_aid",
+   "status": "neu"
+  },
+  {
+   "id": "yoga_block",
+   "name": {
+    "de": "Yoga-Block",
+    "en": "Yoga block"
+   },
+   "kind": "mobility_aid",
+   "status": "neu"
+  },
+  {
+   "id": "pilates_ring",
+   "name": {
+    "de": "Pilates-Ring",
+    "en": "Pilates ring"
+   },
+   "kind": "mobility_aid",
+   "status": "neu"
+  },
+  {
+   "id": "resistance_tube",
+   "name": {
+    "de": "Expander mit Griffen",
+    "en": "Resistance tube with handles"
+   },
+   "kind": "band",
+   "status": "neu"
+  },
+  {
+   "id": "chair",
+   "name": {
+    "de": "Stuhl",
+    "en": "Chair"
+   },
+   "kind": "surface",
+   "status": "neu"
+  },
+  {
+   "id": "battle_rope",
+   "name": {
+    "de": "Battle Rope",
+    "en": "Battle rope"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "sled",
+   "name": {
+    "de": "Schlitten (Sled)",
+    "en": "Sled"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "rowing_machine",
+   "name": {
+    "de": "Rudergerät",
+    "en": "Rowing machine"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "stationary_bike",
+   "name": {
+    "de": "Fahrradergometer",
+    "en": "Stationary bike"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "elliptical",
+   "name": {
+    "de": "Crosstrainer",
+    "en": "Elliptical trainer"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "stair_climber",
+   "name": {
+    "de": "Stepper / Treppensteiger",
+    "en": "Stair climber"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "ski_erg",
+   "name": {
+    "de": "Ski-Ergometer",
+    "en": "Ski ergometer"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "agility_ladder",
+   "name": {
+    "de": "Koordinationsleiter",
+    "en": "Agility ladder"
+   },
+   "kind": "cardio_machine",
+   "status": "neu"
+  },
+  {
+   "id": "double_end_bag",
+   "name": {
+    "de": "Doppelendball",
+    "en": "Double-end bag"
+   },
+   "kind": "combat",
+   "status": "neu"
+  },
+  {
+   "id": "speed_bag",
+   "name": {
+    "de": "Punchingball (Speed Bag)",
+    "en": "Speed bag"
+   },
+   "kind": "combat",
+   "status": "neu"
+  },
+  {
+   "id": "focus_mitts",
+   "name": {
+    "de": "Pratzen",
+    "en": "Focus mitts"
+   },
+   "kind": "combat",
+   "status": "neu"
+  }
+ ]
+}

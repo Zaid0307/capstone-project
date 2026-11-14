@@ -12,6 +12,8 @@ With GetFit! you always have your workout plans with you, no matter if you work 
 
 For newcomers GetFit! also offers a collection of exercises sorted by the 6 main muscle groups of the human body.
 
+Plans are built from days and exercises with targets per set; the plan editor shows which muscles a day and the whole plan train, with hints on gaps and imbalances. The training diary logs every training per set (and per side for one-arm and one-leg exercises), including missed and moved days.
+
 ## Demo:
 
 You can find the hosted version on Vercel: [Demo Version of Capstone Project](https://capstone-project-lake.vercel.app/)
@@ -28,7 +30,7 @@ You can find the hosted version on Vercel: [Demo Version of Capstone Project](ht
 - ESLint
 - Storybook 10
 - JavaScript
-- Own exercise library (97 exercises, German and English)
+- Own exercise library (97 exercises, 93 anatomically exact muscles, German and English)
 - localStorage
 - npm
 - Vercel
@@ -59,17 +61,18 @@ src/
     exercises/    exercise cards and muscle group navigation
     layout/       page layout and back-to-top button
     navigation/   bottom navigation and language switch
-    planForm/     forms to create and edit workout plans
+    planEditor/   plan editor: days, exercises, sets, exercise picker, muscle analysis
     ui/           small reusable building blocks (buttons, headers, …)
     workoutPlans/ display of saved workout plans
   data/         own exercise library: exercises, muscles, equipment, muscle groups
-  hooks/        useWorkoutPlans (localStorage)
+  hooks/        plans, training diary and plan drafts (localStorage)
   i18n/         translations and language context
   pages/        one component per route
   styles/       design tokens (colors, fonts, radii) and global styles
-  utils/        pure functions for workout plan data
-  storage/      plan store (localStorage today, backend later)
+  utils/        pure functions: plan model, plan editing, exercise search, muscle analysis, training diary
+  storage/      plan and diary stores (localStorage today, backend later)
   routes.js     all paths of the app
+docs/           concept, muscle model, Kanban board (docs/kanban.md), UX specifications
 docs/images/    screenshots for this README
 scripts/        import of plan templates from the graphics package
 supabase/       prepared backend schema and setup guide (not set up yet)

@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-03",
+  "manifest_version": "1.3.9-working",
+  "manifest_verified_files": 788,
+  "archive_entries": 170,
+  "archive_bytes": 2167503,
+  "archive_sha256": "646615d68328a9f729f0408c7f0f59e43111dbe3684f59c0b4673b4a161ed020",
+  "zip_crc_and_entry_sha256": "PASS",
+  "actual_source_svg_paths": 140,
+  "distinct_source_muscle_side_regions": 70,
+  "final_atlas_assets": 0,
+  "final_exercise_pairs": 0
+}

@@ -1,0 +1,482 @@
+{
+  "version": 1,
+  "date": "2026-11-13",
+  "format": "SVG, viewBox 0 0 24 24, eine Datei pro ID, Füllung/Linie in currentColor (die App färbt), ohne Text, ohne Markenzeichen, einheitlicher Stil passend zur Stil-Referenz, gut lesbar bei 20–28 px, zusätzlich in 48 px geprüft.",
+  "naming": "icons/<gruppe>/<id>.svg, z. B. icons/navigation/today.svg",
+  "groups": {
+    "navigation": [
+      {
+        "id": "today",
+        "de": "Heute",
+        "en": "Today"
+      },
+      {
+        "id": "calendar",
+        "de": "Kalender",
+        "en": "Calendar"
+      },
+      {
+        "id": "plans",
+        "de": "Pläne",
+        "en": "Plans"
+      },
+      {
+        "id": "analysis",
+        "de": "Auswertung",
+        "en": "Analysis"
+      },
+      {
+        "id": "exercises",
+        "de": "Übungen",
+        "en": "Exercises"
+      },
+      {
+        "id": "settings",
+        "de": "Einstellungen",
+        "en": "Settings"
+      }
+    ],
+    "muscleGroups": [
+      {
+        "id": "chest",
+        "de": "Brust",
+        "en": "Chest"
+      },
+      {
+        "id": "back",
+        "de": "Rücken",
+        "en": "Back"
+      },
+      {
+        "id": "abs",
+        "de": "Bauch",
+        "en": "Abs"
+      },
+      {
+        "id": "shoulders",
+        "de": "Schultern",
+        "en": "Shoulders"
+      },
+      {
+        "id": "arms",
+        "de": "Arme",
+        "en": "Arms"
+      },
+      {
+        "id": "legs",
+        "de": "Beine",
+        "en": "Legs"
+      },
+      {
+        "id": "other",
+        "de": "Sonstiges (Cardio, Boxen)",
+        "en": "Other (cardio, boxing)"
+      }
+    ],
+    "trainingKinds": [
+      {
+        "id": "bodyweight",
+        "de": "Körpergewicht",
+        "en": "Bodyweight"
+      },
+      {
+        "id": "dumbbell",
+        "de": "Kurzhanteln",
+        "en": "Dumbbells"
+      },
+      {
+        "id": "barbell",
+        "de": "Langhantel",
+        "en": "Barbell"
+      },
+      {
+        "id": "band",
+        "de": "Bänder",
+        "en": "Bands"
+      },
+      {
+        "id": "cable",
+        "de": "Kabelzug",
+        "en": "Cable"
+      },
+      {
+        "id": "machine",
+        "de": "Maschine",
+        "en": "Machine"
+      },
+      {
+        "id": "boxing",
+        "de": "Boxen",
+        "en": "Boxing"
+      },
+      {
+        "id": "cardio",
+        "de": "Cardiogeräte",
+        "en": "Cardio equipment"
+      }
+    ],
+    "equipment": [
+      {
+        "id": "anchor",
+        "de": "Befestigungspunkt",
+        "en": "Anchor point"
+      },
+      {
+        "id": "assist_band",
+        "de": "Klimmzug-Band",
+        "en": "Pull-up assist band"
+      },
+      {
+        "id": "barbell",
+        "de": "Langhantel",
+        "en": "Barbell"
+      },
+      {
+        "id": "bench_flat",
+        "de": "Flachbank",
+        "en": "Flat bench"
+      },
+      {
+        "id": "boxing_gloves",
+        "de": "Boxhandschuhe",
+        "en": "Boxing gloves"
+      },
+      {
+        "id": "cable_machine",
+        "de": "Kabelzug",
+        "en": "Cable machine"
+      },
+      {
+        "id": "chest_press_machine",
+        "de": "Brustpresse",
+        "en": "Chest press machine"
+      },
+      {
+        "id": "dip_station",
+        "de": "Barren",
+        "en": "Dip station"
+      },
+      {
+        "id": "dumbbells",
+        "de": "Kurzhanteln",
+        "en": "Dumbbells"
+      },
+      {
+        "id": "ez_bar",
+        "de": "SZ-Stange",
+        "en": "EZ bar"
+      },
+      {
+        "id": "hack_squat_machine",
+        "de": "Hackenschmidt-Maschine",
+        "en": "Hack squat machine"
+      },
+      {
+        "id": "hand_wraps",
+        "de": "Bandagen",
+        "en": "Hand wraps"
+      },
+      {
+        "id": "heavy_bag",
+        "de": "Boxsack",
+        "en": "Heavy bag"
+      },
+      {
+        "id": "incline_bench",
+        "de": "Schrägbank",
+        "en": "Incline bench"
+      },
+      {
+        "id": "jump_rope",
+        "de": "Springseil",
+        "en": "Jump rope"
+      },
+      {
+        "id": "leg_curl_machine",
+        "de": "Beinbeuger-Maschine",
+        "en": "Leg curl machine"
+      },
+      {
+        "id": "leg_extension_machine",
+        "de": "Beinstrecker-Maschine",
+        "en": "Leg extension machine"
+      },
+      {
+        "id": "leg_press_machine",
+        "de": "Beinpresse",
+        "en": "Leg press machine"
+      },
+      {
+        "id": "mat",
+        "de": "Matte",
+        "en": "Mat"
+      },
+      {
+        "id": "miniband",
+        "de": "Miniband",
+        "en": "Mini band"
+      },
+      {
+        "id": "pad",
+        "de": "Polster",
+        "en": "Pad"
+      },
+      {
+        "id": "preacher_bench",
+        "de": "Scottbank",
+        "en": "Preacher bench"
+      },
+      {
+        "id": "pullover_machine",
+        "de": "Überzugmaschine",
+        "en": "Pullover machine"
+      },
+      {
+        "id": "pullup_bar",
+        "de": "Klimmzugstange",
+        "en": "Pull-up bar"
+      },
+      {
+        "id": "rack",
+        "de": "Hantelablage / Rack",
+        "en": "Rack"
+      },
+      {
+        "id": "resistance_band",
+        "de": "Widerstandsband",
+        "en": "Resistance band"
+      },
+      {
+        "id": "smith_machine",
+        "de": "Multipresse",
+        "en": "Smith machine"
+      },
+      {
+        "id": "step",
+        "de": "Stufe",
+        "en": "Step"
+      },
+      {
+        "id": "stretch_strap",
+        "de": "Dehngurt",
+        "en": "Stretch strap"
+      },
+      {
+        "id": "t_bar_station",
+        "de": "T-Bar-Station",
+        "en": "T-bar station"
+      },
+      {
+        "id": "treadmill",
+        "de": "Laufband",
+        "en": "Treadmill"
+      },
+      {
+        "id": "wall",
+        "de": "Wand",
+        "en": "Wall"
+      }
+    ],
+    "actions": [
+      {
+        "id": "add",
+        "de": "Hinzufügen",
+        "en": "Add"
+      },
+      {
+        "id": "details",
+        "de": "Details / Einstellungen einer Übung",
+        "en": "Details"
+      },
+      {
+        "id": "delete",
+        "de": "Löschen",
+        "en": "Delete"
+      },
+      {
+        "id": "duplicate",
+        "de": "Duplizieren",
+        "en": "Duplicate"
+      },
+      {
+        "id": "replace",
+        "de": "Übung ersetzen",
+        "en": "Replace"
+      },
+      {
+        "id": "undo",
+        "de": "Rückgängig",
+        "en": "Undo"
+      },
+      {
+        "id": "back",
+        "de": "Zurück",
+        "en": "Back"
+      },
+      {
+        "id": "close",
+        "de": "Schließen",
+        "en": "Close"
+      },
+      {
+        "id": "info",
+        "de": "Vorschau / Info",
+        "en": "Info"
+      },
+      {
+        "id": "move-up",
+        "de": "Nach oben",
+        "en": "Move up"
+      },
+      {
+        "id": "move-down",
+        "de": "Nach unten",
+        "en": "Move down"
+      },
+      {
+        "id": "drag",
+        "de": "Ziehen zum Sortieren",
+        "en": "Drag handle"
+      },
+      {
+        "id": "more",
+        "de": "Mehr (⋮-Menü)",
+        "en": "More"
+      },
+      {
+        "id": "start-training",
+        "de": "Training starten",
+        "en": "Start training"
+      },
+      {
+        "id": "skip",
+        "de": "Überspringen",
+        "en": "Skip"
+      },
+      {
+        "id": "per-side",
+        "de": "Pro Seite links/rechts",
+        "en": "Per side"
+      },
+      {
+        "id": "check",
+        "de": "Erledigt / ausgewählt",
+        "en": "Done / selected"
+      },
+      {
+        "id": "remove-set",
+        "de": "Satz entfernen",
+        "en": "Remove set"
+      },
+      {
+        "id": "timer",
+        "de": "Pausen-Timer",
+        "en": "Rest timer"
+      },
+      {
+        "id": "search",
+        "de": "Suchen",
+        "en": "Search"
+      },
+      {
+        "id": "filter",
+        "de": "Filter",
+        "en": "Filter"
+      },
+      {
+        "id": "edit",
+        "de": "Bearbeiten",
+        "en": "Edit"
+      },
+      {
+        "id": "archive",
+        "de": "Archivieren",
+        "en": "Archive"
+      },
+      {
+        "id": "note",
+        "de": "Notiz",
+        "en": "Note"
+      },
+      {
+        "id": "language",
+        "de": "Sprache",
+        "en": "Language"
+      },
+      {
+        "id": "figure-male",
+        "de": "Figur Mann",
+        "en": "Male figure"
+      },
+      {
+        "id": "figure-female",
+        "de": "Figur Frau",
+        "en": "Female figure"
+      },
+      {
+        "id": "skeleton",
+        "de": "Skelett ein/aus",
+        "en": "Skeleton on/off"
+      },
+      {
+        "id": "warning",
+        "de": "Hinweis",
+        "en": "Hint"
+      },
+      {
+        "id": "error",
+        "de": "Fehler",
+        "en": "Error"
+      },
+      {
+        "id": "success",
+        "de": "Alles gut",
+        "en": "All good"
+      }
+    ],
+    "trainingStatus": [
+      {
+        "id": "on-plan",
+        "de": "Nach Plan trainiert",
+        "en": "Trained as planned"
+      },
+      {
+        "id": "deviated",
+        "de": "Mit Abweichungen",
+        "en": "With deviations"
+      },
+      {
+        "id": "other",
+        "de": "Anderes Training",
+        "en": "Other training"
+      },
+      {
+        "id": "missed",
+        "de": "Ausgefallen / verpasst",
+        "en": "Missed"
+      },
+      {
+        "id": "planned",
+        "de": "Geplant",
+        "en": "Planned"
+      },
+      {
+        "id": "moved",
+        "de": "Verschoben",
+        "en": "Moved"
+      },
+      {
+        "id": "rest",
+        "de": "Ruhetag",
+        "en": "Rest day"
+      }
+    ],
+    "app": [
+      {
+        "id": "app-icon",
+        "de": "App-Symbol (Favicon, Startbildschirm; Name noch offen, daher ohne Schrift)",
+        "en": "App icon"
+      }
+    ]
+  }
+}

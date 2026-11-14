@@ -1,0 +1,29 @@
+{
+ "note": "Gelenkwinkel in Grad, 0 = anatomische Neutralstellung (aufrechter Stand, Arme hängend, Handflächen zum Körper). Positive Werte in Richtung des Namens. Rechte Körperseite; links spiegelt die Grafik.",
+ "joints": {
+  "neck_flexion": "Kopf nach vorn (negativ = nach hinten)",
+  "neck_rotation": "Kopf nach rechts drehen",
+  "neck_lateral_flexion": "Kopf zur rechten Schulter neigen",
+  "trunk_flexion": "Rumpf nach vorn beugen (negativ = Streckung nach hinten)",
+  "trunk_rotation": "Rumpf nach rechts drehen",
+  "trunk_lateral_flexion": "Rumpf zur rechten Seite neigen",
+  "pelvis_tilt": "Becken nach vorn kippen (negativ = nach hinten)",
+  "scapula_elevation": "Schulterblatt anheben (negativ = senken), ungefähre Stufe in Grad",
+  "scapula_protraction": "Schulterblatt nach vorn schieben (negativ = zusammenziehen)",
+  "shoulder_flexion": "Arm nach vorn oben heben (negativ = nach hinten)",
+  "shoulder_abduction": "Arm seitlich heben",
+  "shoulder_horizontal_abduction": "Arm in Schulterhöhe: 0 = seitlich gestreckt in der Frontalebene (90° abduziert), positiv = weiter nach hinten, negativ = nach vorn vor den Körper (z. B. -90 = Arm nach vorn gestreckt)",
+  "shoulder_external_rotation": "Oberarm nach außen drehen (negativ = innen)",
+  "elbow_flexion": "Ellbogen beugen",
+  "forearm_supination": "Handfläche nach oben drehen (negativ = Pronation)",
+  "wrist_flexion": "Handgelenk zur Handfläche beugen (negativ = Streckung)",
+  "wrist_ulnar_deviation": "Hand zur Kleinfingerseite neigen",
+  "hip_flexion": "Oberschenkel nach vorn heben (negativ = nach hinten)",
+  "hip_abduction": "Bein seitlich abspreizen (negativ = Adduktion)",
+  "hip_external_rotation": "Oberschenkel nach außen drehen (negativ = innen)",
+  "knee_flexion": "Knie beugen",
+  "ankle_dorsiflexion": "Fußspitze zum Schienbein ziehen (negativ = Plantarflexion)",
+  "ankle_inversion": "Fußsohle nach innen drehen (negativ = Eversion)",
+  "toe_extension": "Zehen nach oben strecken"
+ }
+}

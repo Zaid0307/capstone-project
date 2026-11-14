@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "requirement": "N4",
+  "status": "PROPOSED_IDS_AWAITING_APP_V2",
+  "app_parent_source": "../muskelmodell-v1.json",
+  "side_suffixes": ["__left", "__right"],
+  "figures": ["char_male_01", "char_female_01"],
+  "sources": {
+    "ta2": "https://cdn.dal.ca/content/dam/dalhousie/pdf/library/FIPAT/TA2/FIPAT-TA2-Part-2.pdf",
+    "tah": "https://ifaa.unifr.ch/Public/TNAEntryPage/prop/ViewPartListLAEN.html",
+    "latissimus_architecture": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3724205/",
+    "latissimus_dissection": "https://pubmed.ncbi.nlm.nih.gov/11415812/",
+    "rectus_intersections": "https://pubmed.ncbi.nlm.nih.gov/28671887/",
+    "rectus_variation": "https://pubmed.ncbi.nlm.nih.gov/26266107/"
+  },
+  "reuse_ids": [
+    {"parent": "pectoralis_major", "ids": ["pectoralis_major_clavicular", "pectoralis_major_sternocostal", "pectoralis_major_abdominal"], "view": "front", "ta2_ids": [2302,2303,2304]},
+    {"parent": "trapezius", "ids": ["trapezius_descending"], "view": "both", "ta2_ids": [2227]},
+    {"parent": "trapezius", "ids": ["trapezius_transverse", "trapezius_ascending"], "view": "back", "ta2_ids": [2228,2229]},
+    {"parent": "erector_spinae", "ids": ["iliocostalis", "longissimus", "spinalis"], "view": "back"},
+    {"ids": ["external_oblique"], "view": "front"},
+    {"ids": ["internal_oblique","transversus_abdominis"], "view": "deep"}
+  ],
+  "new_regions": [
+    {"id":"latissimus_dorsi__thoracic","parent":"latissimus_dorsi","label_de":"Brustwirbelsäulenregion","view":"back","basis":"research_region","source_keys":["latissimus_architecture","latissimus_dissection"]},
+    {"id":"latissimus_dorsi__lumbar_pelvic_costal","parent":"latissimus_dorsi","label_de":"Lenden-Becken-Rippen-Region","view":"back","basis":"research_region","source_keys":["latissimus_architecture","latissimus_dissection"]},
+    {"id":"iliocostalis__cervical","parent":"iliocostalis","label_de":"Halsabschnitt","view":"back","basis":"named_anatomy","tah_id":1796},
+    {"id":"iliocostalis__thoracic","parent":"iliocostalis","label_de":"Brustabschnitt","view":"back","basis":"named_anatomy","tah_id":1795},
+    {"id":"iliocostalis__lumbar","parent":"iliocostalis","label_de":"Lendenabschnitt","view":"back","basis":"named_anatomy","tah_id":1794},
+    {"id":"longissimus__capitis","parent":"longissimus","label_de":"Kopfabschnitt","view":"back","basis":"named_anatomy","tah_id":1801},
+    {"id":"longissimus__cervicis","parent":"longissimus","label_de":"Halsabschnitt","view":"back","basis":"named_anatomy","tah_id":1800},
+    {"id":"longissimus__thoracis_thoracic","parent":"longissimus","label_de":"Brustregion des Longissimus thoracis","view":"back","basis":"display_remainder_of_named_anatomy","tah_id":1798,"excluded_tah_id":1799},
+    {"id":"longissimus__thoracis_lumbar","parent":"longissimus","label_de":"Lendenregion des Longissimus thoracis","view":"back","basis":"named_anatomy","tah_id":1799,"ta2_id":2264},
+    {"id":"spinalis__capitis","parent":"spinalis","label_de":"Kopfabschnitt","view":"back","basis":"named_anatomy","tah_id":1805},
+    {"id":"spinalis__cervicis","parent":"spinalis","label_de":"Halsabschnitt","view":"back","basis":"named_anatomy","tah_id":1804},
+    {"id":"spinalis__thoracis","parent":"spinalis","label_de":"Brustabschnitt","view":"back","basis":"named_anatomy","tah_id":1803},
+    {"id":"rectus_abdominis__segment_01","parent":"rectus_abdominis","label_de":"Oberster modellierter Muskelbauch","view":"front","basis":"model_specific_tendinous_intersections","ta2_ids":[2357,2358]},
+    {"id":"rectus_abdominis__segment_02","parent":"rectus_abdominis","label_de":"Zweiter modellierter Muskelbauch von oben","view":"front","basis":"model_specific_tendinous_intersections","ta2_ids":[2357,2358]},
+    {"id":"rectus_abdominis__segment_03","parent":"rectus_abdominis","label_de":"Dritter modellierter Muskelbauch von oben","view":"front","basis":"model_specific_tendinous_intersections","ta2_ids":[2357,2358]},
+    {"id":"rectus_abdominis__segment_04","parent":"rectus_abdominis","label_de":"Vierter modellierter Muskelbauch von oben","view":"front","basis":"model_specific_tendinous_intersections","ta2_ids":[2357,2358]}
+  ],
+  "implementation_rules": [
+    "Keep all existing App IDs. Derive a parent highlight by unioning its approved descendants or fall back to its whole mask where a complete child set is unavailable.",
+    "Append the anatomical side suffix to the full App region ID in a path. Treat the App region ID and side as explicit fields.",
+    "Use separate deep masks when surface occlusion conceals a region. The proposed back view identifies the camera, including for deep masks. Use the same camera and mask IDs for both figures.",
+    "Rectus segment order is cranial to caudal on each side. The four proposed slots are shared by both figures and require a checked common reference pattern before approval.",
+    "Keep exercise-role assignments at the existing level until the App explicitly approves evidence-based subdivision."
+  ]
+}
+

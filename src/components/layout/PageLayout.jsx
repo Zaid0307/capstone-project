@@ -2,11 +2,15 @@ import styled from 'styled-components';
 import Navigation from '../navigation/Navigation';
 import { navigationOffset, sizes, space } from '../../styles/tokens';
 
-export default function PageLayout({ children }) {
+// `isWide` gives pages with side-by-side areas more room on large screens.
+// `hideNavigation` is for focused tasks such as editing a plan.
+export default function PageLayout({ children, isWide = false, hideNavigation = false }) {
   return (
     <>
-      <Main>{children}</Main>
-      <Navigation />
+      <Main $isWide={isWide} $hasNavigation={!hideNavigation}>
+        {children}
+      </Main>
+      {!hideNavigation && <Navigation />}
     </>
   );
 }
@@ -17,8 +21,9 @@ const Main = styled.main`
   gap: ${space.xl};
   width: 100%;
   min-width: 0;
-  max-width: ${sizes.contentMax};
+  max-width: ${props => (props.$isWide ? '960px' : sizes.contentMax)};
   margin: 0 auto;
   /* Room for the fixed navigation at the bottom. */
-  padding: ${space.xl} ${space.lg} calc(${navigationOffset} + ${space.lg});
+  padding: ${space.xl} ${space.lg}
+    ${props => (props.$hasNavigation ? `calc(${navigationOffset} + ${space.lg})` : space.xl)};
 `;

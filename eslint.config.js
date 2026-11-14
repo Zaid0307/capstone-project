@@ -3,7 +3,7 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
-  { ignores: ['build', 'storybook-static', 'node_modules'] },
+  { ignores: ['build', 'storybook-static', 'node_modules', 'design-handoff', 'supabase/.temp'] },
   js.configs.recommended,
   {
     files: ['**/*.{js,jsx}'],

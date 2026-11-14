@@ -1,52 +1,68 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { MdOutlineDeleteForever } from 'react-icons/md';
-import PlanMuscle from './PlanMuscle';
-import IconButton from '../ui/IconButton';
 import ItemHeader from '../ui/ItemHeader';
 import ToggleButton from '../ui/ToggleButton';
-import { colors, fontSizes, radii, space } from '../../styles/tokens';
+import { colors, fontSizes, fontWeights, radii, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
-import { dayLabel, groupEntriesByMuscle } from '../../utils/workoutPlan';
+import {
+  dayTitle,
+  entryName,
+  muscleLabel,
+  summarizeSets,
+} from '../../utils/workoutPlan';
 
-export default function PlanDay({ day, onDelete }) {
-  const { t } = useTranslation();
+// One training day of a saved plan: title, name and, when opened, its exercises in order.
+export default function PlanDay({ day, schedule }) {
+  const { t, language } = useTranslation();
   const [isExpanded, setIsExpanded] = useState(false);
-  const label = dayLabel(day.day, t);
+  const title = dayTitle(day, schedule, t);
+  const subtitle = schedule.type !== 'rotation' && day.weekday ? day.name : '';
 
   return (
     <Card>
       <ItemHeader
         title={
           <>
-            <Title>{label}</Title>
-            {day.name && <DayName>{day.name}</DayName>}
+            <Title>{title}</Title>
+            {subtitle && <Muted>{subtitle}</Muted>}
           </>
         }
         actions={
-          <>
-            <IconButton
-              aria-label={t('plans.deleteDay', { day: label })}
-              onClick={onDelete}
-            >
-              <MdOutlineDeleteForever />
-            </IconButton>
-            <ToggleButton
-              name={label}
-              isExpanded={isExpanded}
-              onToggle={() => setIsExpanded(!isExpanded)}
-            />
-          </>
+          <ToggleButton
+            name={title}
+            isExpanded={isExpanded}
+            onToggle={() => setIsExpanded(!isExpanded)}
+          />
         }
       />
       {isExpanded && (
         <>
-          {day.note && <Note>{day.note}</Note>}
-          <MuscleList>
-            {groupEntriesByMuscle(day.entries ?? []).map(muscle => (
-              <PlanMuscle key={muscle.name} muscle={muscle} />
-            ))}
-          </MuscleList>
+          {day.note && <Muted>{day.note}</Muted>}
+          <EntryList aria-label={t('planEditor.day.exercisesOf', { name: title })}>
+            {day.entries.map(entry => {
+              const rir = entry.sets.find(set => set.rirTarget !== null)?.rirTarget;
+              return (
+                <Entry key={entry.id}>
+                  <Name>{entryName(entry, language)}</Name>
+                  <Muted>
+                    {muscleLabel(entry.muscle, t)} · {summarizeSets(entry.sets, language)}
+                  </Muted>
+                  {(entry.restSeconds !== null || rir !== undefined) && (
+                    <Muted>
+                      {[
+                        entry.restSeconds !== null &&
+                          t('planEditor.entry.restShort', { seconds: entry.restSeconds }),
+                        rir !== undefined && `${t('exercise.rir')} ${rir}`,
+                      ]
+                        .filter(Boolean)
+                        .join(' · ')}
+                    </Muted>
+                  )}
+                  {entry.note && <p>{entry.note}</p>}
+                </Entry>
+              );
+            })}
+          </EntryList>
         </>
       )}
     </Card>
@@ -67,17 +83,25 @@ const Title = styled.h3`
   font-size: ${fontSizes.lead};
 `;
 
-const DayName = styled.p`
+const Muted = styled.p`
   color: ${colors.textMuted};
+  font-size: ${fontSizes.caption};
+  font-variant-numeric: tabular-nums;
 `;
 
-const Note = styled.p`
-  color: ${colors.textMuted};
-`;
-
-const MuscleList = styled.ul`
+const EntryList = styled.ol`
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: ${space.sm};
-  list-style: none;
+  gap: ${space.xs};
+  padding-left: ${space.lg};
+`;
+
+const Entry = styled.li`
+  padding: ${space.sm} ${space.md};
+  border-radius: ${radii.small};
+  background-color: ${colors.surface};
+`;
+
+const Name = styled.p`
+  font-weight: ${fontWeights.medium};
 `;

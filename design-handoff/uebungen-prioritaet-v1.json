@@ -1,0 +1,479 @@
+{
+  "version": 1,
+  "date": "2026-11-13",
+  "source": "src/data/planTemplates.json, src/data/exerciseLibrary.js",
+  "note": "Priorität 1 = Übungen der 23 Vorlagen, sortiert nach Häufigkeit in den Vorlagen (Anzahl Vorkommen), bei Gleichstand nach erster Vorlage. Priorität 2 = übrige Katalogübungen. Alle IDs stammen aus dem bestehenden Katalog mit 97 Übungen; es gibt keine Varianten-IDs außerhalb des Katalogs.",
+  "priority1": [
+    {
+      "exerciseId": "glute_bridge",
+      "usesInTemplates": 18,
+      "perSide": false
+    },
+    {
+      "exerciseId": "cat_cow",
+      "usesInTemplates": 17,
+      "perSide": false
+    },
+    {
+      "exerciseId": "plank",
+      "usesInTemplates": 14,
+      "perSide": false
+    },
+    {
+      "exerciseId": "calf_raise",
+      "usesInTemplates": 14,
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_shoulder_press",
+      "usesInTemplates": 13,
+      "perSide": false
+    },
+    {
+      "exerciseId": "lying_leg_curl",
+      "usesInTemplates": 13,
+      "perSide": false
+    },
+    {
+      "exerciseId": "push_up",
+      "usesInTemplates": 13,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_row",
+      "usesInTemplates": 12,
+      "perSide": false
+    },
+    {
+      "exerciseId": "triceps_pushdown",
+      "usesInTemplates": 11,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_squat",
+      "usesInTemplates": 11,
+      "perSide": false
+    },
+    {
+      "exerciseId": "standing_shoulder_car",
+      "usesInTemplates": 11,
+      "perSide": false
+    },
+    {
+      "exerciseId": "hip_flexor_stretch",
+      "usesInTemplates": 11,
+      "perSide": true
+    },
+    {
+      "exerciseId": "thoracic_open_book",
+      "usesInTemplates": 11,
+      "perSide": true
+    },
+    {
+      "exerciseId": "supine_hamstring_strap_stretch",
+      "usesInTemplates": 11,
+      "perSide": true
+    },
+    {
+      "exerciseId": "wall_pec_stretch",
+      "usesInTemplates": 11,
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_bench_press",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_rdl",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "reverse_lunge",
+      "usesInTemplates": 10,
+      "perSide": true
+    },
+    {
+      "exerciseId": "pull_up",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "dead_bug",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "barbell_bench_press",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "cable_lat_pulldown",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "incline_dumbbell_press",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_lateral_raise",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "barbell_curl",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "pilates_bridge",
+      "usesInTemplates": 10,
+      "perSide": false
+    },
+    {
+      "exerciseId": "goblet_squat",
+      "usesInTemplates": 9,
+      "perSide": false
+    },
+    {
+      "exerciseId": "one_arm_dumbbell_row",
+      "usesInTemplates": 9,
+      "perSide": true
+    },
+    {
+      "exerciseId": "barbell_squat",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "romanian_deadlift",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "leg_press",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "hammer_curl",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "hip_thrust",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "bulgarian_split_squat",
+      "usesInTemplates": 8,
+      "perSide": true
+    },
+    {
+      "exerciseId": "lateral_band_walk",
+      "usesInTemplates": 8,
+      "perSide": false
+    },
+    {
+      "exerciseId": "seated_cable_row",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "barbell_row",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "reverse_fly",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_external_rotation",
+      "usesInTemplates": 6,
+      "perSide": true
+    },
+    {
+      "exerciseId": "pilates_hundred",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "pilates_single_leg_stretch",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "pilates_clamshell",
+      "usesInTemplates": 6,
+      "perSide": true
+    },
+    {
+      "exerciseId": "bird_dog",
+      "usesInTemplates": 6,
+      "perSide": false
+    },
+    {
+      "exerciseId": "overhead_triceps_extension",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "leg_extension",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "cable_crunch",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_lat_pulldown",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_lateral_raise",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_curl",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_triceps_extension",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "banded_good_morning",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "shadow_boxing",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "heavy_bag_jab_cross",
+      "usesInTemplates": 5,
+      "perSide": false
+    },
+    {
+      "exerciseId": "heavy_bag_jab",
+      "usesInTemplates": 4,
+      "perSide": false
+    },
+    {
+      "exerciseId": "heavy_bag_cross",
+      "usesInTemplates": 4,
+      "perSide": false
+    },
+    {
+      "exerciseId": "pilates_swimming",
+      "usesInTemplates": 4,
+      "perSide": false
+    },
+    {
+      "exerciseId": "pilates_side_kick",
+      "usesInTemplates": 4,
+      "perSide": true
+    },
+    {
+      "exerciseId": "side_plank",
+      "usesInTemplates": 4,
+      "perSide": true
+    },
+    {
+      "exerciseId": "child_pose",
+      "usesInTemplates": 4,
+      "perSide": false
+    },
+    {
+      "exerciseId": "face_pull",
+      "usesInTemplates": 3,
+      "perSide": false
+    },
+    {
+      "exerciseId": "chest_supported_dumbbell_row",
+      "usesInTemplates": 2,
+      "perSide": false
+    },
+    {
+      "exerciseId": "cable_chest_fly",
+      "usesInTemplates": 2,
+      "perSide": false
+    },
+    {
+      "exerciseId": "heavy_bag_hook",
+      "usesInTemplates": 1,
+      "perSide": false
+    },
+    {
+      "exerciseId": "step_up",
+      "usesInTemplates": 1,
+      "perSide": true
+    }
+  ],
+  "priority2": [
+    {
+      "exerciseId": "incline_barbell_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "machine_chest_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_chest_fly",
+      "perSide": false
+    },
+    {
+      "exerciseId": "parallel_bar_dip",
+      "perSide": false
+    },
+    {
+      "exerciseId": "close_grip_bench_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_pullover",
+      "perSide": false
+    },
+    {
+      "exerciseId": "assisted_pull_up",
+      "perSide": false
+    },
+    {
+      "exerciseId": "straight_arm_pulldown",
+      "perSide": false
+    },
+    {
+      "exerciseId": "yates_row",
+      "perSide": false
+    },
+    {
+      "exerciseId": "t_bar_row",
+      "perSide": false
+    },
+    {
+      "exerciseId": "machine_pullover",
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_shrug",
+      "perSide": false
+    },
+    {
+      "exerciseId": "barbell_overhead_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_dumbbell_lateral_raise",
+      "perSide": false
+    },
+    {
+      "exerciseId": "arnold_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "smith_shoulder_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "band_pull_apart",
+      "perSide": false
+    },
+    {
+      "exerciseId": "dumbbell_curl",
+      "perSide": false
+    },
+    {
+      "exerciseId": "preacher_curl",
+      "perSide": false
+    },
+    {
+      "exerciseId": "21s_barbell_curl",
+      "perSide": false
+    },
+    {
+      "exerciseId": "close_grip_push_up",
+      "perSide": false
+    },
+    {
+      "exerciseId": "bodyweight_squat",
+      "perSide": false
+    },
+    {
+      "exerciseId": "hack_squat",
+      "perSide": false
+    },
+    {
+      "exerciseId": "conventional_deadlift",
+      "perSide": false
+    },
+    {
+      "exerciseId": "cable_glute_kickback",
+      "perSide": true
+    },
+    {
+      "exerciseId": "pallof_press",
+      "perSide": false
+    },
+    {
+      "exerciseId": "hanging_knee_raise",
+      "perSide": false
+    },
+    {
+      "exerciseId": "downward_facing_dog",
+      "perSide": false
+    },
+    {
+      "exerciseId": "seated_glute_stretch",
+      "perSide": true
+    },
+    {
+      "exerciseId": "standing_calf_stretch",
+      "perSide": true
+    },
+    {
+      "exerciseId": "jump_rope",
+      "perSide": false
+    },
+    {
+      "exerciseId": "brisk_walk",
+      "perSide": false
+    },
+    {
+      "exerciseId": "incline_treadmill_walk",
+      "perSide": false
+    }
+  ],
+  "perSideExerciseIds": [
+    "one_arm_dumbbell_row",
+    "band_external_rotation",
+    "bulgarian_split_squat",
+    "reverse_lunge",
+    "step_up",
+    "cable_glute_kickback",
+    "side_plank",
+    "pilates_side_kick",
+    "pilates_clamshell",
+    "hip_flexor_stretch",
+    "supine_hamstring_strap_stretch",
+    "seated_glute_stretch",
+    "standing_calf_stretch",
+    "thoracic_open_book"
+  ],
+  "variantIdsOutsideCatalog": []
+}

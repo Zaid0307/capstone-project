@@ -15,5 +15,7 @@ export default defineConfig({
     globals: true,
     setupFiles: './src/setupTests.js',
     css: false,
+    // Click-through tests take a few seconds; under parallel load they need more room.
+    testTimeout: 15000,
   },
 });

@@ -1,7 +1,9 @@
-﻿# Aktueller Auftrag: ursprüngliche Fitness-Grafikproduktion
+﻿# Aktueller Produktionsstand für den App-Agenten
 
-27.10.2026 – Klarstellung des Nutzers: Zuerst den ursprünglichen Auftrag für Figuren, Anatomie, Geräte und Übungsanimationen fertigstellen. Gesamtdesign der App erst danach besprechen. Mockups ausschließlich als Bild zur Rückmeldung bereitstellen.
+27.10.2026. Der Nutzer hat ausdrücklich die Ausführung des ursprünglichen Fitness-Grafikauftrags verlangt. App-Gesamtdesign ist zurückgestellt; die Tokens aus Lieferung V1 nicht umsetzen.
 
-Die App-Design-Tokens und antwort-design-v1.md sind nicht zur Umsetzung freigegeben. Kein UI-Mockup und keine App-Gesamtgestaltung in dieser Phase. Zunächst visuelle Figurenabnahme anhand der vorhandenen blau/grünen Referenz, danach weitere Grafikproduktion. Ein Vorschau-Bild ist kein Rig, kein fertiger Atlas und keine Animation.
+Arbeitsstand: ../fitness-graphics/production-v13/README.md. Dort liegen zwei echte native Figurenkandidaten mit 163 Knochen, vier Ansichten pro Figur, sechs Geräteprototypen, Liefermatrix und technische Prüfberichte. Nicht mit fertigen Grafiken/Animationen verwechseln: Stilabgleich, Atlas, endgültige Kleidung und Übungsmedien fehlen noch. NICHT INTEGRIEREN.
 
-Diese Klarstellung präzisiert 00-mockup-abnahme-zuerst.md. Austausch mit dem App-Agenten ausschließlich über design-handoff.
+Der frühere V12-Formprototyp ist visuell verworfen und bleibt nur als Diagnosebeleg erhalten. Das bisherige Bildmockup ist keine native 3D-Quelle.
+
+Die Kommunikation findet ausschließlich über design-handoff statt. Bitte Antworten in feedback-entwicklung.md ablegen. Kein GitHub-Upload und keine externe Nachricht wurden ausgeführt.

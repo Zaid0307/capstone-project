@@ -1,20 +1,21 @@
-import { PLAN_TEMPLATES, templateById, templateToPlan } from './planTemplates';
-import { EXERCISES } from './exerciseLibrary';
 import {
-  PLAN_SCHEMA_VERSION,
-  WEEKDAYS,
-  buildWorkoutPlan,
-  groupEntriesByMuscle,
-  splitWorkoutPlan,
-} from '../utils/workoutPlan';
+  OWN_TEMPLATES,
+  PLAN_TEMPLATES,
+  TEMPLATE_CATEGORIES,
+  templateById,
+  templateCategory,
+  templateToPlan,
+} from './planTemplates';
+import { EXERCISES } from './exerciseLibrary';
+import { PLAN_SCHEMA_VERSION, WEEKDAYS, migratePlan, planProblems } from '../utils/workoutPlan';
 
 const exerciseIds = new Set(EXERCISES.map(exercise => exercise.id));
 const bilingual = text => Boolean(text?.de?.trim() && text?.en?.trim());
 
 describe('plan templates', () => {
   it('contains the 23 own templates and no athlete-inspired ones', () => {
-    expect(PLAN_TEMPLATES).toHaveLength(23);
-    expect(new Set(PLAN_TEMPLATES.map(template => template.id)).size).toBe(23);
+    expect(OWN_TEMPLATES).toHaveLength(23);
+    expect(new Set(PLAN_TEMPLATES.map(template => template.id)).size).toBe(PLAN_TEMPLATES.length);
     const names = JSON.stringify(PLAN_TEMPLATES.map(template => template.name));
     for (const athlete of ['Arnold', 'Ronnie', 'Yates', 'Cutler', 'Haney', 'Mentzer', 'Bailey']) {
       expect(names).not.toContain(athlete);
@@ -49,6 +50,59 @@ describe('plan templates', () => {
   );
 });
 
+describe('template quality (expert review 14.11.2026)', () => {
+  const exercisesOf = template => template.days.flatMap(day => day.entries);
+
+  it('gives every template its own description', () => {
+    const descriptions = PLAN_TEMPLATES.map(template => template.description.de);
+    expect(new Set(descriptions).size).toBe(descriptions.length);
+  });
+
+  it('has a real strength block in the strength plan', () => {
+    const entries = exercisesOf(templateById('strength_hypertrophy_4'));
+    expect(entries.some(entry => entry.exerciseId === 'conventional_deadlift')).toBe(true);
+    expect(entries.filter(entry => entry.dose.unit === 'repetitions' && entry.dose.max <= 5).length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('trains the abs in the split plans', () => {
+    const core = ['cable_crunch', 'hanging_knee_raise', 'plank', 'dead_bug'];
+    for (const id of ['hypertrophy_ppl_6', 'hypertrophy_5day_bodypart']) {
+      expect(exercisesOf(templateById(id)).some(entry => core.includes(entry.exerciseId)), id).toBe(true);
+    }
+  });
+
+  it('does not tell mobility and Pilates plans to add load', () => {
+    for (const id of ['mobility_daily_light', 'women_pilates_beginner_3', 'women_mobility_stretch_4']) {
+      expect(templateById(id).progression.instruction.de, id).toMatch(/Haltezeit/);
+    }
+  });
+});
+
+describe('template categories', () => {
+  it('puts every template into one known category', () => {
+    for (const template of PLAN_TEMPLATES) {
+      expect(TEMPLATE_CATEGORIES).toContain(templateCategory(template));
+    }
+    expect(templateCategory(templateById('hypertrophy_fullbody_3'))).toBe('gym');
+    expect(templateCategory(templateById('home_band_3'))).toBe('home');
+    expect(templateCategory(templateById('boxing_technical_3'))).toBe('boxing');
+    expect(templateCategory(templateById('mobility_daily_light'))).toBe('mobility');
+    expect(templateCategory(templateById('women_strength_glutes_4'))).toBe('women');
+  });
+
+  it('has realistic anime-inspired plans with rest days and a safety note', () => {
+    const anime = PLAN_TEMPLATES.filter(template => templateCategory(template) === 'anime');
+    expect(anime.length).toBeGreaterThanOrEqual(5);
+    for (const template of anime) {
+      expect(template.name.de).toMatch(/inspiriert von/);
+      expect(template.safety.caution.de).toMatch(/Fan-Plan, nicht offiziell/);
+      const trainingDays = template.days.filter(day => day.type !== 'rest');
+      expect(trainingDays.length).toBe(template.weeklyTrainingDays);
+      expect(trainingDays.length).toBeLessThanOrEqual(5);
+    }
+  });
+});
+
 describe('templateToPlan', () => {
   const template = templateById('hypertrophy_fullbody_3');
 
@@ -61,16 +115,21 @@ describe('templateToPlan', () => {
       template: { id: 'hypertrophy_fullbody_3' },
     });
     expect(plan.id).not.toBe(template.id);
-    expect(plan.days.map(day => day.day)).toEqual(['monday', 'wednesday', 'friday']);
+    expect(plan.schedule).toEqual({ type: 'weekdays' });
+    expect(plan.days.map(day => day.weekday)).toEqual(['monday', 'wednesday', 'friday']);
     expect(plan.days[0].name).toBe('Ganzkörper A');
-    expect(plan.days[0].entries[0]).toMatchObject({
+    const [first] = plan.days[0].entries;
+    expect(first).toMatchObject({
       exerciseId: 'goblet_squat',
       exercise: 'Goblet Squat',
       muscle: 'legs',
-      sets: 3,
+      restSeconds: 120,
+    });
+    expect(first.sets).toHaveLength(3);
+    expect(first.sets[0]).toEqual({
+      type: 'working',
       dose: { unit: 'repetitions', min: 8, max: 12 },
       weight: null,
-      restSeconds: 120,
       rirTarget: 2,
     });
     expect(plan.hints.safety).toMatch(/Muskelversagen/);
@@ -90,22 +149,16 @@ describe('templateToPlan', () => {
 
   it('puts exercises without a muscle group under other', () => {
     const plan = templateToPlan(templateById('boxing_technical_3'), 'en');
-    const entries = plan.days.flatMap(day => day.entries);
-    const jab = entries.find(entry => entry.exerciseId === 'heavy_bag_jab');
-
+    const jab = plan.days.flatMap(day => day.entries).find(entry => entry.exerciseId === 'heavy_bag_jab');
     expect(jab.muscle).toBe('other');
-    const groups = groupEntriesByMuscle(entries).map(group => group.name);
-    expect(groups[groups.length - 1]).toBe('other');
   });
 
-  it('keeps day names, hints and targets when the copy is edited and saved', () => {
-    const plan = templateToPlan(template, 'de');
-    const { details, entriesByDay } = splitWorkoutPlan(plan);
-    const saved = buildWorkoutPlan(details, entriesByDay);
-
-    expect(saved.days[0].name).toBe('Ganzkörper A');
-    expect(saved.hints).toEqual(plan.hints);
-    expect(saved.template).toEqual(plan.template);
-    expect(saved.days[0].entries[0].rirTarget).toBe(2);
-  });
+  it.each(PLAN_TEMPLATES.map(item => [item.id, item]))(
+    '%s becomes a plan that can be saved as it is',
+    (id, item) => {
+      const plan = templateToPlan(item, 'de');
+      expect(planProblems(plan)).toEqual([]);
+      expect(migratePlan(plan)).toBe(plan);
+    }
+  );
 });

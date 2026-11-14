@@ -1,5 +1,7 @@
 # Design-Übergabe: GetFit!
 
+> **AKTUELL (13.11.2026): Neuer Auftrag an den Grafik-Agenten → [00-AKTUELL-AN-GRAFIK.md](00-AKTUELL-AN-GRAFIK.md)** (Muskelmodell für den ganzen Körper, Masken, Animationen).
+
 Stand: 27.10.2026, Code-Stand: Commit `c4ed677` plus Umstellung auf Vite und React 19 (Branch `ueberarbeitung`).
 
 Dieses Paket beschreibt die Fitness-App **GetFit!** so, dass das gesamte UI/UX-Design, die Grafiken und die Farbpalette gestaltet werden können, ohne Funktionen oder Seitenstruktur erraten zu müssen.

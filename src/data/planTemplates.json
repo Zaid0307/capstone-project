@@ -1,14 +1,14 @@
 [
  {
   "id": "hypertrophy_fullbody_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Muskelaufbau Ganzkörper 3 Tage",
    "en": "Muscle building full body, 3 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Drei Ganzkörper-Einheiten pro Woche mit Kurzhanteln und Grundübungen. Für den Einstieg ins Studio, etwa 60 Minuten.",
+   "en": "Three full-body sessions a week with dumbbells and basic lifts. For getting started in the gym, about 60 minutes."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -105,6 +105,17 @@
       },
       "restSeconds": 45,
       "rirTarget": null
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -153,12 +164,12 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "pull_up",
+      "exerciseId": "assisted_pull_up",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 5,
-       "max": 10
+       "min": 8,
+       "max": 12
       },
       "restSeconds": 120,
       "rirTarget": 2
@@ -184,6 +195,28 @@
       },
       "restSeconds": 45,
       "rirTarget": null
+     },
+     {
+      "exerciseId": "dumbbell_lateral_raise",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "calf_raise",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 12,
+       "max": 20
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -295,14 +328,14 @@
  },
  {
   "id": "hypertrophy_upperlower_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Muskelaufbau Ober-/Unterkörper 4 Tage",
    "en": "Muscle building upper/lower, 4 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ober- und Unterkörper im Wechsel, jeder Muskel zweimal pro Woche. Der Klassiker für Fortgeschrittene, etwa 60–70 Minuten.",
+   "en": "Upper and lower body in turns, every muscle twice a week. The classic for intermediates, about 60–70 minutes."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -317,8 +350,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -688,14 +721,14 @@
  },
  {
   "id": "hypertrophy_ppl_6",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Push/Pull/Legs 6 Tage",
    "en": "Push/Pull/Legs, 6 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Drücken, Ziehen, Beine zweimal pro Woche. Viel Volumen für Erfahrene mit Zeit für sechs Einheiten.",
+   "en": "Push, pull, legs twice a week. High volume for experienced lifters with time for six sessions."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -710,8 +743,8 @@
   "weeklyTrainingDays": 6,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -936,6 +969,17 @@
       },
       "restSeconds": 75,
       "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -949,7 +993,7 @@
     "note": null,
     "entries": [
      {
-      "exerciseId": "barbell_bench_press",
+      "exerciseId": "incline_barbell_press",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
@@ -960,7 +1004,7 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "incline_dumbbell_press",
+      "exerciseId": "dumbbell_bench_press",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
@@ -983,7 +1027,7 @@
      },
      {
       "exerciseId": "dumbbell_lateral_raise",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
        "min": 12,
@@ -1026,14 +1070,14 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "chest_supported_dumbbell_row",
+      "exerciseId": "barbell_row",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 6,
+       "max": 10
       },
-      "restSeconds": 120,
+      "restSeconds": 150,
       "rirTarget": 2
      },
      {
@@ -1145,6 +1189,17 @@
       },
       "restSeconds": 75,
       "rirTarget": 2
+     },
+     {
+      "exerciseId": "hanging_knee_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -1165,14 +1220,14 @@
  },
  {
   "id": "hypertrophy_chest_back_split_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Brust/Rücken- und Bein-Fokus",
    "en": "Chest/back and leg focus"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Split mit eigenem Tag für Brust/Rücken, Beine, Schultern/Arme und Gesäß. Für Fortgeschrittene.",
+   "en": "Split with own days for chest/back, legs, shoulders/arms and glutes. For intermediates."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -1187,8 +1242,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -1547,14 +1602,14 @@
  },
  {
   "id": "hypertrophy_5day_bodypart",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Fünf-Tage-Bodybuilding-Split",
    "en": "Five-day bodybuilding split"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Klassischer Bodybuilding-Split: jede Muskelgruppe einen eigenen Tag. Für Erfahrene mit fünf Trainingstagen.",
+   "en": "Classic bodybuilding split: each muscle group gets its own day. For experienced lifters with five training days."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -1569,8 +1624,8 @@
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -1629,6 +1684,17 @@
        "max": 15
       },
       "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "parallel_bar_dip",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 6,
+       "max": 12
+      },
+      "restSeconds": 120,
       "rirTarget": 2
      },
      {
@@ -1773,6 +1839,17 @@
       },
       "restSeconds": 75,
       "rirTarget": 2
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -1811,7 +1888,7 @@
      },
      {
       "exerciseId": "dumbbell_lateral_raise",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
        "min": 12,
@@ -1840,6 +1917,17 @@
        "max": 15
       },
       "restSeconds": 75,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "dumbbell_curl",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 60,
       "rirTarget": 2
      }
     ]
@@ -1907,6 +1995,17 @@
       },
       "restSeconds": 60,
       "rirTarget": 2
+     },
+     {
+      "exerciseId": "hanging_knee_raise",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 60,
+      "rirTarget": 2
      }
     ]
    },
@@ -1927,14 +2026,14 @@
  },
  {
   "id": "strength_hypertrophy_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Kraft & Muskelmasse",
    "en": "Strength & muscle mass"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ober-/Unterkörper mit Kraftblock: schwere Grundübungen mit 3–5 Wiederholungen, danach Muskelaufbau. Etwa 75 Minuten.",
+   "en": "Upper/lower with a strength block: heavy main lifts at 3–5 reps, then muscle building. About 75 minutes."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -1944,14 +2043,14 @@
    "hypertrophy",
    "strength"
   ],
-  "level": "advanced",
+  "level": "intermediate",
   "setting": "gym",
   "audience": "all",
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Grundübungen (Bankdrücken, Kniebeuge, Kreuzheben) mit 3–5 Wiederholungen: Sobald alle Sätze 5 sauber bei RIR ≥ 1 gelingen, beim nächsten Mal 2,5 kg (Oberkörper) bzw. 5 kg (Beine, Kreuzheben) mehr. Hilfsübungen im Wiederholungsbereich steigern. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen.",
+    "en": "Main lifts (bench press, squat, deadlift) at 3–5 reps: once every set reaches 5 cleanly at RIR ≥ 1, add 2.5 kg (upper body) or 5 kg (legs, deadlift) next time. Progress the accessories within their rep range. Every 6–8 weeks, take a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -1981,13 +2080,35 @@
     "entries": [
      {
       "exerciseId": "barbell_bench_press",
+      "sets": 4,
+      "dose": {
+       "unit": "repetitions",
+       "min": 3,
+       "max": 5
+      },
+      "restSeconds": 210,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_row",
+      "sets": 4,
+      "dose": {
+       "unit": "repetitions",
+       "min": 5,
+       "max": 8
+      },
+      "restSeconds": 150,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "barbell_overhead_press",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 6,
-       "max": 10
+       "min": 4,
+       "max": 6
       },
-      "restSeconds": 150,
+      "restSeconds": 180,
       "rirTarget": 2
      },
      {
@@ -1998,51 +2119,7 @@
        "min": 8,
        "max": 12
       },
-      "restSeconds": 120,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "incline_dumbbell_press",
-      "sets": 2,
-      "dose": {
-       "unit": "repetitions",
-       "min": 8,
-       "max": 12
-      },
-      "restSeconds": 120,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "seated_cable_row",
-      "sets": 3,
-      "dose": {
-       "unit": "repetitions",
-       "min": 8,
-       "max": 12
-      },
-      "restSeconds": 120,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "dumbbell_lateral_raise",
-      "sets": 3,
-      "dose": {
-       "unit": "repetitions",
-       "min": 12,
-       "max": 20
-      },
-      "restSeconds": 60,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "barbell_curl",
-      "sets": 2,
-      "dose": {
-       "unit": "repetitions",
-       "min": 10,
-       "max": 15
-      },
-      "restSeconds": 75,
+      "restSeconds": 90,
       "rirTarget": 2
      },
      {
@@ -2053,8 +2130,19 @@
        "min": 10,
        "max": 15
       },
-      "restSeconds": 75,
-      "rirTarget": 2
+      "restSeconds": 60,
+      "rirTarget": 1
+     },
+     {
+      "exerciseId": "barbell_curl",
+      "sets": 2,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
+      "rirTarget": 1
      }
     ]
    },
@@ -2069,13 +2157,13 @@
     "entries": [
      {
       "exerciseId": "barbell_squat",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
-       "min": 6,
-       "max": 10
+       "min": 3,
+       "max": 5
       },
-      "restSeconds": 180,
+      "restSeconds": 210,
       "rirTarget": 2
      },
      {
@@ -2083,19 +2171,19 @@
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 10
+       "min": 6,
+       "max": 8
       },
       "restSeconds": 150,
       "rirTarget": 2
      },
      {
       "exerciseId": "leg_press",
-      "sets": 3,
+      "sets": 2,
       "dose": {
        "unit": "repetitions",
-       "min": 10,
-       "max": 15
+       "min": 8,
+       "max": 12
       },
       "restSeconds": 120,
       "rirTarget": 2
@@ -2108,7 +2196,7 @@
        "min": 10,
        "max": 15
       },
-      "restSeconds": 90,
+      "restSeconds": 60,
       "rirTarget": 2
      },
      {
@@ -2116,11 +2204,11 @@
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 12,
-       "max": 20
+       "min": 10,
+       "max": 15
       },
       "restSeconds": 60,
-      "rirTarget": 2
+      "rirTarget": 1
      }
     ]
    },
@@ -2235,18 +2323,18 @@
     "note": null,
     "entries": [
      {
-      "exerciseId": "hip_thrust",
+      "exerciseId": "conventional_deadlift",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 3,
+       "max": 5
       },
-      "restSeconds": 150,
+      "restSeconds": 210,
       "rirTarget": 2
      },
      {
-      "exerciseId": "bulgarian_split_squat",
+      "exerciseId": "hip_thrust",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
@@ -2257,36 +2345,36 @@
       "rirTarget": 2
      },
      {
+      "exerciseId": "bulgarian_split_squat",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 8,
+       "max": 12
+      },
+      "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
       "exerciseId": "leg_extension",
-      "sets": 3,
-      "dose": {
-       "unit": "repetitions",
-       "min": 10,
-       "max": 15
-      },
-      "restSeconds": 90,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "lying_leg_curl",
-      "sets": 3,
-      "dose": {
-       "unit": "repetitions",
-       "min": 10,
-       "max": 15
-      },
-      "restSeconds": 90,
-      "rirTarget": 2
-     },
-     {
-      "exerciseId": "cable_crunch",
       "sets": 2,
       "dose": {
        "unit": "repetitions",
        "min": 10,
        "max": 15
       },
-      "restSeconds": 75,
+      "restSeconds": 60,
+      "rirTarget": 1
+     },
+     {
+      "exerciseId": "cable_crunch",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 15
+      },
+      "restSeconds": 60,
       "rirTarget": 2
      }
     ]
@@ -2321,14 +2409,14 @@
  },
  {
   "id": "gym_short_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Kompakt 30–45 Min",
    "en": "Compact 30–45 min"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Drei kurze Studio-Einheiten von 30–45 Minuten für volle Wochen.",
+   "en": "Three short gym sessions of 30–45 minutes for busy weeks."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -2583,14 +2671,14 @@
  },
  {
   "id": "bodyweight_beginner_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
-   "de": "Einstieg mit Eigengewicht",
-   "en": "Getting started with bodyweight"
+   "de": "Einstieg zu Hause (Körpergewicht und Band)",
+   "en": "Home starter (bodyweight and band)"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Sanfter Einstieg zu Hause mit Körpergewicht und einem Widerstandsband.",
+   "en": "A gentle start at home with bodyweight and one resistance band."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -2907,14 +2995,14 @@
  },
  {
   "id": "home_band_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Home Gym mit Widerstandsbändern",
    "en": "Home gym with resistance bands"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ganzkörper zu Hause mit Bändern, Miniband und einem Paar Kurzhanteln.",
+   "en": "Full body at home with bands, a mini band and one pair of dumbbells."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -3236,14 +3324,14 @@
  },
  {
   "id": "home_band_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Home Gym 4 Tage",
    "en": "Home gym, 4 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ober-/Unterkörper zu Hause mit Bändern und Kurzhanteln, für Fortgeschrittene.",
+   "en": "Upper/lower at home with bands and dumbbells, for intermediates."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -3259,8 +3347,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -3630,14 +3718,14 @@
  },
  {
   "id": "home_heavybag_band_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Home Gym + Boxsack + Bänder",
    "en": "Home gym + heavy bag + bands"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Zu Hause: Kraft mit Bändern plus Technik und Ausdauer am Boxsack.",
+   "en": "At home: strength with bands plus technique and conditioning on the heavy bag."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -3654,8 +3742,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -4001,14 +4089,14 @@
  },
  {
   "id": "boxing_technical_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Boxsack Grundtechnik + Kraft",
    "en": "Heavy bag basics + strength"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Grundtechnik am Boxsack mit einem Krafttag. Gut für den Einstieg ins Boxen.",
+   "en": "Basic heavy bag technique with one strength day. Good for getting started in boxing."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -4038,8 +4126,8 @@
   },
   "safety": {
    "caution": {
-    "de": "Kein erzwungenes Muskelversagen, keine Rekordlasten und keine extremen Profi-Umfänge als Standard.",
-    "en": "No forced muscle failure, no record loads and no extreme professional volumes as a default."
+    "de": "Boxsack sicher befestigen, Handbandagen und intakte Boxhandschuhe tragen; Technik vor Schlagkraft, keine maximalen Schläge.",
+    "en": "Fix the heavy bag securely, wear hand wraps and intact boxing gloves; technique before power, no maximum punches."
    },
    "medicalClearance": true
   },
@@ -4284,14 +4372,14 @@
  },
  {
   "id": "boxing_and_strength_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Boxen + Muskelaufbau",
    "en": "Boxing + muscle building"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Zwei Boxtage und zwei Krafttage im Studio.",
+   "en": "Two boxing days and two strength days in the gym."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -4307,8 +4395,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -4622,14 +4710,14 @@
  },
  {
   "id": "mobility_strength_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Gesunder Muskelaufbau + Mobility",
    "en": "Healthy muscle building + mobility"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Zwei Krafttage im Studio und zwei Mobility-Einheiten für gesunde Gelenke.",
+   "en": "Two strength days in the gym and two mobility sessions for healthy joints."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -4848,12 +4936,12 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "pull_up",
+      "exerciseId": "assisted_pull_up",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 5,
-       "max": 10
+       "min": 8,
+       "max": 12
       },
       "restSeconds": 120,
       "rirTarget": 2
@@ -4985,14 +5073,14 @@
  },
  {
   "id": "mobility_daily_light",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Mobility, Stretching und Regeneration",
    "en": "Mobility, stretching and recovery"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Kurze tägliche Einheit für Beweglichkeit, Dehnen und Erholung, etwa 20 Minuten.",
+   "en": "A short daily session for mobility, stretching and recovery, about 20 minutes."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -5008,16 +5096,16 @@
   "weeklyTrainingDays": 6,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
+    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "nicht relevant: ruhig atmen, kein Schmerz",
+    "en": "not relevant: breathe calmly, no pain"
    },
    "recovery": {
-    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
-    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+    "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
+    "en": "Light sessions also fit on strength days."
    }
   },
   "safety": {
@@ -5483,14 +5571,14 @@
  },
  {
   "id": "women_strength_glutes_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Glutes & Muskelaufbau – 4 Tage",
    "en": "Glutes & muscle building – 4 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Muskelaufbau mit Schwerpunkt Gesäß und Beine, vier Studio-Tage.",
+   "en": "Muscle building with a focus on glutes and legs, four gym days."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -5506,8 +5594,8 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -5877,14 +5965,14 @@
  },
  {
   "id": "women_strength_pilates_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Kraft + Pilates – 4 Tage",
    "en": "Strength + Pilates – 4 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Zwei Krafttage und zwei Pilates-Einheiten für Kraft und Körperspannung.",
+   "en": "Two strength days and two Pilates sessions for strength and core control."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -6106,12 +6194,12 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "pull_up",
+      "exerciseId": "assisted_pull_up",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 5,
-       "max": 10
+       "min": 8,
+       "max": 12
       },
       "restSeconds": 120,
       "rirTarget": 2
@@ -6244,14 +6332,14 @@
  },
  {
   "id": "women_pilates_beginner_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Pilates Einstieg",
    "en": "Pilates for beginners"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Pilates auf der Matte für den Einstieg, etwa 30 Minuten.",
+   "en": "Mat Pilates for beginners, about 30 minutes."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -6267,16 +6355,16 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
+    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "nicht relevant: ruhig atmen, kein Schmerz",
+    "en": "not relevant: breathe calmly, no pain"
    },
    "recovery": {
-    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
-    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+    "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
+    "en": "Light sessions also fit on strength days."
    }
   },
   "safety": {
@@ -6301,7 +6389,7 @@
       "sets": 1,
       "dose": {
        "unit": "seconds",
-       "value": 50
+       "value": 30
       },
       "restSeconds": 60,
       "rirTarget": null
@@ -6567,14 +6655,14 @@
  },
  {
   "id": "women_pilates_strength_5",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
-   "de": "Pilates & definierter Muskelaufbau",
-   "en": "Pilates & defined muscle building"
+   "de": "Pilates und Muskelaufbau – 5 Tage",
+   "en": "Pilates and muscle building – 5 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Drei Krafttage und zwei Pilates-Einheiten pro Woche.",
+   "en": "Three strength days and two Pilates sessions a week."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -6590,8 +6678,8 @@
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -7009,14 +7097,14 @@
  },
  {
   "id": "women_home_glutes_band_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Home-Workout Glutes & Bänder",
    "en": "Home workout: glutes & bands"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Zu Hause mit Bändern, Schwerpunkt Gesäß und Beine.",
+   "en": "At home with bands, focus on glutes and legs."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -7047,8 +7135,8 @@
   },
   "safety": {
    "caution": {
-    "de": "Für Glutes & Beintraining mit Band: passende Bandspannung und Verankerung beachten; Hip-Thrust mit Langhantel erfordert Gerät, andernfalls Glute-Bridge wählen.",
-    "en": "For glute and leg training with bands, use suitable band tension and anchoring; the barbell hip thrust needs equipment, otherwise choose the glute bridge."
+    "de": "Passende Bandspannung wählen und das Band sicher verankern. Bei Schmerzen in Knie, Hüfte oder Rücken abbrechen.",
+    "en": "Choose a suitable band tension and anchor the band securely. Stop if your knees, hips or back hurt."
    },
    "medicalClearance": true
   },
@@ -7097,7 +7185,7 @@
      },
      {
       "exerciseId": "glute_bridge",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
        "min": 12,
@@ -7108,7 +7196,7 @@
      },
      {
       "exerciseId": "lateral_band_walk",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
        "min": 15,
@@ -7237,8 +7325,8 @@
     "day": "friday",
     "type": "workout",
     "name": {
-     "de": "Home Ganzkörper (ersetzt Gym-Übungen)",
-     "en": "Home full body (replaces gym exercises)"
+     "de": "Zuhause Ganzkörper",
+     "en": "Home full body"
     },
     "note": null,
     "entries": [
@@ -7251,6 +7339,17 @@
        "max": 20
       },
       "restSeconds": 90,
+      "rirTarget": 2
+     },
+     {
+      "exerciseId": "step_up",
+      "sets": 3,
+      "dose": {
+       "unit": "repetitions",
+       "min": 10,
+       "max": 12
+      },
+      "restSeconds": 60,
       "rirTarget": 2
      },
      {
@@ -7339,14 +7438,14 @@
  },
  {
   "id": "women_fullbody_strength_3",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Starker Ganzkörper für Frauen",
    "en": "Strong full body for women"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ganzkörper mit Kraftschwerpunkt: Kniebeuge mit Langhantel und schwerere Sätze.",
+   "en": "Full body with a strength focus: barbell squats and heavier sets."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -7392,14 +7491,14 @@
     "note": null,
     "entries": [
      {
-      "exerciseId": "goblet_squat",
+      "exerciseId": "barbell_squat",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 5,
+       "max": 8
       },
-      "restSeconds": 120,
+      "restSeconds": 180,
       "rirTarget": 2
      },
      {
@@ -7407,10 +7506,10 @@
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 6,
+       "max": 8
       },
-      "restSeconds": 120,
+      "restSeconds": 150,
       "rirTarget": 2
      },
      {
@@ -7492,12 +7591,12 @@
       "rirTarget": 2
      },
      {
-      "exerciseId": "pull_up",
+      "exerciseId": "assisted_pull_up",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 5,
-       "max": 10
+       "min": 8,
+       "max": 12
       },
       "restSeconds": 120,
       "rirTarget": 2
@@ -7549,14 +7648,14 @@
     "note": null,
     "entries": [
      {
-      "exerciseId": "goblet_squat",
+      "exerciseId": "barbell_squat",
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 5,
+       "max": 8
       },
-      "restSeconds": 120,
+      "restSeconds": 180,
       "rirTarget": 2
      },
      {
@@ -7564,10 +7663,10 @@
       "sets": 3,
       "dose": {
        "unit": "repetitions",
-       "min": 8,
-       "max": 12
+       "min": 6,
+       "max": 8
       },
-      "restSeconds": 120,
+      "restSeconds": 150,
       "rirTarget": 2
      },
      {
@@ -7634,14 +7733,14 @@
  },
  {
   "id": "women_mobility_stretch_4",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Beweglichkeit & Pilates",
    "en": "Flexibility & Pilates"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Pilates und Mobility im Wechsel für Beweglichkeit und Haltung.",
+   "en": "Pilates and mobility in turns for flexibility and posture."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -7657,16 +7756,16 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
+    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "nicht relevant: ruhig atmen, kein Schmerz",
+    "en": "not relevant: breathe calmly, no pain"
    },
    "recovery": {
-    "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
-    "en": "Put recovery, everyday life, technique and total volume before blanket increases in intensity."
+    "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
+    "en": "Light sessions also fit on strength days."
    }
   },
   "safety": {
@@ -8015,14 +8114,14 @@
  },
  {
   "id": "women_athlete_5",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": {
    "de": "Athletisch & muskulös – 5 Tage",
    "en": "Athletic & muscular – 5 days"
   },
   "description": {
-   "de": "Originales, vollständig editierbares Trainingsprogramm. Keine medizinische Individualberatung.",
-   "en": "Original, fully editable training programme. No individual medical advice."
+   "de": "Ober-/Unterkörper mit Kraftblock plus Pilates für Rumpf und Beweglichkeit.",
+   "en": "Upper/lower with a strength block plus Pilates for core and mobility."
   },
   "note": {
    "de": "Trainingsprinzipien sind grundsätzlich nicht an ein Geschlecht gebunden; Anzeige nach ausgewähltem Zielprofil.",
@@ -8033,14 +8132,14 @@
    "strength",
    "pilates"
   ],
-  "level": "advanced",
+  "level": "intermediate",
   "setting": "gym",
   "audience": "women_interest",
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
    },
    "repsInReserve": {
     "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
@@ -8070,13 +8169,13 @@
     "entries": [
      {
       "exerciseId": "barbell_bench_press",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
-       "min": 6,
-       "max": 10
+       "min": 4,
+       "max": 6
       },
-      "restSeconds": 150,
+      "restSeconds": 180,
       "rirTarget": 2
      },
      {
@@ -8158,11 +8257,11 @@
     "entries": [
      {
       "exerciseId": "barbell_squat",
-      "sets": 3,
+      "sets": 4,
       "dose": {
        "unit": "repetitions",
-       "min": 6,
-       "max": 10
+       "min": 4,
+       "max": 6
       },
       "restSeconds": 180,
       "rirTarget": 2

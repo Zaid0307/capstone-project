@@ -2,13 +2,16 @@
 
 Stand: 27.10.2026. Dieses Dokument beschreibt das Zielbild der App, die Bausteine, die Reihenfolge der Umsetzung und die Grenzen. Alles mit **Vorschlag** ist noch nicht entschieden.
 
+**Pläne, Training, Kalender und Auswertung** sind im Detail in [konzept-plaene-training-auswertung.md](konzept-plaene-training-auswertung.md) beschrieben. Dieses Dokument gibt den Überblick.
+
 ## 1. Zielbild
 
 Vom Nutzer gewünscht:
 
 - **Anmeldung** mit eigenem Konto
 - **Trainingspläne pro Nutzer** gespeichert, auf jedem Gerät verfügbar
-- **Tracking:** Trainings protokollieren
+- **Tracking:** Trainings protokollieren, **pro Satz und pro Wiederholung**, mit Abweichungen vom Plan
+- **Kalender:** pro Tag sichtbar, ob trainiert wurde, ob nach Plan oder etwas anderes
 - **Auswertung pro Nutzer:** Analysen, **filterbar**
 - **Dashboard** und **eigenes, anpassbares Dashboard**
 - **Ziele** setzen und verfolgen
@@ -34,11 +37,12 @@ Fest in der App (kein Backend nötig): Übungsdatenbank, Muskeln, Plan-Vorlagen,
 | Baustein | Inhalt | Status |
 |---|---|---|
 | Übungsdatenbank | 97 Übungen, 39 Muskeln, Geräte, Deutsch und Englisch | **fertig** |
-| Pläne | eigene Pläne erstellen und bearbeiten, mit Übungen aus der Datenbank, Wiederholungsbereichen, Dauer und Pausen | **fertig** (lokal im Browser, Speicher austauschbar) |
-| Plan-Vorlagen | 30 Vorlagen übernehmen und anpassen | Daten da, Funktion geplant |
+| Pläne | eigene Pläne erstellen und bearbeiten, mit Übungen aus der Datenbank, Wiederholungsbereichen, Dauer und Pausen | Planmodell 2 **fertig** (lokal, Speicher austauschbar). **Neu geplant:** Planmodell 3 mit benannten Tagen, Zeitplan und Vorgaben pro Satz |
+| Plan-Vorlagen | 23 Vorlagen übernehmen und anpassen (7 Athleten-Vorlagen zurückgestellt, O9) | Daten da, Funktion geplant |
 | Konto | Registrierung, Anmeldung, Passwort vergessen, Konto löschen | geplant |
 | Synchronisation | Pläne pro Nutzer im Backend, lokale Pläne werden beim ersten Anmelden übernommen | geplant |
-| Tracking | Training aus einem Plan starten, Sätze mit Gewicht, Wiederholungen bzw. Zeit eintragen, Verlauf | geplant |
+| Tracking | Training aus einem Plan starten, frei trainieren, andere Aktivität, nachtragen; Sätze und optional einzelne Wiederholungen; Soll und Ist getrennt | geplant |
+| Kalender | Monatsansicht mit Status (nach Plan, mit Abweichungen, anderes Training, verpasst), Soll-Ist-Vergleich | geplant |
 | Analyse | Kennzahlen und Diagramme, filterbar | geplant |
 | Dashboard | Standard-Dashboard plus eigenes Dashboard mit frei gewählten Elementen | geplant |
 | Ziele | Ziele anlegen und den Fortschritt sehen | geplant |
@@ -53,6 +57,7 @@ Die Daten dafür entstehen durch das Tracking. Die Übungsdatenbank kennt zu jed
 | Auswertung | Beispiel |
 |---|---|
 | Trainingshäufigkeit | Trainings pro Woche, Serie (Tage in Folge), Kalender |
+| Plantreue | Anteil der Vorgaben, die erfüllt wurden, pro Training, Woche und Plan |
 | Volumen | Sätze × Wiederholungen × Gewicht, pro Woche, pro Muskelgruppe, pro Übung |
 | Muskelkarte | Figur, auf der die Muskeln nach Trainingsumfang eingefärbt sind |
 | Bestleistungen | schwerstes Gewicht, meiste Wiederholungen, geschätztes Maximum pro Übung |
@@ -84,7 +89,7 @@ Die Daten dafür entstehen durch das Tracking. Die Übungsdatenbank kennt zu jed
 |---|---|
 | `profiles` | Anzeigename, Sprache, Ansicht Mann/Frau, Einwilligungen |
 | `plans`, `plan_days`, `plan_entries` | eigene Pläne mit Tagen und Einträgen (Übungs-ID, Sätze, Wiederholungsbereich oder Zeit, Pause), Herkunft bei Vorlagen |
-| `workout_sessions`, `session_sets` | protokollierte Trainings mit allen Sätzen |
+| `workouts`, `workout_sets` | protokollierte Trainings mit Kopie der Vorgaben, allen Sätzen und optional Wiederholungen; flache Satz-Tabelle für Auswertungen |
 | `body_metrics` | Körperwerte mit Datum und Quelle (manuell oder App) |
 | `goals` | Ziel, Zielwert, Termin, Status |
 | `dashboards`, `dashboard_widgets` | eigene Dashboards mit Elementen, Reihenfolge und Filtern |
@@ -117,18 +122,20 @@ Mit Konten und Trainingsdaten wird die App datenschutzrechtlich relevant. Das is
 - Nutzer müssen ihre Daten **exportieren** und ihr **Konto löschen** können.
 - Bei der Anbindung von Apple Health gelten zusätzlich Apples Regeln, zum Beispiel keine Weitergabe an Dritte und keine Werbung mit diesen Daten.
 
-## 7. Reihenfolge (Vorschlag)
+## 7. Reihenfolge (Vorschlag, überarbeitet am 27.10.2026)
 
 | Phase | Inhalt | Braucht |
 |---|---|---|
-| **0 – erledigt** | Plan-Speicher als austauschbare Schnittstelle (heute Browser, später Backend). Planmodell 2: Übungen aus der Datenbank oder Freitext, Wiederholungsbereiche oder Dauer, Pausen, optionales Gewicht. Alte Pläne werden automatisch umgewandelt. | – |
-| **1 – Konto** (vorbereitet: Datenbankschema, Backend-Speicher, Übernahme lokaler Pläne, Anleitung in `supabase/README.md`) | Supabase einrichten, Anmeldung, Pläne pro Nutzer, Übernahme lokaler Pläne, Konto löschen und Daten exportieren, Datenschutzerklärung | dein Supabase-Konto, Design der Anmeldeseiten |
-| **2 – Tracking** | Training aus einem Plan starten, Sätze eintragen, Verlauf | Design |
-| **3 – Analyse** | Auswertungen, Filter, Standard-Dashboard, eigenes Dashboard, Ziele | Design, Muskelfiguren für die Muskelkarte |
-| **4 – Gesundheitsdaten** | Import der Apple-Health-Exportdatei, Körperwerte | Einwilligung, Datenschutz |
-| **5 – Native App** | Capacitor-Hülle, Apple Health und Health Connect automatisch | Mac, Apple-Entwicklerprogramm. **Zurückgestellt**, kein Mac vorhanden. Android allein wäre unter Windows möglich. |
+| **0 – erledigt** | Plan-Speicher als austauschbare Schnittstelle. Planmodell 2. Alte Pläne werden automatisch umgewandelt. | – |
+| **A – Plan-Editor (umgesetzt 13.11.2026)** | Planmodell 3, benannte Tage, Zeitplan, Übungsauswahl mit Filtern, Vorgaben pro Satz, Vorlagen übernehmen | – |
+| **B – Training** | Training protokollieren, pro Satz und optional pro Wiederholung, freie Trainings und andere Aktivitäten | Entscheidungen O14, O17 |
+| **C – Kalender** | Monatsansicht, Status, Plantreue, Soll-Ist-Vergleich | Entscheidung O15 |
+| **D – Auswertung** | Verlauf, Volumen, Bestleistungen, Filter, Dashboards, Ziele | Muskelfiguren für die Muskelkarte |
+| **E – Konto** (vorbereitet, siehe `supabase/README.md`) | Supabase, Anmeldung, Synchronisation von Plänen und Trainings, Konto löschen, Export | dein Supabase-Konto |
+| **F – Gesundheitsdaten** | Import der Apple-Health-Exportdatei, Körperwerte | Einwilligung, Datenschutz |
+| **G – Native App** | Capacitor-Hülle | **Zurückgestellt**, kein Mac |
 
-Parallel: Plan-Vorlagen (sobald das Design steht), Figuren und Animationen (Grafik-Agent), Oberfläche (Designer-Agent).
+A bis D laufen ohne Konto, lokal im Browser. E kann jederzeit dazwischen kommen. Die Gestaltung neuer Seiten kommt vom Design-Agenten, sobald das App-Design freigegeben ist; bis dahin nutzt die Entwicklung die vorhandenen Bausteine.
 
 ## 8. Entscheidungen (27.10.2026)
 
@@ -141,7 +148,7 @@ Parallel: Plan-Vorlagen (sobald das Design steht), Figuren und Animationen (Graf
 | Mac | **Kein Mac.** Keine native iPhone-App und keine automatische Apple-Health-Anbindung. Apple-Health-Daten kommen über den **Import der Exportdatei**. |
 | Phase 0 | **Ja**, wird umgesetzt. |
 
-Noch offen: welche Auswertungen, Dashboard-Elemente, Filter und Ziele genau (Abschnitt 3).
+Noch offen: welche Auswertungen, Dashboard-Elemente, Filter und Ziele genau (Abschnitt 3), sowie O8 und O14–O18 im [Detailkonzept](konzept-plaene-training-auswertung.md#10-offene-fragen-an-den-nutzer).
 
 ## Quellen
 

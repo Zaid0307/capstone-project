@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-03",
+  "manifest_version": "1.3.8-working",
+  "manifest_verified_files": 625,
+  "archive_entries": 369,
+  "archive_bytes": 165920594,
+  "archive_sha256": "3b39ec4431d90936528e6e5db6a4c43869b8eee37e9fed18c612beabcd0cedd1",
+  "zip_crc_and_entry_sha256": "PASS",
+  "final_exercise_pairs": 0,
+  "native_anatomy_reference_source_meshes": 142,
+  "mapped_catalog_muscle_ids": 35
+}

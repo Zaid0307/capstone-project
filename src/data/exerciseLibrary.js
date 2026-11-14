@@ -30,6 +30,41 @@ function localize(exercise, language) {
   };
 }
 
+// Exercises done for one arm, leg or side at a time: repetitions and weight are
+// logged per side (left and right).
+export const PER_SIDE_EXERCISE_IDS = new Set([
+  'one_arm_dumbbell_row',
+  'band_external_rotation',
+  'bulgarian_split_squat',
+  'reverse_lunge',
+  'step_up',
+  'cable_glute_kickback',
+  'side_plank',
+  'pilates_side_kick',
+  'pilates_clamshell',
+  'hip_flexor_stretch',
+  'supine_hamstring_strap_stretch',
+  'seated_glute_stretch',
+  'standing_calf_stretch',
+  'thoracic_open_book',
+]);
+
+export const isPerSideExercise = exerciseId => PER_SIDE_EXERCISE_IDS.has(exerciseId);
+
+// Only strength work counts as training sets for the muscle load (sets per
+// muscle, hints, muscle figure). Stretching, mobility, yoga, Pilates, boxing and
+// cardio are logged and analysed, but a stretch is no set for the chest.
+// Own exercises (no category) count for the group they were given.
+export const LOAD_CATEGORIES = new Set(['strength', 'isometric']);
+
+// Stretching, mobility, yoga, Pilates, boxing and cardio have no weight field.
+const WITHOUT_WEIGHT = new Set(['stretch', 'mobility', 'yoga', 'pilates', 'boxing', 'cardio']);
+export function usesWeight(exerciseId) {
+  const category = exerciseId ? EXERCISES.find(exercise => exercise.id === exerciseId)?.category : null;
+  return !WITHOUT_WEIGHT.has(category);
+}
+export const countsForMuscleLoad = category => category === null || category === undefined || LOAD_CATEGORIES.has(category);
+
 // Exercises per muscle group in the given language, sorted by name.
 export function exercisesByGroup(language) {
   const groups = Object.fromEntries(MUSCLE_GROUP_NAMES.map(group => [group, []]));

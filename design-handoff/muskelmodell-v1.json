@@ -1,0 +1,2137 @@
+{
+  "version": 1,
+  "date": "2026-11-13",
+  "source": "src/data/muscles.js, docs/muskelmodell.md",
+  "muscles": [
+    {
+      "id": "pectoralis_major",
+      "group": "chest",
+      "view": "front",
+      "de": "Großer Brustmuskel",
+      "en": "Pectoralis major",
+      "latin": "Musculus pectoralis major"
+    },
+    {
+      "id": "pectoralis_major_clavicular",
+      "group": "chest",
+      "view": "front",
+      "parent": "pectoralis_major",
+      "de": "Großer Brustmuskel, Schlüsselbeinteil",
+      "en": "Pectoralis major, clavicular part",
+      "latin": "Pars clavicularis musculi pectoralis majoris"
+    },
+    {
+      "id": "pectoralis_major_sternocostal",
+      "group": "chest",
+      "view": "front",
+      "parent": "pectoralis_major",
+      "de": "Großer Brustmuskel, Brustbein-Rippen-Teil",
+      "en": "Pectoralis major, sternocostal part",
+      "latin": "Pars sternocostalis musculi pectoralis majoris"
+    },
+    {
+      "id": "pectoralis_major_abdominal",
+      "group": "chest",
+      "view": "front",
+      "parent": "pectoralis_major",
+      "de": "Großer Brustmuskel, Bauchteil",
+      "en": "Pectoralis major, abdominal part",
+      "latin": "Pars abdominalis musculi pectoralis majoris"
+    },
+    {
+      "id": "pectoralis_minor",
+      "group": "chest",
+      "view": "deep",
+      "de": "Kleiner Brustmuskel",
+      "en": "Pectoralis minor",
+      "latin": "Musculus pectoralis minor"
+    },
+    {
+      "id": "serratus_anterior",
+      "group": "chest",
+      "view": "front",
+      "de": "Vorderer Sägemuskel",
+      "en": "Serratus anterior",
+      "latin": "Musculus serratus anterior"
+    },
+    {
+      "id": "deltoid",
+      "group": "shoulders",
+      "view": "both",
+      "de": "Deltamuskel",
+      "en": "Deltoid",
+      "latin": "Musculus deltoideus"
+    },
+    {
+      "id": "deltoid_anterior",
+      "group": "shoulders",
+      "view": "front",
+      "parent": "deltoid",
+      "de": "Vorderer Deltamuskel (Schlüsselbeinteil)",
+      "en": "Anterior deltoid (clavicular part)",
+      "latin": "Pars clavicularis musculi deltoidei"
+    },
+    {
+      "id": "deltoid_lateral",
+      "group": "shoulders",
+      "view": "both",
+      "parent": "deltoid",
+      "de": "Seitlicher Deltamuskel (Schulterhöhenteil)",
+      "en": "Lateral deltoid (acromial part)",
+      "latin": "Pars acromialis musculi deltoidei"
+    },
+    {
+      "id": "deltoid_posterior",
+      "group": "shoulders",
+      "view": "back",
+      "parent": "deltoid",
+      "de": "Hinterer Deltamuskel (Schulterblattgräten-Teil)",
+      "en": "Posterior deltoid (spinal part)",
+      "latin": "Pars spinalis musculi deltoidei"
+    },
+    {
+      "id": "supraspinatus",
+      "group": "shoulders",
+      "view": "deep",
+      "de": "Obergrätenmuskel",
+      "en": "Supraspinatus",
+      "latin": "Musculus supraspinatus"
+    },
+    {
+      "id": "infraspinatus",
+      "group": "shoulders",
+      "view": "back",
+      "de": "Untergrätenmuskel",
+      "en": "Infraspinatus",
+      "latin": "Musculus infraspinatus"
+    },
+    {
+      "id": "teres_minor",
+      "group": "shoulders",
+      "view": "back",
+      "de": "Kleiner Rundmuskel",
+      "en": "Teres minor",
+      "latin": "Musculus teres minor"
+    },
+    {
+      "id": "subscapularis",
+      "group": "shoulders",
+      "view": "deep",
+      "de": "Unterschulterblattmuskel",
+      "en": "Subscapularis",
+      "latin": "Musculus subscapularis"
+    },
+    {
+      "id": "biceps_brachii",
+      "group": "arms",
+      "view": "front",
+      "de": "Bizeps",
+      "en": "Biceps brachii",
+      "latin": "Musculus biceps brachii"
+    },
+    {
+      "id": "biceps_brachii_long",
+      "group": "arms",
+      "view": "front",
+      "parent": "biceps_brachii",
+      "de": "Bizeps, langer Kopf",
+      "en": "Biceps brachii, long head",
+      "latin": "Caput longum musculi bicipitis brachii"
+    },
+    {
+      "id": "biceps_brachii_short",
+      "group": "arms",
+      "view": "front",
+      "parent": "biceps_brachii",
+      "de": "Bizeps, kurzer Kopf",
+      "en": "Biceps brachii, short head",
+      "latin": "Caput breve musculi bicipitis brachii"
+    },
+    {
+      "id": "brachialis",
+      "group": "arms",
+      "view": "front",
+      "de": "Oberarmmuskel",
+      "en": "Brachialis",
+      "latin": "Musculus brachialis"
+    },
+    {
+      "id": "coracobrachialis",
+      "group": "arms",
+      "view": "deep",
+      "de": "Hakenarmmuskel",
+      "en": "Coracobrachialis",
+      "latin": "Musculus coracobrachialis"
+    },
+    {
+      "id": "triceps_brachii",
+      "group": "arms",
+      "view": "back",
+      "de": "Trizeps",
+      "en": "Triceps brachii",
+      "latin": "Musculus triceps brachii"
+    },
+    {
+      "id": "triceps_brachii_long",
+      "group": "arms",
+      "view": "back",
+      "parent": "triceps_brachii",
+      "de": "Trizeps, langer Kopf",
+      "en": "Triceps brachii, long head",
+      "latin": "Caput longum musculi tricipitis brachii"
+    },
+    {
+      "id": "triceps_brachii_lateral",
+      "group": "arms",
+      "view": "back",
+      "parent": "triceps_brachii",
+      "de": "Trizeps, seitlicher Kopf",
+      "en": "Triceps brachii, lateral head",
+      "latin": "Caput laterale musculi tricipitis brachii"
+    },
+    {
+      "id": "triceps_brachii_medial",
+      "group": "arms",
+      "view": "deep",
+      "parent": "triceps_brachii",
+      "de": "Trizeps, mittlerer Kopf",
+      "en": "Triceps brachii, medial head",
+      "latin": "Caput mediale musculi tricipitis brachii"
+    },
+    {
+      "id": "anconeus",
+      "group": "arms",
+      "view": "back",
+      "de": "Knorrenmuskel",
+      "en": "Anconeus",
+      "latin": "Musculus anconeus"
+    },
+    {
+      "id": "brachioradialis",
+      "group": "arms",
+      "view": "both",
+      "de": "Oberarmspeichenmuskel",
+      "en": "Brachioradialis",
+      "latin": "Musculus brachioradialis"
+    },
+    {
+      "id": "pronator_teres",
+      "group": "arms",
+      "view": "front",
+      "de": "Runder Einwärtsdreher",
+      "en": "Pronator teres",
+      "latin": "Musculus pronator teres"
+    },
+    {
+      "id": "supinator",
+      "group": "arms",
+      "view": "deep",
+      "de": "Auswärtsdreher",
+      "en": "Supinator",
+      "latin": "Musculus supinator"
+    },
+    {
+      "id": "flexor_carpi_radialis",
+      "group": "arms",
+      "view": "front",
+      "de": "Speichenseitiger Handbeuger",
+      "en": "Flexor carpi radialis",
+      "latin": "Musculus flexor carpi radialis"
+    },
+    {
+      "id": "palmaris_longus",
+      "group": "arms",
+      "view": "front",
+      "de": "Langer Hohlhandmuskel",
+      "en": "Palmaris longus",
+      "latin": "Musculus palmaris longus"
+    },
+    {
+      "id": "flexor_carpi_ulnaris",
+      "group": "arms",
+      "view": "front",
+      "de": "Ellenseitiger Handbeuger",
+      "en": "Flexor carpi ulnaris",
+      "latin": "Musculus flexor carpi ulnaris"
+    },
+    {
+      "id": "flexor_digitorum_superficialis",
+      "group": "arms",
+      "view": "front",
+      "de": "Oberflächlicher Fingerbeuger",
+      "en": "Flexor digitorum superficialis",
+      "latin": "Musculus flexor digitorum superficialis"
+    },
+    {
+      "id": "flexor_digitorum_profundus",
+      "group": "arms",
+      "view": "deep",
+      "de": "Tiefer Fingerbeuger",
+      "en": "Flexor digitorum profundus",
+      "latin": "Musculus flexor digitorum profundus"
+    },
+    {
+      "id": "extensor_carpi_radialis_longus",
+      "group": "arms",
+      "view": "back",
+      "de": "Langer speichenseitiger Handstrecker",
+      "en": "Extensor carpi radialis longus",
+      "latin": "Musculus extensor carpi radialis longus"
+    },
+    {
+      "id": "extensor_carpi_radialis_brevis",
+      "group": "arms",
+      "view": "back",
+      "de": "Kurzer speichenseitiger Handstrecker",
+      "en": "Extensor carpi radialis brevis",
+      "latin": "Musculus extensor carpi radialis brevis"
+    },
+    {
+      "id": "extensor_digitorum",
+      "group": "arms",
+      "view": "back",
+      "de": "Fingerstrecker",
+      "en": "Extensor digitorum",
+      "latin": "Musculus extensor digitorum"
+    },
+    {
+      "id": "extensor_carpi_ulnaris",
+      "group": "arms",
+      "view": "back",
+      "de": "Ellenseitiger Handstrecker",
+      "en": "Extensor carpi ulnaris",
+      "latin": "Musculus extensor carpi ulnaris"
+    },
+    {
+      "id": "trapezius",
+      "group": "back",
+      "view": "both",
+      "de": "Trapezmuskel",
+      "en": "Trapezius",
+      "latin": "Musculus trapezius"
+    },
+    {
+      "id": "trapezius_descending",
+      "group": "back",
+      "view": "both",
+      "parent": "trapezius",
+      "de": "Trapezmuskel, absteigender Teil",
+      "en": "Trapezius, descending part",
+      "latin": "Pars descendens musculi trapezii"
+    },
+    {
+      "id": "trapezius_transverse",
+      "group": "back",
+      "view": "back",
+      "parent": "trapezius",
+      "de": "Trapezmuskel, querverlaufender Teil",
+      "en": "Trapezius, transverse part",
+      "latin": "Pars transversa musculi trapezii"
+    },
+    {
+      "id": "trapezius_ascending",
+      "group": "back",
+      "view": "back",
+      "parent": "trapezius",
+      "de": "Trapezmuskel, aufsteigender Teil",
+      "en": "Trapezius, ascending part",
+      "latin": "Pars ascendens musculi trapezii"
+    },
+    {
+      "id": "latissimus_dorsi",
+      "group": "back",
+      "view": "back",
+      "de": "Breiter Rückenmuskel",
+      "en": "Latissimus dorsi",
+      "latin": "Musculus latissimus dorsi"
+    },
+    {
+      "id": "teres_major",
+      "group": "back",
+      "view": "back",
+      "de": "Großer Rundmuskel",
+      "en": "Teres major",
+      "latin": "Musculus teres major"
+    },
+    {
+      "id": "rhomboid_major",
+      "group": "back",
+      "view": "deep",
+      "de": "Großer Rautenmuskel",
+      "en": "Rhomboid major",
+      "latin": "Musculus rhomboideus major"
+    },
+    {
+      "id": "rhomboid_minor",
+      "group": "back",
+      "view": "deep",
+      "de": "Kleiner Rautenmuskel",
+      "en": "Rhomboid minor",
+      "latin": "Musculus rhomboideus minor"
+    },
+    {
+      "id": "levator_scapulae",
+      "group": "back",
+      "view": "deep",
+      "de": "Schulterblattheber",
+      "en": "Levator scapulae",
+      "latin": "Musculus levator scapulae"
+    },
+    {
+      "id": "erector_spinae",
+      "group": "back",
+      "view": "back",
+      "de": "Rückenstrecker",
+      "en": "Erector spinae",
+      "latin": "Musculus erector spinae"
+    },
+    {
+      "id": "iliocostalis",
+      "group": "back",
+      "view": "back",
+      "parent": "erector_spinae",
+      "de": "Darmbein-Rippen-Muskel",
+      "en": "Iliocostalis",
+      "latin": "Musculus iliocostalis"
+    },
+    {
+      "id": "longissimus",
+      "group": "back",
+      "view": "back",
+      "parent": "erector_spinae",
+      "de": "Längster Rückenmuskel",
+      "en": "Longissimus",
+      "latin": "Musculus longissimus"
+    },
+    {
+      "id": "spinalis",
+      "group": "back",
+      "view": "back",
+      "parent": "erector_spinae",
+      "de": "Dornmuskel",
+      "en": "Spinalis",
+      "latin": "Musculus spinalis"
+    },
+    {
+      "id": "multifidus",
+      "group": "back",
+      "view": "deep",
+      "de": "Vielgespaltener Muskel",
+      "en": "Multifidus",
+      "latin": "Musculi multifidi"
+    },
+    {
+      "id": "quadratus_lumborum",
+      "group": "back",
+      "view": "deep",
+      "de": "Quadratischer Lendenmuskel",
+      "en": "Quadratus lumborum",
+      "latin": "Musculus quadratus lumborum"
+    },
+    {
+      "id": "sternocleidomastoid",
+      "group": "back",
+      "view": "front",
+      "de": "Kopfwender",
+      "en": "Sternocleidomastoid",
+      "latin": "Musculus sternocleidomastoideus"
+    },
+    {
+      "id": "sternocleidomastoid_sternal",
+      "group": "back",
+      "view": "front",
+      "parent": "sternocleidomastoid",
+      "de": "Kopfwender, Brustbeinkopf",
+      "en": "Sternocleidomastoid, sternal head",
+      "latin": "Caput sternale musculi sternocleidomastoidei"
+    },
+    {
+      "id": "sternocleidomastoid_clavicular",
+      "group": "back",
+      "view": "front",
+      "parent": "sternocleidomastoid",
+      "de": "Kopfwender, Schlüsselbeinkopf",
+      "en": "Sternocleidomastoid, clavicular head",
+      "latin": "Caput claviculare musculi sternocleidomastoidei"
+    },
+    {
+      "id": "splenius_capitis",
+      "group": "back",
+      "view": "back",
+      "de": "Riemenmuskel des Kopfes",
+      "en": "Splenius capitis",
+      "latin": "Musculus splenius capitis"
+    },
+    {
+      "id": "splenius_cervicis",
+      "group": "back",
+      "view": "deep",
+      "de": "Riemenmuskel des Halses",
+      "en": "Splenius cervicis",
+      "latin": "Musculus splenius cervicis"
+    },
+    {
+      "id": "rectus_abdominis",
+      "group": "abs",
+      "view": "front",
+      "de": "Gerader Bauchmuskel",
+      "en": "Rectus abdominis",
+      "latin": "Musculus rectus abdominis"
+    },
+    {
+      "id": "external_oblique",
+      "group": "abs",
+      "view": "front",
+      "de": "Äußerer schräger Bauchmuskel",
+      "en": "External oblique",
+      "latin": "Musculus obliquus externus abdominis"
+    },
+    {
+      "id": "internal_oblique",
+      "group": "abs",
+      "view": "deep",
+      "de": "Innerer schräger Bauchmuskel",
+      "en": "Internal oblique",
+      "latin": "Musculus obliquus internus abdominis"
+    },
+    {
+      "id": "transversus_abdominis",
+      "group": "abs",
+      "view": "deep",
+      "de": "Querer Bauchmuskel",
+      "en": "Transversus abdominis",
+      "latin": "Musculus transversus abdominis"
+    },
+    {
+      "id": "gluteus_maximus",
+      "group": "legs",
+      "view": "back",
+      "de": "Großer Gesäßmuskel",
+      "en": "Gluteus maximus",
+      "latin": "Musculus gluteus maximus"
+    },
+    {
+      "id": "gluteus_medius",
+      "group": "legs",
+      "view": "back",
+      "de": "Mittlerer Gesäßmuskel",
+      "en": "Gluteus medius",
+      "latin": "Musculus gluteus medius"
+    },
+    {
+      "id": "gluteus_minimus",
+      "group": "legs",
+      "view": "deep",
+      "de": "Kleiner Gesäßmuskel",
+      "en": "Gluteus minimus",
+      "latin": "Musculus gluteus minimus"
+    },
+    {
+      "id": "tensor_fasciae_latae",
+      "group": "legs",
+      "view": "front",
+      "de": "Schenkelbindenspanner",
+      "en": "Tensor fasciae latae",
+      "latin": "Musculus tensor fasciae latae"
+    },
+    {
+      "id": "piriformis",
+      "group": "legs",
+      "view": "deep",
+      "de": "Birnenförmiger Muskel",
+      "en": "Piriformis",
+      "latin": "Musculus piriformis"
+    },
+    {
+      "id": "iliopsoas",
+      "group": "legs",
+      "view": "deep",
+      "de": "Lenden-Darmbein-Muskel (Hüftbeuger)",
+      "en": "Iliopsoas (hip flexor)",
+      "latin": "Musculus iliopsoas"
+    },
+    {
+      "id": "psoas_major",
+      "group": "legs",
+      "view": "deep",
+      "parent": "iliopsoas",
+      "de": "Großer Lendenmuskel",
+      "en": "Psoas major",
+      "latin": "Musculus psoas major"
+    },
+    {
+      "id": "iliacus",
+      "group": "legs",
+      "view": "deep",
+      "parent": "iliopsoas",
+      "de": "Darmbeinmuskel",
+      "en": "Iliacus",
+      "latin": "Musculus iliacus"
+    },
+    {
+      "id": "quadriceps_femoris",
+      "group": "legs",
+      "view": "front",
+      "de": "Vierköpfiger Oberschenkelmuskel",
+      "en": "Quadriceps femoris",
+      "latin": "Musculus quadriceps femoris"
+    },
+    {
+      "id": "rectus_femoris",
+      "group": "legs",
+      "view": "front",
+      "parent": "quadriceps_femoris",
+      "de": "Gerader Oberschenkelmuskel",
+      "en": "Rectus femoris",
+      "latin": "Musculus rectus femoris"
+    },
+    {
+      "id": "vastus_lateralis",
+      "group": "legs",
+      "view": "front",
+      "parent": "quadriceps_femoris",
+      "de": "Äußerer Oberschenkelmuskel",
+      "en": "Vastus lateralis",
+      "latin": "Musculus vastus lateralis"
+    },
+    {
+      "id": "vastus_medialis",
+      "group": "legs",
+      "view": "front",
+      "parent": "quadriceps_femoris",
+      "de": "Innerer Oberschenkelmuskel",
+      "en": "Vastus medialis",
+      "latin": "Musculus vastus medialis"
+    },
+    {
+      "id": "vastus_intermedius",
+      "group": "legs",
+      "view": "deep",
+      "parent": "quadriceps_femoris",
+      "de": "Mittlerer Oberschenkelmuskel",
+      "en": "Vastus intermedius",
+      "latin": "Musculus vastus intermedius"
+    },
+    {
+      "id": "sartorius",
+      "group": "legs",
+      "view": "front",
+      "de": "Schneidermuskel",
+      "en": "Sartorius",
+      "latin": "Musculus sartorius"
+    },
+    {
+      "id": "biceps_femoris",
+      "group": "legs",
+      "view": "back",
+      "de": "Zweiköpfiger Oberschenkelmuskel",
+      "en": "Biceps femoris",
+      "latin": "Musculus biceps femoris"
+    },
+    {
+      "id": "biceps_femoris_long",
+      "group": "legs",
+      "view": "back",
+      "parent": "biceps_femoris",
+      "de": "Zweiköpfiger Oberschenkelmuskel, langer Kopf",
+      "en": "Biceps femoris, long head",
+      "latin": "Caput longum musculi bicipitis femoris"
+    },
+    {
+      "id": "biceps_femoris_short",
+      "group": "legs",
+      "view": "deep",
+      "parent": "biceps_femoris",
+      "de": "Zweiköpfiger Oberschenkelmuskel, kurzer Kopf",
+      "en": "Biceps femoris, short head",
+      "latin": "Caput breve musculi bicipitis femoris"
+    },
+    {
+      "id": "semitendinosus",
+      "group": "legs",
+      "view": "back",
+      "de": "Halbsehnenmuskel",
+      "en": "Semitendinosus",
+      "latin": "Musculus semitendinosus"
+    },
+    {
+      "id": "semimembranosus",
+      "group": "legs",
+      "view": "back",
+      "de": "Plattsehnenmuskel",
+      "en": "Semimembranosus",
+      "latin": "Musculus semimembranosus"
+    },
+    {
+      "id": "adductor_magnus",
+      "group": "legs",
+      "view": "both",
+      "de": "Großer Schenkelanzieher",
+      "en": "Adductor magnus",
+      "latin": "Musculus adductor magnus"
+    },
+    {
+      "id": "adductor_longus",
+      "group": "legs",
+      "view": "front",
+      "de": "Langer Schenkelanzieher",
+      "en": "Adductor longus",
+      "latin": "Musculus adductor longus"
+    },
+    {
+      "id": "adductor_brevis",
+      "group": "legs",
+      "view": "deep",
+      "de": "Kurzer Schenkelanzieher",
+      "en": "Adductor brevis",
+      "latin": "Musculus adductor brevis"
+    },
+    {
+      "id": "gracilis",
+      "group": "legs",
+      "view": "both",
+      "de": "Schlanker Muskel",
+      "en": "Gracilis",
+      "latin": "Musculus gracilis"
+    },
+    {
+      "id": "pectineus",
+      "group": "legs",
+      "view": "front",
+      "de": "Kammmuskel",
+      "en": "Pectineus",
+      "latin": "Musculus pectineus"
+    },
+    {
+      "id": "triceps_surae",
+      "group": "legs",
+      "view": "back",
+      "de": "Dreiköpfiger Wadenmuskel",
+      "en": "Triceps surae",
+      "latin": "Musculus triceps surae"
+    },
+    {
+      "id": "gastrocnemius",
+      "group": "legs",
+      "view": "back",
+      "parent": "triceps_surae",
+      "de": "Zwillingswadenmuskel",
+      "en": "Gastrocnemius",
+      "latin": "Musculus gastrocnemius"
+    },
+    {
+      "id": "gastrocnemius_medial",
+      "group": "legs",
+      "view": "back",
+      "parent": "gastrocnemius",
+      "de": "Zwillingswadenmuskel, innerer Kopf",
+      "en": "Gastrocnemius, medial head",
+      "latin": "Caput mediale musculi gastrocnemii"
+    },
+    {
+      "id": "gastrocnemius_lateral",
+      "group": "legs",
+      "view": "back",
+      "parent": "gastrocnemius",
+      "de": "Zwillingswadenmuskel, äußerer Kopf",
+      "en": "Gastrocnemius, lateral head",
+      "latin": "Caput laterale musculi gastrocnemii"
+    },
+    {
+      "id": "soleus",
+      "group": "legs",
+      "view": "both",
+      "parent": "triceps_surae",
+      "de": "Schollenmuskel",
+      "en": "Soleus",
+      "latin": "Musculus soleus"
+    },
+    {
+      "id": "tibialis_anterior",
+      "group": "legs",
+      "view": "front",
+      "de": "Vorderer Schienbeinmuskel",
+      "en": "Tibialis anterior",
+      "latin": "Musculus tibialis anterior"
+    },
+    {
+      "id": "extensor_digitorum_longus",
+      "group": "legs",
+      "view": "front",
+      "de": "Langer Zehenstrecker",
+      "en": "Extensor digitorum longus",
+      "latin": "Musculus extensor digitorum longus"
+    },
+    {
+      "id": "fibularis_longus",
+      "group": "legs",
+      "view": "both",
+      "de": "Langer Wadenbeinmuskel",
+      "en": "Fibularis (peroneus) longus",
+      "latin": "Musculus fibularis longus"
+    },
+    {
+      "id": "fibularis_brevis",
+      "group": "legs",
+      "view": "deep",
+      "de": "Kurzer Wadenbeinmuskel",
+      "en": "Fibularis (peroneus) brevis",
+      "latin": "Musculus fibularis brevis"
+    }
+  ],
+  "legacyIds": {
+    "rhomboids": [
+      "rhomboid_major",
+      "rhomboid_minor"
+    ],
+    "adductors": [
+      "adductor_magnus",
+      "adductor_longus",
+      "adductor_brevis",
+      "gracilis",
+      "pectineus"
+    ],
+    "forearm_flexors": [
+      "flexor_carpi_radialis",
+      "palmaris_longus",
+      "flexor_carpi_ulnaris",
+      "flexor_digitorum_superficialis",
+      "flexor_digitorum_profundus"
+    ],
+    "forearm_extensors": [
+      "extensor_carpi_radialis_longus",
+      "extensor_carpi_radialis_brevis",
+      "extensor_digitorum",
+      "extensor_carpi_ulnaris"
+    ]
+  },
+  "exercises": [
+    {
+      "id": "barbell_bench_press",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "incline_barbell_press",
+      "primary": [
+        "pectoralis_major_clavicular"
+      ],
+      "secondary": [
+        "pectoralis_major_sternocostal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "incline_dumbbell_press",
+      "primary": [
+        "pectoralis_major_clavicular"
+      ],
+      "secondary": [
+        "pectoralis_major_sternocostal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "dumbbell_bench_press",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "machine_chest_press",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "push_up",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "serratus_anterior",
+        "rectus_abdominis"
+      ]
+    },
+    {
+      "id": "cable_chest_fly",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior"
+      ]
+    },
+    {
+      "id": "dumbbell_chest_fly",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior"
+      ]
+    },
+    {
+      "id": "parallel_bar_dip",
+      "primary": [
+        "pectoralis_major_sternocostal",
+        "pectoralis_major_abdominal",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long"
+      ],
+      "secondary": [
+        "deltoid_anterior",
+        "pectoralis_minor"
+      ]
+    },
+    {
+      "id": "close_grip_bench_press",
+      "primary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial"
+      ],
+      "secondary": [
+        "triceps_brachii_long",
+        "pectoralis_major_sternocostal",
+        "pectoralis_major_clavicular",
+        "deltoid_anterior"
+      ]
+    },
+    {
+      "id": "dumbbell_pullover",
+      "primary": [
+        "latissimus_dorsi",
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_abdominal",
+        "triceps_brachii_long",
+        "teres_major",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "pull_up",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "trapezius_ascending",
+        "rhomboid_major",
+        "rhomboid_minor"
+      ]
+    },
+    {
+      "id": "assisted_pull_up",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "trapezius_ascending",
+        "rhomboid_major",
+        "rhomboid_minor"
+      ]
+    },
+    {
+      "id": "cable_lat_pulldown",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "trapezius_ascending",
+        "rhomboid_major",
+        "rhomboid_minor"
+      ]
+    },
+    {
+      "id": "seated_cable_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "chest_supported_dumbbell_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "barbell_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "iliocostalis",
+        "longissimus",
+        "multifidus"
+      ]
+    },
+    {
+      "id": "one_arm_dumbbell_row",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse",
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "band_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "band_lat_pulldown",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "trapezius_ascending"
+      ]
+    },
+    {
+      "id": "straight_arm_pulldown",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "triceps_brachii_long",
+        "deltoid_posterior",
+        "pectoralis_major_sternocostal"
+      ]
+    },
+    {
+      "id": "yates_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "iliocostalis",
+        "longissimus",
+        "multifidus"
+      ]
+    },
+    {
+      "id": "t_bar_row",
+      "primary": [
+        "latissimus_dorsi",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "trapezius_ascending",
+        "deltoid_posterior",
+        "teres_major",
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis",
+        "brachioradialis",
+        "iliocostalis",
+        "longissimus",
+        "multifidus"
+      ]
+    },
+    {
+      "id": "machine_pullover",
+      "primary": [
+        "latissimus_dorsi"
+      ],
+      "secondary": [
+        "teres_major",
+        "serratus_anterior",
+        "pectoralis_major_sternocostal",
+        "triceps_brachii_long"
+      ]
+    },
+    {
+      "id": "dumbbell_shrug",
+      "primary": [
+        "trapezius_descending"
+      ],
+      "secondary": [
+        "levator_scapulae",
+        "flexor_digitorum_superficialis",
+        "flexor_digitorum_profundus"
+      ]
+    },
+    {
+      "id": "dumbbell_shoulder_press",
+      "primary": [
+        "deltoid_anterior",
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "trapezius_descending",
+        "trapezius_ascending",
+        "serratus_anterior",
+        "pectoralis_major_clavicular"
+      ]
+    },
+    {
+      "id": "barbell_overhead_press",
+      "primary": [
+        "deltoid_anterior",
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "trapezius_descending",
+        "trapezius_ascending",
+        "serratus_anterior",
+        "pectoralis_major_clavicular",
+        "rectus_abdominis"
+      ]
+    },
+    {
+      "id": "dumbbell_lateral_raise",
+      "primary": [
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "deltoid_anterior",
+        "supraspinatus",
+        "trapezius_descending",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "band_lateral_raise",
+      "primary": [
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "deltoid_anterior",
+        "supraspinatus",
+        "trapezius_descending",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "band_dumbbell_lateral_raise",
+      "primary": [
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "deltoid_anterior",
+        "supraspinatus",
+        "trapezius_descending",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "reverse_fly",
+      "primary": [
+        "deltoid_posterior"
+      ],
+      "secondary": [
+        "infraspinatus",
+        "teres_minor",
+        "trapezius_transverse",
+        "rhomboid_major",
+        "rhomboid_minor"
+      ]
+    },
+    {
+      "id": "face_pull",
+      "primary": [
+        "deltoid_posterior",
+        "infraspinatus",
+        "teres_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_ascending"
+      ]
+    },
+    {
+      "id": "arnold_press",
+      "primary": [
+        "deltoid_anterior",
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "trapezius_descending",
+        "trapezius_ascending",
+        "serratus_anterior",
+        "pectoralis_major_clavicular"
+      ]
+    },
+    {
+      "id": "smith_shoulder_press",
+      "primary": [
+        "deltoid_anterior",
+        "deltoid_lateral"
+      ],
+      "secondary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "trapezius_descending",
+        "trapezius_ascending",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "band_pull_apart",
+      "primary": [
+        "deltoid_posterior",
+        "rhomboid_major",
+        "rhomboid_minor",
+        "trapezius_transverse"
+      ],
+      "secondary": [
+        "infraspinatus",
+        "teres_minor",
+        "trapezius_ascending"
+      ]
+    },
+    {
+      "id": "band_external_rotation",
+      "primary": [
+        "infraspinatus",
+        "teres_minor"
+      ],
+      "secondary": [
+        "deltoid_posterior"
+      ]
+    },
+    {
+      "id": "barbell_curl",
+      "primary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis",
+        "flexor_carpi_radialis",
+        "flexor_carpi_ulnaris"
+      ]
+    },
+    {
+      "id": "dumbbell_curl",
+      "primary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis",
+        "flexor_carpi_radialis",
+        "flexor_carpi_ulnaris"
+      ]
+    },
+    {
+      "id": "hammer_curl",
+      "primary": [
+        "brachialis",
+        "brachioradialis"
+      ],
+      "secondary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "extensor_carpi_radialis_longus"
+      ]
+    },
+    {
+      "id": "band_curl",
+      "primary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "preacher_curl",
+      "primary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis"
+      ]
+    },
+    {
+      "id": "21s_barbell_curl",
+      "primary": [
+        "biceps_brachii_long",
+        "biceps_brachii_short",
+        "brachialis"
+      ],
+      "secondary": [
+        "brachioradialis",
+        "flexor_carpi_radialis",
+        "flexor_carpi_ulnaris"
+      ]
+    },
+    {
+      "id": "triceps_pushdown",
+      "primary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial"
+      ],
+      "secondary": [
+        "triceps_brachii_long",
+        "anconeus"
+      ]
+    },
+    {
+      "id": "overhead_triceps_extension",
+      "primary": [
+        "triceps_brachii_long",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial"
+      ],
+      "secondary": [
+        "anconeus"
+      ]
+    },
+    {
+      "id": "band_triceps_extension",
+      "primary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial"
+      ],
+      "secondary": [
+        "triceps_brachii_long",
+        "anconeus"
+      ]
+    },
+    {
+      "id": "close_grip_push_up",
+      "primary": [
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial"
+      ],
+      "secondary": [
+        "triceps_brachii_long",
+        "pectoralis_major_sternocostal",
+        "pectoralis_major_clavicular",
+        "deltoid_anterior",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "bodyweight_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus",
+        "iliocostalis",
+        "longissimus"
+      ]
+    },
+    {
+      "id": "barbell_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus",
+        "iliocostalis",
+        "longissimus",
+        "multifidus",
+        "rectus_abdominis"
+      ]
+    },
+    {
+      "id": "goblet_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus",
+        "rectus_abdominis"
+      ]
+    },
+    {
+      "id": "band_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus"
+      ]
+    },
+    {
+      "id": "leg_press",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus"
+      ]
+    },
+    {
+      "id": "hack_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "gluteus_maximus",
+        "adductor_magnus"
+      ]
+    },
+    {
+      "id": "leg_extension",
+      "primary": [
+        "rectus_femoris",
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius"
+      ],
+      "secondary": []
+    },
+    {
+      "id": "lying_leg_curl",
+      "primary": [
+        "biceps_femoris_long",
+        "biceps_femoris_short",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": [
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "gracilis"
+      ]
+    },
+    {
+      "id": "romanian_deadlift",
+      "primary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "adductor_magnus",
+        "iliocostalis",
+        "longissimus",
+        "multifidus",
+        "flexor_digitorum_superficialis",
+        "flexor_digitorum_profundus"
+      ]
+    },
+    {
+      "id": "dumbbell_rdl",
+      "primary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "adductor_magnus",
+        "iliocostalis",
+        "longissimus",
+        "multifidus"
+      ]
+    },
+    {
+      "id": "conventional_deadlift",
+      "primary": [
+        "gluteus_maximus",
+        "iliocostalis",
+        "longissimus",
+        "multifidus",
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "adductor_magnus",
+        "trapezius_descending",
+        "trapezius_transverse",
+        "latissimus_dorsi",
+        "flexor_digitorum_superficialis",
+        "flexor_digitorum_profundus"
+      ]
+    },
+    {
+      "id": "banded_good_morning",
+      "primary": [
+        "iliocostalis",
+        "longissimus",
+        "multifidus",
+        "gluteus_maximus",
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": [
+        "adductor_magnus"
+      ]
+    },
+    {
+      "id": "hip_thrust",
+      "primary": [
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "gluteus_medius",
+        "adductor_magnus"
+      ]
+    },
+    {
+      "id": "glute_bridge",
+      "primary": [
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "iliocostalis",
+        "longissimus"
+      ]
+    },
+    {
+      "id": "bulgarian_split_squat",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus",
+        "gluteus_medius"
+      ]
+    },
+    {
+      "id": "reverse_lunge",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "adductor_magnus",
+        "gluteus_medius"
+      ]
+    },
+    {
+      "id": "step_up",
+      "primary": [
+        "vastus_lateralis",
+        "vastus_medialis",
+        "vastus_intermedius",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "rectus_femoris",
+        "gluteus_medius",
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "soleus"
+      ]
+    },
+    {
+      "id": "lateral_band_walk",
+      "primary": [
+        "gluteus_medius",
+        "gluteus_minimus"
+      ],
+      "secondary": [
+        "tensor_fasciae_latae",
+        "gluteus_maximus"
+      ]
+    },
+    {
+      "id": "cable_glute_kickback",
+      "primary": [
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus"
+      ]
+    },
+    {
+      "id": "calf_raise",
+      "primary": [
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "soleus"
+      ],
+      "secondary": [
+        "fibularis_longus",
+        "fibularis_brevis"
+      ]
+    },
+    {
+      "id": "plank",
+      "primary": [
+        "rectus_abdominis",
+        "transversus_abdominis"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique",
+        "deltoid_anterior",
+        "serratus_anterior",
+        "gluteus_maximus"
+      ]
+    },
+    {
+      "id": "side_plank",
+      "primary": [
+        "external_oblique",
+        "internal_oblique"
+      ],
+      "secondary": [
+        "quadratus_lumborum",
+        "gluteus_medius",
+        "transversus_abdominis"
+      ]
+    },
+    {
+      "id": "dead_bug",
+      "primary": [
+        "transversus_abdominis",
+        "rectus_abdominis"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique",
+        "psoas_major",
+        "iliacus"
+      ]
+    },
+    {
+      "id": "bird_dog",
+      "primary": [
+        "iliocostalis",
+        "longissimus",
+        "multifidus",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "transversus_abdominis",
+        "external_oblique",
+        "internal_oblique",
+        "deltoid_anterior"
+      ]
+    },
+    {
+      "id": "pallof_press",
+      "primary": [
+        "external_oblique",
+        "internal_oblique",
+        "transversus_abdominis"
+      ],
+      "secondary": [
+        "rectus_abdominis"
+      ]
+    },
+    {
+      "id": "hanging_knee_raise",
+      "primary": [
+        "rectus_abdominis",
+        "psoas_major",
+        "iliacus"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique",
+        "flexor_digitorum_superficialis",
+        "flexor_digitorum_profundus"
+      ]
+    },
+    {
+      "id": "cable_crunch",
+      "primary": [
+        "rectus_abdominis"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique"
+      ]
+    },
+    {
+      "id": "pilates_hundred",
+      "primary": [
+        "rectus_abdominis",
+        "transversus_abdominis"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique",
+        "psoas_major",
+        "iliacus"
+      ]
+    },
+    {
+      "id": "pilates_single_leg_stretch",
+      "primary": [
+        "rectus_abdominis",
+        "transversus_abdominis"
+      ],
+      "secondary": [
+        "external_oblique",
+        "internal_oblique",
+        "psoas_major",
+        "iliacus"
+      ]
+    },
+    {
+      "id": "pilates_bridge",
+      "primary": [
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "iliocostalis",
+        "longissimus",
+        "transversus_abdominis"
+      ]
+    },
+    {
+      "id": "pilates_side_kick",
+      "primary": [
+        "gluteus_medius"
+      ],
+      "secondary": [
+        "gluteus_minimus",
+        "tensor_fasciae_latae",
+        "gluteus_maximus",
+        "psoas_major",
+        "iliacus",
+        "external_oblique"
+      ]
+    },
+    {
+      "id": "pilates_swimming",
+      "primary": [
+        "iliocostalis",
+        "longissimus",
+        "spinalis",
+        "multifidus",
+        "gluteus_maximus"
+      ],
+      "secondary": [
+        "deltoid_posterior",
+        "trapezius_ascending",
+        "trapezius_transverse",
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus"
+      ]
+    },
+    {
+      "id": "pilates_clamshell",
+      "primary": [
+        "gluteus_medius",
+        "gluteus_minimus"
+      ],
+      "secondary": [
+        "piriformis",
+        "gluteus_maximus"
+      ]
+    },
+    {
+      "id": "downward_facing_dog",
+      "primary": [
+        "biceps_femoris_long",
+        "biceps_femoris_short",
+        "semitendinosus",
+        "semimembranosus",
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral"
+      ],
+      "secondary": [
+        "soleus",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "serratus_anterior",
+        "deltoid_anterior",
+        "latissimus_dorsi"
+      ]
+    },
+    {
+      "id": "supine_hamstring_strap_stretch",
+      "primary": [
+        "biceps_femoris_long",
+        "biceps_femoris_short",
+        "semitendinosus",
+        "semimembranosus"
+      ],
+      "secondary": []
+    },
+    {
+      "id": "standing_shoulder_car",
+      "primary": [
+        "deltoid_anterior",
+        "deltoid_lateral",
+        "deltoid_posterior"
+      ],
+      "secondary": [
+        "supraspinatus",
+        "infraspinatus",
+        "teres_minor",
+        "subscapularis",
+        "serratus_anterior"
+      ]
+    },
+    {
+      "id": "cat_cow",
+      "primary": [
+        "iliocostalis",
+        "longissimus",
+        "spinalis",
+        "multifidus"
+      ],
+      "secondary": [
+        "rectus_abdominis",
+        "external_oblique",
+        "internal_oblique"
+      ]
+    },
+    {
+      "id": "hip_flexor_stretch",
+      "primary": [
+        "psoas_major",
+        "iliacus",
+        "rectus_femoris"
+      ],
+      "secondary": [
+        "tensor_fasciae_latae"
+      ]
+    },
+    {
+      "id": "thoracic_open_book",
+      "primary": [
+        "external_oblique",
+        "pectoralis_major_sternocostal",
+        "pectoralis_major_clavicular"
+      ],
+      "secondary": [
+        "internal_oblique",
+        "pectoralis_major_abdominal"
+      ]
+    },
+    {
+      "id": "child_pose",
+      "primary": [
+        "latissimus_dorsi",
+        "iliocostalis",
+        "longissimus",
+        "multifidus"
+      ],
+      "secondary": [
+        "gluteus_maximus",
+        "teres_major"
+      ]
+    },
+    {
+      "id": "seated_glute_stretch",
+      "primary": [
+        "gluteus_maximus",
+        "gluteus_medius",
+        "piriformis"
+      ],
+      "secondary": [
+        "gluteus_minimus"
+      ]
+    },
+    {
+      "id": "standing_calf_stretch",
+      "primary": [
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral"
+      ],
+      "secondary": [
+        "soleus"
+      ]
+    },
+    {
+      "id": "wall_pec_stretch",
+      "primary": [
+        "pectoralis_major_sternocostal"
+      ],
+      "secondary": [
+        "pectoralis_major_clavicular",
+        "pectoralis_major_abdominal",
+        "deltoid_anterior",
+        "pectoralis_minor"
+      ]
+    },
+    {
+      "id": "heavy_bag_jab",
+      "primary": [],
+      "secondary": [
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "serratus_anterior",
+        "external_oblique"
+      ]
+    },
+    {
+      "id": "heavy_bag_cross",
+      "primary": [],
+      "secondary": [
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "serratus_anterior",
+        "external_oblique",
+        "internal_oblique"
+      ]
+    },
+    {
+      "id": "heavy_bag_jab_cross",
+      "primary": [],
+      "secondary": [
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "serratus_anterior",
+        "external_oblique",
+        "internal_oblique"
+      ]
+    },
+    {
+      "id": "heavy_bag_hook",
+      "primary": [],
+      "secondary": [
+        "deltoid_anterior",
+        "pectoralis_major_clavicular",
+        "pectoralis_major_sternocostal",
+        "external_oblique",
+        "internal_oblique"
+      ]
+    },
+    {
+      "id": "shadow_boxing",
+      "primary": [],
+      "secondary": [
+        "deltoid_anterior",
+        "triceps_brachii_lateral",
+        "triceps_brachii_medial",
+        "triceps_brachii_long",
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral"
+      ]
+    },
+    {
+      "id": "jump_rope",
+      "primary": [],
+      "secondary": [
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "soleus",
+        "deltoid_lateral"
+      ]
+    },
+    {
+      "id": "brisk_walk",
+      "primary": [],
+      "secondary": [
+        "gluteus_maximus",
+        "gluteus_medius",
+        "rectus_femoris",
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "soleus",
+        "tibialis_anterior"
+      ]
+    },
+    {
+      "id": "incline_treadmill_walk",
+      "primary": [],
+      "secondary": [
+        "gluteus_maximus",
+        "biceps_femoris_long",
+        "semitendinosus",
+        "semimembranosus",
+        "gastrocnemius_medial",
+        "gastrocnemius_lateral",
+        "soleus"
+      ]
+    }
+  ]
+}

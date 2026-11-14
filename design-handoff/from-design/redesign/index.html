@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="de">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trainingsplan</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#101418;color:#f2f4f7;font:16px system-ui,sans-serif}button,input,select{font:inherit}button,.control{border:1px solid #4d5d6b;background:#232d37;color:inherit;border-radius:8px;min-height:44px;padding:8px 14px}button{cursor:pointer}button:hover{background:#324454}button[aria-pressed=true],.main{background:#b9f86a;color:#101418;border-color:#b9f86a;font-weight:650}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #e6a66f;outline-offset:3px}a{color:#b9f86a}nav{display:flex;gap:6px;padding:12px;background:#171e25}nav button{display:flex;align-items:center;gap:10px;text-align:left}nav img{width:22px;height:22px;filter:invert(1)}nav button[aria-pressed=true] img{filter:none}main{padding:28px;max-width:1400px;min-width:0}h1{font-size:clamp(30px,4vw,48px);margin:0 0 18px}h2{font-size:20px;margin:0 0 12px}p,li{line-height:1.5}small,.muted{color:#bac7d1}.panel{background:#1a222a;border:1px solid #35434f;border-radius:14px;padding:18px;margin-bottom:14px;min-width:0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.split{display:grid;grid-template-columns:minmax(240px,1fr) minmax(280px,1fr);gap:14px}.figure{display:block;height:380px;width:100%;object-fit:contain;background:#262d36;border-radius:10px;margin-top:12px}.metric{display:grid;grid-template-columns:minmax(100px,1fr) 2fr auto;align-items:center;gap:10px;padding:8px 0}.track{height:10px;background:#394651;border-radius:10px}.track span{display:block;height:100%;background:#b9f86a;border-radius:10px}input{max-width:100%;width:100%;min-height:44px;background:#111820;color:inherit;border:1px solid #526170;border-radius:8px;padding:8px}.set{display:grid;grid-template-columns:36px 1fr 1fr;gap:10px;align-items:center;margin:8px 0}video{display:block;width:100%;max-height:360px;background:#262d36;border-radius:10px}progress{width:100%;accent-color:#b9f86a}ul{padding-left:20px}.exercise-list button{display:block;width:100%;text-align:left;margin:6px 0}
+@media(min-width:801px){body{display:grid;grid-template-columns:174px 1fr}nav{min-height:100dvh;position:sticky;top:0;height:100dvh;flex-direction:column}nav button{border-color:transparent}}
+@media(max-width:800px){main{padding:18px 16px 95px}.split{display:block}.figure{height:330px}nav{position:fixed;bottom:0;left:0;right:0;padding:6px 5px max(6px,env(safe-area-inset-bottom));justify-content:space-between;z-index:2}nav button{flex:1;flex-direction:column;gap:3px;font-size:11px;padding:6px 1px;min-width:0;border:0;background:transparent}nav button[aria-pressed=true]{background:#b9f86a}nav img{width:20px;height:20px}}
+</style>
+<nav aria-label="Hauptnavigation"></nav>
+<main id="main" tabindex="-1"></main>
+<script>
+const assets='../../fitness-graphics/';
+const nav=[['today','Heute'],['calendar','Kalender'],['plans','Pläne'],['analysis','Auswertung'],['exercises','Übungen']];
+const exercises=['Kniebeuge','Glute Bridge','Cat Cow','Unterarmstütz','Wadenheben','Kurzhantel-Schulterdrücken'];
+const initialPlan=['Kniebeuge','Glute Bridge','Unterarmstütz'];
+let page=innerWidth>800?'analysis':'today', sex='male', side='front', region='Alle', period=4, opened='Kniebeuge', query='', plan=[...initialPlan], planName='Ganzkörper A', editor=false, training=false, workoutDone=false;
+let session=null, exerciseIndex=0, fromTechnique=false;
+const newSets=()=>Array.from({length:3},()=>({kg:'',reps:''}));
+const groups=['Brust','Rücken','Schultern','Arme','Rumpf','Beine'];
+const examples = {
+  4: { current: [7,9,5,6,8,12], previous: [6,8,5,5,7,9] },
+  8: { current: [6,8,4,6,7,10], previous: [5,7,4,5,6,8] },
+  12: { current: [6,7,4,5,7,9], previous: [5,6,3,4,6,7] },
+};
+const currentValues = () => examples[period].current;
+const main=document.querySelector('main');
+const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const btn=(text,action,on=false)=>'<button type="button" data-do="'+action+'" aria-pressed="'+on+'">'+text+'</button>';
+const heading=title=>'<h1>'+title+'</h1>';
+function figure(){return '<img class="figure" alt="'+(sex==='male'?'Männliche':'Weibliche')+' Figur, '+(side==='front'?'Vorderansicht':'Rückansicht')+'" src="'+assets+'production-v13/renders/v42-figuren-reference-stance/char_'+sex+'_01_stance_'+side+'.png">'}
+function map(){return '<section class="panel"><h2>Muskelgruppen</h2><div class="row">'+btn('Vorne','front',side==='front')+btn('Hinten','back',side==='back')+btn('Mann','male',sex==='male')+btn('Frau','female',sex==='female')+'</div>'+figure()+'<div class="row" style="margin-top:12px">'+['Alle',...groups].map((x,i)=>btn(x,'region'+i,x===region)).join('')+'</div><p aria-live="polite">'+(region==='Alle'?'Muskelgruppe auswählen, um den Beispielwert zu sehen.':region+' · '+currentValues()[groups.indexOf(region)]+' Sätze pro Woche im Beispieldatensatz.')+'</p><small>Figur V42 · Auswahl in der Liste. Farbmasken folgen mit der passenden Figurenbasis.</small></section>'}
+function analysis(){return heading('Auswertung')+'<div class="row" style="margin-bottom:14px"><span>Zeitraum</span>'+[4,8,12].map(n=>btn(n+' Wochen','period'+n,n===period)).join('')+'</div><div class="split">'+map()+'<div><section class="panel"><h2>Sätze pro Woche</h2><small>Beispieldaten · '+period+' Wochen</small>'+groups.map((name,i)=>'<div class="metric"><span>'+name+'</span><div class="track" aria-hidden="true"><span style="width:'+(currentValues()[i]*7)+'%"></span></div><strong>'+currentValues()[i]+'</strong></div>').join('')+'</section><section class="panel"><h2>Vergleich</h2><p>Beine: '+(currentValues()[5]+' gegenüber '+examples[period].previous[5])+' Sätze pro Woche im Beispiel.</p>'+btn('Übungen ansehen','exercises')+'</section></div></div>'}
+function workouts(){
+const exercise=session[exerciseIndex];
+const sets=exercise.sets;
+const count=sets.filter(row=>Number(row.reps)>0).length;
+return heading('Training')+'<section class="panel"><h2>'+safe(planName)+' · '+safe(exercise.name)+'</h2><div class="row">'+session.map((row,i)=>btn(safe(row.name),'work'+i,i===exerciseIndex)).join('')+'</div><label for="work-progress">Sätze erfasst <span id="count">'+count+'</span> von 3</label><progress id="work-progress" max="3" value="'+count+'"></progress><div class="set" aria-hidden="true"><span>Satz</span><span>kg</span><span>Wdh.</span></div>'+sets.map((s,i)=>'<div class="set"><span>'+(i+1)+'</span><input aria-label="Satz '+(i+1)+' Gewicht" data-set="'+i+'" data-field="kg" inputmode="decimal" value="'+safe(s.kg)+'"><input aria-label="Satz '+(i+1)+' Wiederholungen" data-set="'+i+'" data-field="reps" inputmode="numeric" value="'+safe(s.reps)+'"></div>').join('')+'<div class="row">'+btn('Technikhinweise','technique')+'<button data-do="finish" class="main">Training abschließen</button></div></section>'}
+function plans(){return heading('Pläne')+(editor?'<section class="panel"><h2>Plan bearbeiten</h2><label>Planname<input id="planName" value="'+safe(planName)+'"></label><ul>'+plan.map(x=>'<li>'+safe(x)+'</li>').join('')+'</ul><div class="row">'+btn('Übung hinzufügen','add')+'<button class="main" data-do="save">Plan speichern</button></div></section>':'<section class="panel"><h2>'+safe(planName)+'</h2><p>'+plan.length+' Übungen</p><div class="row"><button class="main" data-do="start">Trainieren</button>'+btn('Plan bearbeiten','edit')+btn('Neuer Plan','new')+'</div></section>')}
+function library(){
+const q=query.trim().toLowerCase();
+return heading('Übungen')+(fromTechnique?btn('Zurück zum Training','resume'):'')+'<div class="split"><section class="panel"><label>Übung suchen<input id="search" value="'+safe(query)+'"></label><div class="exercise-list" id="results">'+results(q)+'</div></section><section class="panel" id="detail"><h2>'+safe(opened)+'</h2>'+(opened==='Kniebeuge'?'<video controls playsinline preload="metadata" src="'+assets+'production-v13/renders/squat-deeper-v39-loops/char_'+sex+'_01_squat_v39_0001-0048.mp4"></video><small>V39 · Prüfvorschau</small><details open><summary>Technikhinweise</summary><p>Der Clip zeigt Absenken und Aufrichten. Prüfe in der Vorschau die Fußposition in der tiefsten Haltung.</p></details>':'<p>Für diese Übung ist im Entwurf eine Medienfläche vorgesehen.</p>')+(editor?btn('Zum Plan hinzufügen','use'):'')+'</section></div>'+map()}
+function results(q){return exercises.map((x,i)=>[x,i]).filter(([x])=>x.toLowerCase().includes(q)).map(([x,i])=>btn(safe(x),'exercise'+i,x===opened)).join('')||'<p>Keine passende Übung.</p>'}
+function render(focus=false){
+document.querySelector('nav').innerHTML=nav.map(([id,label])=>btn('<img alt="" src="'+assets+'icons/navigation/'+id+'.svg">'+label,id,id===page)).join('');
+main.innerHTML=page==='analysis'?analysis():page==='plans'?plans():page==='exercises'?library():page==='calendar'?heading('Kalender')+'<section class="panel"><h2>Diese Woche</h2><p>'+safe(planName)+' · '+(workoutDone?'Training erfasst':'Geplant')+'</p>'+btn('Training öffnen','start')+'</section>':training?workouts():heading('Heute')+'<section class="panel"><h2>'+safe(planName)+'</h2><p>'+ (workoutDone?'Training erfasst':plan.length+' Übungen auf deinem Plan')+'</p><div class="row"><button class="main" data-do="start">Training starten</button>'+btn('Plan bearbeiten','edit')+'</div></section>';
+if(focus){scrollTo(0,0);main.focus()}
+}
+document.addEventListener('click',event=>{
+const a=event.target.closest('button[data-do]')?.dataset.do;if(!a)return;
+let focus=false;
+if(a.startsWith('exercise')&&a!=='exercises'){opened=exercises[Number(a.slice(8))]}
+else if(a.startsWith('region'))region=['Alle',...groups][Number(a.slice(6))];
+else if(a.startsWith('period'))period=Number(a.slice(6));
+else if(['male','female'].includes(a))sex=a;
+else if(['front','back'].includes(a))side=a;
+else if(a==='start'){
+ if(!training){
+   if(!plan.length){page='plans';editor=true;render(true);return}
+   session=plan.map(name=>({name,sets:newSets()}));exerciseIndex=0;
+ }
+ page='today';training=true;fromTechnique=false;focus=true;
+}
+else if(a==='resume'){page='today';fromTechnique=false;focus=true}
+else if(/^work[0-9]+$/.test(a)){exerciseIndex=Number(a.slice(4));focus=true}
+else if(a==='finish'){workoutDone=true;training=false;session=null;focus=true}
+else if(a==='edit'||a==='new'){page='plans';editor=true;if(a==='new'){plan=[];planName='Neuer Trainingsplan'}focus=true}
+else if(a==='save'){editor=false;focus=true}
+else if(a==='add'||a==='technique'){page='exercises';if(a==='technique'){opened=session[exerciseIndex].name;fromTechnique=true;}focus=true}
+else if(a==='use'){if(!plan.includes(opened))plan.push(opened);page='plans';focus=true}
+else {page=a;focus=true}
+render(focus);
+if(!focus&&a.startsWith('exercise'))document.querySelector('#detail')?.scrollIntoView({block:'start'});
+});
+document.addEventListener('input',event=>{
+const e=event.target;
+if(e.id==='search'){query=e.value;document.querySelector('#results').innerHTML=results(query.trim().toLowerCase())}
+if(e.id==='planName')planName=e.value;
+if(e.dataset.set!==undefined){const sets=session[exerciseIndex].sets;sets[Number(e.dataset.set)][e.dataset.field]=e.value;const count=sets.filter(row=>Number(row.reps)>0).length;document.querySelector('#count').textContent=count;document.querySelector('#work-progress').value=count}
+});
+render();
+</script>
+</html>

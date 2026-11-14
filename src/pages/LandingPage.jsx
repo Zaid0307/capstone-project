@@ -18,7 +18,7 @@ export default function LandingPage() {
       </SwitchBox>
       <Panel>
         <Title>{t('landing.title')}</Title>
-        <Button onClick={() => navigate(routes.exercises)}>{t('landing.start')}</Button>
+        <Button onClick={() => navigate(routes.today)}>{t('landing.start')}</Button>
       </Panel>
     </Page>
   );

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { BiDumbbell, BiListUl, BiPlusCircle } from 'react-icons/bi';
-import LanguageSwitch from './LanguageSwitch';
+import { BiBarChartAlt2, BiCalendar, BiDumbbell, BiHomeAlt, BiListUl } from 'react-icons/bi';
 import {
   colors,
   fontSizes,
@@ -15,25 +14,33 @@ import {
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
 
-// Bottom navigation. NavLink marks the current page with aria-current="page".
+// Bottom navigation with five areas; language and figure are in the settings.
+// NavLink marks the current page with aria-current="page".
 export default function Navigation() {
   const { t } = useTranslation();
 
   return (
     <Nav aria-label={t('nav.label')}>
-      <NavItem to={routes.newPlan}>
-        <BiPlusCircle aria-hidden="true" />
-        <span>{t('nav.newPlan')}</span>
+      <NavItem to={routes.today}>
+        <BiHomeAlt aria-hidden="true" />
+        <span>{t('nav.today')}</span>
+      </NavItem>
+      <NavItem to={routes.calendar}>
+        <BiCalendar aria-hidden="true" />
+        <span>{t('nav.calendar')}</span>
+      </NavItem>
+      <NavItem to={routes.plans}>
+        <BiListUl aria-hidden="true" />
+        <span>{t('nav.plans')}</span>
+      </NavItem>
+      <NavItem to={routes.analysis}>
+        <BiBarChartAlt2 aria-hidden="true" />
+        <span>{t('nav.analysis')}</span>
       </NavItem>
       <NavItem to={routes.exercises}>
         <BiDumbbell aria-hidden="true" />
         <span>{t('nav.exercises')}</span>
       </NavItem>
-      <NavItem to={routes.plans} end>
-        <BiListUl aria-hidden="true" />
-        <span>{t('nav.plans')}</span>
-      </NavItem>
-      <Switch />
     </Nav>
   );
 }
@@ -90,8 +97,4 @@ const NavItem = styled(NavLink)`
     border-radius: ${radii.pill};
     background-color: ${colors.primary};
   }
-`;
-
-const Switch = styled(LanguageSwitch)`
-  margin: 0 ${space.xs};
 `;

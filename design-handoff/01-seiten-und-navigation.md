@@ -1,5 +1,7 @@
 # Seiten und Navigation
 
+> **Veraltet seit 13.11.2026:** Das Plan-Formular (`planForm/`) wurde durch den Plan-Editor (`src/components/planEditor/`) ersetzt, dazu kamen Tagebuch und Trainingsseite. Aktueller Stand: [CHANGELOG.md](CHANGELOG.md) und `docs/konzept-plaene-training-auswertung.md`. Das App-Design ist zurückgestellt; diese Datei wird vor der Wiederaufnahme aktualisiert.
+
 ## Seitenübersicht
 
 | ID | Seite | Route | Status | Untere Navigation |

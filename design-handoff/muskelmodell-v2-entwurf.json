@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "status": "ENTWURF_FUER_UMSETZUNG",
+  "date": "2026-11-14",
+  "card": "E24",
+  "answers": "G04 / N4 (from-design/n4-muskelbuendel-vorschlag.json)",
+  "doc": "../docs/muskelmodell-v2.md",
+  "base": "muskelmodell-v1.json (alle 93 IDs bleiben unverändert gültig)",
+  "id_scheme": "<eltern-id>__<bereich>. Doppelter Unterstrich = Darstellungsfläche (kind 'region') ohne eigene Übungszuordnung. Körperseite nur in Masken-Pfad-IDs: <id>__left / <id>__right.",
+  "status_values": {
+    "final": "ID, Name und Abgrenzung stehen fest.",
+    "vorbehaltlich": "ID steht fest, wird aber erst nach Freigabe (Nutzer oder Grafik-Referenzform) in muscles.js aufgenommen. Wird sie verworfen, zeigt die ID auf ihren Elternmuskel."
+  },
+  "unchanged_reused_v1_ids": [
+    {"parent": "pectoralis_major", "ids": ["pectoralis_major_clavicular", "pectoralis_major_sternocostal", "pectoralis_major_abdominal"], "kind": "muscle_part", "note": "TA2-Teile, bleiben Übungsebene"},
+    {"parent": "trapezius", "ids": ["trapezius_descending", "trapezius_transverse", "trapezius_ascending"], "kind": "muscle_part", "note": "TA2-Teile, bleiben Übungsebene"},
+    {"parent": "deltoid", "ids": ["deltoid_anterior", "deltoid_lateral", "deltoid_posterior"], "kind": "muscle_part", "note": "TA2-Teile, bleiben Übungsebene"},
+    {"parent": "erector_spinae", "ids": ["iliocostalis", "longissimus", "spinalis"], "kind": "muscle", "note": "bleiben Übungsebene, erhalten in V2 Darstellungsflächen"}
+  ],
+  "new_regions": [
+    {"id": "latissimus_dorsi__thoracic", "parent": "latissimus_dorsi", "group": "back", "view": "back", "kind": "region", "status": "vorbehaltlich", "de": "Breiter Rückenmuskel, Brustwirbelanteil", "en": "Latissimus dorsi, thoracic region", "latin": null, "basis": "Forschungsgliederung (Gerling & Brown 2013), kein TA2-Teil", "boundary": "Faszikel von den Dornfortsätzen Th7–Th12 (über die Fascia thoracolumbalis), oberer, eher quer verlaufender Rand über dem unteren Schulterblattwinkel"},
+    {"id": "latissimus_dorsi__lumbar_pelvic_costal", "parent": "latissimus_dorsi", "group": "back", "view": "back", "kind": "region", "status": "vorbehaltlich", "de": "Breiter Rückenmuskel, Lenden-Becken-Rippen-Anteil", "en": "Latissimus dorsi, lumbar-pelvic-costal region", "latin": null, "basis": "Forschungsgliederung (Gerling & Brown 2013), kein TA2-Teil", "boundary": "Faszikel von Lendenwirbeln/Fascia thoracolumbalis, Darmbeinkamm und 9.–12. Rippe; nur die Muskelfläche, nicht die Aponeurose"},
+
+    {"id": "iliocostalis__lumborum", "parent": "iliocostalis", "group": "back", "view": "back", "kind": "region", "status": "final", "de": "Darmbein-Rippen-Muskel, Lendenteil", "en": "Iliocostalis lumborum", "latin": "Musculus iliocostalis lumborum (Pars lumbalis)", "basis": "TA (Tah 1794)"},
+    {"id": "iliocostalis__thoracis", "parent": "iliocostalis", "group": "back", "view": "deep", "kind": "region", "status": "final", "de": "Darmbein-Rippen-Muskel, Brustteil", "en": "Iliocostalis thoracis", "latin": "Musculus iliocostalis thoracis (TA98: Pars thoracica musculi iliocostalis lumborum)", "basis": "TA (Tah 1795)"},
+    {"id": "iliocostalis__cervicis", "parent": "iliocostalis", "group": "back", "view": "deep", "kind": "region", "status": "final", "de": "Darmbein-Rippen-Muskel, Halsteil", "en": "Iliocostalis cervicis", "latin": "Musculus iliocostalis cervicis", "basis": "TA (Tah 1796)"},
+
+    {"id": "longissimus__thoracis_lumbar", "parent": "longissimus", "group": "back", "view": "back", "kind": "region", "status": "final", "de": "Längster Rückenmuskel, Brustteil – Lendenabschnitt", "en": "Longissimus thoracis, lumbar part", "latin": "Pars lumbalis musculi longissimi thoracis", "basis": "TA (Tah 1799, TA2 2264)"},
+    {"id": "longissimus__thoracis_thoracic", "parent": "longissimus", "group": "back", "view": "back", "kind": "region", "status": "final", "de": "Längster Rückenmuskel, Brustteil – Brustabschnitt", "en": "Longissimus thoracis, thoracic part", "latin": "Musculus longissimus thoracis (ohne Pars lumbalis)", "basis": "TA (Tah 1798) abzüglich Pars lumbalis; keine eigene TA-Benennung des Rests"},
+    {"id": "longissimus__cervicis", "parent": "longissimus", "group": "back", "view": "deep", "kind": "region", "status": "final", "de": "Längster Rückenmuskel, Halsteil", "en": "Longissimus cervicis", "latin": "Musculus longissimus cervicis", "basis": "TA (Tah 1800)"},
+    {"id": "longissimus__capitis", "parent": "longissimus", "group": "back", "view": "deep", "kind": "region", "status": "final", "de": "Längster Rückenmuskel, Kopfteil", "en": "Longissimus capitis", "latin": "Musculus longissimus capitis", "basis": "TA (Tah 1801)"},
+
+    {"id": "spinalis__thoracis", "parent": "spinalis", "group": "back", "view": "back", "kind": "region", "status": "final", "de": "Dornmuskel, Brustteil", "en": "Spinalis thoracis", "latin": "Musculus spinalis thoracis", "basis": "TA (Tah 1803)"},
+    {"id": "spinalis__cervicis", "parent": "spinalis", "group": "back", "view": "deep", "kind": "region", "status": "vorbehaltlich", "de": "Dornmuskel, Halsteil", "en": "Spinalis cervicis", "latin": "Musculus spinalis cervicis", "basis": "TA (Tah 1804); oft fehlend", "note": "nur belegen, wenn die Referenzform ihn zeigt"},
+    {"id": "spinalis__capitis", "parent": "spinalis", "group": "back", "view": "deep", "kind": "region", "status": "vorbehaltlich", "de": "Dornmuskel, Kopfteil", "en": "Spinalis capitis", "latin": "Musculus spinalis capitis", "basis": "TA (Tah 1805); inkonstant, meist mit M. semispinalis capitis verschmolzen", "note": "nur belegen, wenn die Referenzform ihn getrennt zeigt"},
+
+    {"id": "rectus_abdominis__segment_01", "parent": "rectus_abdominis", "group": "abs", "view": "front", "kind": "region", "status": "final", "display_only": true, "de": "Gerader Bauchmuskel, 1. Feld von oben", "en": "Rectus abdominis, 1st field from the top", "latin": null, "basis": "Muskelfeld zwischen Rippenbogen-Ursprung und 1. Intersectio tendinea (TA2 2357/2358)"},
+    {"id": "rectus_abdominis__segment_02", "parent": "rectus_abdominis", "group": "abs", "view": "front", "kind": "region", "status": "final", "display_only": true, "de": "Gerader Bauchmuskel, 2. Feld von oben", "en": "Rectus abdominis, 2nd field from the top", "latin": null, "basis": "Muskelfeld zwischen 1. und 2. Intersectio tendinea"},
+    {"id": "rectus_abdominis__segment_03", "parent": "rectus_abdominis", "group": "abs", "view": "front", "kind": "region", "status": "final", "display_only": true, "de": "Gerader Bauchmuskel, 3. Feld von oben", "en": "Rectus abdominis, 3rd field from the top", "latin": null, "basis": "Muskelfeld zwischen 2. und 3. Intersectio tendinea (diese meist auf Nabelhöhe)"},
+    {"id": "rectus_abdominis__segment_04", "parent": "rectus_abdominis", "group": "abs", "view": "front", "kind": "region", "status": "final", "display_only": true, "de": "Gerader Bauchmuskel, 4. Feld von oben", "en": "Rectus abdominis, 4th field from the top", "latin": null, "basis": "Muskelfeld unterhalb der 3. Intersectio tendinea bis zum Schambein", "note": "Darf nie als 'unterer Bauch' bezeichnet oder einer Übung zugeordnet werden"},
+
+    {"id": "serratus_anterior__superior", "parent": "serratus_anterior", "group": "chest", "view": "deep", "kind": "region", "status": "vorbehaltlich", "de": "Vorderer Sägemuskel, oberer Teil", "en": "Serratus anterior, superior part", "latin": null, "basis": "Lehrbuchgliederung (Gray's Anatomy, Prometheus), kein TA2-Teil", "boundary": "Zacken der 1.–2. Rippe zum oberen Schulterblattwinkel"},
+    {"id": "serratus_anterior__intermediate", "parent": "serratus_anterior", "group": "chest", "view": "deep", "kind": "region", "status": "vorbehaltlich", "de": "Vorderer Sägemuskel, mittlerer Teil", "en": "Serratus anterior, intermediate part", "latin": null, "basis": "Lehrbuchgliederung (Gray's Anatomy, Prometheus), kein TA2-Teil", "boundary": "Zacken der 2.–3. Rippe zum Margo medialis scapulae"},
+    {"id": "serratus_anterior__inferior", "parent": "serratus_anterior", "group": "chest", "view": "front", "kind": "region", "status": "vorbehaltlich", "de": "Vorderer Sägemuskel, unterer Teil", "en": "Serratus anterior, inferior part", "latin": null, "basis": "Lehrbuchgliederung (Gray's Anatomy, Prometheus), kein TA2-Teil", "boundary": "Zacken der 4.–9. Rippe zum unteren Schulterblattwinkel; die sichtbaren Zacken seitlich unter dem Brustmuskel"}
+  ],
+  "counts": {"v1_entries": 93, "new_regions": 19, "final": 12, "vorbehaltlich": 7, "v2_entries_if_all_approved": 112, "exercise_level_ids_unchanged": 81},
+  "rules": [
+    "Übungsdaten (src/data/exercises/*.js) verweisen weiter nur auf die Übungsebene = die 81 V1-Blätter. IDs mit '__' sind dort verboten (Test).",
+    "Markierung einer Übung: jede Übungsebenen-ID leuchtet als Vereinigung all ihrer Darstellungsflächen, gleich stark. Keine Abstufung je Fläche.",
+    "Auswahl im Muskel-Atlas: Fläche anklickbar und benennbar; für Filter und Übungssuche gilt der nächste Vorfahr der Übungsebene (z. B. rectus_abdominis__segment_04 -> rectus_abdominis).",
+    "Auswahl eines Elternmuskels vereinigt alle freigegebenen Kinderflächen; fehlen Kinderflächen, trägt die bisherige Gesamtmaske.",
+    "Darstellungsflächen sind keine Aktivierungsaussage. Eine Fläche wird nur nach dokumentierter fachlicher Entscheidung Übungsebene; die ID bleibt dann gleich.",
+    "Rectus-Felder sind reine Darstellungsflächen (display_only) und bekommen nie eine Übungszuordnung.",
+    "Körperseite gehört nur in Masken-Pfad-IDs (__left/__right), nicht in Muskel-IDs oder Übungsdaten.",
+    "Linea alba, Intersectiones tendineae, Aponeurosen und Fascia thoracolumbalis gehören zu keiner Fläche."
+  ],
+  "migration": [
+    "Alle 93 V1-IDs und die 4 LEGACY_MUSCLE_IDS bleiben gültig; nichts wird umbenannt oder gelöscht.",
+    "resolveMuscleId(id) behält seine Bedeutung (Übungsebene). Neu: resolveDisplayRegions(id) für die Masken.",
+    "Taucht eine Regions-ID in gespeicherten Daten auf, wird sie zur Übungsebenen-ID ihres Vorfahren aufgelöst.",
+    "Wird eine vorbehaltliche Region verworfen, kommt sie als RETIRED_REGION_IDS-Eintrag auf ihren Elternmuskel."
+  ],
+  "rejected_or_not_added": [
+    {"topic": "gluteus_medius vorne/hinten", "reason": "nur funktionelle Faserbeschreibung, kein TA2-Teil, keine verlässliche Oberflächengrenze"},
+    {"topic": "gluteus_maximus oben/unten", "reason": "kein TA2-Teil"},
+    {"topic": "vastus_medialis 'obliquus' (VMO)", "reason": "kein TA2-Teil, Trainingszone"},
+    {"topic": "latissimus_dorsi Pars scapularis", "reason": "inkonstant, klein; in der Forschungsgliederung im Brustwirbelanteil enthalten"},
+    {"topic": "adductor_magnus / adductor minimus", "reason": "offene Frage, nicht in V2; tief und variabel"}
+  ],
+  "sources": {
+    "ta2": "https://cdn.dal.ca/content/dam/dalhousie/pdf/library/FIPAT/TA2/FIPAT-TA2-Part-2.pdf",
+    "tah": "https://ifaa.unifr.ch/Public/TNAEntryPage/prop/ViewPartListLAEN.html",
+    "gerling_brown_2013": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3724205/",
+    "bogduk_1998": "https://pubmed.ncbi.nlm.nih.gov/11415812/",
+    "broyles_2018": "https://pubmed.ncbi.nlm.nih.gov/28671887/",
+    "anita_2015": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4525496/"
+  }
+}
