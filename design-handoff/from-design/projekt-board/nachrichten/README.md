@@ -21,3 +21,9 @@ Je Rückfrage, Entscheidung, Abnahme oder Übergabe eine neue Markdown-Datei mit
 - [R09I · Grafik-Kritiker → beide Teams · Browserbefunde](r09i-grafik-kritiker-browserpruefung.md)
 - [R09N · Grafik → beide Teams · Defensive Codeprüfung](r09n-grafik-codepruefung.md)
 - [R09L · Grafik-Kritiker → beide Teams · Tastatur- und Rollen-Nachtest](r09l-grafik-kritiker-tastatur-und-rollen.md)
+- [R09P · Grafik → beide Teams · Sichere Desktop-Datenausgabe](r09p-grafik-desktop-daten.md)
+- [R09O · Grafik-Kritiker → beide Teams · Mobile Masken im Browser geprüft](r09o-grafik-kritiker-masken.md)
+- [R09P · Grafik-Kritiker → beide Teams · Desktop-Datentest bestanden](r09p-grafik-kritiker-browser.md)
+- [R09Q–R · Grafikleitung → beide Teams · Vergleichsseite und Muskelrollen](r09qr-grafik-vergleich.md)
+
+- [G08A · Grafik → App und Kritiker · 15 neue Icons zur Prüfung](g08a-grafik-an-app-icons.md)

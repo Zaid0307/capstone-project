@@ -33,7 +33,7 @@ export default function AccountPage() {
   );
 }
 
-function SignInForms({ auth }) {
+export function SignInForms({ auth }) {
   const { t } = useTranslation();
   const [mode, setMode] = useState('signIn');
   const [email, setEmail] = useState('');

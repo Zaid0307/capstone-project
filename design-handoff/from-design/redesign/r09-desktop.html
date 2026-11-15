@@ -26,12 +26,60 @@ const roleNames={primary:"Primär",secondary:"Sekundär",steady:"Stabilisierend"
 const $=id=>document.getElementById(id), state={sex:"male",view:"front",deep:false,active:null};
 function press(ids,current){ids.forEach(id=>$(id).setAttribute("aria-pressed",String(id===current)));}
 function stats(){
- const selected=weeks.slice(-Number($("range").value)), max=Math.max(...selected.map(w=>w.sets));
- const sets=selected.reduce((sum,w)=>sum+w.sets,0), sessions=selected.reduce((sum,w)=>sum+w.sessions,0);
- $("metrics").innerHTML=[[sessions,"Einheiten"],[sets,"Sätze"],[(sets/sessions).toFixed(1).replace(".",","),"Sätze je Einheit"]].map(([num,label])=>'<div class="metric"><strong>'+num+'</strong><span>'+label+'</span></div>').join("");
- $("chart").innerHTML=selected.map(w=>'<div class="chart-row"><span>KW '+w.week+'</span><div class="bar"><span style="width:'+(w.sets/max*100)+'%"></span></div><span>'+w.sets+'</span></div>').join("");
- $("values").innerHTML=selected.map(w=>'<tr><th scope="row">KW '+w.week+'</th><td>'+w.sets+'</td></tr>').join("");
- $("history").innerHTML=dates.slice(0,selected.length).slice(0,3).map((d,i)=>'<article><time>'+d+'</time><b>'+["Oberkörper A","Ganzkörper","Oberkörper B"][i]+'</b></article>').join("");
+ const requested = Number($("range").value);
+ const period = requested === 8 ? 8 : 4;
+ const validCount = value => Number.isSafeInteger(value) && value >= 0;
+ const selected = weeks.slice(-period).filter(row =>
+  Number.isInteger(row.week) && row.week >= 1 && row.week <= 53 &&
+  validCount(row.sets) && validCount(row.sessions)
+ );
+ const max = Math.max(0, ...selected.map(row => row.sets));
+ const sets = selected.reduce((sum, row) => sum + row.sets, 0);
+ const sessions = selected.reduce((sum, row) => sum + row.sessions, 0);
+ const average = sessions > 0 && validCount(sets) && validCount(sessions)
+  ? (sets / sessions).toFixed(1).replace(".", ",") : "–";
+ function element(tag, content, className){
+  const node = document.createElement(tag);
+  if(content !== undefined) node.textContent = String(content);
+  if(className) node.className = className;
+  return node;
+ }
+ const metrics = [
+  [validCount(sessions) ? sessions : "–", "Einheiten"],
+  [validCount(sets) ? sets : "–", "Sätze"],
+  [average, "Sätze je Einheit"]
+ ].map(([value, label]) => {
+  const metric = element("div", undefined, "metric");
+  metric.append(element("strong", value), element("span", label));
+  return metric;
+ });
+ const chart = selected.map(row => {
+  const line = element("div", undefined, "chart-row");
+  const track = element("div", undefined, "bar");
+  const bar = element("span");
+  const width = max > 0 ? Math.min(100, Math.max(0, row.sets / max * 100)) : 0;
+  bar.style.width = width + "%";
+  track.append(bar);
+  line.append(element("span", "KW " + row.week), track, element("span", row.sets));
+  return line;
+ });
+ const values = selected.map(row => {
+  const line = element("tr");
+  const heading = element("th", "KW " + row.week);
+  heading.scope = "row";
+  line.append(heading, element("td", row.sets));
+  return line;
+ });
+ const names = ["Oberkörper A", "Ganzkörper", "Oberkörper B"];
+ const history = dates.slice(0, Math.min(selected.length, names.length)).map((date, index) => {
+  const entry = element("article");
+  entry.append(element("time", date), element("b", names[index]));
+  return entry;
+ });
+ $("metrics").replaceChildren(...metrics);
+ $("chart").replaceChildren(...chart);
+ $("values").replaceChildren(...values);
+ $("history").replaceChildren(...history);
 }
 function choose(key){state.active=key; paint(false);}
 function paint(rebuild=true){

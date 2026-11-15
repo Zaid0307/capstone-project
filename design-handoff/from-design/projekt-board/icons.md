@@ -10,21 +10,21 @@ Team Grafik. Abnahme nach N12. Die sechs Navigationsdateien liegen zur Prüfung 
 | IC-004 | navigation/analysis | Prüfung |
 | IC-005 | navigation/exercises | Überarbeitung · Lesbarkeit bei 20 px |
 | IC-006 | navigation/settings | Prüfung |
-| IC-007 | muscleGroups/chest | Offen |
-| IC-008 | muscleGroups/back | Offen |
-| IC-009 | muscleGroups/abs | Offen |
-| IC-010 | muscleGroups/shoulders | Offen |
-| IC-011 | muscleGroups/arms | Offen |
-| IC-012 | muscleGroups/legs | Offen |
-| IC-013 | muscleGroups/other | Offen |
-| IC-014 | trainingKinds/bodyweight | Offen |
-| IC-015 | trainingKinds/dumbbell | Offen |
-| IC-016 | trainingKinds/barbell | Offen |
-| IC-017 | trainingKinds/band | Offen |
-| IC-018 | trainingKinds/cable | Offen |
-| IC-019 | trainingKinds/machine | Offen |
-| IC-020 | trainingKinds/boxing | Offen |
-| IC-021 | trainingKinds/cardio | Offen |
+| IC-007 | muscleGroups/chest | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/chest.svg) |
+| IC-008 | muscleGroups/back | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/back.svg) |
+| IC-009 | muscleGroups/abs | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/abs.svg) |
+| IC-010 | muscleGroups/shoulders | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/shoulders.svg) |
+| IC-011 | muscleGroups/arms | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/arms.svg) |
+| IC-012 | muscleGroups/legs | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/legs.svg) |
+| IC-013 | muscleGroups/other | Prüfung · [SVG](../../fitness-graphics/icons/muscleGroups/other.svg) |
+| IC-014 | trainingKinds/bodyweight | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/bodyweight.svg) |
+| IC-015 | trainingKinds/dumbbell | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/dumbbell.svg) |
+| IC-016 | trainingKinds/barbell | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/barbell.svg) |
+| IC-017 | trainingKinds/band | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/band.svg) |
+| IC-018 | trainingKinds/cable | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/cable.svg) |
+| IC-019 | trainingKinds/machine | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/machine.svg) |
+| IC-020 | trainingKinds/boxing | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/boxing.svg) |
+| IC-021 | trainingKinds/cardio | Prüfung · [SVG](../../fitness-graphics/icons/trainingKinds/cardio.svg) |
 | IC-022 | equipment/anchor | Offen |
 | IC-023 | equipment/assist_band | Offen |
 | IC-024 | equipment/barbell | Offen |

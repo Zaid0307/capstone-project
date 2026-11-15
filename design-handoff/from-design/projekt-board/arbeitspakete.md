@@ -100,6 +100,8 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | R09K | Grafikleitung | Rollenfarben bei Muskelauswahl erhalten und Auswahl mit eigener Kontur zeigen | Erledigt · [Chrome-Nachtest R09L](nachrichten/r09l-grafik-kritiker-tastatur-und-rollen.md) |
 | R09L | Grafik-Kritiker | Fokus und Rollen im Browser erneut prüfen, Tastaturfolge ergänzen | Erledigt · [Chrome-Nachtest](nachrichten/r09l-grafik-kritiker-tastatur-und-rollen.md) |
 | R09N | Atlas-Agent · defensive Codeprüfung | Eingabepfade, dynamisches HTML, externe Ressourcen und Datenspeicherung der lokalen Entwürfe prüfen | Erledigt · [Statischer Prüfbericht](nachrichten/r09n-grafik-codepruefung.md) |
-| R09O | Grafikleitung | Lokale SVG-Masken im Mobilentwurf passiv als Bilder einbinden | Prüfung · [Raster](../redesign/richtung-a.html) und [Journal](../redesign/richtung-b.html) |
-| R09P | Grafikleitung | Dynamische Texte und Diagrammwerte für App-Daten defensiv über DOM und geprüfte Werte ausgeben | Offen · R09N |
-
+| R09O | Grafikleitung | Lokale SVG-Masken im Mobilentwurf passiv als Bilder einbinden | Erledigt · [Chrome-Nachtest auf beiden Mobilentwürfen](nachrichten/r09o-grafik-kritiker-masken.md) |
+| R09P | Grafikleitung | Dynamische Texte und Diagrammwerte für App-Daten defensiv über DOM und geprüfte Werte ausgeben | Erledigt · [Unabhängiger Chrome-Nachtest](nachrichten/r09p-grafik-kritiker-browser.md) |
+| R09Q | Atlas-Agent | Vier Rollen gleichzeitig an vorhandenen Masken als Beispiel zeigen | Prüfung · [Vier-Rollen-Studie](../redesign/r09q-vier-rollen.html). [Browserbefund](nachrichten/r09q-grafik-kritiker-browser.md). Vorderansicht und Übungsbezug offen |
+| R09R | Grafikleitung | Beide Mobilrichtungen und Desktop-Vergleich auf einer Seite verlinken | Erledigt · [Vergleichsseite](../redesign/r09-vergleich.html) · [Browsertest](nachrichten/r09q-grafik-kritiker-browser.md) |
+| G08A | Grafik-Kritiker | 15 neue Icons in drei Größen auf Hell/Dunkel prüfen | In Arbeit |

@@ -2,6 +2,8 @@
 const accountTexts = {
   en: {
     'account.title': 'Account',
+    'account.welcome': 'Welcome to GetFit!',
+    'account.continueWithout': 'Continue without an account',
     'account.loading': 'Loading …',
     'account.syncing': 'Loading your account …',
     'account.syncError': 'Your account could not be loaded. Please reload the page.',
@@ -38,6 +40,8 @@ const accountTexts = {
   },
   de: {
     'account.title': 'Konto',
+    'account.welcome': 'Willkommen bei GetFit!',
+    'account.continueWithout': 'Ohne Anmeldung fortfahren',
     'account.loading': 'Wird geladen …',
     'account.syncing': 'Dein Konto wird geladen …',
     'account.syncError': 'Dein Konto konnte nicht geladen werden. Bitte lade die Seite neu.',
