@@ -1,42 +1,82 @@
-import { EXERCISES, exerciseGroups } from '../data/exerciseLibrary';
+import { EXERCISES, exerciseById, exerciseGroups } from '../data/exerciseLibrary';
+import { EQUIPMENT } from '../data/equipment';
 
 // Finding exercises in the library: text search, filters that depend on each
 // other (muscle group ↔ equipment) and variants of an exercise.
 
 export const ALL = 'all';
 
-// Kind of training an exercise needs, derived from its equipment. Benches,
-// mats, racks and the like do not count; exercises without a load are bodyweight.
-const EQUIPMENT_TYPE = {
+// Kind of training an exercise needs, derived from its equipment and category.
+// Benches, mats, racks, balls and the like do not count; strength exercises
+// without a load are bodyweight.
+const TYPE_BY_EQUIPMENT = {
   dumbbells: 'dumbbell',
+  kettlebell: 'kettlebell',
   barbell: 'barbell',
   ez_bar: 'barbell',
+  trap_bar: 'barbell',
+  landmine: 'barbell',
+  medicine_ball: 'otherWeight',
+  slam_ball: 'otherWeight',
+  weight_plate: 'otherWeight',
+  sandbag: 'otherWeight',
+  weighted_vest: 'otherWeight',
+  ankle_weights: 'otherWeight',
   resistance_band: 'band',
+  resistance_tube: 'band',
   miniband: 'band',
   assist_band: 'band',
   cable_machine: 'cable',
-  chest_press_machine: 'machine',
-  hack_squat_machine: 'machine',
-  leg_curl_machine: 'machine',
-  leg_extension_machine: 'machine',
-  leg_press_machine: 'machine',
-  pullover_machine: 'machine',
-  smith_machine: 'machine',
-  t_bar_station: 'machine',
-  heavy_bag: 'boxing',
-  treadmill: 'cardio',
-  jump_rope: 'cardio',
 };
-// Bodyweight even with this equipment: it only holds the body.
-const BODYWEIGHT_EQUIPMENT = ['pullup_bar', 'dip_station'];
+// Any other equipment of these kinds sets the type.
+const TYPE_BY_KIND = {
+  machine: 'machine',
+  cardio_machine: 'cardio',
+  combat: 'boxing',
+};
+// Categories with their own kind of training, whatever the equipment.
+// Plyometrics (jumps, throws) get their own chip next to cardio.
+const TYPE_BY_CATEGORY = {
+  plyometric: 'plyometric',
+  cardio: 'cardio',
+  boxing: 'boxing',
+  mobility: 'mobility',
+  stretch: 'mobility',
+  yoga: 'mobility',
+  pilates: 'pilates',
+};
+// Bodyweight even with this equipment: it only holds the body (pull-up bar,
+// dip station, rings, suspension trainer, ab wheel …).
+const BODYWEIGHT_KIND = 'bodyweight_aid';
+const BODYWEIGHT_CATEGORIES = new Set(['strength', 'isometric', 'plyometric']);
 
-export const TRAINING_TYPES = ['bodyweight', 'dumbbell', 'barbell', 'band', 'cable', 'machine', 'boxing', 'cardio'];
+export const TRAINING_TYPES = [
+  'bodyweight',
+  'dumbbell',
+  'kettlebell',
+  'barbell',
+  'otherWeight',
+  'band',
+  'cable',
+  'machine',
+  'plyometric',
+  'cardio',
+  'boxing',
+  'mobility',
+  'pilates',
+];
+
+function equipmentType(item) {
+  const kind = EQUIPMENT[item]?.kind;
+  return TYPE_BY_EQUIPMENT[item] ?? TYPE_BY_KIND[kind] ?? (kind === BODYWEIGHT_KIND ? 'bodyweight' : null);
+}
 
 export function exerciseTypes(exercise) {
-  const types = new Set(exercise.equipment.map(item => EQUIPMENT_TYPE[item]).filter(Boolean));
-  if (types.size === 0 || exercise.equipment.some(item => BODYWEIGHT_EQUIPMENT.includes(item))) {
-    types.add('bodyweight');
-  }
+  const types = new Set(exercise.equipment.map(equipmentType).filter(Boolean));
+  const loaded = [...types].some(type => type !== 'bodyweight');
+  if (!loaded && BODYWEIGHT_CATEGORIES.has(exercise.category)) types.add('bodyweight');
+  if (TYPE_BY_CATEGORY[exercise.category]) types.add(TYPE_BY_CATEGORY[exercise.category]);
+  if (types.size === 0) types.add('bodyweight');
   return TRAINING_TYPES.filter(type => types.has(type));
 }
 
@@ -46,10 +86,21 @@ const matchesTypes = (exercise, types) =>
 
 const nameIn = (exercise, language) => exercise.name[language] ?? exercise.name.en;
 
+// Names and aliases in both languages, lower case, built once per exercise.
+const searchTexts = new WeakMap();
+function searchText(exercise) {
+  if (!searchTexts.has(exercise)) {
+    const aliases = Object.values(exercise.aliases ?? {}).flat();
+    searchTexts.set(exercise, [...Object.values(exercise.name), ...aliases].join(' ').toLowerCase());
+  }
+  return searchTexts.get(exercise);
+}
+
 function matchesQuery(exercise, query) {
   const words = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
-  const names = Object.values(exercise.name).join(' ').toLowerCase();
-  return words.every(word => names.includes(word));
+  if (words.length === 0) return true;
+  const text = searchText(exercise);
+  return words.every(word => text.includes(word));
 }
 
 function matchesMuscle(exercise, muscle) {
@@ -138,14 +189,23 @@ export function muscleSimilarity(a, b) {
 
 const VARIANT_SIMILARITY = 0.5;
 
-// Other exercises for mostly the same muscles, e.g. with dumbbells, cable or band
-// instead of a barbell. The most similar come first.
+// Variants of an exercise: first those the catalog names (variants, easier and
+// harder version), then other exercises for mostly the same muscles, e.g. with
+// dumbbells, cable or band instead of a barbell, the most similar first.
 export function exerciseVariants(exercise, exercises = EXERCISES) {
-  if (exercise.muscles.primary.length === 0) return [];
-  return exercises
-    .filter(other => other.id !== exercise.id && other.muscles.primary.length > 0)
-    .map(other => ({ exercise: other, similarity: muscleSimilarity(exercise, other) }))
-    .filter(({ similarity }) => similarity >= VARIANT_SIMILARITY)
-    .sort((a, b) => b.similarity - a.similarity)
-    .map(({ exercise: other }) => other);
+  const named = [...(exercise.variants ?? []), exercise.regression, exercise.progression]
+    .filter(Boolean)
+    .map(exerciseById)
+    .filter(other => other && other.id !== exercise.id && exercises.includes(other));
+  const seen = new Set([exercise.id, ...named.map(other => other.id)]);
+  const similar =
+    exercise.muscles.primary.length === 0
+      ? []
+      : exercises
+          .filter(other => !seen.has(other.id) && other.muscles.primary.length > 0)
+          .map(other => ({ exercise: other, similarity: muscleSimilarity(exercise, other) }))
+          .filter(({ similarity }) => similarity >= VARIANT_SIMILARITY)
+          .sort((a, b) => b.similarity - a.similarity)
+          .map(({ exercise: other }) => other);
+  return [...new Map([...named, ...similar].map(other => [other.id, other])).values()];
 }

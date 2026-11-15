@@ -8,6 +8,7 @@ import MuscleGroupNav from '../components/exercises/MuscleGroupNav';
 import MuscleGroupPicker from '../components/exercises/MuscleGroupPicker';
 import Message from '../components/ui/Message';
 import { exercisesByGroup } from '../data/exerciseLibrary';
+import { describeExercise, useExerciseDetails } from '../data/exerciseDetails';
 import { MUSCLE_GROUP_NAMES } from '../data/muscleGroups';
 import { space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
@@ -17,6 +18,8 @@ export default function ExercisesPage() {
   const { t, language } = useTranslation();
   const { muscle } = useParams();
   const groups = useMemo(() => exercisesByGroup(language), [language]);
+  // The descriptions follow once the exercise texts are loaded.
+  const details = useExerciseDetails();
 
   if (!muscle) {
     return (
@@ -41,7 +44,10 @@ export default function ExercisesPage() {
         <CardList>
           {exercises.map(exercise => (
             <li key={exercise.id}>
-              <ExerciseCard exercise={exercise} />
+              <ExerciseCard
+                exercise={exercise}
+                description={describeExercise(details?.[exercise.id], language)}
+              />
             </li>
           ))}
         </CardList>

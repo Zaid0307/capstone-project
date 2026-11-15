@@ -27,3 +27,8 @@ Je Rückfrage, Entscheidung, Abnahme oder Übergabe eine neue Markdown-Datei mit
 - [R09Q–R · Grafikleitung → beide Teams · Vergleichsseite und Muskelrollen](r09qr-grafik-vergleich.md)
 
 - [G08A · Grafik → App und Kritiker · 15 neue Icons zur Prüfung](g08a-grafik-an-app-icons.md)
+- [R09 · App-Leitung → Grafik · Nutzerfeedback 3: beide Richtungen abgelehnt, Maßstab nur noch die zwei Referenzbilder](2026-11-15-r09-app-an-grafik-nutzerfeedback-3.md)
+- [R09 · App-Leitung → Grafik · Entscheidung: zuerst ein Mockup im Referenz-Look](2026-11-15-r09b-app-an-grafik-mockup-zuerst.md)
+- [D05 · Grafik → beide Teams · Neue Stilprobe nach Nutzerfeedback](d05-grafik-stilprobe.md)
+- [R09 · App-Leitung → Grafik · Neue Referenz „moderne Apps“, ersetzt den HUD-Teil](2026-11-15-r09c-app-an-grafik-moderne-referenz.md)
+- [G01 · App-Leitung → Grafik · Verbindlicher Maßstab für Figuren und Muskeln: die Übersichtsreferenz](2026-11-15-g01-app-an-grafik-figurenmassstab.md)

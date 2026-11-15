@@ -121,7 +121,7 @@ describe('templateToPlan', () => {
     const [first] = plan.days[0].entries;
     expect(first).toMatchObject({
       exerciseId: 'goblet_squat',
-      exercise: 'Goblet Squat',
+      exercise: 'Goblet Squat mit Kurzhantel',
       muscle: 'legs',
       restSeconds: 120,
     });
@@ -149,8 +149,8 @@ describe('templateToPlan', () => {
 
   it('puts exercises without a muscle group under other', () => {
     const plan = templateToPlan(templateById('boxing_technical_3'), 'en');
-    const jab = plan.days.flatMap(day => day.entries).find(entry => entry.exerciseId === 'heavy_bag_jab');
-    expect(jab.muscle).toBe('other');
+    const shadowBoxing = plan.days.flatMap(day => day.entries).find(entry => entry.exerciseId === 'shadow_boxing');
+    expect(shadowBoxing.muscle).toBe('other');
   });
 
   it.each(PLAN_TEMPLATES.map(item => [item.id, item]))(

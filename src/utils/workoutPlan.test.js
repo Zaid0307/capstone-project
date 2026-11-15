@@ -122,7 +122,7 @@ describe('migratePlan', () => {
 describe('library helpers', () => {
   it('finds library exercises by German or English name, ignoring case', () => {
     expect(findLibraryExercise('langhantel-bankdrücken').id).toBe('barbell_bench_press');
-    expect(findLibraryExercise('  PLANK ').id).toBe('plank');
+    expect(findLibraryExercise('  FOREARM PLANK ').id).toBe('plank');
     expect(findLibraryExercise('Something else')).toBeNull();
     expect(findLibraryExercise('')).toBeNull();
   });
@@ -209,12 +209,11 @@ describe('weeklySetsByMuscle', () => {
         { entries: [squat] },
       ],
     };
-    // Squat: legs primary, back and abs secondary. Bench press: chest primary,
-    // front shoulder and triceps secondary (two working sets left).
+    // Squat: legs primary and secondary; back and abs only stabilize and do not
+    // count. Bench press: chest primary, front shoulder and triceps secondary
+    // (two working sets left).
     expect(weeklySetsByMuscle(plan)).toEqual([
       { muscle: 'chest', sets: 2 },
-      { muscle: 'back', sets: 3 },
-      { muscle: 'abs', sets: 3 },
       { muscle: 'shoulders', sets: 1 },
       { muscle: 'arms', sets: 1 },
       { muscle: 'legs', sets: 6 },

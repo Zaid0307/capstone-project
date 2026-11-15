@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / 'design-handoff' / 'uebungskatalog-v2'
-EXERCISE_DIR = ROOT / 'src' / 'data' / 'exercises'
+EXISTING_IDS = ROOT / 'scripts' / 'existing_exercise_ids.json'
 
 CATEGORIES = {'strength', 'isometric', 'plyometric', 'mobility', 'stretch', 'yoga', 'pilates', 'cardio', 'boxing'}
 MECHANICS = {'compound', 'isolation', 'none'}
@@ -38,10 +38,8 @@ def muscle_leaves():
 
 
 def existing_ids():
-    ids = set()
-    for path in EXERCISE_DIR.glob('*.js'):
-        ids.update(re.findall(r"exercise\('(\w+)'", path.read_text(encoding='utf-8')))
-    return ids
+    # The 99 IDs of the first exercise library; saved plans refer to them.
+    return set(json.loads(EXISTING_IDS.read_text(encoding='utf-8')))
 
 
 def bilingual(value):

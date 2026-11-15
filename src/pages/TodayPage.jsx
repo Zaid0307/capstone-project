@@ -6,12 +6,17 @@ import PageLayout from '../components/layout/PageLayout';
 import Button from '../components/ui/Button';
 import Message from '../components/ui/Message';
 import PageTitle from '../components/ui/PageTitle';
+import { useUndo } from '../components/ui/UndoProvider';
+import RunningWorkoutBanner from '../components/workout/RunningWorkoutBanner';
 import { colors, fontSizes, fontWeights, radii, shadows, sizes, space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
 import {
+  countsAsTraining,
   createFreeWorkout,
   createWorkoutFromPlan,
+  isWorkoutRunning,
+  runningWorkout,
   suggestDay,
   toDateKey,
   weekdayOf,
@@ -30,8 +35,13 @@ function weekStart(dateKey) {
 // What is due today in each active plan, started with one tap. Weekday plans
 // say honestly when today is a rest day and name the next training day.
 function todayOf(plan, today, workouts) {
+  // A running or empty training is not "done"; starting again opens the running one.
   const doneToday = workouts.find(
-    workout => workout.plan?.planId === plan.id && workout.date === today && workout.status === 'done'
+    workout =>
+      workout.plan?.planId === plan.id &&
+      workout.date === today &&
+      countsAsTraining(workout) &&
+      !isWorkoutRunning(workout)
   );
   if (plan.schedule?.type === 'rotation') {
     return { day: suggestDay(plan, today, workouts), isRestDay: false, doneToday };
@@ -46,20 +56,35 @@ function todayOf(plan, today, workouts) {
   return { day: null, next, isRestDay: true, doneToday };
 }
 
-export default function TodayPage({ plans, workouts, onAddWorkout }) {
+// onDeleteWorkout is optional: with it, an empty running training can be discarded here.
+export default function TodayPage({ plans, workouts, onAddWorkout, onDeleteWorkout }) {
   const { t, language } = useTranslation();
   const navigate = useNavigate();
+  const showUndo = useUndo();
+  const running = runningWorkout(workouts);
   const today = toDateKey();
   const activePlans = plans.map(migratePlan).filter(isPlanActive);
   const format = value => value.toLocaleString(language, { maximumFractionDigits: 1 });
 
-  function start(workout) {
+  // Only one training runs at a time: while one runs, starting opens it instead.
+  function start(createWorkout) {
+    if (running) {
+      navigate(routes.workout(running.id));
+      return;
+    }
+    const workout = createWorkout();
     onAddWorkout(workout);
     navigate(routes.workout(workout.id));
   }
 
+  function discard(workout) {
+    onDeleteWorkout(workout.id);
+    showUndo(t('diary.running.discarded'), () => onAddWorkout(workout));
+  }
+
   const thisWeek = workouts.filter(workout => workout.date >= weekStart(today));
-  const done = thisWeek.filter(workout => workout.status === 'done');
+  // Trainings without a single done set do not count.
+  const done = thisWeek.filter(countsAsTraining);
   const summaries = done.map(workoutSummary);
   const dateLabel = new Date(`${today}T12:00:00`).toLocaleDateString(language, {
     weekday: 'long',
@@ -78,6 +103,8 @@ export default function TodayPage({ plans, workouts, onAddWorkout }) {
           <MdOutlineSettings aria-hidden="true" />
         </SettingsLink>
       </Header>
+
+      {running && <RunningWorkoutBanner workout={running} onDiscard={onDeleteWorkout ? discard : undefined} />}
 
       {activePlans.length === 0 ? (
         <Message>
@@ -126,7 +153,7 @@ export default function TodayPage({ plans, workouts, onAddWorkout }) {
                         {t('today.exerciseCount', { count: day.entries.length })}
                       </p>
                       <Buttons>
-                        <Button onClick={() => start(createWorkoutFromPlan(plan, day, today, workouts))}>
+                        <Button onClick={() => start(() => createWorkoutFromPlan(plan, day, today, workouts))}>
                           {t('diary.start')}
                         </Button>
                         <Button $variant="secondary" onClick={() => navigate(routes.diaryForPlan(plan.id))}>
@@ -143,7 +170,7 @@ export default function TodayPage({ plans, workouts, onAddWorkout }) {
       )}
 
       <div>
-        <Button $variant="secondary" onClick={() => start(createFreeWorkout(today))}>
+        <Button $variant="secondary" onClick={() => start(() => createFreeWorkout(today))}>
           {t('diary.startFree')}
         </Button>
       </div>

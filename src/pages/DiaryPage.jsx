@@ -15,14 +15,18 @@ import IconButton from '../components/ui/IconButton';
 import Message from '../components/ui/Message';
 import PageTitle from '../components/ui/PageTitle';
 import { useUndo } from '../components/ui/UndoProvider';
+import RunningWorkoutBanner from '../components/workout/RunningWorkoutBanner';
 import { colors, fontSizes, fontWeights, radii, shadows, sizes, space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
 import {
+  countsAsTraining,
   createFreeWorkout,
   createSkippedWorkout,
   createWorkoutFromPlan,
   isMoved,
+  isWorkoutRunning,
+  runningWorkout,
   suggestDay,
   filterWorkoutsByPlans,
   toDateKey,
@@ -57,6 +61,7 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
   const [chosenDayId, setChosenDayId] = useState(null);
   const [isSkipping, setIsSkipping] = useState(false);
 
+  const running = runningWorkout(workouts);
   const plan = allPlans.find(item => item.id === planId) ?? null;
   const days = plan ? orderedDays(plan) : [];
   const suggested = plan ? suggestDay(plan, date, workouts) : null;
@@ -71,9 +76,21 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
     });
   const format = value => value.toLocaleString(language, { maximumFractionDigits: 1 });
 
-  function start(workout) {
+  // Only one training runs at a time: while one runs, starting opens it instead
+  // (an empty one can be discarded in the banner).
+  function start(createWorkout) {
+    if (running) {
+      navigate(routes.workout(running.id));
+      return;
+    }
+    const workout = createWorkout();
     onAddWorkout(workout);
     navigate(routes.workout(workout.id));
+  }
+
+  function discard(workout) {
+    onDeleteWorkout(workout.id);
+    showUndo(t('diary.running.discarded'), () => onAddWorkout(workout));
   }
 
   function recordSkipped(note) {
@@ -97,13 +114,16 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
   ].concat(workouts.some(workout => !workout.plan) ? [['free', t('diary.freeWorkout')]] : []);
   const toggleFilter = id =>
     setFilterPlanIds(filterPlanIds.includes(id) ? filterPlanIds.filter(other => other !== id) : [...filterPlanIds, id]);
-  const weekDone = thisWeek.filter(workout => workout.status === 'done');
+  // Trainings without a single done set do not count.
+  const weekDone = thisWeek.filter(countsAsTraining);
   const weekSummaries = weekDone.map(workoutSummary);
   const withAdherence = weekSummaries.filter(summary => summary.adherence !== null);
 
   return (
     <PageLayout>
       <PageTitle>{t('diary.title')}</PageTitle>
+
+      {running && <RunningWorkoutBanner workout={running} onDiscard={discard} />}
 
       <FormCard aria-labelledby="diaryStartTitle">
         <SectionTitle id="diaryStartTitle">{t('diary.startTitle')}</SectionTitle>
@@ -159,7 +179,7 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
               <Muted>{t('diary.movedHint', { day: dayTitle(day, plan.schedule, t) })}</Muted>
             )}
             <Buttons>
-              <Button disabled={!day} onClick={() => start(createWorkoutFromPlan(plan, day, date, workouts))}>
+              <Button disabled={!day} onClick={() => start(() => createWorkoutFromPlan(plan, day, date, workouts))}>
                 {t('diary.start')}
               </Button>
               <Button $variant="secondary" disabled={!day} aria-haspopup="dialog" onClick={() => setIsSkipping(true)}>
@@ -177,7 +197,7 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
           </>
         )}
         <div>
-          <Button $variant="secondary" onClick={() => start(createFreeWorkout(date))}>
+          <Button $variant="secondary" onClick={() => start(() => createFreeWorkout(date))}>
             {t('diary.startFree')}
           </Button>
         </div>
@@ -205,7 +225,7 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
           </div>
           <div>
             <dt>{t('diary.stats.skipped')}</dt>
-            <dd>{thisWeek.length - weekDone.length}</dd>
+            <dd>{thisWeek.filter(workout => workout.status === 'skipped').length}</dd>
           </div>
           <div>
             <dt>{t('diary.stats.sets')}</dt>
@@ -253,7 +273,11 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
                       {skipped
                         ? [t('diary.status.skipped'), workout.note].filter(Boolean).join(' · ')
                         : [
-                            moved ? t('diary.status.moved', { day: t(`day.${workout.plan.weekday}`) }) : t('diary.status.done'),
+                            isWorkoutRunning(workout)
+                              ? t('diary.running.title')
+                              : moved
+                                ? t('diary.status.moved', { day: t(`day.${workout.plan.weekday}`) })
+                                : t('diary.status.done'),
                             t('diary.setsDone', { done: summary.doneSets, planned: summary.plannedSets }),
                             summary.volume ? `${format(summary.volume)} kg` : null,
                             summary.adherence !== null ? t('diary.adherence', { percent: Math.round(summary.adherence * 100) }) : null,

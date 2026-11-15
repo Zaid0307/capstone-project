@@ -15,6 +15,7 @@ export const routes = {
   diary: '/diary',
   diaryForPlan: planId => `/diary?plan=${encodeURIComponent(planId)}`,
   workout: workoutId => `/diary/${workoutId}`,
+  workoutSummary: workoutId => `/diary/${workoutId}/summary`,
 };
 
 // Paths used by older versions of the app.

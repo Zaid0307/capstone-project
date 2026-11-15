@@ -41,9 +41,10 @@ describe('muscleContributions', () => {
     expect(contributionTo(bench, 'arms')).toBe(0.5);
 
     const squat = muscleContributions('barbell_squat');
-    expect(squat.groups).toMatchObject({ legs: 1, back: 0.5, abs: 0.5 });
+    // Back and abs only stabilize the squat and do not count.
+    expect(squat.groups).toEqual({ legs: 1 });
     expect(contributionTo(squat, 'quadriceps_femoris')).toBe(1);
-    expect(contributionTo(squat, 'erector_spinae')).toBe(0.5);
+    expect(contributionTo(squat, 'erector_spinae')).toBe(0);
   });
 
   it('counts own exercises only for their group', () => {

@@ -9,7 +9,7 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 
-export default function ExerciseCard({ exercise }) {
+export default function ExerciseCard({ exercise, description = exercise.description }) {
   const { t } = useTranslation();
 
   return (
@@ -24,7 +24,7 @@ export default function ExerciseCard({ exercise }) {
         )}
         <Title>{exercise.name}</Title>
       </Header>
-      <p>{exercise.description}</p>
+      {description && <p>{description}</p>}
     </Card>
   );
 }

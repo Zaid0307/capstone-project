@@ -19,6 +19,11 @@ describe('filterExercises', () => {
     expect(ids(filterExercises({ query: 'kniebeuge langhantel' }, 'de'))).toContain('barbell_squat');
   });
 
+  it('also finds exercises by their aliases', () => {
+    expect(ids(filterExercises({ query: 'twenty-ones' }, 'en'))).toEqual(['21s_barbell_curl']);
+    expect(ids(filterExercises({ query: 'bankdrücken' }, 'de'))).toContain('barbell_bench_press');
+  });
+
   it('combines muscle group and equipment', () => {
     const found = filterExercises({ muscle: 'legs', equipment: 'barbell' }, 'en');
     expect(found.length).toBeGreaterThan(0);
@@ -74,6 +79,29 @@ describe('kinds of training', () => {
     expect(exerciseTypes(byId('barbell_squat'))).toEqual(['barbell']);
   });
 
+  it('gives the new categories and equipment their own kind', () => {
+    const plyometric = EXERCISES.filter(exercise => exercise.category === 'plyometric');
+    for (const exercise of plyometric) expect(exerciseTypes(exercise), exercise.id).toContain('plyometric');
+    for (const exercise of EXERCISES.filter(exercise => ['yoga', 'stretch', 'mobility'].includes(exercise.category))) {
+      expect(exerciseTypes(exercise), exercise.id).toContain('mobility');
+      expect(exerciseTypes(exercise), exercise.id).not.toContain('bodyweight');
+    }
+    for (const exercise of EXERCISES.filter(exercise => exercise.equipment.includes('kettlebell'))) {
+      expect(exerciseTypes(exercise), exercise.id).toContain('kettlebell');
+    }
+    expect(EXERCISES.some(exercise => exerciseTypes(exercise).includes('pilates'))).toBe(true);
+    for (const type of TRAINING_TYPES) {
+      expect(EXERCISES.some(exercise => exerciseTypes(exercise).includes(type)), type).toBe(true);
+    }
+  });
+
+  it('counts the new equipment in the filter', () => {
+    const { equipmentCounts } = filterOptions({}, PLAN_MUSCLES);
+    expect(equipmentCounts.kettlebell).toBe(EXERCISES.filter(exercise => exercise.equipment.includes('kettlebell')).length);
+    expect(equipmentCounts.kettlebell).toBeGreaterThan(0);
+    expect(equipmentCounts.lat_pulldown_machine).toBeGreaterThan(0);
+  });
+
   it('gives every exercise at least one kind', () => {
     for (const exercise of EXERCISES) {
       expect(exerciseTypes(exercise).length, exercise.id).toBeGreaterThan(0);
@@ -94,7 +122,7 @@ describe('kinds of training', () => {
     for (const type of TRAINING_TYPES) {
       expect(typeCounts[type]).toBe(filterExercises({ muscle: 'arms', types: [type] }, 'en').length);
     }
-    expect(typeCounts.machine).toBe(0);
+    expect(typeCounts.band).toBeGreaterThan(0);
     expect(muscleCounts.arms).toBe(filterExercises({ muscle: 'arms', types: ['band'] }, 'en').length);
   });
 });
@@ -112,8 +140,17 @@ describe('variants', () => {
     expect(ids(variants)).not.toContain('barbell_squat');
   });
 
-  it('has no variants for exercises without primary muscles', () => {
+  it('puts the variants the catalog names first', () => {
+    const exercise = byId('prone_y_raise');
+    const named = exercise.variants;
+    expect(ids(exerciseVariants(exercise)).slice(0, named.length)).toEqual(named);
+    // The variants of the merged duplicate incline_y_raise were kept.
+    expect(named).toEqual(expect.arrayContaining(['reverse_fly', 'face_pull']));
+  });
+
+  it('gives exercises without primary muscles only the named variants', () => {
     const withoutMuscles = EXERCISES.find(exercise => exercise.muscles.primary.length === 0);
-    expect(exerciseVariants(withoutMuscles)).toEqual([]);
+    const named = [...withoutMuscles.variants, withoutMuscles.regression, withoutMuscles.progression].filter(Boolean);
+    expect(ids(exerciseVariants(withoutMuscles)).sort()).toEqual([...new Set(named)].sort());
   });
 });

@@ -9,6 +9,7 @@ import { Field, FormCard, Input, Label, Select, Textarea } from '../components/p
 import Button from '../components/ui/Button';
 import DecimalInput from '../components/ui/DecimalInput';
 import RestTimer from '../components/workout/RestTimer';
+import WorkoutProgress from '../components/workout/WorkoutProgress';
 import useRestTimer from '../hooks/useRestTimer';
 import IconButton from '../components/ui/IconButton';
 import Message from '../components/ui/Message';
@@ -22,7 +23,9 @@ import {
   addLoggedExercise,
   addLoggedSet,
   extraExercise,
+  finishWorkout,
   insertLoggedExercise,
+  isWorkoutRunning,
   insertLoggedSet,
   isMoved,
   loggedExerciseName,
@@ -77,6 +80,19 @@ export default function WorkoutPage({ workouts, onUpdateWorkout }) {
     ? `${workout.plan.planName} · ${workout.plan.dayName || t(`day.${workout.plan.weekday}`)}`
     : t('diary.freeWorkout');
   const isSkipped = workout.status === 'skipped';
+  const isRunning = isWorkoutRunning(workout);
+
+  // "Finish training" sets the end time and shows the summary; a finished entry
+  // that is edited later keeps its end time.
+  function handleFinish() {
+    restTimer.stop();
+    if (isSkipped) {
+      navigate(routes.diary);
+      return;
+    }
+    if (isRunning) onUpdateWorkout(finishWorkout(workout));
+    navigate(routes.workoutSummary(workout.id));
+  }
 
   function formatShortDate(date) {
     if (!date) return '';
@@ -111,6 +127,7 @@ export default function WorkoutPage({ workouts, onUpdateWorkout }) {
   return (
     <PageLayout>
       <PageTitle>{title}</PageTitle>
+      {!isSkipped && <WorkoutProgress workout={workout} />}
 
       <FormCard aria-label={t('workout.details')}>
         <Fields>
@@ -381,13 +398,8 @@ export default function WorkoutPage({ workouts, onUpdateWorkout }) {
       )}
 
       <div>
-        <Button
-          onClick={() => {
-            restTimer.stop();
-            navigate(routes.diary);
-          }}
-        >
-          {t('workout.finish')}
+        <Button onClick={handleFinish}>
+          {t(isSkipped ? 'workout.finish' : isRunning ? 'workout.finishTraining' : 'workout.openSummary')}
         </Button>
       </div>
       <RestTimer timer={restTimer} />

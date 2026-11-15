@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { MUSCLE_GROUP_NAMES } from '../data/muscleGroups';
-import { EXERCISES, countsForMuscleLoad, exerciseGroups, isPerSideExercise } from '../data/exerciseLibrary';
+import { EXERCISES, countsForMuscleLoad, exerciseById, exerciseGroups, isPerSideExercise } from '../data/exerciseLibrary';
 import { MUSCLES, resolveMuscleId } from '../data/muscles';
 
 // Plan model 3 (docs/konzept-plaene-training-auswertung.md, section 7.1):
@@ -86,10 +86,9 @@ export function findLibraryExercise(name) {
   );
 }
 
-const EXERCISES_BY_ID = new Map(EXERCISES.map(exercise => [exercise.id, exercise]));
-
+// Also resolves ids of exercises that were merged into another one.
 export function libraryExercise(exerciseId) {
-  return EXERCISES_BY_ID.get(exerciseId) ?? null;
+  return exerciseId ? exerciseById(exerciseId) : null;
 }
 
 export function defaultMuscleOf(exerciseId) {

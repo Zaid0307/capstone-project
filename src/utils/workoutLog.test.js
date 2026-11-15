@@ -1,5 +1,14 @@
 import {
+  WORKOUT_SCHEMA_VERSION,
   addLoggedSet,
+  countsAsTraining,
+  finishWorkout,
+  isWorkoutRunning,
+  migrateWorkout,
+  runningWorkout,
+  workoutDeviations,
+  workoutDuration,
+  workoutProgress,
   createFreeWorkout,
   createSkippedWorkout,
   createWorkoutFromPlan,
@@ -293,5 +302,120 @@ describe('editing a workout', () => {
     expect(isMoved(createWorkoutFromPlan(plan, monday, MONDAY))).toBe(false);
     expect(isMoved(createWorkoutFromPlan(plan, monday, '2026-11-17'))).toBe(true);
     expect(isMoved(createWorkoutFromPlan({ ...plan, schedule: { type: 'rotation' } }, monday, '2026-11-17'))).toBe(false);
+  });
+});
+
+describe('running training (schema version 2)', () => {
+  it('starts running, gets an end time once and keeps it', () => {
+    const { plan, monday } = weekdayPlan();
+    const workout = createWorkoutFromPlan(plan, monday, MONDAY);
+    expect(workout).toMatchObject({ schemaVersion: WORKOUT_SCHEMA_VERSION, finishedAt: null });
+    expect(workout.startedAt).toEqual(expect.any(String));
+    expect(isWorkoutRunning(workout)).toBe(true);
+    expect(runningWorkout([workout])).toBe(workout);
+
+    const finished = finishWorkout(workout);
+    expect(finished.finishedAt).toEqual(expect.any(String));
+    expect(isWorkoutRunning(finished)).toBe(false);
+    expect(runningWorkout([finished])).toBeNull();
+    expect(finishWorkout(finished)).toBe(finished);
+  });
+
+  it('never runs a skipped training', () => {
+    const { plan, thursday } = weekdayPlan();
+    const skipped = createSkippedWorkout(plan, thursday, THURSDAY);
+    expect(skipped).toMatchObject({ startedAt: null, finishedAt: null });
+    expect(isWorkoutRunning(skipped)).toBe(false);
+  });
+
+  it('measures the duration from start to end', () => {
+    const workout = { startedAt: '2026-11-16T17:00:00.000Z', finishedAt: '2026-11-16T18:05:00.000Z' };
+    expect(workoutDuration(workout)).toBe(65 * 60000);
+    expect(workoutDuration({ startedAt: '2026-11-16T17:00:00.000Z', finishedAt: null }, Date.parse('2026-11-16T17:42:00.000Z'))).toBe(42 * 60000);
+    expect(workoutDuration({ startedAt: null, finishedAt: null })).toBeNull();
+  });
+
+  it('keeps the time a set first became done', () => {
+    const { plan, monday } = weekdayPlan();
+    let workout = createWorkoutFromPlan(plan, monday, MONDAY);
+    const [bench] = workout.exercises;
+    expect(bench.sets[0].completedAt).toBeNull();
+    workout = updateLoggedSet(workout, bench.id, bench.sets[0].id, { weight: 62.5 });
+    expect(workout.exercises[0].sets[0].completedAt).toBeNull();
+    workout = updateLoggedSet(workout, bench.id, bench.sets[0].id, { reps: 8 });
+    const completedAt = workout.exercises[0].sets[0].completedAt;
+    expect(completedAt).toEqual(expect.any(String));
+    workout = updateLoggedSet(workout, bench.id, bench.sets[0].id, { reps: 9 });
+    expect(workout.exercises[0].sets[0].completedAt).toBe(completedAt);
+
+    workout = setExercisePerSide(workout, bench.id, true);
+    const second = workout.exercises[0].sets[1];
+    workout = updateLoggedSide(workout, bench.id, second.id, 'left', { reps: 10 });
+    expect(workout.exercises[0].sets[1].completedAt).toEqual(expect.any(String));
+  });
+
+  it('counts a training only with at least one done set', () => {
+    const { plan, monday } = weekdayPlan();
+    const workout = createWorkoutFromPlan(plan, monday, MONDAY);
+    expect(countsAsTraining(workout)).toBe(false);
+    expect(workoutProgress(workout)).toEqual({ done: 0, total: 3 });
+    const [bench] = workout.exercises;
+    const logged = updateLoggedSet(workout, bench.id, bench.sets[0].id, { reps: 8 });
+    expect(countsAsTraining(logged)).toBe(true);
+    expect(workoutProgress(logged)).toEqual({ done: 1, total: 3 });
+    // Values in a skipped exercise do not count.
+    expect(countsAsTraining(setExerciseSkipped(logged, bench.id, true))).toBe(false);
+  });
+
+  it('lists skipped exercises and missing sets as deviations', () => {
+    const { plan, monday } = weekdayPlan();
+    let workout = createWorkoutFromPlan(plan, monday, MONDAY);
+    const [bench] = workout.exercises;
+    workout = updateLoggedSet(workout, bench.id, bench.sets[0].id, { reps: 8 });
+    expect(workoutDeviations(workout)).toEqual([{ exerciseId: bench.id, type: 'missingSets', count: 2 }]);
+    workout = logAllSets(workout, { reps: 10, weight: 60 });
+    expect(workoutDeviations(workout)).toEqual([]);
+    workout = setExerciseSkipped(workout, bench.id, true);
+    expect(workoutDeviations(workout)).toEqual([{ exerciseId: bench.id, type: 'skipped', count: 0 }]);
+    // Added exercises are no deviation.
+    workout = addLoggedExercise(workout, extraExercise(createEntry({ exerciseId: 'barbell_squat' })));
+    expect(workoutDeviations(workout)).toHaveLength(1);
+  });
+});
+
+describe('migrateWorkout', () => {
+  const v1 = {
+    id: 'w1',
+    date: MONDAY,
+    status: 'done',
+    plan: null,
+    note: 'Good',
+    exercises: [
+      {
+        id: 'e1',
+        exerciseId: 'barbell_bench_press',
+        exercise: '',
+        plannedEntryId: null,
+        skipped: false,
+        perSide: true,
+        sets: [{ id: 's1', type: 'working', planned: null, weight: null, reps: null, seconds: null, sides: { left: { weight: 10, reps: 12, seconds: null }, right: { weight: 10, reps: 11, seconds: null } } }],
+      },
+    ],
+    createdAt: '2026-11-16T17:00:00.000Z',
+    updatedAt: '2026-11-16T18:00:00.000Z',
+  };
+
+  it('reads version 1 as finished, without inventing a start time, and keeps every value', () => {
+    const migrated = migrateWorkout(v1);
+    expect(migrated).toMatchObject({ schemaVersion: 2, startedAt: null, finishedAt: '2026-11-16T18:00:00.000Z', note: 'Good' });
+    expect(migrated.exercises[0].sets[0]).toEqual({ ...v1.exercises[0].sets[0], completedAt: null });
+    expect(isWorkoutRunning(migrated)).toBe(false);
+    expect(countsAsTraining(migrated)).toBe(true);
+  });
+
+  it('leaves skipped days without times and current workouts unchanged', () => {
+    expect(migrateWorkout({ ...v1, status: 'skipped', exercises: [] })).toMatchObject({ startedAt: null, finishedAt: null });
+    const current = migrateWorkout(v1);
+    expect(migrateWorkout(current)).toBe(current);
   });
 });

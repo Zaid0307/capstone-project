@@ -130,9 +130,10 @@ describe('filterWorkouts and filterRows', () => {
     expect(filterRows(rows, parseFilters('warmups=1'), range)).toHaveLength(5);
     expect(filterRows(rows, parseFilters('kind=mobility'), range).map(row => row.exerciseKey)).toEqual(['hip_flexor_stretch']);
     expect(filterRows(rows, parseFilters('kind=custom,mobility'), range)).toHaveLength(2);
-    // Squat counts for back (erector spinae as secondary muscle), the bench press not.
-    expect(filterRows(rows, parseFilters('group=back'), range).map(row => row.exerciseKey)).toEqual(['barbell_squat']);
-    expect(filterRows(rows, parseFilters('group=legs'), range).map(row => row.exerciseKey)).toEqual(['barbell_squat', 'hip_flexor_stretch', 'custom:sled%20push']);
+    // Neither the squat (erector spinae only stabilizes) nor the bench press counts for the back.
+    expect(filterRows(rows, parseFilters('group=back'), range)).toHaveLength(0);
+    // The hip flexor stretch only stretches (no primary or secondary muscles) and belongs to no group.
+    expect(filterRows(rows, parseFilters('group=legs'), range).map(row => row.exerciseKey)).toEqual(['barbell_squat', 'custom:sled%20push']);
     expect(filterRows(rows, parseFilters('muscle=triceps_brachii'), range).map(row => row.exerciseKey)).toEqual(['barbell_bench_press']);
     expect(filterRows(rows, parseFilters('exercise=barbell_squat&group=chest'), range)).toHaveLength(0);
     expect(filterRows(rows, parseFilters('plans=free'), range).map(row => row.workoutId)).toEqual(['w3']);

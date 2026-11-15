@@ -6,6 +6,7 @@ import CreatePlanPage from './pages/CreatePlanPage';
 import EditPlanPage from './pages/EditPlanPage';
 import DiaryPage from './pages/DiaryPage';
 import WorkoutPage from './pages/WorkoutPage';
+import WorkoutSummaryPage from './pages/WorkoutSummaryPage';
 import TodayPage from './pages/TodayPage';
 import SettingsPage from './pages/SettingsPage';
 import CalendarPage from './pages/CalendarPage';
@@ -87,7 +88,9 @@ export default function App() {
       />
       <Route
         path={routes.today}
-        element={<TodayPage plans={plans} workouts={workouts} onAddWorkout={addWorkout} />}
+        element={
+          <TodayPage plans={plans} workouts={workouts} onAddWorkout={addWorkout} onDeleteWorkout={deleteWorkout} />
+        }
       />
       <Route path={routes.settings} element={<SettingsPage />} />
       <Route path={routes.account} element={<AccountPage />} />
@@ -123,6 +126,12 @@ export default function App() {
       <Route
         path={routes.workout(':workoutId')}
         element={<WorkoutPage workouts={workouts} onUpdateWorkout={updateWorkout} />}
+      />
+      <Route
+        path={routes.workoutSummary(':workoutId')}
+        element={
+          <WorkoutSummaryPage workouts={workouts} onAddWorkout={addWorkout} onDeleteWorkout={deleteWorkout} />
+        }
       />
       {Object.entries(legacyRedirects).map(([from, to]) => (
         <Route key={from} path={from} element={<Navigate to={to} replace />} />

@@ -5,17 +5,39 @@ import { WEEKDAYS, entryIsPerSide, entryName, libraryExercise, orderedDays } fro
 // A workout is what really happened on a date. It keeps a copy of the plan's
 // targets, so it can be compared with the plan even after the plan changed.
 //
-// workout  { id, schemaVersion, date, status, plan | null, note, exercises, createdAt, updatedAt }
+// workout  { id, schemaVersion, date, status, plan | null, note, exercises,
+//            startedAt, finishedAt, createdAt, updatedAt }
 //   status: 'done' (trained) | 'skipped' (planned training did not happen)
+//   startedAt, finishedAt: ISO times or null. A 'done' workout with startedAt and
+//            without finishedAt is running (docs/ux/02-tagebuch.md, 3.1 and 5).
 //   plan:   { planId, planName, dayId, dayName, weekday | null }
 // exercise { id, exerciseId | null, exercise, muscle, plannedEntryId | null, plannedWorkingSets, skipped, restSeconds, perSide, sets }
 //   plannedWorkingSets: working sets the plan asked for; stays when sets are removed
-// set      { id, type, planned | null, weight, reps, seconds, sides? }
+// set      { id, type, planned | null, weight, reps, seconds, completedAt, sides? }
+//   completedAt: ISO time when the set first got repetitions or seconds, or null
 //   planned: the target of the plan for this set ({ dose, weight, rirTarget }) or null if added
 //   sides:   only for exercises done per side: { left: values, right: values },
 //            values = { weight, reps, seconds }; weight/reps/seconds of the set stay null
 // A set counts as done as soon as repetitions or seconds are entered.
-export const WORKOUT_SCHEMA_VERSION = 1;
+export const WORKOUT_SCHEMA_VERSION = 2;
+
+// Reads workouts of older versions (done when reading, like migratePlan); nothing
+// is lost. Version 1 had no times: a done workout counts as finished (finishedAt =
+// its last change), startedAt stays null because no start time is invented.
+export function migrateWorkout(workout) {
+  if (!workout || (workout.schemaVersion ?? 1) >= WORKOUT_SCHEMA_VERSION) return workout;
+  return {
+    ...workout,
+    schemaVersion: WORKOUT_SCHEMA_VERSION,
+    startedAt: workout.startedAt ?? null,
+    finishedAt:
+      workout.finishedAt ?? (workout.status === 'done' ? workout.updatedAt ?? workout.createdAt ?? null : null),
+    exercises: (workout.exercises ?? []).map(exercise => ({
+      ...exercise,
+      sets: (exercise.sets ?? []).map(set => ({ ...set, completedAt: set.completedAt ?? null })),
+    })),
+  };
+}
 
 export const SIDES = ['left', 'right'];
 
@@ -40,6 +62,39 @@ const hasAmount = values => values.reps !== null || values.seconds !== null;
 export const setValues = set => (set.sides ? SIDES.map(side => set.sides[side] ?? emptyValues()) : [set]);
 
 export const isSetDone = set => setValues(set).some(hasAmount);
+
+// A training that was started and not finished yet.
+export const isWorkoutRunning = workout =>
+  workout.status === 'done' && Boolean(workout.startedAt) && !workout.finishedAt;
+
+// A started training counts only once at least one set is done (02-tagebuch 5).
+export const hasDoneSets = workout =>
+  workout.exercises.some(exercise => !exercise.skipped && exercise.sets.some(isSetDone));
+
+export const countsAsTraining = workout => workout.status === 'done' && hasDoneSets(workout);
+
+// The running training, if there is one (the newest, should there be several).
+export function runningWorkout(workouts) {
+  return (
+    workouts
+      .filter(isWorkoutRunning)
+      .sort((a, b) => b.startedAt.localeCompare(a.startedAt))[0] ?? null
+  );
+}
+
+// Milliseconds from start to end (or to `now` while running); null without start.
+export function workoutDuration(workout, nowTime = Date.now()) {
+  if (!workout.startedAt) return null;
+  const end = workout.finishedAt ? Date.parse(workout.finishedAt) : nowTime;
+  return Math.max(0, end - Date.parse(workout.startedAt));
+}
+
+// Sets and done sets of the whole training (skipped exercises left out), for the
+// progress line "3 of 12 sets".
+export function workoutProgress(workout) {
+  const sets = workout.exercises.filter(exercise => !exercise.skipped).flatMap(exercise => exercise.sets);
+  return { done: sets.filter(isSetDone).length, total: sets.length };
+}
 
 function planReference(plan, day) {
   return {
@@ -104,6 +159,7 @@ function newSet({ type = 'working', planned = null, perSide = false, weight = nu
     id: nanoid(),
     type,
     planned,
+    completedAt: null,
     ...emptyValues(perSide ? null : weight),
     ...(perSide
       ? { sides: { left: emptyValues(sideWeights.left ?? weight), right: emptyValues(sideWeights.right ?? weight) } }
@@ -164,6 +220,9 @@ function baseWorkout(date, status, plan, note = '') {
     plan,
     note,
     exercises: [],
+    // A skipped training never runs; a started one runs until it is finished.
+    startedAt: status === 'done' ? timestamp : null,
+    finishedAt: null,
     createdAt: timestamp,
     updatedAt: timestamp,
   };
@@ -278,15 +337,39 @@ export function updateWorkout(workout, changes) {
   return touch({ ...workout, ...changes });
 }
 
+// Keeps the time a set first became done; later changes do not move it.
+const withCompletedAt = set =>
+  set.completedAt || !isSetDone(set) ? set : { ...set, completedAt: now() };
+
 export function updateLoggedSet(workout, exerciseId, setId, changes) {
-  return mapSet(workout, exerciseId, setId, set => ({ ...set, ...changes }));
+  return mapSet(workout, exerciseId, setId, set => withCompletedAt({ ...set, ...changes }));
 }
 
 export function updateLoggedSide(workout, exerciseId, setId, side, changes) {
-  return mapSet(workout, exerciseId, setId, set => ({
-    ...set,
-    sides: { ...set.sides, [side]: { ...set.sides[side], ...changes } },
-  }));
+  return mapSet(workout, exerciseId, setId, set =>
+    withCompletedAt({
+      ...set,
+      sides: { ...set.sides, [side]: { ...set.sides[side], ...changes } },
+    })
+  );
+}
+
+// Ends a running training; an already finished one keeps its end time.
+export function finishWorkout(workout) {
+  return workout.finishedAt ? workout : touch({ ...workout, finishedAt: now() });
+}
+
+// What differs from the plan: skipped planned exercises and planned working sets
+// that are missing or not done. [{ exerciseId, type: 'skipped' | 'missingSets', count }]
+export function workoutDeviations(workout) {
+  return workout.exercises.flatMap(exercise => {
+    if (exercise.plannedEntryId === null || exercise.plannedEntryId === undefined) return [];
+    if (exercise.skipped) return [{ exerciseId: exercise.id, type: 'skipped', count: 0 }];
+    const planned =
+      exercise.plannedWorkingSets ?? exercise.sets.filter(set => set.type === 'working' && set.planned).length;
+    const done = exercise.sets.filter(set => set.type === 'working' && isSetDone(set)).length;
+    return done < planned ? [{ exerciseId: exercise.id, type: 'missingSets', count: planned - done }] : [];
+  });
 }
 
 export function addLoggedSet(workout, exerciseId) {

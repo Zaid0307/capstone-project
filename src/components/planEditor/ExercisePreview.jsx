@@ -15,15 +15,26 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { exerciseVariants } from '../../utils/exerciseSearch';
+import { useExerciseDetails } from '../../data/exerciseDetails';
 
 const nameIn = (item, language) => item?.[language] ?? item?.en ?? '';
 
-// Details of one library exercise: room for its animation, the trained muscles,
-// the description and its variants with other equipment.
+// The muscles of an exercise in their four roles; empty roles are left out,
+// except the primary muscles.
+const MUSCLE_ROLES = [
+  ['primary', 'planEditor.preview.primary'],
+  ['secondary', 'planEditor.preview.secondary'],
+  ['stabilizers', 'catalog.preview.stabilizers'],
+  ['stretched', 'catalog.preview.stretched'],
+];
+
+// Details of one library exercise: room for its animation, the muscles in their
+// roles, setup, steps, tips, common mistakes, safety and its variants.
 export default function ExercisePreview({ exercise, isSelected, onToggle, onShow, onClose }) {
   const { t, language } = useTranslation();
   const name = nameIn(exercise.name, language);
   const variants = exerciseVariants(exercise);
+  const details = useExerciseDetails()?.[exercise.id];
   const muscleNames = ids => ids.map(id => nameIn(MUSCLES[id], language) || id).join(', ');
   const equipmentNames = ids => ids.map(id => nameIn(EQUIPMENT[id], language) || id).join(', ');
 
@@ -43,22 +54,62 @@ export default function ExercisePreview({ exercise, isSelected, onToggle, onShow
       </Animation>
 
       <Facts>
-        <div>
-          <dt>{t('planEditor.preview.primary')}</dt>
-          <dd>{muscleNames(exercise.muscles.primary) || '–'}</dd>
-        </div>
-        {exercise.muscles.secondary.length > 0 && (
-          <div>
-            <dt>{t('planEditor.preview.secondary')}</dt>
-            <dd>{muscleNames(exercise.muscles.secondary)}</dd>
-          </div>
-        )}
+        {MUSCLE_ROLES.map(([role, label]) => {
+          const muscles = exercise.muscles[role] ?? [];
+          if (role !== 'primary' && muscles.length === 0) return null;
+          return (
+            <div key={role}>
+              <dt>{t(label)}</dt>
+              <dd>{muscleNames(muscles) || '–'}</dd>
+            </div>
+          );
+        })}
         <div>
           <dt>{t('planEditor.preview.equipment')}</dt>
-          <dd>{equipmentNames(exercise.equipment)}</dd>
+          <dd>{equipmentNames(exercise.equipment) || '–'}</dd>
         </div>
       </Facts>
-      <p>{nameIn(exercise.description, language)}</p>
+
+      {details ? (
+        <>
+          <div>
+            <Subtitle>{t('catalog.preview.setup')}</Subtitle>
+            <p>{nameIn(details.setup, language)}</p>
+          </div>
+          <div>
+            <Subtitle>{t('catalog.preview.steps')}</Subtitle>
+            <TextList as="ol">
+              <li>{nameIn(details.execution.start, language)}</li>
+              {details.execution.steps.map((step, index) => (
+                <li key={index}>{nameIn(step, language)}</li>
+              ))}
+            </TextList>
+          </div>
+          {[
+            ['cues', details.execution.cues],
+            ['mistakes', details.execution.mistakes],
+          ].map(
+            ([part, items]) =>
+              items.length > 0 && (
+                <div key={part}>
+                  <Subtitle>{t(`catalog.preview.${part}`)}</Subtitle>
+                  <TextList>
+                    {items.map((item, index) => (
+                      <li key={index}>{nameIn(item, language)}</li>
+                    ))}
+                  </TextList>
+                </div>
+              )
+          )}
+          <div>
+            <Subtitle>{t('catalog.preview.safety')}</Subtitle>
+            <p>{nameIn(details.execution.safety, language)}</p>
+            {details.execution.contraindications && <p>{nameIn(details.execution.contraindications, language)}</p>}
+          </div>
+        </>
+      ) : (
+        <Muted role="status">{t('catalog.preview.loading')}</Muted>
+      )}
 
       <div>
         <Button $variant={isSelected ? 'secondary' : 'primary'} aria-pressed={isSelected} onClick={() => onToggle(exercise)}>
@@ -144,6 +195,12 @@ const Facts = styled.dl`
   dt {
     font-weight: ${fontWeights.medium};
   }
+`;
+
+const TextList = styled.ul`
+  display: grid;
+  gap: ${space.xs};
+  padding-left: ${space.lg};
 `;
 
 const Muted = styled.p`

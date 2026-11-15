@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GetFit! · Demo</title>
+<style>
+:root{color-scheme:dark;--page:#101419;--panel:#191f27;--line:#536375;--text:#f1f5fb;--muted:#b9c6d6;--accent:#a9dcff;--violet:#c9b9f4;--stage:#090c10}
+[data-theme=light]{color-scheme:light;--page:#eef2f7;--panel:#fff;--line:#647487;--text:#161f2a;--muted:#4d5c6d;--accent:#174d77;--violet:#60428c}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--text);font:16px 'Segoe UI',system-ui,sans-serif}button,input,a{font:inherit}button,a{cursor:pointer}button,input{min-height:44px}button{color:inherit;background:transparent;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-weight:600}button:hover{background:color-mix(in srgb,var(--accent) 14%,transparent)}button:focus-visible,a:focus-visible,input:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.primary{background:var(--accent);color:var(--page);border-color:transparent}.primary:hover{background:var(--accent);filter:brightness(.92)}a{color:var(--accent)}p{line-height:1.5}h1{font-size:clamp(25px,4vw,40px);margin:0 0 16px;letter-spacing:-.035em}h2{font-size:20px;margin:0 0 12px}.muted,small{color:var(--muted)}.shell{max-width:1320px;margin:auto}.mast{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--line)}.brand{font-size:23px;font-weight:800;letter-spacing:-.05em}.layout{display:grid;grid-template-columns:170px minmax(0,1fr)}nav{display:grid;align-content:start;gap:6px;padding:18px 12px;border-right:1px solid var(--line)}nav button{display:flex;gap:10px;align-items:center;text-align:left;border-color:transparent}nav img{width:24px;height:24px;filter:invert(1)}[data-theme=light] nav img{filter:none}nav [aria-current=page]{color:var(--accent);border-left:3px solid var(--accent);border-radius:0;background:color-mix(in srgb,var(--accent) 10%,transparent)}main{padding:24px;min-width:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:var(--panel);padding:16px;border:1px solid var(--line);border-radius:12px;min-width:0}.row{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.hero{display:grid;grid-template-columns:1fr minmax(100px,35%);gap:12px;align-items:center}.hero img{width:100%;height:220px;object-fit:contain;background:var(--stage);border-radius:6px}.numbers{display:flex;gap:24px;flex-wrap:wrap;padding:12px 0}.numbers strong{display:block;font-size:28px;color:var(--violet);font-variant-numeric:tabular-nums}.media{background:var(--stage);width:100%;height:clamp(230px,46vh,420px);object-fit:contain;border-radius:8px}.line{border-top:1px solid var(--line);padding:12px 0}.sets{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(0,1fr);gap:8px;margin:8px 0;align-items:center}.sets input{width:100%;background:var(--page);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:8px}.frame{display:block;width:100%;min-height:740px;border:0}.preview-nav{margin-bottom:12px}.kind-icon{width:22px;height:22px;vertical-align:middle;filter:invert(1)}[data-theme=light] .kind-icon{filter:none}.hint{border-left:3px solid var(--violet);padding-left:12px}.panel>*:last-child{margin-bottom:0}
+@media(max-width:760px){.mast{padding:10px 16px}.layout{display:block}main{padding:16px 16px 100px}.grid{grid-template-columns:1fr}.hero img{height:178px}nav{position:fixed;inset:auto 0 0;z-index:2;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:var(--panel);padding:4px 4px max(env(safe-area-inset-bottom),4px);border:0;border-top:1px solid var(--line)}nav button{flex-direction:column;gap:3px;font-size:11px;padding:4px 0;text-align:center}nav [aria-current=page]{border-left:0;border-top:3px solid var(--accent)}.numbers{gap:14px}}
+</style></head><body>
+<div class="shell"><header class="mast"><strong class="brand">GetFit!</strong><div class="row"><small>UX/UI-Demo</small><button id="theme" type="button">Hell</button></div></header><div class="layout"><nav aria-label="Hauptnavigation" id="nav"></nav><main id="screen" tabindex="-1"></main></div></div>
+<script>
+const root='../../fitness-graphics/';
+const renders=root+'production-v13/renders/';
+const nav=[['today','Heute'],['calendar','Kalender'],['plans','Pläne'],['analysis','Auswertung'],['exercises','Übungen']];
+const squat=sex=>renders+'squat-deeper-v39-loops/char_'+sex+'_01_squat_v39_0001-0048.mp4';
+const squatPoster=sex=>renders+'squat-deeper-v39-loops/posters/char_'+sex+'_01_bodyweight_squat_25.png';
+const bridgePoster=sex=>renders+'glute-bridge-a01a-review/char_'+sex+'_01_frame_25.png';
+const state={page:innerWidth>900?'analysis':'today',sex:'male',exercise:'squat',sets:[],plan:['Kniebeuge','Beckenheben','Unterarmstütz'],done:false};
+const screen=document.getElementById('screen');
+const button=(label,action,kind='')=>'<button type="button" class="'+kind+'" data-action="'+action+'">'+label+'</button>';
+const escapeHtml=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+function today(){return '<h1>Heute</h1><div class="grid"><section class="panel hero"><div><small>Als Nächstes</small><h2>Ganzkörper A</h2><p>'+state.plan.length+' Übungen</p>'+button('Training starten','workout','primary')+'</div><img alt="Stencil-Figurenstudie" src="'+renders+'v43-figuren-upper-torso/char_'+state.sex+'_01_stencil_form_front.png"></section><section class="panel"><h2>Diese Woche</h2><div class="numbers"><div><strong>2 / 3</strong>Einheiten</div><div><strong>18</strong>Sätze</div><div><strong>42</strong>Minuten zuletzt</div></div><small>Beispieldaten</small></section></div>';}
+function exercises(){
+const isSquat=state.exercise==='squat';
+const media=isSquat?'<video class="media" controls playsinline loop preload="metadata" aria-label="Kniebeuge abspielen" poster="'+squatPoster(state.sex)+'" src="'+squat(state.sex)+'"></video>':'<img class="media" alt="Beckenheben am höchsten Punkt" src="'+bridgePoster(state.sex)+'">';
+return '<h1>Übungen</h1><div class="grid"><section class="panel"><div class="row">'+button('Kniebeuge','squat')+button('Beckenheben','bridge')+'</div><div class="row line" style="margin-top:12px">'+button('Männliche Figur','male')+button('Weibliche Figur','female')+'</div><h2><img class="kind-icon" alt="" src="'+root+'icons/trainingKinds/bodyweight.svg"> '+ (isSquat?'Kniebeuge':'Beckenheben')+'</h2>'+media+'<small>Eigene '+(isSquat?'V39-Prüfanimation':'A01A-Bildstudie')+'</small></section><section class="panel"><h2>Technikhinweise</h2><p class="hint">'+(isSquat?'In der Vorschau kannst du das Absenken und Aufrichten einzeln beobachten.':'Das Standbild zeigt die angehobene Hüfte und die Auflage an der Matte bzw. Bodenebene.')+'</p>'+button('Training öffnen','workout')+'</section></div>';
+}
+function workout(){
+return '<h1>Training</h1><section class="panel"><h2>Kniebeuge</h2><p>Ganzkörper A · Satz '+Math.min(state.sets.length+1,3)+' von 3</p>'+state.sets.map((x,i)=>'<p class="line">Satz '+(i+1)+' · '+x+' Wdh.</p>').join('')+(state.done?'<p role="status">Training abgeschlossen.</p>':state.sets.length===3?button('Training abschließen','finish','primary'):'<form id="log"><label for="reps">Wiederholungen</label><div class="sets"><span>'+(state.sets.length+1)+'</span><input type="number" min="1" max="100" required id="reps"><button class="primary">Satz speichern</button></div></form>')+button('Übungsvorschau','exercises')+'</section>';
+}
+function plans(){return '<h1>Pläne</h1><section class="panel"><h2>Ganzkörper A</h2><ol>'+state.plan.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ol><form id="add"><label for="exerciseName">Übung ergänzen</label><div class="row"><input id="exerciseName" maxlength="60" required><button class="primary">Hinzufügen</button></div></form></section>';}
+function draw(focus=false){
+document.getElementById('nav').innerHTML=nav.map(([id,label])=>'<button type="button" data-action="'+id+'" '+((state.page===id||id==='today'&&state.page==='workout')?'aria-current="page"':'')+'><img alt="" src="'+root+'icons/navigation/'+id+'.svg">'+label+'</button>').join('');
+const pages={today,exercises,workout,plans,calendar:()=>'<h1>Kalender</h1><section class="panel"><h2>Diese Woche</h2><p>Montag · Ganzkörper A</p><p>Mittwoch · Ganzkörper A</p><p>Freitag · nächste Einheit</p>'+button('Training öffnen','workout')+'</section>',analysis:()=>'<h1>Auswertung</h1><p class="muted">Beispieldaten und registrierte Muskelmasken</p><iframe title="Interaktive Auswertung" class="frame" src="demo-auswertung.html"></iframe>'};
+screen.innerHTML=pages[state.page]();
+if(focus){window.scrollTo(0,0);screen.focus();}
+}
+document.addEventListener('click',e=>{
+const a=e.target.closest('button[data-action]')?.dataset.action;if(!a)return;
+if(a==='male'||a==='female'){state.sex=a;draw();return}
+if(a==='squat'||a==='bridge'){state.exercise=a;draw();return}
+if(a==='finish'){state.done=true;draw(true);return}
+state.page=a;draw(true);
+});
+document.addEventListener('submit',e=>{
+if(e.target.id!=='log'&&e.target.id!=='add')return;e.preventDefault();
+if(e.target.id==='log'){const reps=Number(document.getElementById('reps').value);if(!Number.isInteger(reps)||reps<1||reps>100)return;state.sets.push(reps);}
+else{const name=document.getElementById('exerciseName').value.trim();if(!name)return;state.plan.push(name);}
+draw(true);
+});
+document.getElementById('theme').onclick=e=>{const light=document.documentElement.dataset.theme!=='light';document.documentElement.dataset.theme=light?'light':'dark';e.currentTarget.textContent=light?'Dunkel':'Hell';};
+draw();
+</script></body></html>

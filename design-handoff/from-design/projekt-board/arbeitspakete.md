@@ -51,8 +51,8 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | E12 | App · App-Leitung (Claude Code) | Training: Ziel-RIR, „Letztes Mal“, Steigerungsvorschlag, kein kg-Feld bei Dehnen/Mobility/Cardio | Erledigt · `src/pages/WorkoutPage.jsx`, `src/utils/workoutLog.js` |
 | E13 | App · App-Leitung (Claude Code) | Kalender, Auswertung, Übungsauswertung (Helfer-Agent) eingebunden | Erledigt · `src/pages/CalendarPage.jsx`, `AnalysisPage.jsx`, `ExerciseAnalysisPage.jsx` |
 | E14 | App · App-Leitung (Claude Code) | Pausen-Timer: startet nach eingetragenem Satz, ±15 s, übersteht Neuladen | Erledigt · `src/hooks/useRestTimer.js`, `src/components/workout/RestTimer.jsx`, Test `RestTimer.test.jsx` · Bildschirm-an (Wake Lock) folgt |
-| E15 | App · App-Leitung (Claude Code) | Training läuft / fortsetzen / verwerfen; Datenmodell 2 mit Migration (Start, Ende, Zeit pro Satz) | Offen |
-| E16 | App · App-Leitung (Claude Code) | Abschluss-Bildschirm (Dauer, Sätze, Volumen, Plantreue, Abweichungen) | Offen · E15 |
+| E15 | App · Helfer „Training“ | Training läuft / fortsetzen / verwerfen; Datenmodell 2 mit Migration (Start, Ende, Zeit pro Satz) | Erledigt · Datenmodell 2 mit Migration, „Training läuft“ mit Fortsetzen/Verwerfen, Fortschrittskopf · offen: Rückfrage bei offenen Sätzen, Sicherung v1 |
+| E16 | App · Helfer „Training“ | Abschluss-Bildschirm (Dauer, Sätze, Volumen, Plantreue, Abweichungen) | Erledigt · Abschluss `/diary/:id/summary` (Dauer, Sätze, Volumen, Plantreue, Bestleistungen, Abweichungen) |
 | E17 | App · Helfer „Kalender“ | Ausfall-Dialog mit Grund-Chips; Bearbeitungsmodus für beendete Trainings | Erledigt · Ausfall-Dialog `src/components/diary/SkipDialog.jsx` (+Test), im Tagebuch und Kalender · Bearbeitungsmodus offen (App-Leitung) |
 | E18 | App · App-Leitung (Claude Code) | RIR pro Satz optional erfassen und im Steigerungsvorschlag nutzen | Offen |
 | E19 | App · Helfer „Statistik“ | Eine Zählung überall: Gruppenleiste im Editor auf effektive Sätze (1/0,5, Höchstwert) | Erledigt · effektive Sätze in `weeklySetsByMuscle`, Editor und Dashboard gleich, Legende im Editor |
@@ -68,10 +68,10 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | E29 | App · App-Leitung (Claude Code) | Speicherfehler: „Erneut versuchen“; Daten später in Supabase (Konto) statt nur lokal | Offen · Nutzerentscheidung Supabase |
 | E30 | App · App-Leitung (Claude Code) | Neue Übungen `sit_up` und `easy_run` in Übungskarten aufnehmen (spätere Animation) | Offen · Grafik, nicht Beta 1 |
 | E31 | App · App-Leitung mit 6 Katalog-Helfern | Übungskatalog V2: große Übungsliste (Geräte, Bänder, Körpergewicht, Yoga, Mobility, Pilates, Cardio, Boxen) mit Ausführung, Muskelrollen (primär, sekundär, Stabilisator, gedehnt) und Bewegungsdaten für Animationen. Format: [README](../../uebungskatalog-v2/README.md), Prüfer `scripts/validate_exercise_catalog.py` | Erledigt · 432 Übungen in 6 Bereichen, Prüfer 0 Meldungen · Quellen einzelner Bereiche noch gegenprüfen |
-| E32 | App · App-Leitung | Katalog V2 in die App übernehmen (Daten, Geräte, Stabilisator-Rolle, gedehnte Muskeln, Ausführung in der Übungsvorschau) | Offen · E31 |
+| E32 | App · Helfer „Katalog-Import“ | Katalog V2 in die App übernehmen (Daten, Geräte, Stabilisator-Rolle, gedehnte Muskeln, Ausführung in der Übungsvorschau) | Erledigt · 431 Übungen in der App (`src/data/exerciseCatalog.json`, Details nachgeladen), 81 Geräte, Vorschau mit vier Muskelrollen und Ausführung, Suche mit Aliasen |
 | E33 | App · App-Leitung | Testphase ohne Backend vorbereiten: „Meine Daten exportieren“ (JSON) und „Trainingsdaten löschen“ mit Bestätigung in den Einstellungen | Erledigt · `src/utils/dataExport.js`, `SettingsPage.jsx`, Tests |
 | E34 | App · App-Leitung | Backend Testphase: Supabase (Frankfurt) + Vercel, offene Registrierung; Tabelle `workouts` (`supabase/migrations/0002_workouts.sql`) und `remoteWorkoutStore` vorbereitet | In Prüfung · Supabase `getfit` (Frankfurt) mit Tabellen, Anmeldung/Konto/Datenschutzseite in der App, online unter https://getfit-rosy.vercel.app · offen: GitHub-Verbindung in Vercel |
-| E35 | App · App-Leitung | Vor dem ersten Tester: Datenschutzerklärung mit Einwilligung, Hinweis „Testversion“, Konto löschen | In Arbeit · Datenschutzerklärung als Entwurf (`src/pages/PrivacyPage.jsx`), Einwilligung beim Registrieren, Konto löschen fertig · Verantwortlicher muss vom Nutzer eingetragen werden |
+| E35 | App · App-Leitung | Vor dem ersten Tester: Datenschutzerklärung mit Einwilligung, Hinweis „Testversion“, Konto löschen | Erledigt · Datenschutzhinweis als privates Projekt für Freunde und Familie (Nutzerentscheidung 15.11.), Einwilligung, Konto löschen, Start mit Anmeldung und „Ohne Anmeldung fortfahren“ |
 
 
 ## Neue visuelle Richtung
@@ -105,3 +105,18 @@ Verantwortlich ist die App-Leitung; Helfer-Agenten bekommen den Board-Pfad und i
 | R09Q | Atlas-Agent | Vier Rollen gleichzeitig an vorhandenen Masken als Beispiel zeigen | Prüfung · [Vier-Rollen-Studie](../redesign/r09q-vier-rollen.html). [Browserbefund](nachrichten/r09q-grafik-kritiker-browser.md). Vorderansicht und Übungsbezug offen |
 | R09R | Grafikleitung | Beide Mobilrichtungen und Desktop-Vergleich auf einer Seite verlinken | Erledigt · [Vergleichsseite](../redesign/r09-vergleich.html) · [Browsertest](nachrichten/r09q-grafik-kritiker-browser.md) |
 | G08A | Grafik-Kritiker | 15 neue Icons in drei Größen auf Hell/Dunkel prüfen | In Arbeit |
+
+## Klickbare UX/UI-Demo
+
+| ID | Team | Aufgabe und Abnahme | Status |
+|---|---|---|---|
+| D01 | Grafikleitung | Klickbare Oberfläche mit neuer Palette, eigenen Icons, Figurenbildern und Übungsmedien | Prüfung · erste Demo visuell verworfen. [Neue Stilprobe](../redesign/demo-stilrichtung.html) |
+| D02 | Atlas-Agent | Registrierte Figuren und Masken in die neue Auswertungsansicht einbinden | Prüfung · [Analysemodul](../redesign/demo-auswertung.html) |
+| D03 | Bewegungs-Agent | Beckenheben-Arbeitsclip aus den korrigierten A01A-Quellen exportieren | Erledigt · männlicher Prüfclip, 384 × 384, 4 Bilder/s |
+| D04 | Grafik-Kritiker | Demo in Mobil- und Desktopgröße prüfen. Medien, Umschaltung und Fokus testen | Offen · D01–D03 |
+| D05 | Grafikleitung | Visuelle Richtung mit direktem Referenzausschnitt und neuen Farben testen | Prüfung · [Stilprobe](../redesign/demo-stilrichtung.html) |
+| D06 | Figur/Bewegung | Eigene Figuren näher an Referenz modellieren und Übungsdarstellung mit Gerät, Posen und Rollenlegende nach zweiter Referenz gestalten | Offen · D05 dient dem Stilabgleich |
+| D07 | Grafikleitung | Mobiles Mockup nach neuer App-Referenz | Visuelle Abnahme offen · [Mockup und Hinweise](nachrichten/d07-grafik-mockup-navy.md) |
+| D08 | Atlas-Agent | G01-Figurenprobe Mann, Vorder- und Rückansicht als eigene SVG-Muskelpfade mit App-IDs, einfarbig und als Farbkarte | In Arbeit · [Figurenmaßstab](nachrichten/2026-11-15-g01-app-an-grafik-figurenmassstab.md) |
+| D09 | Design-Agent | Einzelbild Heute mobil (390 × 844) mit Wochenring, nächstem Training, Figur und Muskel-Monitor. Finale Figur aus D08 | In Arbeit · [UI-Referenz](nachrichten/2026-11-15-r09c-app-an-grafik-moderne-referenz.md) |
+| D10 | Grafik-Kritiker | D08 gegen die Übersichtsreferenz prüfen, D09 gegen die moderne App-Referenz prüfen | Beauftragt · Ergebnis offen |

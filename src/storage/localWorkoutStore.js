@@ -1,9 +1,12 @@
+import { migrateWorkout } from '../utils/workoutLog';
+
 export const WORKOUT_STORAGE_KEY = 'workoutLog';
 
 function read(storage) {
   try {
     const value = JSON.parse(storage.getItem(WORKOUT_STORAGE_KEY));
-    return Array.isArray(value) ? value : [];
+    // Older entries are migrated when read; they are saved in the new format on the next change.
+    return Array.isArray(value) ? value.map(migrateWorkout) : [];
   } catch {
     return [];
   }

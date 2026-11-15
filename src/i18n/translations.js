@@ -1,5 +1,6 @@
 import accountTexts from './accountTexts';
 import analysisTexts from './analysisTexts';
+import catalogTexts from './catalogTexts';
 import diaryTexts from './diaryTexts';
 import editorTexts from './editorTexts';
 import statsTexts from './statsTexts';
@@ -812,6 +813,7 @@ const translations = Object.fromEntries(
       ...editorTexts[language],
       ...statsTexts[language],
       ...diaryTexts[language],
+      ...catalogTexts[language],
     },
   ])
 );

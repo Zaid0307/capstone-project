@@ -304,8 +304,8 @@ describe('App', () => {
 
       await userEvent.click(screen.getByRole('button', { name: 'Empty plan' }));
       // The selection for day A is open right away.
-      await userEvent.type(screen.getByLabelText('Search'), 'barbell squat');
-      await userEvent.click(screen.getByRole('button', { name: 'Select Barbell squat' }));
+      await userEvent.type(screen.getByLabelText('Search'), 'barbell back squat');
+      await userEvent.click(screen.getByRole('button', { name: 'Select Barbell back squat' }));
       await userEvent.click(screen.getByRole('button', { name: 'Add (1)' }));
       await userEvent.clear(screen.getByLabelText('Name of the plan'));
       await userEvent.type(screen.getByLabelText('Name of the plan'), 'Legs');
@@ -415,13 +415,23 @@ describe('App', () => {
       await userEvent.type(screen.getByLabelText('Set 1: kg'), '62.5');
       // A set counts as done as soon as its repetitions are entered; no extra button.
       await userEvent.type(screen.getByLabelText('Set 1: Reps'), '8');
+      expect(screen.getByText('1 of 4 sets')).toBeInTheDocument();
+      await userEvent.click(screen.getByRole('button', { name: 'Finish training' }));
+
+      // The summary after finishing.
+      expect(screen.getByRole('heading', { level: 1, name: 'Training saved' })).toBeInTheDocument();
+      expect(screen.getByText('1 of 4')).toBeInTheDocument();
+      expect(screen.getByText('Bench Press: 3 sets fewer')).toBeInTheDocument();
+      expect(readWorkouts()[0].finishedAt).toEqual(expect.any(String));
       await userEvent.click(screen.getByRole('button', { name: 'Done' }));
+      expect(screen.getByRole('heading', { level: 1, name: 'Today' })).toBeInTheDocument();
+      await userEvent.click(screen.getByRole('link', { name: 'All diary entries' }));
 
       expect(screen.getByRole('link', { name: 'Push · Monday' })).toBeInTheDocument();
       expect(screen.getByText(/Trained · 1 of 4 sets · 500 kg · Plan followed 25 %/)).toBeInTheDocument();
       const [workout] = readWorkouts();
-      expect(workout).toMatchObject({ date: '2026-11-16', status: 'done', plan: { planId: 'plan1' } });
-      expect(workout.exercises[0].sets[0]).toMatchObject({ weight: 62.5, reps: 8 });
+      expect(workout).toMatchObject({ schemaVersion: 2, date: '2026-11-16', status: 'done', plan: { planId: 'plan1' } });
+      expect(workout.exercises[0].sets[0]).toMatchObject({ weight: 62.5, reps: 8, completedAt: expect.any(String) });
 
       // Entries stay editable.
       await userEvent.click(screen.getByRole('link', { name: 'Push · Monday' }));
@@ -529,6 +539,35 @@ describe('App', () => {
       setItem.mockRestore();
     });
 
+    it('opens the running training instead of starting a second one and discards an empty one', async () => {
+      savePlans(savedPlans);
+      await renderApp('/diary?plan=plan1');
+      await userEvent.click(screen.getByRole('button', { name: 'Start training' }));
+      const title = screen.getByRole('heading', { level: 1 }).textContent;
+      expect(screen.getByText('0 of 4 sets')).toBeInTheDocument();
+      const goToday = () =>
+        userEvent.click(within(screen.getByRole('navigation', { name: 'Main navigation' })).getByRole('link', { name: 'Today' }));
+      await goToday();
+
+      const banner = within(screen.getByRole('region', { name: 'Training in progress' }));
+      expect(banner.getByText(new RegExp(`^${title} · for \\d+ min$`))).toBeInTheDocument();
+      // An empty training does not count as a training of this week.
+      expect(within(screen.getByRole('region', { name: 'This week' })).getAllByRole('definition')[0]).toHaveTextContent('0');
+
+      // Starting another plan opens the running training instead.
+      await userEvent.click(screen.getByRole('link', { name: 'All diary entries' }));
+      await userEvent.selectOptions(screen.getByLabelText('Plan'), 'plan2');
+      await userEvent.click(screen.getByRole('button', { name: 'Start training' }));
+      expect(screen.getByRole('heading', { level: 1, name: title })).toBeInTheDocument();
+      expect(readWorkouts()).toHaveLength(1);
+
+      await goToday();
+      await userEvent.click(screen.getByRole('link', { name: 'All diary entries' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Discard' }));
+      expect(readWorkouts()).toEqual([]);
+      expect(screen.queryByRole('region', { name: 'Training in progress' })).not.toBeInTheDocument();
+    });
+
     it('deletes an entry and can undo it', async () => {
       savePlans(savedPlans);
       await renderApp('/diary?plan=plan1');
@@ -550,8 +589,9 @@ describe('App', () => {
       expect(
         screen.getByRole('heading', { name: 'Barbell bench press' })
       ).toBeInTheDocument();
+      // The descriptions are loaded on demand.
       expect(
-        screen.getByText(/Lower the bar under control to your lower chest/)
+        await screen.findByText(/Back on the bench, feet planted/)
       ).toBeInTheDocument();
       expect(
         screen.getAllByRole('img', { name: /no image available/i }).length
@@ -559,7 +599,7 @@ describe('App', () => {
 
       await userEvent.click(screen.getByRole('link', { name: 'Legs' }));
       expect(
-        screen.getByRole('heading', { name: 'Barbell squat' })
+        screen.getByRole('heading', { name: 'Barbell back squat' })
       ).toBeInTheDocument();
       expect(
         screen.queryByRole('heading', { name: 'Barbell bench press' })
@@ -598,7 +638,7 @@ describe('App', () => {
 
     it('opens the analysis of one exercise', async () => {
       await renderApp('/analysis/exercise/barbell_squat');
-      expect(screen.getByRole('heading', { level: 1, name: /Barbell squat/ })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { level: 1, name: /Barbell back squat/ })).toBeInTheDocument();
     });
   });
 
@@ -665,7 +705,7 @@ describe('App', () => {
         screen.getByRole('heading', { name: 'Langhantel-Bankdrücken' })
       ).toBeInTheDocument();
       expect(
-        screen.getByText(/Die Stange kontrolliert zur unteren Brust senken/)
+        await screen.findByText(/Rücken auf der Bank, Füße fest am Boden/)
       ).toBeInTheDocument();
 
       expect(

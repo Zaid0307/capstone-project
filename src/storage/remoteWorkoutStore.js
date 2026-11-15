@@ -1,4 +1,4 @@
-import { WORKOUT_SCHEMA_VERSION } from '../utils/workoutLog';
+import { WORKOUT_SCHEMA_VERSION, migrateWorkout } from '../utils/workoutLog';
 
 const TABLE = 'workouts';
 
@@ -29,7 +29,7 @@ export function createRemoteWorkoutStore(client, userId) {
     async list() {
       const result = await workouts().select('data').order('date', { ascending: true });
       check(result);
-      return result.data.map(row => row.data);
+      return result.data.map(row => migrateWorkout(row.data));
     },
     async create(workout) {
       check(await workouts().insert(toRow(workout, userId)));

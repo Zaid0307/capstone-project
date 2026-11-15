@@ -42,8 +42,11 @@ function fakeSupabase({ signedInAs, rows = [], failWith = null }) {
 
 const workout = (id, date, values = {}) => ({
   id,
+  schemaVersion: 2,
   date,
   status: 'done',
+  startedAt: null,
+  finishedAt: null,
   plan: { planId: 'plan-1', planName: 'Push', dayId: 'd1', dayName: '', weekday: 'monday' },
   note: '',
   exercises: [],
@@ -67,6 +70,18 @@ describe('remote workout store', () => {
 
     expect(await store.list()).toEqual([workout('late', '2026-11-20', { status: 'skipped', note: 'Ill' })]);
     expect(client.rows[0]).toMatchObject({ user_id: 'user-a', date: '2026-11-20', status: 'skipped', plan_id: 'plan-1' });
+  });
+
+  it('reads workouts of schema version 1 in the new format', async () => {
+    const { schemaVersion: _version, startedAt: _start, finishedAt: _end, ...old } = workout('old', '2026-11-16', {
+      updatedAt: '2026-11-16T18:00:00.000Z',
+    });
+    const rows = [{ user_id: 'user-a', id: 'old', date: '2026-11-16', data: old }];
+    const store = createRemoteWorkoutStore(fakeSupabase({ signedInAs: 'user-a', rows }), 'user-a');
+
+    expect(await store.list()).toEqual([
+      { ...old, schemaVersion: 2, startedAt: null, finishedAt: '2026-11-16T18:00:00.000Z' },
+    ]);
   });
 
   it('never shows or changes workouts of other users', async () => {
