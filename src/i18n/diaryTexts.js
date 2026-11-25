@@ -31,6 +31,65 @@ const diaryTexts = {
     'workout.finishTraining': 'Finish training',
     'workout.openSummary': 'Show summary',
 
+    // Optional repetitions in reserve per set
+    'workout.rir.column': 'RIR',
+    'workout.rir.columnLong': 'Reps in reserve',
+    'workout.rir.label': '{set}: reps in reserve',
+    'workout.rir.none': '–',
+
+    // Question before finishing with open planned sets
+    'workout.finishCheck.title': 'Finish the training?',
+    'workout.finishCheck.textOne': '1 planned set is still open. It will be saved as not done.',
+    'workout.finishCheck.text': '{count} planned sets are still open. They will be saved as not done.',
+    'workout.finishCheck.finish': 'Finish anyway',
+    'workout.finishCheck.continue': 'Keep training',
+
+    // Editing a finished training
+    'workout.edit.title': 'Editing',
+    'workout.edit.of': 'Training of {date}',
+    'workout.edit.hint': 'Changes are saved right away. Start and end time stay as they were.',
+    'workout.edit.changed': 'Last changed {time}',
+    'workout.edit.done': 'Done editing',
+
+    // Warm-up sets (replace the short "W")
+    'workout.warmupShort': 'WU',
+    'workout.warmupLabel': 'Warm-up set {number}',
+    'workout.warmupAdd': 'Warm-up set',
+    'workout.warmupAddLabel': 'Add warm-up set to {name}',
+    'workout.warmupRemove': 'Remove warm-up set {number}',
+    'workout.warmupRemoved': 'Warm-up set {number} of {name} removed',
+    'workout.warmupHint': 'WU = warm-up set, does not count as a working set',
+
+    // Suggested values for the open sets
+    'workout.prefill.label': 'Fill in the open sets of {name} with',
+    'workout.prefill.last': 'Last time',
+    'workout.prefill.average': 'Average',
+    'workout.prefill.averageDetail': 'Ø {values}',
+    'workout.prefill.averageCount': 'last {count}',
+    'workout.prefill.hint': 'Grey values are suggestions. Type to change them; the tick takes a set over.',
+    'workout.prefill.suggestion': 'Suggestion {value}',
+    'workout.prefill.take': 'Take over {set}',
+    'workout.prefill.done': '{set} done',
+    'workout.prefill.doneColumn': 'Done',
+    'workout.targetLine': 'Target {target}',
+
+    // Note per exercise and "How was it?" per training
+    'workout.exerciseNote.toggle': 'Note',
+    'workout.exerciseNote.label': 'Note on {name}',
+    'workout.feeling.title': 'How was it?',
+    'workout.feeling.1': 'Bad',
+    'workout.feeling.2': 'Meh',
+    'workout.feeling.3': 'Okay',
+    'workout.feeling.4': 'Good',
+    'workout.feeling.5': 'Very good',
+    'workout.feeling.value': 'How it was: {value}/5 · {label}',
+
+    // Supersets
+    'workout.superset.badge': 'Superset {group}',
+    'workout.superset.flow': 'In turn: {order}, then rest.',
+    'workout.superset.next': 'No rest – go on with {label}.',
+    'workout.superset.rest': 'Rest after this exercise.',
+
     // Durations
     'duration.minutes': '{minutes} min',
     'duration.hours': '{hours} h {minutes} min',
@@ -87,6 +146,58 @@ const diaryTexts = {
     'workout.duration': 'Dauer {duration}',
     'workout.finishTraining': 'Training beenden',
     'workout.openSummary': 'Zusammenfassung ansehen',
+
+    'workout.rir.column': 'RIR',
+    'workout.rir.columnLong': 'Wiederholungen in Reserve',
+    'workout.rir.label': '{set}: Wiederholungen in Reserve',
+    'workout.rir.none': '–',
+
+    'workout.finishCheck.title': 'Training beenden?',
+    'workout.finishCheck.textOne': '1 geplanter Satz ist noch offen. Er wird als nicht gemacht gespeichert.',
+    'workout.finishCheck.text': '{count} geplante Sätze sind noch offen. Sie werden als nicht gemacht gespeichert.',
+    'workout.finishCheck.finish': 'Trotzdem beenden',
+    'workout.finishCheck.continue': 'Weiter trainieren',
+
+    'workout.edit.title': 'Bearbeiten',
+    'workout.edit.of': 'Training vom {date}',
+    'workout.edit.hint': 'Änderungen werden sofort gespeichert. Start- und Endzeit bleiben, wie sie waren.',
+    'workout.edit.changed': 'Zuletzt geändert {time}',
+    'workout.edit.done': 'Fertig',
+
+    'workout.warmupShort': 'Aufw.',
+    'workout.warmupLabel': 'Aufwärmsatz {number}',
+    'workout.warmupAdd': 'Aufwärmsatz',
+    'workout.warmupAddLabel': 'Aufwärmsatz zu {name} hinzufügen',
+    'workout.warmupRemove': 'Aufwärmsatz {number} entfernen',
+    'workout.warmupRemoved': 'Aufwärmsatz {number} von {name} entfernt',
+    'workout.warmupHint': 'Aufw. = Aufwärmsatz, zählt nicht als Arbeitssatz',
+
+    'workout.prefill.label': 'Offene Sätze von {name} vorausfüllen mit',
+    'workout.prefill.last': 'Letztes Mal',
+    'workout.prefill.average': 'Durchschnitt',
+    'workout.prefill.averageDetail': 'Ø {values}',
+    'workout.prefill.averageCount': 'letzte {count}',
+    'workout.prefill.hint': 'Graue Werte sind Vorschläge. Tippen ändert sie, der Haken übernimmt den Satz.',
+    'workout.prefill.suggestion': 'Vorschlag {value}',
+    'workout.prefill.take': '{set} übernehmen',
+    'workout.prefill.done': '{set} erledigt',
+    'workout.prefill.doneColumn': 'Erledigt',
+    'workout.targetLine': 'Ziel {target}',
+
+    'workout.exerciseNote.toggle': 'Notiz',
+    'workout.exerciseNote.label': 'Notiz zu {name}',
+    'workout.feeling.title': 'Wie war’s?',
+    'workout.feeling.1': 'Schlecht',
+    'workout.feeling.2': 'Mäßig',
+    'workout.feeling.3': 'Okay',
+    'workout.feeling.4': 'Gut',
+    'workout.feeling.5': 'Sehr gut',
+    'workout.feeling.value': 'Gefühl: {value}/5 · {label}',
+
+    'workout.superset.badge': 'Supersatz {group}',
+    'workout.superset.flow': 'Abwechselnd: {order}, dann Pause.',
+    'workout.superset.next': 'Keine Pause – weiter mit {label}.',
+    'workout.superset.rest': 'Pause nach dieser Übung.',
 
     'duration.minutes': '{minutes} min',
     'duration.hours': '{hours} h {minutes} min',

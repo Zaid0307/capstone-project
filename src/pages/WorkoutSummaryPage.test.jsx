@@ -59,13 +59,20 @@ const current = workout(
   { note: 'Felt strong' }
 );
 
-function renderSummary(workouts, { onDeleteWorkout = vi.fn(), onAddWorkout = vi.fn() } = {}) {
+function renderSummary(workouts, { onDeleteWorkout = vi.fn(), onAddWorkout = vi.fn(), onUpdateWorkout } = {}) {
   renderWithProviders(
     <UndoProvider>
       <Routes>
         <Route
           path="/diary/:workoutId/summary"
-          element={<WorkoutSummaryPage workouts={workouts} onAddWorkout={onAddWorkout} onDeleteWorkout={onDeleteWorkout} />}
+          element={
+            <WorkoutSummaryPage
+              workouts={workouts}
+              onAddWorkout={onAddWorkout}
+              onUpdateWorkout={onUpdateWorkout}
+              onDeleteWorkout={onDeleteWorkout}
+            />
+          }
         />
         <Route path="/diary/:workoutId" element={<h1>Training page</h1>} />
         <Route path="/today" element={<h1>Today page</h1>} />
@@ -90,6 +97,16 @@ describe('WorkoutSummaryPage', () => {
     expect(screen.getByText('Bench: 1 set fewer')).toBeInTheDocument();
     expect(screen.getByText('Rows: skipped')).toBeInTheDocument();
     expect(screen.getByText('Felt strong')).toBeInTheDocument();
+  });
+
+  it('asks "How was it?" from 1 to 5 and saves the choice with the training', async () => {
+    const onUpdateWorkout = vi.fn();
+    renderSummary([earlier, { ...current, feeling: 2 }], { onUpdateWorkout });
+    const group = screen.getByRole('radiogroup', { name: 'How was it?' });
+    expect(group).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: '2 Meh' })).toHaveAttribute('aria-checked', 'true');
+    await userEvent.click(screen.getByRole('radio', { name: '4 Good' }));
+    expect(onUpdateWorkout).toHaveBeenLastCalledWith(expect.objectContaining({ id: 'w1', feeling: 4 }));
   });
 
   it('goes to the today page with Done and back into the training with Edit', async () => {

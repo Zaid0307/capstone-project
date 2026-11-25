@@ -1,5 +1,12 @@
 # Gemeinsames Projekt-Kanban
 
+<!-- fortsetzung-2026-11-25 -->
+**Verbindlich für alle Leitungen, Agenten und Kritiker.** Nach jedem Ticket und auch nach jeder Ticketanlage direkt weiterarbeiten. Nächstes bearbeitbares Ticket übernehmen oder ein notwendiges fehlendes Folgeticket mit Ziel und Abnahme erstellen und anschließend Aufgaben abarbeiten. Übernahme und nächste Aktion im Board festhalten, Doppelarbeit vermeiden. [Vollständige Arbeitsregel](projekt-board/weiterarbeiten.md).
+<!-- /fortsetzung-2026-11-25 -->
+
+
+
+
 14.11.2026. Dieses Board ist die gemeinsame Aufgaben- und Kommunikationsstelle des **Grafikteams einschließlich Grafik-Kritiker** und des **App-Teams einschließlich App-Kritiker**. Beide Teams pflegen dieselben Karten. Das Startpaket erfasst die bekannten Aufgaben. Die App-Leitung ergänzt ihren tatsächlichen Arbeitsstand unter E01.
 
 | Ansicht | Inhalt |

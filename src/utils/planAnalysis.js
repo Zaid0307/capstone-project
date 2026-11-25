@@ -68,12 +68,11 @@ function muscleShare(exercise, id) {
 
 // Library entries of the plan with their working sets per week.
 function weeklyEntries(plan) {
-  const factor = weeklyDayFactor(plan);
   return plan.days.flatMap(day =>
     day.entries
       .map(entry => ({
         exercise: entry.exerciseId && libraryExercise(entry.exerciseId),
-        sets: entry.sets.filter(set => set.type === 'working').length * factor,
+        sets: entry.sets.filter(set => set.type === 'working').length * weeklyDayFactor(plan, day),
       }))
       .filter(item => item.exercise && countsForMuscleLoad(item.exercise.category))
   );

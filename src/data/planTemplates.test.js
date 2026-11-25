@@ -1,7 +1,10 @@
 import {
+  NO_TEMPLATE_FILTERS,
   OWN_TEMPLATES,
   PLAN_TEMPLATES,
   TEMPLATE_CATEGORIES,
+  TEMPLATE_FILTERS,
+  matchesTemplateFilters,
   templateById,
   templateCategory,
   templateToPlan,
@@ -74,7 +77,40 @@ describe('template quality (expert review 14.11.2026)', () => {
   it('does not tell mobility and Pilates plans to add load', () => {
     for (const id of ['mobility_daily_light', 'women_pilates_beginner_3', 'women_mobility_stretch_4']) {
       expect(templateById(id).progression.instruction.de, id).toMatch(/Haltezeit/);
+      expect(templateById(id).progression.repsInReserve.de, id).toMatch(/^Nicht relevant/);
     }
+  });
+
+  it('warms up before the first heavy barbell lift of a day', () => {
+    const heavy = ['barbell_squat', 'barbell_bench_press', 'conventional_deadlift'];
+    for (const id of ['strength_hypertrophy_4', 'anime_saiyan_strength', 'hypertrophy_upperlower_4']) {
+      const warmedUp = exercisesOf(templateById(id)).filter(entry => entry.warmupSets?.length);
+      expect(warmedUp.some(entry => heavy.includes(entry.exerciseId)), id).toBe(true);
+    }
+    for (const template of PLAN_TEMPLATES) {
+      for (const day of template.days) {
+        expect(day.entries.filter(entry => entry.warmupSets).length).toBeLessThanOrEqual(1);
+        for (const warmup of day.entries.flatMap(entry => entry.warmupSets ?? [])) {
+          expect(warmup.reps).toBeGreaterThan(0);
+          expect(warmup.percent).toBeGreaterThan(0);
+          expect(warmup.percent).toBeLessThan(100);
+        }
+      }
+    }
+  });
+
+  it('has progression and RIR texts that fit the plan type', () => {
+    const progression = id => templateById(id).progression;
+    expect(progression('hypertrophy_fullbody_3').instruction.de).toMatch(/Doppelte Progression/);
+    expect(progression('women_fullbody_strength_3').repsInReserve.de).toMatch(/^Grundübungen 2, Hilfsübungen 1–2/);
+    expect(progression('home_band_3').instruction.de).toMatch(/stärkeres Band/);
+    expect(progression('boxing_technical_3').instruction.de).toMatch(/Rundenzeit/);
+    expect(progression('women_pilates_strength_5').instruction.de).toMatch(/Haltezeit/);
+    for (const template of PLAN_TEMPLATES) {
+      expect(bilingual(template.progression.repsInReserve), template.id).toBe(true);
+    }
+    // No two plan types share the old general text any more.
+    expect(PLAN_TEMPLATES.some(template => template.progression.repsInReserve.de.startsWith('ca. 2-3'))).toBe(false);
   });
 });
 
@@ -100,6 +136,40 @@ describe('template categories', () => {
       expect(trainingDays.length).toBe(template.weeklyTrainingDays);
       expect(trainingDays.length).toBeLessThanOrEqual(5);
     }
+  });
+});
+
+describe('template filters', () => {
+  const ids = filters => PLAN_TEMPLATES.filter(item => matchesTemplateFilters(item, filters)).map(item => item.id);
+
+  it('finds every template without filters', () => {
+    expect(ids(NO_TEMPLATE_FILTERS)).toHaveLength(PLAN_TEMPLATES.length);
+    expect(ids()).toHaveLength(PLAN_TEMPLATES.length);
+  });
+
+  it('filters by level, including templates for a range of levels', () => {
+    const beginner = ids({ level: 'beginner' });
+    expect(beginner).toContain('bodyweight_beginner_3');
+    expect(beginner).toContain('hypertrophy_fullbody_3');
+    expect(beginner).toContain('mobility_daily_light');
+    expect(beginner).not.toContain('hypertrophy_ppl_6');
+    expect(ids({ level: 'advanced' })).toContain('hypertrophy_ppl_6');
+  });
+
+  it('filters by place and days per week, combined', () => {
+    for (const template of PLAN_TEMPLATES.filter(item => matchesTemplateFilters(item, { setting: 'home', days: 'upTo3' }))) {
+      expect(template.setting).toBe('home');
+      expect(template.weeklyTrainingDays).toBeLessThanOrEqual(3);
+    }
+    expect(ids({ setting: 'mixed' })).toContain('boxing_and_strength_4');
+    expect(ids({ days: 'fivePlus' })).toEqual(
+      expect.arrayContaining(['hypertrophy_ppl_6', 'hypertrophy_5day_bodypart', 'mobility_daily_light'])
+    );
+    expect(ids({ days: 'four' }).every(id => templateById(id).weeklyTrainingDays === 4)).toBe(true);
+  });
+
+  it('offers each filter with "all" first', () => {
+    for (const values of Object.values(TEMPLATE_FILTERS)) expect(values[0]).toBe('all');
   });
 });
 
@@ -145,6 +215,38 @@ describe('templateToPlan', () => {
     expect(first.days[0].entries[0].id).not.toBe(second.days[0].entries[0].id);
     expect(first.nameOfWorkout).toBe('Muscle building full body, 3 days');
     expect(JSON.stringify(template)).toBe(before);
+  });
+
+  it('puts warm-up sets before the working sets of the first heavy lift', () => {
+    const plan = templateToPlan(templateById('strength_hypertrophy_4'), 'de');
+    const bench = plan.days[0].entries.find(entry => entry.exerciseId === 'barbell_bench_press');
+
+    expect(bench.sets.map(set => set.type)).toEqual(['warmup', 'warmup', 'working', 'working', 'working', 'working']);
+    expect(bench.sets[0]).toEqual({
+      type: 'warmup',
+      dose: { unit: 'repetitions', min: 8, max: 8 },
+      weight: null,
+      rirTarget: null,
+    });
+    expect(bench.sets[1].dose).toEqual({ unit: 'repetitions', min: 4, max: 4 });
+    expect(bench.note).toBe(
+      'Aufwärmen vor den Arbeitssätzen: 1 × 8 mit ca. 50 %, 1 × 4 mit ca. 75 % des Arbeitsgewichts.'
+    );
+  });
+
+  it('adds no warm-up sets where the template has none', () => {
+    const plan = templateToPlan(templateById('mobility_daily_light'), 'en');
+    const sets = plan.days.flatMap(day => day.entries.flatMap(entry => entry.sets));
+    expect(sets.every(set => set.type === 'working')).toBe(true);
+    expect(plan.days.flatMap(day => day.entries).some(entry => entry.note)).toBe(false);
+  });
+
+  it('takes over the place and the equipment the exercises need', () => {
+    expect(templateToPlan(templateById('hypertrophy_fullbody_3'), 'en').setup).toEqual({ place: 'gym', equipment: null });
+    const boxing = templateToPlan(templateById('home_heavybag_band_4'), 'en').setup;
+    expect(boxing.place).toBe('home');
+    expect(boxing.equipment).toEqual(expect.arrayContaining(['heavy_bag', 'resistance_band', 'dumbbells']));
+    expect(boxing.equipment).not.toContain('mat');
   });
 
   it('puts exercises without a muscle group under other', () => {

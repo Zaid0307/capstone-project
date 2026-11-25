@@ -67,8 +67,35 @@ describe('CalendarPage', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'November 2026' })).toBeInTheDocument();
     expect(within(grid()).getAllByRole('button')).toHaveLength(42);
     expect(day(/^Today, Friday, November 13, Rest day$/)).toHaveAttribute('aria-current', 'date');
-    expect(screen.getByText('No entries in November 2026.')).toBeInTheDocument();
     expect(screen.getByRole('list', { name: 'Legend' })).toHaveTextContent('On plan');
+  });
+
+  it('says when the list of a month is empty', () => {
+    renderCalendar({ plans: [], workouts: [], route: '/calendar?view=list' });
+    expect(screen.getByText('No entries in November 2026.')).toBeInTheDocument();
+  });
+
+  it('switches between month, week and list and keeps the view in the URL', async () => {
+    renderCalendar({ route: '/calendar?day=2026-11-09' });
+    const views = within(screen.getByRole('group', { name: 'View' }));
+    expect(views.getByRole('button', { name: 'Month' })).toHaveAttribute('aria-pressed', 'true');
+
+    await userEvent.click(views.getByRole('button', { name: 'Week' }));
+    expect(location()).toContain('view=week');
+    expect(screen.getByRole('heading', { name: /^Week 46 · / })).toBeInTheDocument();
+    const week = screen.getByRole('list', { name: /^Week 46 · / });
+    expect(within(week).getAllByRole('button')).toHaveLength(7);
+    // The chosen day stays chosen and shows its details below the week.
+    expect(within(week).getByRole('button', { name: /November 9,/ })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByRole('region', { name: 'Monday, November 9' })).toBeInTheDocument();
+    await userEvent.click(screen.getByRole('button', { name: 'Next week' }));
+    expect(location()).toContain('day=2026-11-16');
+    expect(screen.getByRole('heading', { name: /^Week 47 · / })).toBeInTheDocument();
+
+    await userEvent.click(views.getByRole('button', { name: 'List' }));
+    expect(location()).toContain('view=list');
+    expect(screen.getByRole('list', { name: 'Entries in November 2026' })).toBeInTheDocument();
+    expect(screen.queryByRole('grid')).not.toBeInTheDocument();
   });
 
   it('shows the status of each day with text', () => {
@@ -96,6 +123,18 @@ describe('CalendarPage', () => {
     expect(within(table).getByText('too few reps')).toBeInTheDocument();
     expect(within(table).getAllByText('60 kg × 8–12 reps')).toHaveLength(3);
     expect(within(details).getByRole('link', { name: 'Open workout' })).toHaveAttribute('href', '/diary/bench-7');
+  });
+
+  it('shows how the training was and the notes on exercises in the day details', () => {
+    const workouts = sampleWorkouts().map(workout =>
+      workout.id === 'bench-7'
+        ? { ...workout, feeling: 4, exercises: workout.exercises.map((item, index) => (index === 0 ? { ...item, note: 'Shoulder fine' } : item)) }
+        : workout
+    );
+    renderCalendar({ workouts, route: '/calendar?day=2026-11-09' });
+    const details = screen.getByRole('region', { name: 'Monday, November 9' });
+    expect(within(details).getByText('How it was: 4/5 · Good')).toBeInTheDocument();
+    expect(within(details).getByText(/^Note on .+: Shoulder fine$/)).toBeInTheDocument();
   });
 
   it('offers to log a training on an empty past day', async () => {
@@ -138,7 +177,7 @@ describe('CalendarPage', () => {
   });
 
   it('lists the entries of the month by week, newest first', () => {
-    renderCalendar();
+    renderCalendar({ route: '/calendar?view=list' });
     const list = screen.getByRole('list', { name: 'Entries in November 2026' });
     const headings = within(list).getAllByRole('heading', { level: 3 }).map(heading => heading.textContent);
     expect(headings[0]).toBe('Week 46 · 2 workouts · 1/3 planned');

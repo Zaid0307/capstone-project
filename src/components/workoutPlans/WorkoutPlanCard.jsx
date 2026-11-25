@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   MdContentCopy,
@@ -8,9 +8,12 @@ import {
   MdOutlineDeleteForever,
   MdOutlineEdit,
   MdOutlineUnarchive,
+  MdShare,
 } from 'react-icons/md';
 import PlanDay from './PlanDay';
 import PlanHints, { SafetyHint } from './PlanHints';
+import { scheduleText } from './planSummary';
+import SharePlanPanel from './SharePlanPanel';
 import IconButton from '../ui/IconButton';
 import { useUndo } from '../ui/UndoProvider';
 import ToggleButton from '../ui/ToggleButton';
@@ -25,16 +28,12 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { copyPlan, setArchived } from '../../utils/planEditing';
-import { isPlanActive, migratePlan, orderedDays, WEEKDAYS } from '../../utils/workoutPlan';
+import { isPlanActive, migratePlan, orderedDays } from '../../utils/workoutPlan';
 import { toDateKey } from '../../utils/workoutLog';
 import { routes } from '../../routes';
+import { useIsGuest } from '../../auth/useAccess';
+import { useAuth } from '../../auth/AuthContext';
 import { tCount } from '../analysis/format';
-
-// 2024-01-01 was a Monday: used to get short weekday names in the chosen language.
-function shortWeekday(weekday, language) {
-  const date = new Date(2024, 0, 1 + WEEKDAYS.indexOf(weekday));
-  return new Intl.DateTimeFormat(language, { weekday: 'short' }).format(date);
-}
 
 function daysBetween(from, to) {
   const [a, b] = [from, to].map(key => {
@@ -60,6 +59,7 @@ function lastTrainedText(lastDate, today, t, language) {
 
 // One plan in the list: name, a short summary, "Train" and further actions (⋮).
 // Opening the card shows its days and exercises read-only; changes happen in the editor.
+// The name links to the plan view (all days, muscle load and hints on one page).
 export default function WorkoutPlanCard({
   plan: savedPlan,
   lastTrained = null,
@@ -69,6 +69,11 @@ export default function WorkoutPlanCard({
   onUpdatePlan,
 }) {
   const { t, language } = useTranslation();
+  const isGuest = useIsGuest();
+  const { isConfigured, user } = useAuth();
+  // Sharing needs the backend and an account.
+  const canShare = isConfigured && Boolean(user);
+  const [isSharing, setIsSharing] = useState(false);
   const id = useId();
   const showUndo = useUndo();
   const navigate = useNavigate();
@@ -82,14 +87,7 @@ export default function WorkoutPlanCard({
   const days = orderedDays(plan);
   const exerciseCount = plan.days.reduce((sum, day) => sum + day.entries.length, 0);
 
-  const schedule =
-    plan.schedule.type === 'rotation'
-      ? t('planEditor.summary.rotation', { count: plan.schedule.daysPerWeek ?? Math.max(1, Math.min(7, plan.days.length)) })
-      : days
-          .map(day => day.weekday)
-          .filter(Boolean)
-          .map(weekday => shortWeekday(weekday, language))
-          .join(' ');
+  const schedule = scheduleText(plan, t, language);
 
   // The menu closes with Escape (focus back to ⋮) and with a tap outside.
   useEffect(() => {
@@ -136,7 +134,9 @@ export default function WorkoutPlanCard({
     <Card>
       <Head>
         <TitleBlock>
-          <Title>{name}</Title>
+          <Title>
+            <TitleLink to={routes.planView(plan.id)}>{name}</TitleLink>
+          </Title>
           <Summary>
             {[schedule, tCount(t, 'plans.summary.days', plan.days.length)].filter(Boolean).join(' · ')}
           </Summary>
@@ -146,7 +146,7 @@ export default function WorkoutPlanCard({
           </Summary>
         </TitleBlock>
         <Actions>
-          {isActive && (
+          {isActive && !isGuest && (
             <TrainButton
               type="button"
               aria-label={t('plans.train', { name })}
@@ -186,6 +186,15 @@ export default function WorkoutPlanCard({
                 <VisuallyHidden>{t('plans.duplicate', { name })}</VisuallyHidden>
               </MenuItem>
             </li>
+            {canShare && (
+              <li>
+                <MenuItem type="button" onClick={() => run(() => setIsSharing(true))}>
+                  <MdShare aria-hidden="true" />
+                  <span aria-hidden="true">{t('planShare.menu')}</span>
+                  <VisuallyHidden>{t('planShare.menuName', { name })}</VisuallyHidden>
+                </MenuItem>
+              </li>
+            )}
             <li>
               <MenuItem type="button" onClick={() => run(() => handleArchive(isActive))}>
                 {isActive ? <MdOutlineArchive aria-hidden="true" /> : <MdOutlineUnarchive aria-hidden="true" />}
@@ -204,6 +213,15 @@ export default function WorkoutPlanCard({
           </Menu>
         )}
       </Head>
+      {isSharing && (
+        <SharePlanPanel
+          plan={savedPlan}
+          onClose={() => {
+            setIsSharing(false);
+            menuButtonRef.current?.focus();
+          }}
+        />
+      )}
       {/* Safety hints stay visible, also when the plan is collapsed. */}
       <SafetyHint hints={plan.hints} />
       {isExpanded && (
@@ -243,14 +261,25 @@ const TitleBlock = styled.div`
   min-width: 0;
 `;
 
-// Long names: at most two lines.
 const Title = styled.h2`
-  display: -webkit-box;
-  overflow: hidden;
   font-size: ${fontSizes.section};
+`;
+
+// Long names: at most two lines. The link fills the touch height of the row.
+const TitleLink = styled(Link)`
+  display: -webkit-box;
+  min-height: ${sizes.touchTarget};
+  overflow: hidden;
+  color: inherit;
   overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-color: ${colors.border};
+  text-underline-offset: 0.2em;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  &:hover {
+    text-decoration-color: currentColor;
+  }
 `;
 
 const Summary = styled.p`

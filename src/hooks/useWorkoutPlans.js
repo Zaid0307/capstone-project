@@ -1,47 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
 import { usePlanStore } from '../storage/PlanStoreContext';
+import useStoredList from '../storage/useStoredList';
 import { removeDay } from '../utils/workoutPlan';
 
 // The user's plans and the actions on them. Changes show immediately and are
-// then saved in the plan store; if saving fails, the plans are reloaded.
+// then saved in the plan store; if saving fails, the plans are reloaded and
+// `retry` repeats the failed change (or loads again when loading failed).
 export default function useWorkoutPlans() {
   const store = usePlanStore();
-  const [plans, setPlans] = useState(() => store.snapshot?.() ?? []);
-  const [isLoading, setIsLoading] = useState(() => !store.snapshot);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    if (store.snapshot) return undefined;
-    let isCurrent = true;
-    store
-      .list()
-      .then(loaded => {
-        if (isCurrent) setPlans(loaded);
-      })
-      .catch(loadError => {
-        if (isCurrent) setError(loadError);
-      })
-      .finally(() => {
-        if (isCurrent) setIsLoading(false);
-      });
-    return () => {
-      isCurrent = false;
-    };
-  }, [store]);
-
-  const save = useCallback(
-    async (change, request) => {
-      setError(null);
-      setPlans(change);
-      try {
-        await request();
-      } catch (saveError) {
-        setError(saveError);
-        setPlans(await store.list());
-      }
-    },
-    [store]
-  );
+  const { items: plans, isLoading, error, save, retry } = useStoredList(store);
 
   const findPlan = planId => plans.find(plan => plan.id === planId);
 
@@ -49,6 +15,7 @@ export default function useWorkoutPlans() {
     plans,
     isLoading,
     error,
+    retry,
     addPlan: plan => save(current => [...current, plan], () => store.create(plan)),
     updatePlan: plan =>
       save(

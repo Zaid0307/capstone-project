@@ -31,7 +31,11 @@ describe('plan adherence', () => {
     const skippedExercise = makeWorkout({
       date: '2026-11-10',
       plan: { planId: 'a', dayId: 'd1' },
-      exercises: [loggedExercise({ exerciseId: 'push_up', skipped: true, sets: [set({ reps: 10, planned }), set({ reps: 10, planned })] })],
+      exercises: [
+        loggedExercise({ exerciseId: 'push_up', skipped: true, sets: [set({ reps: 10, planned }), set({ reps: 10, planned })] }),
+        // One extra done set, so the workout counts as a training (countsAsTraining).
+        loggedExercise({ exerciseId: 'plank', sets: [set({ seconds: 30 })] }),
+      ],
     });
     const workouts = [
       planWorkout('2026-11-09', 2, 0),
@@ -82,6 +86,16 @@ describe('schedule adherence', () => {
     ]);
     expect(scheduledSessions([weekdayPlan()], { from: '2026-10-01', to: '2026-10-31' }, TODAY)).toEqual([]);
     expect(scheduledSessions([weekdayPlan({ startDate: '2026-11-02', endDate: '2026-11-06' })], range, TODAY)).toHaveLength(2);
+  });
+
+  it('plans a day on each of its weekdays', () => {
+    const plan = makePlan({ id: 'f', days: [{ id: 'full', weekdays: ['monday', 'thursday'] }], schedule: { startDate: '2026-11-02' } });
+    expect(scheduledSessions([plan], range, TODAY).map(session => [session.date, session.dayId])).toEqual([
+      ['2026-11-02', 'full'],
+      ['2026-11-05', 'full'],
+      ['2026-11-09', 'full'],
+      ['2026-11-12', 'full'],
+    ]);
   });
 
   it('counts a moved workout in the same week, each workout covering one planned day', () => {

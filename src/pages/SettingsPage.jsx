@@ -4,7 +4,8 @@ import PageLayout from '../components/layout/PageLayout';
 import { FormCard } from '../components/planEditor/formStyles';
 import Button from '../components/ui/Button';
 import PageTitle from '../components/ui/PageTitle';
-import { clearTrainingData, downloadExport } from '../utils/dataExport';
+import { clearTrainingData } from '../utils/dataExport';
+import ExportDataButton from '../storage/ExportDataButton';
 import { Link } from 'react-router-dom';
 import { routes } from '../routes';
 import { useAuth } from '../auth/AuthContext';
@@ -73,17 +74,16 @@ export default function SettingsPage({ onDataCleared = () => window.location.ass
         {user && <Muted>{t('account.signedInAs', { email: user.email })}</Muted>}
         <Link to={routes.account}>{t('account.settingsLink')}</Link>
         <Link to={routes.privacy}>{t('privacy.title')}</Link>
+        <Link to={routes.help}>{t('help.title')}</Link>
       </FormCard>
 
       <FormCard aria-labelledby="dataTitle">
         <Legend as="h2" id="dataTitle">
           {t('settings.data.title')}
         </Legend>
-        <Muted>{t('settings.data.text')}</Muted>
+        <Muted>{t(user ? 'account.dataTextSignedIn' : 'settings.data.text')}</Muted>
         <Actions>
-          <Button $variant="secondary" onClick={() => downloadExport()}>
-            {t('settings.data.export')}
-          </Button>
+          <ExportDataButton />
           {!isConfirming && (
             <Button $variant="secondary" onClick={() => setIsConfirming(true)}>
               {t('settings.data.delete')}

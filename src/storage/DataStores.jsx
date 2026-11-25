@@ -5,8 +5,12 @@ import { createLocalPlanStore } from './localPlanStore';
 import { createLocalWorkoutStore } from './localWorkoutStore';
 import { copyMissingPlans, createRemotePlanStore } from './remotePlanStore';
 import { copyMissingWorkouts, createRemoteWorkoutStore } from './remoteWorkoutStore';
-import { PRIVACY_VERSION, recordConsent, useAuth } from '../auth/AuthContext';
+import { createOfflineQueueStore } from './offlineQueue';
+import OfflineNotice from './OfflineNotice';
+import { GOOGLE_CONSENT_KEY, PRIVACY_VERSION, recordConsent, useAuth } from '../auth/AuthContext';
 import { useTranslation } from '../i18n/LanguageContext';
+import { describeFailure } from '../lib/networkError';
+import AccountLoadError from './AccountLoadError';
 
 const syncKey = userId => `syncedToAccount:${userId}`;
 
@@ -21,19 +25,27 @@ async function prepareAccount(client, user, storage = window.localStorage) {
     await copyMissingWorkouts(createLocalWorkoutStore(storage), workouts);
     storage.setItem(syncKey(user.id), new Date().toISOString());
   }
-  if (user.user_metadata?.privacy_version === PRIVACY_VERSION) {
+  // Google sign-in: the consent was given on this device before leaving for Google.
+  const consentBeforeRedirect = storage.getItem(GOOGLE_CONSENT_KEY) === PRIVACY_VERSION;
+  if (user.user_metadata?.privacy_version === PRIVACY_VERSION || consentBeforeRedirect) {
     const { data, error } = await client.from('consents').select('id').eq('version', PRIVACY_VERSION).limit(1);
     if (!error && data.length === 0) await recordConsent(client);
+    if (!error) storage.removeItem(GOOGLE_CONSENT_KEY);
   }
-  return { plans, workouts };
+  // Changes made without a connection wait in a queue and are sent later.
+  return {
+    plans: createOfflineQueueStore(plans, { name: 'plans', userId: user.id, storage }),
+    workouts: createOfflineQueueStore(workouts, { name: 'workouts', userId: user.id, storage }),
+  };
 }
 
 // Chooses where plans and diary are kept: in the browser, or in the account
 // when someone is signed in. The app below is rebuilt when that changes.
 export default function DataStores({ children }) {
   const { t } = useTranslation();
-  const { client, user, isReady } = useAuth();
+  const { client, user, isReady, signOut } = useAuth();
   const [account, setAccount] = useState({ userId: null, stores: null, error: null });
+  const [attempt, setAttempt] = useState(0);
   const userId = user?.id ?? null;
 
   useEffect(() => {
@@ -47,21 +59,30 @@ export default function DataStores({ children }) {
     };
     // The user object changes on every token refresh; the id is what matters.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [client, userId]);
+  }, [client, userId, attempt]);
+
+  const retry = () => {
+    setAccount({ userId: null, stores: null, error: null });
+    setAttempt(current => current + 1);
+  };
 
   if (!isReady) return <p role="status">{t('account.loading')}</p>;
   if (!userId) return <Fragment key="local">{children}</Fragment>;
   if (account.userId !== userId) return <p role="status">{t('account.syncing')}</p>;
   if (account.error) {
     return (
-      <p role="alert">
-        {t('account.syncError')} ({account.error.message})
-      </p>
+      <AccountLoadError
+        isConnectionProblem={['offline', 'network'].includes(describeFailure(account.error))}
+        message={account.error.message}
+        onRetry={retry}
+        onSignOut={signOut}
+      />
     );
   }
   return (
     <PlanStoreProvider store={account.stores.plans}>
       <WorkoutStoreProvider store={account.stores.workouts}>
+        <OfflineNotice stores={[account.stores.plans, account.stores.workouts]} />
         <Fragment key={userId}>{children}</Fragment>
       </WorkoutStoreProvider>
     </PlanStoreProvider>

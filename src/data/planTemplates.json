@@ -1,7 +1,7 @@
 [
  {
   "id": "hypertrophy_fullbody_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Muskelaufbau Ganzkörper 3 Tage",
    "en": "Muscle building full body, 3 days"
@@ -23,12 +23,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -328,7 +328,7 @@
  },
  {
   "id": "hypertrophy_upperlower_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Muskelaufbau Ober-/Unterkörper 4 Tage",
    "en": "Muscle building upper/lower, 4 days"
@@ -350,12 +350,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -382,6 +382,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -470,6 +476,12 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -571,6 +583,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -637,6 +655,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -721,7 +745,7 @@
  },
  {
   "id": "hypertrophy_ppl_6",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Push/Pull/Legs 6 Tage",
    "en": "Push/Pull/Legs, 6 days"
@@ -743,12 +767,12 @@
   "weeklyTrainingDays": 6,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -775,6 +799,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -918,6 +948,12 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -995,6 +1031,12 @@
      {
       "exerciseId": "incline_barbell_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1072,6 +1114,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1138,6 +1186,12 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1220,7 +1274,7 @@
  },
  {
   "id": "hypertrophy_chest_back_split_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Brust/Rücken- und Bein-Fokus",
    "en": "Chest/back and leg focus"
@@ -1242,12 +1296,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -1274,6 +1328,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1351,6 +1411,12 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1518,6 +1584,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -1602,7 +1674,7 @@
  },
  {
   "id": "hypertrophy_5day_bodypart",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Fünf-Tage-Bodybuilding-Split",
    "en": "Five-day bodybuilding split"
@@ -1624,12 +1696,12 @@
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -1656,6 +1728,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1722,6 +1800,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -1788,6 +1872,16 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -1944,6 +2038,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -2026,7 +2126,7 @@
  },
  {
   "id": "strength_hypertrophy_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Kraft & Muskelmasse",
    "en": "Strength & muscle mass"
@@ -2053,8 +2153,8 @@
     "en": "Main lifts (bench press, squat, deadlift) at 3–5 reps: once every set reaches 5 cleanly at RIR ≥ 1, add 2.5 kg (upper body) or 5 kg (legs, deadlift) next time. Progress the accessories within their rep range. Every 6–8 weeks, take a lighter week with half the sets."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2, Hilfsübungen 1–2. Kein Training bis zum Versagen; Aufwärmsätze zählen nicht.",
+    "en": "Main lifts 2, accessories 1–2. No training to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -2081,6 +2181,16 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 3,
@@ -2158,6 +2268,16 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 3,
@@ -2259,6 +2379,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -2325,6 +2451,16 @@
      {
       "exerciseId": "conventional_deadlift",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 3,
@@ -2409,7 +2545,7 @@
  },
  {
   "id": "gym_short_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Kompakt 30–45 Min",
    "en": "Compact 30–45 min"
@@ -2432,12 +2568,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -2671,7 +2807,7 @@
  },
  {
   "id": "bodyweight_beginner_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Einstieg zu Hause (Körpergewicht und Band)",
    "en": "Home starter (bodyweight and band)"
@@ -2694,12 +2830,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Sätze die obere Grenze sauber bei RIR ≥ 1, wird die Übung schwerer statt länger: stärkeres Band, langsameres Ablassen (3 s), kurze Pause in der Endposition oder eine schwerere Variante (z. B. Liegestütz am Boden statt erhöht). Bei Schmerzen abbrechen.",
+    "en": "First add reps up to the top of the range. Once every set reaches the top cleanly with at least 1 rep in reserve, make the exercise harder instead of longer: a stronger band, a slower lowering (3 s), a short pause in the end position or a harder variation (e.g. push-ups on the floor instead of raised). Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "ca. 2: Die letzten Wiederholungen sind schwer, bleiben aber sauber. Kein Satz bis zum Muskelversagen.",
+    "en": "About 2: the last reps are hard but stay clean. No set to failure."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -2995,7 +3131,7 @@
  },
  {
   "id": "home_band_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Home Gym mit Widerstandsbändern",
    "en": "Home gym with resistance bands"
@@ -3018,12 +3154,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Sätze die obere Grenze sauber bei RIR ≥ 1, wird die Übung schwerer statt länger: stärkeres Band, langsameres Ablassen (3 s), kurze Pause in der Endposition oder eine schwerere Variante (z. B. Liegestütz am Boden statt erhöht). Bei Schmerzen abbrechen.",
+    "en": "First add reps up to the top of the range. Once every set reaches the top cleanly with at least 1 rep in reserve, make the exercise harder instead of longer: a stronger band, a slower lowering (3 s), a short pause in the end position or a harder variation (e.g. push-ups on the floor instead of raised). Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "ca. 2: Die letzten Wiederholungen sind schwer, bleiben aber sauber. Kein Satz bis zum Muskelversagen.",
+    "en": "About 2: the last reps are hard but stay clean. No set to failure."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -3324,7 +3460,7 @@
  },
  {
   "id": "home_band_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Home Gym 4 Tage",
    "en": "Home gym, 4 days"
@@ -3347,12 +3483,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Sätze die obere Grenze sauber bei RIR ≥ 1, wird die Übung schwerer statt länger: stärkeres Band, langsameres Ablassen (3 s), kurze Pause in der Endposition oder eine schwerere Variante (z. B. Liegestütz am Boden statt erhöht). Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "First add reps up to the top of the range. Once every set reaches the top cleanly with at least 1 rep in reserve, make the exercise harder instead of longer: a stronger band, a slower lowering (3 s), a short pause in the end position or a harder variation (e.g. push-ups on the floor instead of raised). Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "ca. 2: Die letzten Wiederholungen sind schwer, bleiben aber sauber. Kein Satz bis zum Muskelversagen.",
+    "en": "About 2: the last reps are hard but stay clean. No set to failure."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -3718,7 +3854,7 @@
  },
  {
   "id": "home_heavybag_band_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Home Gym + Boxsack + Bänder",
    "en": "Home gym + heavy bag + bands"
@@ -3742,12 +3878,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Boxrunden: erst die Rundenzeit von 2 auf 3 Minuten verlängern, dann eine Runde mehr; die Pause von 60 s bleibt. Technik vor Tempo und Härte. Kraftübungen: obere Wiederholungsgrenze sauber bei RIR ≥ 1, dann beim nächsten Mal etwas mehr Gewicht oder ein stärkeres Band. Bei Schmerzen in Hand, Handgelenk oder Schulter abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Boxing rounds: first lengthen a round from 2 to 3 minutes, then add a round; the 60 s break stays. Technique before speed and power. Strength exercises: top of the rep range cleanly with at least 1 rep in reserve, then a little more weight or a stronger band next time. Stop if your hand, wrist or shoulder hurts. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2. Boxrunden mittel bis zügig: Am Rundenende kannst du noch sauber schlagen und ein paar Worte sprechen.",
+    "en": "Strength exercises 2. Boxing rounds moderate to brisk: at the end of a round you can still punch cleanly and say a few words."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -4089,7 +4225,7 @@
  },
  {
   "id": "boxing_technical_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Boxsack Grundtechnik + Kraft",
    "en": "Heavy bag basics + strength"
@@ -4112,12 +4248,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Boxrunden: erst die Rundenzeit von 2 auf 3 Minuten verlängern, dann eine Runde mehr; die Pause von 60 s bleibt. Technik vor Tempo und Härte. Kraftübungen: obere Wiederholungsgrenze sauber bei RIR ≥ 1, dann beim nächsten Mal etwas mehr Gewicht oder ein stärkeres Band. Bei Schmerzen in Hand, Handgelenk oder Schulter abbrechen.",
+    "en": "Boxing rounds: first lengthen a round from 2 to 3 minutes, then add a round; the 60 s break stays. Technique before speed and power. Strength exercises: top of the rep range cleanly with at least 1 rep in reserve, then a little more weight or a stronger band next time. Stop if your hand, wrist or shoulder hurts."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2. Boxrunden mittel bis zügig: Am Rundenende kannst du noch sauber schlagen und ein paar Worte sprechen.",
+    "en": "Strength exercises 2. Boxing rounds moderate to brisk: at the end of a round you can still punch cleanly and say a few words."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -4372,7 +4508,7 @@
  },
  {
   "id": "boxing_and_strength_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Boxen + Muskelaufbau",
    "en": "Boxing + muscle building"
@@ -4395,12 +4531,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Boxrunden: erst die Rundenzeit von 2 auf 3 Minuten verlängern, dann eine Runde mehr; die Pause von 60 s bleibt. Technik vor Tempo und Härte. Kraftübungen: obere Wiederholungsgrenze sauber bei RIR ≥ 1, dann beim nächsten Mal etwas mehr Gewicht oder ein stärkeres Band. Bei Schmerzen in Hand, Handgelenk oder Schulter abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Boxing rounds: first lengthen a round from 2 to 3 minutes, then add a round; the 60 s break stays. Technique before speed and power. Strength exercises: top of the rep range cleanly with at least 1 rep in reserve, then a little more weight or a stronger band next time. Stop if your hand, wrist or shoulder hurts. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2. Boxrunden mittel bis zügig: Am Rundenende kannst du noch sauber schlagen und ein paar Worte sprechen.",
+    "en": "Strength exercises 2. Boxing rounds moderate to brisk: at the end of a round you can still punch cleanly and say a few words."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -4427,6 +4563,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -4582,6 +4724,12 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -4710,7 +4858,7 @@
  },
  {
   "id": "mobility_strength_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Gesunder Muskelaufbau + Mobility",
    "en": "Healthy muscle building + mobility"
@@ -4733,12 +4881,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Kraftübungen mit doppelter Progression: erst Wiederholungen bis zur oberen Grenze, dann bei RIR ≥ 1 etwas mehr Gewicht (+1–2 kg pro Kurzhantel, +2,5 kg an der Langhantel). Mobility- und Pilates-Übungen über Haltezeit (30 → 45 → 60 s) und sauberen Bewegungsumfang steigern, nicht über Last. Bei Schmerzen abbrechen.",
+    "en": "Strength exercises with double progression: first reps up to the top of the range, then with at least 1 rep in reserve a little more weight (+1–2 kg per dumbbell, +2.5 kg on a barbell). Progress mobility and Pilates exercises by hold time (30 → 45 → 60 s) and clean range of motion, not by load. Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2, Isolationsübungen 1–2. Mobility und Pilates: nicht relevant, ruhig atmen, Spannung halten, kein Schmerz.",
+    "en": "Strength exercises 2, isolation exercises 1–2. Mobility and Pilates: not relevant; breathe calmly, keep tension, no pain."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -5073,7 +5221,7 @@
  },
  {
   "id": "mobility_daily_light",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Mobility, Stretching und Regeneration",
    "en": "Mobility, stretching and recovery"
@@ -5096,12 +5244,12 @@
   "weeklyTrainingDays": 6,
   "progression": {
    "instruction": {
-    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
-    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
+    "de": "Haltezeit langsam steigern (30 → 45 → 60 s), danach den Bewegungsumfang schmerzfrei erweitern. Nie in den Schmerz dehnen: Ein leichtes Ziehen ist richtig.",
+    "en": "Increase the hold time slowly (30 → 45 → 60 s), then widen the range of motion without pain. Never stretch into pain: a light pull is right."
    },
    "repsInReserve": {
-    "de": "nicht relevant: ruhig atmen, kein Schmerz",
-    "en": "not relevant: breathe calmly, no pain"
+    "de": "Nicht relevant: Dehnen mit leichtem Ziehen (etwa 3–4 von 10), ruhig weiteratmen, kein Schmerz.",
+    "en": "Not relevant: stretch to a light pull (about 3–4 out of 10), keep breathing calmly, no pain."
    },
    "recovery": {
     "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
@@ -5571,7 +5719,7 @@
  },
  {
   "id": "women_strength_glutes_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Glutes & Muskelaufbau – 4 Tage",
    "en": "Glutes & muscle building – 4 days"
@@ -5594,12 +5742,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Doppelte Progression: Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal mehr Gewicht: +2,5 kg an der Langhantel, +1–2 kg pro Kurzhantel oder eine Stufe an der Maschine. Danach wieder am unteren Ende des Bereichs beginnen. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Double progression: first add reps up to the top of the range. Once every working set reaches the top cleanly with at least 1 rep in reserve, add weight next time: +2.5 kg on a barbell, +1–2 kg per dumbbell or one step on a machine. Then start again at the bottom of the range. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2–3, Isolationsübungen 1–2. Kein Satz bis zum Muskelversagen; Aufwärmsätze zählen nicht.",
+    "en": "Compound lifts 2–3, isolation exercises 1–2. No set to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -5626,6 +5774,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -5692,6 +5846,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -5793,6 +5953,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -5881,6 +6047,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -5965,7 +6137,7 @@
  },
  {
   "id": "women_strength_pilates_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Kraft + Pilates – 4 Tage",
    "en": "Strength + Pilates – 4 days"
@@ -5989,12 +6161,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Kraftübungen mit doppelter Progression: erst Wiederholungen bis zur oberen Grenze, dann bei RIR ≥ 1 etwas mehr Gewicht (+1–2 kg pro Kurzhantel, +2,5 kg an der Langhantel). Mobility- und Pilates-Übungen über Haltezeit (30 → 45 → 60 s) und sauberen Bewegungsumfang steigern, nicht über Last. Bei Schmerzen abbrechen.",
+    "en": "Strength exercises with double progression: first reps up to the top of the range, then with at least 1 rep in reserve a little more weight (+1–2 kg per dumbbell, +2.5 kg on a barbell). Progress mobility and Pilates exercises by hold time (30 → 45 → 60 s) and clean range of motion, not by load. Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2, Isolationsübungen 1–2. Mobility und Pilates: nicht relevant, ruhig atmen, Spannung halten, kein Schmerz.",
+    "en": "Strength exercises 2, isolation exercises 1–2. Mobility and Pilates: not relevant; breathe calmly, keep tension, no pain."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -6332,7 +6504,7 @@
  },
  {
   "id": "women_pilates_beginner_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Pilates Einstieg",
    "en": "Pilates for beginners"
@@ -6355,12 +6527,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
-    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
+    "de": "Erst Wiederholungen, dann Haltezeit steigern (z. B. 30 → 45 → 60 s). Eine schwerere Variante (z. B. Kopf angehoben statt abgelegt) erst, wenn die Körpermitte die ganze Zeit stabil bleibt. Schmerzfrei bleiben.",
+    "en": "First add reps, then hold time (e.g. 30 → 45 → 60 s). Take a harder variation (e.g. head lifted instead of resting) only once your core stays stable the whole time. Stay pain-free."
    },
    "repsInReserve": {
-    "de": "nicht relevant: ruhig atmen, kein Schmerz",
-    "en": "not relevant: breathe calmly, no pain"
+    "de": "Nicht relevant: aufhören, sobald die Körpermitte die Spannung verliert oder der untere Rücken ins Hohlkreuz geht; ruhig atmen.",
+    "en": "Not relevant: stop as soon as your core loses tension or your lower back arches; breathe calmly."
    },
    "recovery": {
     "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
@@ -6655,7 +6827,7 @@
  },
  {
   "id": "women_pilates_strength_5",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Pilates und Muskelaufbau – 5 Tage",
    "en": "Pilates and muscle building – 5 days"
@@ -6678,12 +6850,12 @@
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Kraftübungen mit doppelter Progression: erst Wiederholungen bis zur oberen Grenze, dann bei RIR ≥ 1 etwas mehr Gewicht (+1–2 kg pro Kurzhantel, +2,5 kg an der Langhantel). Mobility- und Pilates-Übungen über Haltezeit (30 → 45 → 60 s) und sauberen Bewegungsumfang steigern, nicht über Last. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Strength exercises with double progression: first reps up to the top of the range, then with at least 1 rep in reserve a little more weight (+1–2 kg per dumbbell, +2.5 kg on a barbell). Progress mobility and Pilates exercises by hold time (30 → 45 → 60 s) and clean range of motion, not by load. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Kraftübungen 2, Isolationsübungen 1–2. Mobility und Pilates: nicht relevant, ruhig atmen, Spannung halten, kein Schmerz.",
+    "en": "Strength exercises 2, isolation exercises 1–2. Mobility and Pilates: not relevant; breathe calmly, keep tension, no pain."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -6710,6 +6882,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -6851,6 +7029,12 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 6,
@@ -7097,7 +7281,7 @@
  },
  {
   "id": "women_home_glutes_band_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Home-Workout Glutes & Bänder",
    "en": "Home workout: glutes & bands"
@@ -7121,12 +7305,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Erst die Wiederholungen bis zur oberen Grenze steigern. Schaffen alle Sätze die obere Grenze sauber bei RIR ≥ 1, wird die Übung schwerer statt länger: stärkeres Band, langsameres Ablassen (3 s), kurze Pause in der Endposition oder eine schwerere Variante (z. B. Liegestütz am Boden statt erhöht). Bei Schmerzen abbrechen.",
+    "en": "First add reps up to the top of the range. Once every set reaches the top cleanly with at least 1 rep in reserve, make the exercise harder instead of longer: a stronger band, a slower lowering (3 s), a short pause in the end position or a harder variation (e.g. push-ups on the floor instead of raised). Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "ca. 2: Die letzten Wiederholungen sind schwer, bleiben aber sauber. Kein Satz bis zum Muskelversagen.",
+    "en": "About 2: the last reps are hard but stay clean. No set to failure."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -7438,7 +7622,7 @@
  },
  {
   "id": "women_fullbody_strength_3",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Starker Ganzkörper für Frauen",
    "en": "Strong full body for women"
@@ -7461,12 +7645,12 @@
   "weeklyTrainingDays": 3,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain."
+    "de": "Grundübungen (Kniebeuge, Bankdrücken, Kreuzheben) im unteren Wiederholungsbereich: Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal +2,5 kg (Oberkörper, Kniebeuge) bzw. +5 kg (Kreuzheben); Kurzhanteln +1 kg pro Hand. Hilfsübungen erst über Wiederholungen, dann über Gewicht steigern. Bei Schmerzen abbrechen.",
+    "en": "Main lifts (squat, bench press, deadlift) at low reps: once every working set reaches the top of the range cleanly with at least 1 rep in reserve, add 2.5 kg next time (upper body, squat) or 5 kg (deadlift); dumbbells +1 kg per hand. Accessories first gain reps, then weight. Stop if you feel pain."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2, Hilfsübungen 1–2. Kein Training bis zum Versagen; Aufwärmsätze zählen nicht.",
+    "en": "Main lifts 2, accessories 1–2. No training to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -7493,6 +7677,16 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 5,
@@ -7650,6 +7844,16 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 5,
@@ -7733,7 +7937,7 @@
  },
  {
   "id": "women_mobility_stretch_4",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Beweglichkeit & Pilates",
    "en": "Flexibility & Pilates"
@@ -7756,12 +7960,12 @@
   "weeklyTrainingDays": 4,
   "progression": {
    "instruction": {
-    "de": "Haltezeit oder Wiederholungen langsam steigern (z. B. 30 → 45 → 60 s), Bewegungsumfang schmerzfrei erweitern.",
-    "en": "Slowly increase hold times or reps (e.g. 30 → 45 → 60 s) and widen the range of motion without pain."
+    "de": "Erst Wiederholungen, dann Haltezeit steigern (z. B. 30 → 45 → 60 s). Eine schwerere Variante (z. B. Kopf angehoben statt abgelegt) erst, wenn die Körpermitte die ganze Zeit stabil bleibt. Schmerzfrei bleiben.",
+    "en": "First add reps, then hold time (e.g. 30 → 45 → 60 s). Take a harder variation (e.g. head lifted instead of resting) only once your core stays stable the whole time. Stay pain-free."
    },
    "repsInReserve": {
-    "de": "nicht relevant: ruhig atmen, kein Schmerz",
-    "en": "not relevant: breathe calmly, no pain"
+    "de": "Nicht relevant: aufhören, sobald die Körpermitte die Spannung verliert oder der untere Rücken ins Hohlkreuz geht; ruhig atmen.",
+    "en": "Not relevant: stop as soon as your core loses tension or your lower back arches; breathe calmly."
    },
    "recovery": {
     "de": "Leichte Einheiten sind auch an Krafttagen möglich.",
@@ -8114,7 +8318,7 @@
  },
  {
   "id": "women_athlete_5",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": {
    "de": "Athletisch & muskulös – 5 Tage",
    "en": "Athletic & muscular – 5 days"
@@ -8138,12 +8342,12 @@
   "weeklyTrainingDays": 5,
   "progression": {
    "instruction": {
-    "de": "Alle Sätze technisch sauber im Wiederholungsbereich; wenn obere Grenze kontrolliert erreichbar, Belastung klein steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
-    "en": "Do all sets with clean technique within the repetition range; once the upper limit is reached under control, increase the load slightly. Stop if you feel pain. Every 6–8 weeks, plan a lighter week with half the sets."
+    "de": "Grundübungen (Kniebeuge, Bankdrücken, Kreuzheben) im unteren Wiederholungsbereich: Schaffen alle Arbeitssätze die obere Grenze sauber bei RIR ≥ 1, beim nächsten Mal +2,5 kg (Oberkörper, Kniebeuge) bzw. +5 kg (Kreuzheben); Kurzhanteln +1 kg pro Hand. Hilfsübungen erst über Wiederholungen, dann über Gewicht steigern. Bei Schmerzen abbrechen. Alle 6–8 Wochen eine leichtere Woche mit halbem Satzvolumen einplanen.",
+    "en": "Main lifts (squat, bench press, deadlift) at low reps: once every working set reaches the top of the range cleanly with at least 1 rep in reserve, add 2.5 kg next time (upper body, squat) or 5 kg (deadlift); dumbbells +1 kg per hand. Accessories first gain reps, then weight. Stop if you feel pain. Plan a lighter week with half the sets every 6–8 weeks."
    },
    "repsInReserve": {
-    "de": "ca. 2-3, bei längerer Erfahrung und guter Erholung teils 1-2",
-    "en": "about 2–3 repetitions in reserve; with more experience and good recovery sometimes 1–2"
+    "de": "Grundübungen 2, Hilfsübungen 1–2. Kein Training bis zum Versagen; Aufwärmsätze zählen nicht.",
+    "en": "Main lifts 2, accessories 1–2. No training to failure; warm-up sets do not count."
    },
    "recovery": {
     "de": "Erholung, Alltag, Technik und Gesamtvolumen vor pauschaler Intensitätssteigerung priorisieren.",
@@ -8170,6 +8374,16 @@
      {
       "exerciseId": "barbell_bench_press",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 4,
@@ -8258,6 +8472,16 @@
      {
       "exerciseId": "barbell_squat",
       "sets": 4,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       },
+       {
+        "reps": 4,
+        "percent": 75
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 4,
@@ -8421,6 +8645,12 @@
      {
       "exerciseId": "barbell_row",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,
@@ -8487,6 +8717,12 @@
      {
       "exerciseId": "hip_thrust",
       "sets": 3,
+      "warmupSets": [
+       {
+        "reps": 8,
+        "percent": 50
+       }
+      ],
       "dose": {
        "unit": "repetitions",
        "min": 8,

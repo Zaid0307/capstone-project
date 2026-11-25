@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bestätige deine E-Mail-Adresse</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#F4F7F8;font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:#172B36;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F4F7F8;">
+      <tr>
+        <td align="center" style="padding:24px 16px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background-color:#FFFFFF;border-radius:12px;">
+            <tr>
+              <td style="padding:20px 24px;background-color:#172B36;border-radius:12px 12px 0 0;color:#FFFFFF;font-size:20px;font-weight:700;">GetFit!</td>
+            </tr>
+            <tr>
+              <td style="padding:24px;font-size:16px;line-height:1.5;">
+                <h1 style="margin:0 0 16px;font-size:22px;">Bestätige deine E-Mail-Adresse</h1>
+                <p style="margin:0 0 12px;">Hallo,</p>
+                <p style="margin:0;">du hast bei GetFit! ein Konto für <strong>{{ .Email }}</strong> erstellt. Bestätige bitte deine E-Mail-Adresse, danach kannst du dich anmelden.</p>
+                <p style="margin:24px 0;">
+                  <a href="{{ .ConfirmationURL }}" style="display:inline-block;padding:12px 20px;border-radius:999px;background-color:#075D69;color:#FFFFFF;font-weight:700;text-decoration:none;">E-Mail-Adresse bestätigen</a>
+                </p>
+                <p style="margin:0 0 16px;font-size:14px;color:#465E6B;">Falls der Knopf nicht funktioniert, kopiere diesen Link in deinen Browser:<br /><a href="{{ .ConfirmationURL }}" style="color:#075D69;word-break:break-all;">{{ .ConfirmationURL }}</a></p>
+                <p style="margin:0;font-size:14px;color:#465E6B;">Du hast kein Konto erstellt? Dann kannst du diese E-Mail einfach ignorieren.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:16px 24px;border-top:1px solid #E8EFF2;font-size:13px;color:#465E6B;">GetFit! ist ein privates Projekt für Freunde und Familie. Diese E-Mail wurde automatisch verschickt; bitte antworte nicht darauf.</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

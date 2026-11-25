@@ -254,6 +254,21 @@ otp_expiry = 3600
 # subject = "You have been invited"
 # content_path = "./supabase/templates/invite.html"
 
+# German e-mails of GetFit! (prepared; applied by the app lead with `supabase config push`).
+# The sender name "GetFit!" can only be set with a custom SMTP server
+# ([auth.email.smtp] sender_name); the built-in sender keeps its default name.
+[auth.email.template.confirmation]
+subject = "GetFit!: Bitte bestätige deine E-Mail-Adresse"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.recovery]
+subject = "GetFit!: Neues Passwort festlegen"
+content_path = "./supabase/templates/recovery.html"
+
+[auth.email.template.email_change]
+subject = "GetFit!: Neue E-Mail-Adresse bestätigen"
+content_path = "./supabase/templates/email_change.html"
+
 # Uncomment to customize notification email template
 # [auth.email.notification.password_changed]
 # enabled = true

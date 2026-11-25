@@ -7,6 +7,8 @@ import {
   MdContentCopy,
   MdOutlineDeleteForever,
   MdDriveFileMove,
+  MdLink,
+  MdLinkOff,
   MdSwapHoriz,
   MdTune,
 } from 'react-icons/md';
@@ -32,6 +34,7 @@ import {
   duplicateEntry,
   hasUniformSets,
   insertEntry,
+  linkWithNext,
   moveEntry,
   moveEntryToDay,
   removeEntry,
@@ -39,6 +42,7 @@ import {
   replaceEntryExercise,
   setDoseUnit,
   setSetCount,
+  unlinkSuperset,
   updateAllSets,
   updateEntry,
   updateSet,
@@ -84,6 +88,10 @@ export default function EntryEditor({
   onToggle,
   hasProblem,
   edit,
+  availableEquipment = null,
+  superset = null,
+  canLinkNext = false,
+  nextName = '',
 }) {
   const { t, language } = useTranslation();
   const id = useId();
@@ -124,6 +132,20 @@ export default function EntryEditor({
       disabled: position === count - 1,
       onSelect: () => edit(plan => moveEntry(plan, dayId, entry.id, 1)),
     },
+    canLinkNext && {
+      key: 'link',
+      icon: MdLink,
+      label: t('planEditor.superset.link'),
+      name: t('planEditor.superset.linkWith', { name, next: nextName }),
+      onSelect: () => edit(plan => linkWithNext(plan, dayId, entry.id)),
+    },
+    superset && {
+      key: 'unlink',
+      icon: MdLinkOff,
+      label: t('planEditor.superset.unlink'),
+      name: t('planEditor.superset.unlinkName', { group: superset.group }),
+      onSelect: () => edit(plan => unlinkSuperset(plan, dayId, entry.id)),
+    },
     {
       key: 'duplicate',
       icon: MdContentCopy,
@@ -162,22 +184,33 @@ export default function EntryEditor({
   ].filter(Boolean);
 
   return (
-    <Item $hasProblem={hasProblem}>
+    <Item $hasProblem={hasProblem} $superset={superset}>
       {isReplacing && (
         <ExercisePicker
           replaceFor={{ name, muscle: entry.muscle }}
           onReplace={exerciseId => edit(plan => replaceEntryExercise(plan, dayId, entry.id, exerciseId))}
           onClose={() => setIsReplacing(false)}
+          availableEquipment={availableEquipment}
         />
       )}
       <Summary>
         <Position aria-hidden="true">{position + 1}</Position>
         <SummaryText>
-          <Name>{name}</Name>
+          <Name>
+            {superset && (
+              <SupersetTag title={t('planEditor.superset.label', { group: superset.group })}>
+                {superset.label}
+              </SupersetTag>
+            )}
+            {superset && <VisuallyHidden>{t('planEditor.superset.label', { group: superset.group })}: </VisuallyHidden>}
+            {name}
+          </Name>
           <Muted>
             {muscleLabel(entry.muscle, t)}
             {entryIsPerSide(entry) && ` · ${t('planEditor.entry.perSideShort')}`}
-            {entry.restSeconds !== null && ` · ${t('planEditor.entry.restShort', { seconds: entry.restSeconds })}`}
+            {superset && superset.position < superset.size - 1
+              ? ` · ${t('planEditor.superset.straightOn')}`
+              : entry.restSeconds !== null && ` · ${t('planEditor.entry.restShort', { seconds: entry.restSeconds })}`}
           </Muted>
         </SummaryText>
         <Actions>
@@ -436,11 +469,40 @@ export default function EntryEditor({
   );
 }
 
+// Exercises of a superset share a bracket on the left; the gap between them shrinks.
 const Item = styled.li`
   padding: ${space.sm} ${space.md};
   border: 1px solid ${props => (props.$hasProblem ? colors.error : colors.surfaceMuted)};
-  border-radius: ${radii.small};
+  border-left: ${props => (props.$superset ? `4px solid ${colors.primary}` : undefined)};
+  border-radius: ${props => {
+    if (!props.$superset) return radii.small;
+    const { position, size } = props.$superset;
+    const top = position === 0 ? radii.small : '0';
+    const bottom = position === size - 1 ? radii.small : '0';
+    return `${top} ${top} ${bottom} ${bottom}`;
+  }};
   background-color: ${colors.surface};
+  margin-top: ${props => (props.$superset && props.$superset.position > 0 ? `calc(-1 * ${space.sm} + 2px)` : '0')};
+`;
+
+const SupersetTag = styled.span`
+  display: inline-block;
+  margin-right: ${space.xs};
+  padding: 0 ${space.xs};
+  border-radius: ${radii.small};
+  background-color: ${colors.primary};
+  color: ${colors.onPrimary};
+  font-size: ${fontSizes.caption};
+  font-variant-numeric: tabular-nums;
+`;
+
+const VisuallyHidden = styled.span`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 `;
 
 const Summary = styled.div`

@@ -5,7 +5,7 @@ import ExercisePreview from './ExercisePreview';
 import { Field, Input, Label, Select } from './formStyles';
 import Button from '../ui/Button';
 import IconButton from '../ui/IconButton';
-import { exerciseGroups } from '../../data/exerciseLibrary';
+import { EXERCISES, exerciseGroups } from '../../data/exerciseLibrary';
 import { EQUIPMENT } from '../../data/equipment';
 import {
   colors,
@@ -17,7 +17,21 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { ALL, TRAINING_TYPES, filterExercises, filterOptions } from '../../utils/exerciseSearch';
-import { PLAN_MUSCLES, createEntry } from '../../utils/workoutPlan';
+import { PLAN_MUSCLES, createEntry, exerciseFitsEquipment } from '../../utils/workoutPlan';
+
+// A checkbox with its text; the whole row is the touch target.
+const EquipmentSwitch = styled.label`
+  display: flex;
+  align-items: center;
+  gap: ${space.sm};
+  min-height: ${sizes.touchTarget};
+  cursor: pointer;
+  input {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+`;
 
 const groupOf = exercise => exerciseGroups(exercise)[0] ?? 'other';
 const nameIn = (exercise, language) => exercise.name[language] ?? exercise.name.en;
@@ -26,7 +40,16 @@ const nameIn = (exercise, language) => exercise.name[language] ?? exercise.name.
 // kind only offer what fits the other filters. Tapping exercises selects them and
 // one button adds them all; ⓘ opens a preview with variants. With `replaceFor`
 // exactly one exercise is chosen to replace an entry. Own exercises can be added too.
-export default function ExercisePicker({ onAdd, onClose, replaceFor = null, onReplace, targetName = null }) {
+// `availableEquipment` (the plan's equipment, null for all) shows only exercises
+// that can be done with it; a switch shows all again.
+export default function ExercisePicker({
+  onAdd,
+  onClose,
+  replaceFor = null,
+  onReplace,
+  targetName = null,
+  availableEquipment = null,
+}) {
   const { t, language } = useTranslation();
   const id = useId();
   const titleRef = useRef(null);
@@ -42,13 +65,18 @@ export default function ExercisePicker({ onAdd, onClose, replaceFor = null, onRe
   const [ownName, setOwnName] = useState('');
   const [ownMuscle, setOwnMuscle] = useState('');
   const [lastAdded, setLastAdded] = useState('');
+  const [onlyAvailable, setOnlyAvailable] = useState(Boolean(availableEquipment));
 
   const filters = { query, muscle, equipment, types };
-  // The library is small (about 100 exercises), so filtering on every render is cheap.
-  const results = filterExercises(filters, language);
-  const { muscleCounts, equipmentCounts, typeCounts } = filterOptions(filters, PLAN_MUSCLES);
+  const library =
+    availableEquipment && onlyAvailable
+      ? EXERCISES.filter(exercise => exerciseFitsEquipment(exercise, availableEquipment))
+      : EXERCISES;
+  // The library is small (a few hundred exercises), so filtering on every render is cheap.
+  const results = filterExercises(filters, language, library);
+  const { muscleCounts, equipmentCounts, typeCounts } = filterOptions(filters, PLAN_MUSCLES, library);
   // Counted once per exercise; summing the groups would count exercises with two groups twice.
-  const allCount = filterExercises({ ...filters, muscle: ALL }, language).length;
+  const allCount = filterExercises({ ...filters, muscle: ALL }, language, library).length;
   const typeChoices = TRAINING_TYPES.filter(type => typeCounts[type] > 0 || types.includes(type));
   const toggleType = type =>
     setTypes(types.includes(type) ? types.filter(other => other !== type) : [...types, type]);
@@ -164,6 +192,17 @@ export default function ExercisePicker({ onAdd, onClose, replaceFor = null, onRe
           </Select>
         </Field>
       </Filters>
+
+      {availableEquipment && (
+        <EquipmentSwitch>
+          <input
+            type="checkbox"
+            checked={onlyAvailable}
+            onChange={event => setOnlyAvailable(event.target.checked)}
+          />
+          <span>{t('planEditor.setup.onlyAvailable', { count: availableEquipment.length })}</span>
+        </EquipmentSwitch>
+      )}
 
       <div>
         <Label as="p" id={`${id}-types`}>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { BiBarChartAlt2, BiCalendar, BiDumbbell, BiHomeAlt, BiListUl } from 'react-icons/bi';
+import { BiBarChartAlt2, BiCalendar, BiDumbbell, BiHomeAlt, BiListUl, BiUserCircle } from 'react-icons/bi';
 import {
   colors,
   fontSizes,
@@ -13,11 +13,33 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { routes } from '../../routes';
+import { useIsGuest } from '../../auth/useAccess';
 
 // Bottom navigation with five areas; language and figure are in the settings.
+// Without an account only plans, exercises and the sign-in are shown.
 // NavLink marks the current page with aria-current="page".
 export default function Navigation() {
   const { t } = useTranslation();
+  const isGuest = useIsGuest();
+
+  if (isGuest) {
+    return (
+      <Nav aria-label={t('nav.label')}>
+        <NavItem to={routes.plans}>
+          <BiListUl aria-hidden="true" />
+          <span>{t('nav.plans')}</span>
+        </NavItem>
+        <NavItem to={routes.exercises}>
+          <BiDumbbell aria-hidden="true" />
+          <span>{t('nav.exercises')}</span>
+        </NavItem>
+        <NavItem to={routes.account}>
+          <BiUserCircle aria-hidden="true" />
+          <span>{t('account.navSignIn')}</span>
+        </NavItem>
+      </Nav>
+    );
+  }
 
   return (
     <Nav aria-label={t('nav.label')}>

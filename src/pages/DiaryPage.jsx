@@ -33,7 +33,7 @@ import {
   weekdayOf,
   workoutSummary,
 } from '../utils/workoutLog';
-import { dayTitle, isPlanActive, migratePlan, orderedDays } from '../utils/workoutPlan';
+import { dayTitle, dayWeekdays, isPlanActive, migratePlan, orderedDays } from '../utils/workoutPlan';
 
 // Monday of the week of a date, as date key.
 function weekStart(dateKey) {
@@ -175,7 +175,7 @@ export default function DiaryPage({ plans, workouts, onAddWorkout, onDeleteWorko
                 <Input id="diaryDate" type="date" value={date} onChange={event => event.target.value && setDate(event.target.value)} />
               </Field>
             </Fields>
-            {day?.weekday && plan.schedule.type !== 'rotation' && day.weekday !== weekdayOf(date) && (
+            {day && plan.schedule.type !== 'rotation' && dayWeekdays(day).length > 0 && !dayWeekdays(day).includes(weekdayOf(date)) && (
               <Muted>{t('diary.movedHint', { day: dayTitle(day, plan.schedule, t) })}</Muted>
             )}
             <Buttons>

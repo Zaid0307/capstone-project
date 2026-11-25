@@ -1,0 +1,14 @@
+{
+  "geometry": {
+    "width": 390,
+    "height": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "navTop": 761,
+    "workoutBottom": 705.390625,
+    "figureLoaded": 440,
+    "figureSource": "../../fitness-graphics/g01-figurenprobe/male_front.svg"
+  },
+  "figure_rear_switch": "pass",
+  "start_demo_feedback": "pass"
+}

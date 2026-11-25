@@ -15,7 +15,13 @@ const seconds = (sets, value, restSeconds = 60) => ({
   restSeconds,
   rirTarget: null,
 });
-const entry = (exerciseId, dose) => ({ exerciseId, ...dose });
+const entry = (exerciseId, dose, warmupSets) => ({ exerciseId, ...dose, ...(warmupSets ? { warmupSets } : {}) });
+
+// Two warm-up sets before a heavy barbell lift, as a share of the working weight.
+const WARMUP_HEAVY = [
+  { reps: 8, percent: 50 },
+  { reps: 4, percent: 75 },
+];
 
 const REST = {
   type: 'rest',
@@ -173,7 +179,7 @@ export const INSPIRED_TEMPLATES = [
   },
   {
     id: 'anime_boxer_roadwork',
-    version: '1.0.0',
+    version: '1.1.0',
     category: 'anime',
     name: { de: 'Boxer-Roadwork (inspiriert von Hajime no Ippo)', en: 'Boxer roadwork (inspired by Hajime no Ippo)' },
     description: {
@@ -185,7 +191,17 @@ export const INSPIRED_TEMPLATES = [
     setting: 'mixed',
     audience: 'all',
     weeklyTrainingDays: 4,
-    progression: PROGRESSION_RAMP,
+    progression: {
+      instruction: {
+        de: 'Boxrunden: erst die Rundenzeit von 2 auf 3 Minuten verlängern, dann eine Runde mehr; die Pause von 60 s bleibt. Laufen pro Woche um höchstens 10 % verlängern. Kraftübungen: obere Wiederholungsgrenze sauber, dann etwas mehr Gewicht.',
+        en: 'Boxing rounds: first lengthen a round from 2 to 3 minutes, then add a round; the 60 s break stays. Lengthen the run by at most 10 % a week. Strength exercises: top of the rep range cleanly, then a little more weight.',
+      },
+      repsInReserve: {
+        de: 'Kraftübungen 2. Boxrunden mittel bis zügig: Am Rundenende kannst du noch sauber schlagen und ein paar Worte sprechen.',
+        en: 'Strength exercises 2. Boxing rounds moderate to brisk: at the end of a round you can still punch cleanly and say a few words.',
+      },
+      recovery: PROGRESSION_RAMP.recovery,
+    },
     safety: {
       caution: {
         de: 'Fan-Plan, nicht offiziell. Hände bandagieren, Boxhandschuhe tragen, Technik vor Härte; keine maximalen Schläge. Kein Sparring ohne Trainer.',
@@ -294,7 +310,7 @@ export const INSPIRED_TEMPLATES = [
   },
   {
     id: 'anime_saiyan_strength',
-    version: '1.0.0',
+    version: '1.1.0',
     category: 'anime',
     name: { de: 'Saiyajin-Kraft (inspiriert von Dragon Ball)', en: 'Saiyan strength (inspired by Dragon Ball)' },
     description: {
@@ -308,8 +324,8 @@ export const INSPIRED_TEMPLATES = [
     weeklyTrainingDays: 4,
     progression: {
       instruction: {
-        de: 'Grundübungen im Bereich 4–6 Wiederholungen: sobald alle Sätze 6 sauber schaffen, 2,5 kg (Oberkörper) bzw. 5 kg (Beine, Kreuzheben) mehr.',
-        en: 'Main lifts at 4–6 reps: once every set reaches 6 cleanly, add 2.5 kg (upper body) or 5 kg (legs, deadlift).',
+        de: 'Grundübungen im Bereich 4–6 Wiederholungen: Sobald alle Arbeitssätze 6 sauber bei RIR ≥ 1 schaffen, beim nächsten Mal 2,5 kg mehr (Oberkörper und Kniebeuge), 5 kg nur beim Kreuzheben. Die Aufwärmsätze davor zählen nicht.',
+        en: 'Main lifts at 4–6 reps: once every working set reaches 6 cleanly with at least 1 rep in reserve, add 2.5 kg next time (upper body and squat), 5 kg only on the deadlift. The warm-up sets before do not count.',
       },
       repsInReserve: { de: 'ca. 2 bei Grundübungen, 1–2 bei Zusatzübungen', en: 'about 2 on main lifts, 1–2 on accessories' },
       recovery: {
@@ -328,7 +344,7 @@ export const INSPIRED_TEMPLATES = [
       monday: {
         name: { de: 'Oberkörper schwer', en: 'Upper heavy' },
         entries: [
-          entry('barbell_bench_press', reps(4, 4, 6, 180)),
+          entry('barbell_bench_press', reps(4, 4, 6, 180), WARMUP_HEAVY),
           entry('barbell_row', reps(4, 6, 8, 150)),
           entry('barbell_overhead_press', reps(3, 6, 8, 150)),
           entry('pull_up', reps(3, 6, 10, 120)),
@@ -340,7 +356,7 @@ export const INSPIRED_TEMPLATES = [
       tuesday: {
         name: { de: 'Unterkörper schwer', en: 'Lower heavy' },
         entries: [
-          entry('barbell_squat', reps(4, 4, 6, 180)),
+          entry('barbell_squat', reps(4, 4, 6, 180), WARMUP_HEAVY),
           entry('romanian_deadlift', reps(3, 6, 8, 150)),
           entry('bulgarian_split_squat', reps(3, 8, 10, 90)),
           entry('calf_raise', reps(3, 10, 15, 60, 1)),
@@ -361,7 +377,7 @@ export const INSPIRED_TEMPLATES = [
       friday: {
         name: { de: 'Unterkörper + Kreuzheben', en: 'Lower + deadlift' },
         entries: [
-          entry('conventional_deadlift', reps(3, 3, 5, 180)),
+          entry('conventional_deadlift', reps(3, 3, 5, 180), WARMUP_HEAVY),
           entry('leg_press', reps(3, 10, 12, 120)),
           entry('lying_leg_curl', reps(3, 10, 12, 90)),
           entry('hip_thrust', reps(3, 8, 12, 90)),

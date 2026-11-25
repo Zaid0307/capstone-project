@@ -15,24 +15,30 @@ import {
 } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { GUIDELINE_SETS, analyzePlan } from '../../utils/planAnalysis';
-import { dayTitle } from '../../utils/workoutPlan';
+import { combinePlans, dayTitle, isPlanActive, migratePlan } from '../../utils/workoutPlan';
 
 // More hints at once are hard to take in; the rest is one tap away.
 const VISIBLE_HINTS = 3;
 
-// The analysis below the plan editor, for the chosen day or the whole plan: which
-// muscles are trained, a chart of the sets per muscle group, and (for the whole
-// plan) hints on gaps and imbalances.
-export default function PlanAnalysis({ plan, day }) {
+// The analysis below the plan editor, for the chosen day, the whole plan or all
+// active plans together (this plan as edited plus `otherPlans`, e.g. gym and home
+// plans running side by side): which muscles are trained, a chart of the sets per
+// muscle group, and (for a whole week) hints on gaps and imbalances.
+export default function PlanAnalysis({ plan, day, otherPlans = [] }) {
   const { t, language } = useTranslation();
   const [showAllMuscles, setShowAllMuscles] = useState(false);
   const [showAllHints, setShowAllHints] = useState(false);
   const [scope, setScope] = useState('day');
+  const others = otherPlans.filter(other => other.id !== plan.id && isPlanActive(other)).map(migratePlan);
   const isDay = Boolean(day) && scope === 'day';
-  const scopeName = isDay ? dayTitle(day, plan.schedule, t) : t('planEditor.analysis.wholePlan');
-  const { groups, muscles } = analyzePlan(isDay ? { ...plan, days: [day] } : plan);
-  // Gaps and imbalances only make sense for the whole week.
-  const planHints = analyzePlan(plan).hints;
+  const isAll = others.length > 0 && scope === 'all';
+  const scopeName = isDay
+    ? dayTitle(day, plan.schedule, t)
+    : t(isAll ? 'planEditor.analysis.allPlans' : 'planEditor.analysis.wholePlan');
+  const week = isAll ? combinePlans([plan, ...others]) : plan;
+  const { groups, muscles } = analyzePlan(isDay ? { ...plan, days: [day] } : week);
+  // Gaps and imbalances only make sense for a whole week.
+  const planHints = analyzePlan(week).hints;
   const hints = isDay ? [] : planHints;
   const format = value => value.toLocaleString(language, { maximumFractionDigits: 1 });
   const muscleName = id => MUSCLES[id]?.[language] ?? MUSCLES[id]?.en ?? id;
@@ -65,17 +71,27 @@ export default function PlanAnalysis({ plan, day }) {
     <Wrapper>
       <ScopeHeader>
         <Heading>{t('planEditor.analysis.title')}</Heading>
-        {day && (
+        {(day || others.length > 0) && (
           <Scope role="group" aria-label={t('planEditor.analysis.scope')}>
-            <ScopeButton type="button" aria-pressed={isDay} onClick={() => setScope('day')}>
-              {dayTitle(day, plan.schedule, t)}
-            </ScopeButton>
-            <ScopeButton type="button" aria-pressed={!isDay} onClick={() => setScope('plan')}>
+            {day && (
+              <ScopeButton type="button" aria-pressed={isDay} onClick={() => setScope('day')}>
+                {dayTitle(day, plan.schedule, t)}
+              </ScopeButton>
+            )}
+            <ScopeButton type="button" aria-pressed={!isDay && !isAll} onClick={() => setScope('plan')}>
               {t('planEditor.analysis.wholePlan')}
             </ScopeButton>
+            {others.length > 0 && (
+              <ScopeButton type="button" aria-pressed={isAll} onClick={() => setScope('all')}>
+                {t('planEditor.analysis.allPlans')}
+              </ScopeButton>
+            )}
           </Scope>
         )}
       </ScopeHeader>
+      {isAll && (
+        <Muted>{t('planEditor.analysis.allPlansText', { count: others.length + 1 })}</Muted>
+      )}
 
       <Card aria-labelledby="analysisMusclesTitle">
         <Title id="analysisMusclesTitle">{t('planEditor.analysis.musclesTitle', { scope: scopeName })}</Title>
@@ -162,7 +178,7 @@ export default function PlanAnalysis({ plan, day }) {
           {hints.length === 0 ? (
             <Good>
               <BiCheckCircle aria-hidden="true" />
-              {t(plan.days.some(day => day.entries.length) ? 'planEditor.analysis.noHints' : 'planEditor.analysis.empty')}
+              {t(week.days.some(item => item.entries.length) ? 'planEditor.analysis.noHints' : 'planEditor.analysis.empty')}
             </Good>
           ) : (
             <HintList>
@@ -208,6 +224,7 @@ const Heading = styled.h2`
 
 const Scope = styled.div`
   display: flex;
+  flex-wrap: wrap;
   border: 1px solid ${colors.border};
   border-radius: ${radii.small};
   overflow: hidden;

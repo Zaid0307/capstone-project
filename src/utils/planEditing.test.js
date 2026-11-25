@@ -8,6 +8,11 @@ import {
   hasUniformSets,
   moveDay,
   moveEntry,
+  moveEntryTo,
+  linkWithNext,
+  unlinkSuperset,
+  setPlanPlace,
+  togglePlanEquipment,
   moveEntryToDay,
   removeDayFromPlan,
   removeEntry,
@@ -36,6 +41,66 @@ function planWithDays() {
 const entryIds = (plan, dayId) => plan.days.find(day => day.id === dayId).entries.map(entry => entry.id);
 const entry = (plan, dayId, entryId) =>
   plan.days.find(day => day.id === dayId).entries.find(item => item.id === entryId);
+
+describe('supersets', () => {
+  function threeExercises() {
+    let plan = createEmptyPlan();
+    const { plan: withDay, day } = addDay(plan, { name: 'A', weekday: 'monday' });
+    plan = withDay;
+    const ids = ['barbell_bench_press', 'barbell_row', 'barbell_curl', 'plank'].map(exerciseId => {
+      const entry = { ...createEntry({ exerciseId }), restSeconds: 90 };
+      plan = addEntry(plan, day.id, entry);
+      return entry.id;
+    });
+    return { plan, dayId: day.id, ids };
+  }
+  const entriesOf = (plan, dayId) => plan.days.find(day => day.id === dayId).entries;
+
+  it('couples up to three exercises; only the last one rests', () => {
+    const { plan, dayId, ids } = threeExercises();
+    const two = linkWithNext(plan, dayId, ids[0]);
+    let entries = entriesOf(two, dayId);
+    expect(entries[0].groupId).toBeTruthy();
+    expect(entries[1].groupId).toBe(entries[0].groupId);
+    expect(entries.map(entry => entry.restSeconds)).toEqual([0, 90, 90, 90]);
+
+    const three = linkWithNext(two, dayId, ids[1]);
+    entries = entriesOf(three, dayId);
+    expect(entries[2].groupId).toBe(entries[0].groupId);
+    expect(entries.map(entry => entry.restSeconds)).toEqual([0, 0, 90, 90]);
+    // A fourth one is too many.
+    expect(linkWithNext(three, dayId, ids[2])).toEqual(three);
+  });
+
+  it('splits a superset back into single exercises with the shared rest', () => {
+    const { plan, dayId, ids } = threeExercises();
+    const linked = linkWithNext(plan, dayId, ids[0]);
+    const split = entriesOf(unlinkSuperset(linked, dayId, ids[1]), dayId);
+    expect(split.every(entry => entry.groupId === undefined)).toBe(true);
+    expect(split.map(entry => entry.restSeconds)).toEqual([90, 90, 90, 90]);
+  });
+
+  it('does not copy the coupling to duplicates or other days', () => {
+    const { plan, dayId, ids } = threeExercises();
+    const linked = linkWithNext(plan, dayId, ids[0]);
+    expect(entriesOf(duplicateEntry(linked, dayId, ids[0]), dayId)[1].groupId).toBeUndefined();
+    const { plan: withB, day: b } = addDay(linked, { name: 'B', weekday: 'friday' });
+    expect(entriesOf(moveEntryToDay(withB, dayId, ids[0], b.id), b.id)[0].groupId).toBeUndefined();
+  });
+});
+
+describe('place and equipment', () => {
+  it('starts home plans with typical home equipment and keeps the list', () => {
+    const home = setPlanPlace(createEmptyPlan(), 'home');
+    expect(home.setup.place).toBe('home');
+    expect(home.setup.equipment).toContain('dumbbells');
+    const withBag = togglePlanEquipment(home, 'heavy_bag');
+    expect(withBag.setup.equipment).toContain('heavy_bag');
+    expect(togglePlanEquipment(withBag, 'heavy_bag').setup.equipment).not.toContain('heavy_bag');
+    expect(setPlanPlace(withBag, 'mixed').setup.equipment).toEqual(withBag.setup.equipment);
+    expect(setPlanPlace(withBag, 'gym').setup).toEqual({ place: 'gym', equipment: null });
+  });
+});
 
 describe('plan editing', () => {
   it('never changes the plan it is given', () => {
@@ -79,6 +144,17 @@ describe('plan editing', () => {
       const { plan, a, squat, bench } = planWithDays();
       expect(entryIds(moveEntry(plan, a, bench, -1), a)).toEqual([bench, squat]);
       expect(entryIds(moveEntry(plan, a, bench, 1), a)).toEqual([squat, bench]);
+    });
+
+    it('moves an exercise to any position and shifts the others', () => {
+      const { plan, a } = planWithDays();
+      const curl = createEntry({ exerciseId: 'barbell_curl' });
+      const three = addEntry(plan, a, curl);
+      const [squat, bench] = entryIds(plan, a);
+      expect(entryIds(moveEntryTo(three, a, curl.id, 0), a)).toEqual([curl.id, squat, bench]);
+      expect(entryIds(moveEntryTo(three, a, squat, 2), a)).toEqual([bench, curl.id, squat]);
+      expect(moveEntryTo(three, a, squat, 3)).toEqual(three);
+      expect(moveEntryTo(three, a, 'unknown', 0)).toEqual(three);
     });
 
     it('duplicates, changes and removes exercises', () => {

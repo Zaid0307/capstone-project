@@ -1,4 +1,4 @@
-import { isSetDone, meetsTarget, setValues } from '../workoutLog';
+import { countsAsTraining, isSetDone, meetsTarget, setValues } from '../workoutLog';
 import { addDays, asDateKey, mondayOf, weekKeyOf } from './dates';
 import { scheduledSessions, workoutStatus } from './adherence';
 
@@ -38,6 +38,8 @@ export function monthGrid(monthKey) {
 export function dayStatus({ workouts = [], planned = [] }) {
   const found = new Set();
   for (const workout of workouts) {
+    // An empty or just started training does not make the day a training day.
+    if (workout.status !== 'skipped' && !countsAsTraining(workout)) continue;
     const status = workoutStatus(workout);
     found.add(status === 'skipped' ? 'missed' : status);
   }
@@ -79,7 +81,8 @@ export function calendarMonth(plans, workouts, monthKey, today) {
   for (const workout of [...workouts].sort(byDateThenCreated)) {
     if (!workout.plan || workout.date < from || workout.date > to) continue;
     const week = weekKeyOf(workout.date);
-    const target = workout.status === 'skipped' ? skippedPool : workout.date <= todayKey ? pool : null;
+    const target =
+      workout.status === 'skipped' ? skippedPool : countsAsTraining(workout) && workout.date <= todayKey ? pool : null;
     if (!target) continue;
     for (const key of [`${workout.plan.planId}|${week}|${workout.plan.dayId}`, `${workout.plan.planId}|${week}`]) {
       if (!target.has(key)) target.set(key, []);
@@ -140,7 +143,7 @@ export function calendarMonth(plans, workouts, monthKey, today) {
           isFuture: date > todayKey,
           status: dayStatus({ workouts: dayWorkouts, planned }),
           workouts: dayWorkouts,
-          doneCount: dayWorkouts.filter(workout => workout.status === 'done').length,
+          doneCount: dayWorkouts.filter(countsAsTraining).length,
           planned,
         };
       }),

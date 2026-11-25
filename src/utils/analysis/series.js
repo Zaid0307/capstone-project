@@ -3,6 +3,7 @@ import { weeklySetsByMuscle } from '../workoutPlan';
 import { addDays, asDateKey, daysBetween, mondayOf, monthKeyOf, weekKeyOf, weekMondays } from './dates';
 import { isPlanActive, pooledAdherence } from './adherence';
 import { isCountable, isFirstRowOfSet } from './setRows';
+import { countsAsTraining } from '../workoutLog';
 
 // Time series and plan targets for the dashboard
 // (docs/ux/03-analysen-und-architektur.md, 3.5, 3.8, 3.11).
@@ -41,7 +42,7 @@ const bucketIndex = (buckets, date) => buckets.findIndex(bucket => date >= bucke
 export function workoutsPerBucket(workouts, buckets) {
   const counts = buckets.map(() => 0);
   for (const workout of workouts) {
-    if (workout.status !== 'done') continue;
+    if (!countsAsTraining(workout)) continue;
     const index = bucketIndex(buckets, workout.date);
     if (index >= 0) counts[index] += 1;
   }

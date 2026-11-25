@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { WEEKDAYS, entryIsPerSide, entryName, libraryExercise, orderedDays } from './workoutPlan';
+import { WEEKDAYS, dayWeekdays, entryIsPerSide, entryName, libraryExercise, orderedDays, supersetLabels } from './workoutPlan';
 
 // Training diary (docs/konzept-plaene-training-auswertung.md, section 4 and 7.2).
 // A workout is what really happened on a date. It keeps a copy of the plan's
@@ -11,9 +11,14 @@ import { WEEKDAYS, entryIsPerSide, entryName, libraryExercise, orderedDays } fro
 //   startedAt, finishedAt: ISO times or null. A 'done' workout with startedAt and
 //            without finishedAt is running (docs/ux/02-tagebuch.md, 3.1 and 5).
 //   plan:   { planId, planName, dayId, dayName, weekday | null }
-// exercise { id, exerciseId | null, exercise, muscle, plannedEntryId | null, plannedWorkingSets, skipped, restSeconds, perSide, sets }
+//   feeling?: "How was it?" 1–5 or null; missing in older entries (= not rated)
+// exercise { id, exerciseId | null, exercise, muscle, plannedEntryId | null, plannedWorkingSets, skipped, restSeconds, perSide, sets, note? }
+//   note:   optional text about this exercise in this training; missing = ''
+//   groupId: superset of the plan (supersetLabels in workoutPlan.js) or null; missing = none
 //   plannedWorkingSets: working sets the plan asked for; stays when sets are removed
-// set      { id, type, planned | null, weight, reps, seconds, completedAt, sides? }
+// set      { id, type, planned | null, weight, reps, seconds, rir?, completedAt, sides? }
+//   type:    'working' | 'warmup'; warm-up sets do not count as working sets
+//   rir:     optional repetitions in reserve (0–4) or null; missing in older entries
 //   completedAt: ISO time when the set first got repetitions or seconds, or null
 //   planned: the target of the plan for this set ({ dose, weight, rirTarget }) or null if added
 //   sides:   only for exercises done per side: { left: values, right: values },
@@ -40,6 +45,12 @@ export function migrateWorkout(workout) {
 }
 
 export const SIDES = ['left', 'right'];
+
+// Choices for the optional repetitions in reserve per set.
+export const RIR_CHOICES = [0, 1, 2, 3, 4];
+
+// "How was it?" per training: 1 (bad) to 5 (very good).
+export const FEELINGS = [1, 2, 3, 4, 5];
 
 const pad = number => String(number).padStart(2, '0');
 
@@ -89,20 +100,36 @@ export function workoutDuration(workout, nowTime = Date.now()) {
   return Math.max(0, end - Date.parse(workout.startedAt));
 }
 
-// Sets and done sets of the whole training (skipped exercises left out), for the
-// progress line "3 of 12 sets".
+// Working sets and done working sets of the whole training (skipped exercises and
+// warm-up sets left out), for the progress line "3 of 12 sets".
 export function workoutProgress(workout) {
-  const sets = workout.exercises.filter(exercise => !exercise.skipped).flatMap(exercise => exercise.sets);
+  const sets = workout.exercises
+    .filter(exercise => !exercise.skipped)
+    .flatMap(exercise => exercise.sets)
+    .filter(set => set.type !== 'warmup');
   return { done: sets.filter(isSetDone).length, total: sets.length };
 }
 
-function planReference(plan, day) {
+// Planned working sets of exercises not skipped that have no values yet; finishing
+// asks first while there are some (02-tagebuch 3.3).
+export const openPlannedSets = workout =>
+  workout.exercises
+    .filter(exercise => !exercise.skipped)
+    .flatMap(exercise => exercise.sets)
+    .filter(set => set.type === 'working' && set.planned && !isSetDone(set)).length;
+
+// weekdays: all weekdays the day is planned on (plan model 4); weekday: the one
+// this training belongs to – the date's weekday if planned then, else the first.
+function planReference(plan, day, date) {
+  const weekdays = plan.schedule?.type === 'rotation' ? [] : dayWeekdays(day);
+  const own = date && weekdays.includes(weekdayOf(date)) ? weekdayOf(date) : weekdays[0] ?? null;
   return {
     planId: plan.id,
     planName: plan.nameOfWorkout,
     dayId: day.id,
     dayName: day.name,
-    weekday: plan.schedule?.type === 'rotation' ? null : day.weekday ?? null,
+    weekday: own,
+    weekdays,
   };
 }
 
@@ -140,10 +167,14 @@ export function previousPerformance(workouts, workout, exercise) {
   const date = earlier.find(item => item.exercises.includes(last))?.date ?? null;
   const sets = last.sets.filter(set => set.type === 'working' && isSetDone(set));
   const ranged = last.sets.filter(set => set.type === 'working' && set.planned?.dose.unit === 'repetitions');
+  // A set at the top of the range with no reps left in reserve (RIR 0) was a grind:
+  // stay at the weight. Without an RIR entry only the repetitions decide.
   const reachedTop =
     ranged.length > 0 &&
-    ranged.every(set =>
-      setValues(set).every(values => (values.weight ?? 0) > 0 && (values.reps ?? 0) >= set.planned.dose.max)
+    ranged.every(
+      set =>
+        (set.rir === null || set.rir === undefined || set.rir >= 1) &&
+        setValues(set).every(values => (values.weight ?? 0) > 0 && (values.reps ?? 0) >= set.planned.dose.max)
     );
   const heaviest = Math.max(0, ...sets.flatMap(set => setValues(set).map(values => values.weight ?? 0)));
   return {
@@ -154,29 +185,129 @@ export function previousPerformance(workouts, workout, exercise) {
   };
 }
 
-function newSet({ type = 'working', planned = null, perSide = false, weight = null, sideWeights = {} } = {}) {
+// Suggested values for the open sets (E48) -----------------------------------
+// Open sets show suggestions in their fields; they are not stored and do not
+// count as done until the user changes a field or takes the suggestion over.
+
+const roundTo1 = value => Math.round(value * 10) / 10;
+const mean = numbers => (numbers.length ? roundTo1(numbers.reduce((a, b) => a + b, 0) / numbers.length) : null);
+const workingDone = exercise => exercise.sets.filter(set => set.type === 'working' && isSetDone(set));
+const plainValues = values => ({ weight: values?.weight ?? null, reps: values?.reps ?? null, seconds: values?.seconds ?? null });
+const positionValues = set =>
+  set.sides ? { left: plainValues(set.sides.left), right: plainValues(set.sides.right) } : plainValues(set);
+
+// The same exercise in finished trainings before this one, newest first.
+function earlierSessions(workouts, workout, { exerciseId, exercise }) {
+  const sameExercise = item =>
+    exerciseId ? item.exerciseId === exerciseId : !item.exerciseId && item.exercise === exercise;
+  return workouts
+    .filter(
+      item =>
+        item.id !== workout.id &&
+        item.status === 'done' &&
+        (item.date < workout.date || (item.date === workout.date && (item.createdAt ?? '') < (workout.createdAt ?? '')))
+    )
+    .sort((a, b) => b.date.localeCompare(a.date) || (b.updatedAt ?? '').localeCompare(a.updatedAt ?? ''))
+    .flatMap(item =>
+      item.exercises
+        .filter(logged => !logged.skipped && sameExercise(logged) && workingDone(logged).length > 0)
+        .map(logged => ({ date: item.date, exercise: logged }))
+    );
+}
+
+function averageOf(valuesList) {
+  return {
+    weight: mean(valuesList.map(values => values.weight).filter(value => value !== null && value > 0)),
+    reps: mean(valuesList.map(values => values.reps).filter(value => value !== null)),
+    seconds: mean(valuesList.map(values => values.seconds).filter(value => value !== null)),
+  };
+}
+
+// Average weight and repetitions (or seconds) per working-set position over the
+// last `sessions` trainings with this exercise; per side for one-sided exercises.
+// One decimal. null without history.
+export function averagePerformance(workouts, workout, exercise, { sessions = 5 } = {}) {
+  const recent = earlierSessions(workouts, workout, exercise).slice(0, sessions);
+  if (recent.length === 0) return null;
+  const perSession = recent.map(({ exercise: logged }) => workingDone(logged).map(positionValues));
+  const positions = Math.max(...perSession.map(sets => sets.length));
+  const sets = Array.from({ length: positions }, (_, index) => {
+    const atPosition = perSession.map(sessionSets => sessionSets[index]).filter(Boolean);
+    if (atPosition.some(values => 'left' in values)) {
+      const side = name => averageOf(atPosition.map(values => ('left' in values ? values[name] : values)));
+      return { left: side('left'), right: side('right') };
+    }
+    return averageOf(atPosition);
+  });
+  const all = perSession.flat().flatMap(values => ('left' in values ? [values.left, values.right] : [values]));
+  return { sessions: recent.length, sets, overall: averageOf(all) };
+}
+
+// The plan's target of a set as values: lower end of the repetitions, the seconds
+// and the planned weight. null for sets without plan targets.
+function plannedValues(set) {
+  if (!set.planned) return null;
+  const { dose, weight } = set.planned;
+  return {
+    weight: weight ?? null,
+    reps: dose.unit === 'repetitions' ? dose.min : null,
+    seconds: dose.unit === 'seconds' ? dose.value : null,
+  };
+}
+
+// Suggestions for the open working sets of an exercise, by set id: position for
+// position from the chosen source ({ sets } of previousPerformance or
+// averagePerformance), else the plan's values, else the last known position,
+// else the suggestion of the set before.
+// Repetitions and seconds are whole numbers; done and warm-up sets get none.
+export function setSuggestions(exercise, source) {
+  const history = source?.sets ?? [];
+  const whole = values =>
+    values && {
+      weight: values.weight ?? null,
+      reps: values.reps === null || values.reps === undefined ? null : Math.round(values.reps),
+      seconds: values.seconds === null || values.seconds === undefined ? null : Math.round(values.seconds),
+    };
+  const suggestions = {};
+  let position = 0;
+  let before = null;
+  for (const set of exercise.sets) {
+    if (set.type === 'warmup') continue;
+    const index = position;
+    position += 1;
+    // An added set takes over the suggestion of the set before it.
+    const found = history[index] ?? plannedValues(set) ?? history[history.length - 1] ?? before;
+    before = found;
+    if (!found || isSetDone(set)) continue;
+    const sided = 'left' in found;
+    if (exercise.perSide) {
+      suggestions[set.id] = {
+        left: whole(sided ? found.left : found),
+        right: whole(sided ? found.right : found),
+      };
+    } else {
+      suggestions[set.id] = whole(sided ? found.left : found);
+    }
+  }
+  return suggestions;
+}
+
+function newSet({ type = 'working', planned = null, perSide = false } = {}) {
   return {
     id: nanoid(),
     type,
     planned,
+    rir: null,
     completedAt: null,
-    ...emptyValues(perSide ? null : weight),
-    ...(perSide
-      ? { sides: { left: emptyValues(sideWeights.left ?? weight), right: emptyValues(sideWeights.right ?? weight) } }
-      : {}),
+    ...emptyValues(),
+    ...(perSide ? { sides: { left: emptyValues(), right: emptyValues() } } : {}),
   };
 }
 
-// A logged exercise from a plan entry. Weights start with the last weight used
-// for this exercise, else with the plan's weight; repetitions are left to enter.
-export function exerciseFromEntry(entry, previous = null) {
+// A logged exercise from a plan entry. All values start empty: the training page
+// suggests last time's values, the average or the plan's (setSuggestions).
+export function exerciseFromEntry(entry) {
   const perSide = entryIsPerSide(entry);
-  const doneBefore = previous?.sets.filter(isSetDone) ?? [];
-  const weightAt = (index, side) => {
-    const set = doneBefore[index] ?? doneBefore[doneBefore.length - 1];
-    if (!set) return undefined;
-    return side ? set.sides?.[side]?.weight ?? set.weight : set.weight ?? set.sides?.left?.weight;
-  };
   return {
     id: nanoid(),
     exerciseId: entry.exerciseId,
@@ -184,16 +315,16 @@ export function exerciseFromEntry(entry, previous = null) {
     muscle: entry.muscle,
     plannedEntryId: entry.id,
     plannedWorkingSets: entry.sets.filter(target => target.type === 'working').length,
+    // Superset of the plan: neighbours with the same groupId are done in turn.
+    groupId: entry.groupId ?? null,
     skipped: false,
     restSeconds: entry.restSeconds ?? null,
     perSide,
-    sets: entry.sets.map((target, index) =>
+    sets: entry.sets.map(target =>
       newSet({
         type: target.type,
         planned: { dose: { ...target.dose }, weight: target.weight, rirTarget: target.rirTarget },
         perSide,
-        weight: weightAt(index) ?? target.weight ?? null,
-        sideWeights: { left: weightAt(index, 'left'), right: weightAt(index, 'right') },
       })
     ),
   };
@@ -206,6 +337,7 @@ export function extraExercise(entry) {
     ...exerciseFromEntry(entry),
     plannedEntryId: null,
     plannedWorkingSets: 0,
+    groupId: null,
     sets: entry.sets.map(() => newSet({ perSide })),
   };
 }
@@ -228,16 +360,16 @@ function baseWorkout(date, status, plan, note = '') {
   };
 }
 
-export function createWorkoutFromPlan(plan, day, date, workouts = []) {
+export function createWorkoutFromPlan(plan, day, date) {
   return {
-    ...baseWorkout(date, 'done', planReference(plan, day)),
-    exercises: day.entries.map(entry => exerciseFromEntry(entry, lastLoggedExercise(workouts, entry))),
+    ...baseWorkout(date, 'done', planReference(plan, day, date)),
+    exercises: day.entries.map(entry => exerciseFromEntry(entry)),
   };
 }
 
 // A planned training that did not happen, e.g. because of illness.
 export const createSkippedWorkout = (plan, day, date, note = '') =>
-  baseWorkout(date, 'skipped', planReference(plan, day), note);
+  baseWorkout(date, 'skipped', planReference(plan, day, date), note);
 
 export const createFreeWorkout = date => baseWorkout(date, 'done', null);
 
@@ -247,7 +379,7 @@ export function suggestDay(plan, date, workouts = []) {
   const days = orderedDays(plan);
   if (days.length === 0) return null;
   if (plan.schedule?.type !== 'rotation') {
-    return days.find(day => day.weekday === weekdayOf(date)) ?? days[0];
+    return days.find(day => dayWeekdays(day).includes(weekdayOf(date))) ?? days[0];
   }
   const last = [...workouts]
     .filter(workout => workout.plan?.planId === plan.id && workout.date <= date)
@@ -259,8 +391,11 @@ export function suggestDay(plan, date, workouts = []) {
 }
 
 // A training of a weekday plan done on another weekday counts as moved.
+// A day planned on several weekdays counts as moved only off all of them; entries
+// saved before plan model 4 have one weekday only.
 export function isMoved(workout) {
-  return Boolean(workout.plan?.weekday) && workout.plan.weekday !== weekdayOf(workout.date);
+  const weekdays = workout.plan?.weekdays ?? (workout.plan?.weekday ? [workout.plan.weekday] : []);
+  return weekdays.length > 0 && !weekdays.includes(weekdayOf(workout.date));
 }
 
 // Within 5 % of the planned weight counts as done (concept 6.2). Per side,
@@ -372,15 +507,22 @@ export function workoutDeviations(workout) {
   });
 }
 
+// A new set starts empty; the training page suggests values for it.
 export function addLoggedSet(workout, exerciseId) {
+  return mapExercise(workout, exerciseId, exercise => ({
+    ...exercise,
+    sets: [...exercise.sets, newSet({ perSide: exercise.perSide })],
+  }));
+}
+
+// A warm-up set goes after the existing warm-up sets, before the working sets.
+// It does not count as a working set (summary, adherence, records).
+export function addWarmupSet(workout, exerciseId) {
   return mapExercise(workout, exerciseId, exercise => {
-    const last = exercise.sets[exercise.sets.length - 1];
-    const set = newSet({
-      perSide: exercise.perSide,
-      weight: last?.weight ?? null,
-      sideWeights: { left: last?.sides?.left.weight, right: last?.sides?.right.weight },
-    });
-    return { ...exercise, sets: [...exercise.sets, set] };
+    const index = exercise.sets.filter(set => set.type === 'warmup').length;
+    const sets = [...exercise.sets];
+    sets.splice(index, 0, newSet({ type: 'warmup', perSide: exercise.perSide }));
+    return { ...exercise, sets };
   });
 }
 
@@ -416,6 +558,11 @@ export function setExercisePerSide(workout, exerciseId, perSide) {
   }));
 }
 
+// Changes of one logged exercise, e.g. its note.
+export function updateLoggedExercise(workout, exerciseId, changes) {
+  return mapExercise(workout, exerciseId, exercise => ({ ...exercise, ...changes }));
+}
+
 export function setExerciseSkipped(workout, exerciseId, skipped) {
   return mapExercise(workout, exerciseId, exercise => ({ ...exercise, skipped }));
 }
@@ -435,3 +582,11 @@ export function removeLoggedExercise(workout, exerciseId) {
 }
 
 export const loggedExerciseName = (exercise, language) => entryName(exercise, language);
+
+// Whether the rest starts after a set of this exercise: always for single
+// exercises, in a superset only after its last exercise (A1 → A2 → rest).
+export function restsAfter(workout, exerciseId) {
+  const index = workout.exercises.findIndex(item => item.id === exerciseId);
+  const label = supersetLabels(workout.exercises)[index];
+  return !label || label.position === label.size - 1;
+}

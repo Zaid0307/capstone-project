@@ -17,11 +17,11 @@ function planWithTwoDays() {
   return plan;
 }
 
-function renderEditor(initialPlan = planWithTwoDays()) {
+function renderEditor(initialPlan = planWithTwoDays(), { otherPlans } = {}) {
   const onSave = vi.fn();
   const onCancel = vi.fn();
   renderWithProviders(
-    <PlanEditor initialPlan={initialPlan} draftKey="test" onSave={onSave} onCancel={onCancel} />
+    <PlanEditor initialPlan={initialPlan} draftKey="test" otherPlans={otherPlans} onSave={onSave} onCancel={onCancel} />
   );
   return { onSave, onCancel };
 }
@@ -371,13 +371,92 @@ describe('PlanEditor', () => {
     ]);
   });
 
+  it('trains one day on several weekdays and needs at least one', async () => {
+    const { onSave } = renderEditor();
+    const weekdays = () => within(screen.getByRole('group', { name: 'Weekdays' }));
+
+    await userEvent.click(weekdays().getByRole('button', { name: 'Friday' }));
+    expect(screen.getByRole('button', { name: /^Monday, Friday( .+)? \d+$/, pressed: true })).toBeInTheDocument();
+    // Thursday belongs to the pull day already, it stays choosable.
+    expect(weekdays().getByRole('button', { name: 'Thursday, also used by another day' })).toBeInTheDocument();
+
+    await userEvent.click(weekdays().getByRole('button', { name: 'Monday' }));
+    await userEvent.click(weekdays().getByRole('button', { name: 'Friday' }));
+    await save();
+    expect(onSave).not.toHaveBeenCalled();
+    expect(screen.getAllByText('Choose a weekday.').length).toBeGreaterThan(0);
+
+    await userEvent.click(weekdays().getByRole('button', { name: 'Monday' }));
+    await userEvent.click(weekdays().getByRole('button', { name: 'Wednesday' }));
+    await save();
+    const push = onSave.mock.calls[0][0].days.find(day => day.name === 'Push');
+    expect(push).toMatchObject({ weekdays: ['monday', 'wednesday'], weekday: 'monday' });
+  });
+
+  it('analyses all active plans together on request', async () => {
+    const other = { ...planWithTwoDays(), nameOfWorkout: 'Home' };
+    const archived = { ...planWithTwoDays(), archived: true };
+    renderEditor(planWithTwoDays(), { otherPlans: [other, archived] });
+    const scope = () => within(screen.getByRole('group', { name: 'Show the load of' }));
+    const chestSets = () =>
+      within(screen.getByRole('heading', { name: /^Sets per muscle group/ }).closest('section'))
+        .getByText('Chest')
+        .closest('div')
+        .querySelector('dd').textContent;
+
+    await userEvent.click(scope().getByRole('button', { name: 'Whole plan' }));
+    const single = parseFloat(chestSets());
+    await userEvent.click(scope().getByRole('button', { name: 'All active plans' }));
+    expect(screen.getByText(/The weeks of 2 active plans added up/)).toBeInTheDocument();
+    expect(parseFloat(chestSets())).toBe(2 * single);
+  });
+
+  it('shows only exercises for the equipment at home, which can be switched off', async () => {
+    renderEditor();
+    await userEvent.click(screen.getByRole('button', { name: /^Description, schedule and dates/ }));
+    await userEvent.click(screen.getByRole('radio', { name: 'Home' }));
+    expect(screen.getByText(/Your equipment \(\d+ chosen\)/)).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Add exercise' }));
+    const onlyMine = screen.getByRole('checkbox', { name: /^Only exercises for my equipment/ });
+    expect(onlyMine).toBeChecked();
+    await userEvent.type(screen.getByLabelText('Search'), 'barbell back squat');
+    expect(screen.queryByRole('button', { name: 'Select Barbell back squat' })).not.toBeInTheDocument();
+    await userEvent.click(onlyMine);
+    expect(screen.getByRole('button', { name: 'Select Barbell back squat' })).toBeInTheDocument();
+  });
+
+  it('couples two exercises into a superset and splits it again', async () => {
+    const { onSave } = renderEditor();
+    await menuAction('Barbell bench press', 'Make a superset of Barbell bench press and Dumbbell shoulder press');
+    const list = within(screen.getByRole('list', { name: 'Exercises of Monday' }));
+    expect(list.getByText('A1')).toBeInTheDocument();
+    expect(list.getByText('A2')).toBeInTheDocument();
+    expect(list.getByText(/straight on, no rest/)).toBeInTheDocument();
+
+    await save();
+    const [bench, press] = onSave.mock.calls[0][0].days[0].entries;
+    expect(bench.groupId).toBeTruthy();
+    expect(press.groupId).toBe(bench.groupId);
+    expect(bench.restSeconds).toBe(0);
+
+    await menuAction('Dumbbell shoulder press', 'Split superset A');
+    expect(list.queryByText('A1')).not.toBeInTheDocument();
+  });
+
+  it('offers no combined analysis without other active plans', () => {
+    renderEditor();
+    expect(screen.queryByRole('button', { name: 'All active plans' })).not.toBeInTheDocument();
+  });
+
   it('duplicates and deletes days', async () => {
     renderEditor();
 
     await menuAction('Monday', 'Duplicate day');
     // The copy has no weekday yet, so it needs one before saving.
     expect(screen.getByRole('button', { name: /^Push \(copy\) \d+$/, pressed: true })).toBeInTheDocument();
-    expect(screen.getByLabelText('Weekday')).toHaveValue('');
+    const weekdays = within(screen.getByRole('group', { name: 'Weekdays' }));
+    expect(weekdays.queryAllByRole('button', { pressed: true })).toHaveLength(0);
     expect(exerciseNames('Push (copy)')).toHaveLength(2);
 
     await menuAction('Push (copy)', 'Delete Push (copy)');
@@ -404,7 +483,8 @@ describe('PlanEditor', () => {
     await save();
     expect(onSave).not.toHaveBeenCalled();
     expect(screen.getByRole('alert')).toHaveTextContent('Day B: Add at least one exercise.');
-  });
+    // Opens the full exercise selection twice, which is slow in jsdom.
+  }, 30000);
 
   it('offers to save, keep a draft or discard when leaving with changes', async () => {
     const { onCancel } = renderEditor();

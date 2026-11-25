@@ -11,6 +11,9 @@ Reads design-handoff/uebungskatalog-v2/ (format: README.md there) and writes
   the long texts stay out of the main bundle.
 - src/data/equipment.js: all equipment of the catalog. Existing IDs keep the
   names the app already uses.
+- src/data/legacyExerciseNames.json: name (lower case, German and English) -> ID of the exercises the app had before catalog V2. Plans of the
+  first app versions stored exercises as text; migratePlan finds their IDs with
+  this small table, so the app start does not need the whole catalog.
 The movement data (joint angles, camera, contacts) and sources stay out of the
 app; only the graphics team needs them.
 
@@ -117,6 +120,23 @@ def write_equipment():
     return len(catalog), len(catalog) - len(current)
 
 
+def write_legacy_names(exercises):
+    existing = set(json.loads(EXISTING_IDS.read_text(encoding='utf-8')))
+    names = {}
+    for exercise in exercises:
+        if exercise['id'] not in existing:
+            continue
+        for language in ('de', 'en'):
+            names.setdefault(exercise['name'][language].strip().lower(), exercise['id'])
+    # Merged duplicates were among the old exercises too.
+    for dropped, kept in MERGED.items():
+        if dropped in existing:
+            names.setdefault(dropped, kept)
+    (DATA / 'legacyExerciseNames.json').write_text(
+        json.dumps(dict(sorted(names.items())), ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
+    return len(names)
+
+
 def dump_lines(items, opening, closing):
     # One exercise per line keeps the files compact and the diffs readable.
     body = ',\n'.join(json.dumps(item, ensure_ascii=False, separators=(',', ':')) for item in items)
@@ -135,7 +155,9 @@ def main():
         for exercise in exercises)
     (DATA / 'exerciseDetails.json').write_text('{\n' + detail_lines + '\n}\n', encoding='utf-8')
     equipment, added = write_equipment()
-    print(f'Wrote {len(exercises)} exercises ({len(MERGED)} merged), {equipment} equipment ({added} new).')
+    legacy_names = write_legacy_names(exercises)
+    print(f'Wrote {len(exercises)} exercises ({len(MERGED)} merged), {equipment} equipment ({added} new), '
+          f'{legacy_names} names of older exercises.')
 
 
 if __name__ == '__main__':

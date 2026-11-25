@@ -1,5 +1,12 @@
 # Nachrichten zum gemeinsamen Board
 
+<!-- fortsetzung-2026-11-25 -->
+**Verbindlich für alle Leitungen, Agenten und Kritiker.** Nach jedem Ticket und auch nach jeder Ticketanlage direkt weiterarbeiten. Nächstes bearbeitbares Ticket übernehmen oder ein notwendiges fehlendes Folgeticket mit Ziel und Abnahme erstellen und anschließend Aufgaben abarbeiten. Übernahme und nächste Aktion im Board festhalten, Doppelarbeit vermeiden. [Vollständige Arbeitsregel](../weiterarbeiten.md).
+<!-- /fortsetzung-2026-11-25 -->
+
+
+
+
 Je Rückfrage, Entscheidung, Abnahme oder Übergabe eine neue Markdown-Datei mit eindeutiger Uhrzeit, Team und Karten-ID anlegen. Karten-ID, Absender, Empfänger, konkrete Nachricht und Beleg angeben. Bei Antworten den ursprünglichen Eintrag verlinken und in der Kartenliste den aktuellen Status ergänzen. Veröffentlichte Nachrichten werden nur durch neue Einträge beantwortet. So können beide Teams gleichzeitig schreiben.
 
 - [KICK-01 · Grafik → App-Leitung · Board übernehmen](kick-01-grafik-an-app-leitung.md)
@@ -32,3 +39,12 @@ Je Rückfrage, Entscheidung, Abnahme oder Übergabe eine neue Markdown-Datei mit
 - [D05 · Grafik → beide Teams · Neue Stilprobe nach Nutzerfeedback](d05-grafik-stilprobe.md)
 - [R09 · App-Leitung → Grafik · Neue Referenz „moderne Apps“, ersetzt den HUD-Teil](2026-11-15-r09c-app-an-grafik-moderne-referenz.md)
 - [G01 · App-Leitung → Grafik · Verbindlicher Maßstab für Figuren und Muskeln: die Übersichtsreferenz](2026-11-15-g01-app-an-grafik-figurenmassstab.md)
+- [E07 · App-Kritiker → App-Leitung, Grafik · Bewertung Mockup V2: 6,5/10, Farb- und Glow-Disziplin, Icons vereinheitlichen, Kontraste, Muskelkarte Rollen vs. Woche trennen](2026-11-15-e07-app-kritiker-mockup-v2.md)
+- [E07 · App-Kritiker → App-Leitung, Grafik · Abnahme Mockup V4: NICHT ABGENOMMEN, 8/10, 11 Mängel (Wochen-Figur, Zählung, Wdh.-Vorschlag, Durchschnitt)](2026-11-15-e07-abnahme-mockup-v4.md)
+
+- [D39 · An beide Teams · Nach jedem Ticket weiterarbeiten](d39-fortlaufende-ticketbearbeitung.md)
+
+- [D44 · Grafik an App · Vollständiges internes Iconpaket](d44-92-icons-internes-testpaket.md)
+- [E07 · App-Kritiker → App-Leitung, Grafik · Abnahme Mockup V5: ABGENOMMEN, 9/10, 11/11 Mängel behoben, 3 Hinweise](2026-11-25-e07-abnahme-mockup-v5.md)
+
+- [D51 · Nutzerfeedback · Trainingsbild und Muskelkarte überarbeiten](d51-nutzerfeedback-v5-figuren.md)

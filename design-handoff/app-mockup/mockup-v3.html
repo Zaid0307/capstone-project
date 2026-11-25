@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GetFit! Mockup V3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  /* App-Leitung, 15.11.2026 – V3 nach Kritik E07 (6,5/10): ein UI-Akzent, Glow nur einmal pro
+     Bildschirm, Kontraste ≥ 3:1, Rollen über Helligkeit + Muster, Training mit Aktionsleiste
+     statt Navigation, 44-px-Ziele, einheitliche Icons, Skalen für Schrift/Radius.
+     Figuren: Ausschnitte aus der Nutzerreferenz (nur lokal, Platzhalter). */
+  :root {
+    --bg: #070b16; --bg-2: #0c1324;
+    --card: rgba(22, 32, 56, 0.78);
+    --line: rgba(255, 255, 255, 0.10);
+    --edge: rgba(255, 255, 255, 0.28);
+    --text: #f2f5ff; --muted: #a3aecb; --dim: rgba(242, 245, 255, 0.7);
+    --accent-a: #2f6bff; --accent-b: #1d8fd1; --accent-glow: rgba(47, 107, 255, 0.45);
+    --cyan: #22d3ee; --warn: #ffb020;
+    /* Muscle roles: different lightness, plus a pattern each */
+    --primary: #ff3b4f; --secondary: #ffb020; --stabilizer: #7c8599; --inactive: #4a5578;
+    --r-s: 12px; --r-m: 20px; --r-l: 28px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Manrope', system-ui, sans-serif; color: var(--text); min-height: 100vh; padding: 32px 16px 48px;
+    background: radial-gradient(1200px 700px at 20% -10%, #15275a 0%, transparent 60%), var(--bg); }
+  .num, .field, .ring-wrap b, .timer-ring b, .prev { font-variant-numeric: tabular-nums; }
+  .intro { max-width: 1260px; margin: 0 auto 28px; }
+  .intro h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; }
+  .intro p { color: var(--muted); margin-top: 6px; max-width: 820px; line-height: 1.5; font-size: 15px; }
+  .row { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; max-width: 1260px; margin: 0 auto; }
+  .phone { position: relative; width: 390px; height: 844px; max-width: 100%; border-radius: 48px; overflow: hidden;
+    background: linear-gradient(180deg, var(--bg-2), var(--bg)); box-shadow: 0 0 0 10px #10162a, 0 0 0 11px #26304d, 0 40px 80px rgba(0,0,0,.6); }
+  .screen { position: absolute; inset: 0; overflow-y: auto; padding: 54px 20px 116px; scrollbar-width: none; }
+  .status { position: absolute; top: 16px; left: 30px; right: 26px; display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; z-index: 20; }
+  .label { font-size: 11px; font-weight: 800; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .brand { font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+  .brand span { color: var(--cyan); }
+  .top-actions { display: flex; gap: 8px; }
+  .glass-btn { width: 44px; height: 44px; border-radius: var(--r-s); display: grid; place-items: center; color: var(--dim);
+    background: rgba(255,255,255,.06); border: 1px solid var(--line); position: relative; }
+  .glass-btn svg { width: 22px; height: 22px; }
+  .glass-btn .badge { position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--warn); }
+
+  /* Today */
+  .hero { position: relative; margin-top: 14px; height: 240px; border-radius: var(--r-l); overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(240px 200px at 76% 44%, rgba(47,107,255,.5), transparent 70%), linear-gradient(160deg, #13234d 0%, #0b1328 70%); }
+  .hero-text { position: absolute; left: 20px; top: 20px; z-index: 2; width: 168px; }
+  .hero-text h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+  .hero-text p { color: #c9d3ee; font-size: 15px; margin-top: 8px; line-height: 1.4; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; min-height: 32px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 800;
+    background: rgba(255,176,32,.14); color: #ffd27a; border: 1px solid rgba(255,176,32,.35); margin-top: 12px; }
+  .chip svg { width: 16px; height: 16px; }
+  .fig { position: absolute; mix-blend-mode: screen; background-image: url('../nutzer-referenz/uebersicht-referenz-2026-11-13.png'); background-repeat: no-repeat; }
+  .hero .fig { right: 10px; bottom: 4px; width: 132px; height: 232px; background-size: 1290px 860px; background-position: -630px -32px; }
+  .next { margin-top: -40px; position: relative; z-index: 3; padding: 16px; border-radius: var(--r-l);
+    background: var(--card); border: 1px solid var(--line); backdrop-filter: blur(22px); }
+  .next-head { display: flex; align-items: center; gap: 12px; }
+  .next h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .meta { display: flex; gap: 14px; margin-top: 10px; color: #c2cbe6; font-size: 13px; font-weight: 600; }
+  .meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .meta svg { width: 16px; height: 16px; color: var(--cyan); }
+  .cta { margin-top: 14px; width: 100%; height: 54px; border: 0; border-radius: var(--r-m); color: white; font: 800 17px 'Manrope';
+    display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;
+    background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); box-shadow: 0 10px 28px var(--accent-glow), inset 0 1px 0 rgba(255,255,255,.3);
+    transition: transform .15s ease; }
+  .cta:active { transform: scale(.97); }
+  .cta svg { width: 20px; height: 20px; }
+  .bento { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .tile { border-radius: var(--r-m); padding: 14px; background: var(--card); border: 1px solid var(--line); }
+  .tile .num { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-top: 8px; line-height: 1; }
+  .tile .num small { font-size: 13px; color: var(--muted); font-weight: 700; margin-left: 3px; }
+  .ring-tile { grid-row: span 2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .ring { width: 112px; height: 112px; }
+  .ring circle { fill: none; stroke-width: 12; }
+  .ring .track { stroke: rgba(255,255,255,.16); }
+  .ring .bar { stroke: url(#gRing); stroke-linecap: round; stroke-dasharray: 302; stroke-dashoffset: 302; transform: rotate(-90deg); transform-origin: 50% 50%; animation: fill 1.4s cubic-bezier(.2,.8,.2,1) forwards .3s; }
+  @keyframes fill { to { stroke-dashoffset: 76; } }
+  .ring-wrap { position: relative; }
+  .ring-wrap b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 28px; font-weight: 800; }
+  .week { display: flex; gap: 5px; margin-top: 10px; width: 100%; }
+  .day { flex: 1; text-align: center; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .day i { display: block; margin: 4px auto 0; width: 18px; height: 18px; border-radius: 6px; background: rgba(255,255,255,.16); }
+  .day.done i { background: linear-gradient(135deg, var(--cyan), var(--accent-a)); }
+  .day.today { color: var(--text); }
+  .day.today i { background: transparent; outline: 2px solid var(--cyan); outline-offset: -2px; }
+
+  /* Soft 3D tiles: four data colours only */
+  .ico-tile { width: 40px; height: 40px; border-radius: var(--r-s); display: grid; place-items: center; position: relative; flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.45), inset 0 -3px 6px rgba(0,0,0,.22), 0 6px 14px rgba(0,0,0,.35); }
+  .ico-tile::before { content: ''; position: absolute; inset: 2px 2px auto 2px; height: 45%; border-radius: 10px 10px 16px 16px; background: linear-gradient(180deg, rgba(255,255,255,.32), transparent); }
+  .ico-tile svg { position: relative; width: 22px; height: 22px; }
+  .t-blue { background: linear-gradient(145deg, #5b8cff, #2f50ff); color: #fff; }
+  .t-orange { background: linear-gradient(145deg, #ffc36b, #ff7a2f); color: #2a0f00; }
+  .t-gold { background: linear-gradient(145deg, #ffe58a, #f5a70b); color: #2a1a00; }
+  .t-cyan { background: linear-gradient(145deg, #8cf0ff, #18b4e0); color: #04202a; }
+
+  /* Navigation: duotone, no glow */
+  .nav { position: absolute; left: 14px; right: 14px; bottom: 22px; height: 72px; border-radius: var(--r-l); z-index: 10;
+    display: flex; align-items: center; justify-content: space-around; padding: 0 6px;
+    background: rgba(20, 30, 54, .62); backdrop-filter: blur(24px) saturate(160%); border: 1px solid rgba(255,255,255,.14); }
+  .nav a { display: grid; place-items: center; gap: 2px; width: 62px; height: 58px; border-radius: var(--r-m); color: var(--dim); text-decoration: none; font-size: 11px; font-weight: 700; }
+  .nav a svg { width: 26px; height: 26px; }
+  .nav a.on { color: #fff; background: rgba(47,107,255,.28); border: 1px solid rgba(110,150,255,.55); }
+
+  /* Training */
+  .bar-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .bar-top h2 { font-size: 17px; font-weight: 800; text-align: center; }
+  .steps { display: flex; gap: 6px; margin-top: 14px; align-items: center; }
+  .steps i { flex: 1; height: 6px; border-radius: 99px; background: rgba(255,255,255,.16); }
+  .steps i.on { background: linear-gradient(90deg, var(--cyan), var(--accent-a)); }
+  .steps span { font-size: 13px; font-weight: 800; color: var(--muted); margin-left: 6px; }
+  .media { position: relative; margin-top: 14px; height: 196px; border-radius: var(--r-l); overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(220px 160px at 50% 60%, rgba(47,107,255,.32), transparent 70%), #0c1530; }
+  .media .fig { left: 50%; top: 50%; width: 176px; height: 140px; background-size: 2150px 1434px; background-position: -1355px -600px; transform: translate(-50%, -55%); }
+  .play { position: absolute; right: 12px; bottom: 12px; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); }
+  .play svg { width: 20px; height: 20px; color: #fff; }
+  .roles { position: absolute; left: 12px; bottom: 12px; display: flex; gap: 6px; }
+  .role { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 800; padding: 6px 9px; border-radius: 999px; background: rgba(0,0,0,.55); }
+  .sw { display: inline-block; width: 12px; height: 12px; border-radius: 4px; }
+  .sw.primary { background: var(--primary); }
+  .sw.secondary { background: repeating-linear-gradient(135deg, var(--secondary) 0 3px, #7a4f00 3px 5px); }
+  .sw.stabilizer { background: radial-gradient(circle, #d6dbe6 1.2px, var(--stabilizer) 1.3px) 0 0 / 4px 4px; }
+  .sw.inactive { background: transparent; outline: 1.5px solid rgba(255,255,255,.55); outline-offset: -1.5px; }
+  .ex-title { margin-top: 14px; }
+  .ex-title h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .target { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .target span { font-size: 13px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: rgba(255,255,255,.07); border: 1px solid var(--line); }
+  .sets { margin-top: 12px; border-radius: var(--r-m); background: var(--card); border: 1px solid var(--line); padding: 6px; }
+  .sets-head, .set { display: grid; grid-template-columns: 30px 1fr 1fr 44px; gap: 8px; align-items: center; }
+  .field.suggested { color: #c9d3ee; border-style: dashed; }
+  .hint { font-size: 12px; color: var(--muted); padding: 6px 8px 2px; line-height: 1.4; }
+  .sets-head { padding: 4px 8px 2px; }
+  .set { padding: 7px 8px; border-radius: 14px; }
+  .set.active { background: rgba(47,107,255,.12); box-shadow: 0 0 0 1px rgba(110,150,255,.55), 0 8px 24px var(--accent-glow); }
+  .set .n { width: 28px; height: 28px; border-radius: 9px; display: grid; place-items: center; font-weight: 800; font-size: 13px; background: rgba(255,255,255,.08); }
+  .prev { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+  .field { height: 44px; border-radius: var(--r-s); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 17px; background: rgba(255,255,255,.05); border: 1px solid var(--edge); }
+  .field small { font-size: 11px; color: var(--muted); margin-left: 4px; font-weight: 700; }
+  .set.active .field.focus { border-color: var(--cyan); }
+  .check { width: 44px; height: 44px; border-radius: var(--r-s); display: grid; place-items: center; border: 1px solid var(--edge); color: var(--muted); }
+  .check svg { width: 20px; height: 20px; }
+  .set.done .check { background: #19b98a; border-color: #19b98a; color: #04261b; animation: pop .35s ease; }
+  @keyframes pop { 50% { transform: scale(1.15); } }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 12px; padding: 4px; border-radius: var(--r-m); background: rgba(255,255,255,.07); }
+  .compare button { min-height: 44px; border: 0; border-radius: 16px; background: transparent; color: var(--muted); font: 800 14px 'Manrope'; display: grid; place-items: center; line-height: 1.1; cursor: pointer; }
+  .compare button small { font-size: 11px; font-weight: 700; opacity: .85; }
+  .compare button[aria-checked='true'] { background: rgba(47,107,255,.28); color: #fff; outline: 1px solid rgba(110,150,255,.55); }
+  .prev { transition: opacity .2s ease; }
+  .actionbar { position: absolute; left: 14px; right: 14px; bottom: 22px; z-index: 10; display: flex; align-items: center; gap: 8px; padding: 8px;
+    border-radius: var(--r-l); background: rgba(20, 30, 54, .72); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,.14); }
+  .timer-ring { position: relative; width: 52px; height: 52px; flex-shrink: 0; }
+  .timer-ring svg { width: 52px; height: 52px; }
+  .timer-ring circle { fill: none; stroke-width: 5; }
+  .timer-ring .track { stroke: rgba(255,255,255,.16); }
+  .timer-ring .bar { stroke: var(--cyan); stroke-linecap: round; stroke-dasharray: 145; stroke-dashoffset: 52; transform: rotate(-90deg); transform-origin: 50% 50%; }
+  .timer-ring b { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; font-weight: 800; }
+  .pill { height: 44px; min-width: 52px; border-radius: var(--r-s); display: grid; place-items: center; font-weight: 800; font-size: 14px; background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+  .save { flex: 1; height: 54px; border: 0; border-radius: var(--r-m); color: #fff; font: 800 16px 'Manrope'; background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); }
+
+  /* Muscle map */
+  .seg { margin: 14px auto 0; display: flex; padding: 4px; border-radius: var(--r-m); background: rgba(255,255,255,.07); width: max-content; }
+  .seg span { min-height: 44px; display: grid; place-items: center; padding: 0 18px; border-radius: 16px; font-weight: 800; font-size: 14px; color: var(--muted); }
+  .seg span.on { background: linear-gradient(90deg, var(--accent-a), var(--accent-b)); color: #fff; }
+  .stage { position: relative; margin-top: 12px; height: 352px; border-radius: var(--r-l); overflow: hidden; border: 1px solid var(--line);
+    background: radial-gradient(200px 240px at 50% 45%, rgba(47,107,255,.28), transparent 70%), #0b1226; }
+  .stage .fig { left: 50%; top: 8px; width: 198px; height: 336px; background-size: 1900px 1267px; background-position: -922px -45px; transform: translateX(-50%); }
+  .callout { position: absolute; min-height: 44px; display: flex; flex-direction: column; justify-content: center; padding: 4px 12px; border-radius: var(--r-s);
+    background: rgba(10,16,34,.84); border: 1px solid rgba(255,255,255,.18); font-size: 13px; font-weight: 800; }
+  .callout small { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .scale { margin-top: 12px; padding: 12px 14px; border-radius: var(--r-m); background: var(--card); border: 1px solid var(--line); }
+  .scale-bar { margin-top: 8px; height: 14px; border-radius: 99px; background: linear-gradient(90deg, #2a3350, #3b5bdb, #22d3ee, #ffb020, #ff3b4f); }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .roles-legend { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .leg { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border-radius: var(--r-s); background: var(--card); border: 1px solid var(--line); font-size: 13px; font-weight: 700; }
+
+  /* Icon sheet */
+  .sheet { max-width: 1260px; margin: 40px auto 0; padding: 24px; border-radius: var(--r-l); background: rgba(20,30,54,.5); border: 1px solid var(--line); }
+  .sheet h2 { font-size: 22px; font-weight: 800; }
+  .sheet p { color: var(--muted); margin-top: 6px; font-size: 15px; line-height: 1.5; max-width: 900px; }
+  .icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; margin-top: 18px; }
+  .icon-cell { display: grid; justify-items: center; gap: 8px; padding: 14px 8px; border-radius: var(--r-m); background: rgba(255,255,255,.03); font-size: 13px; font-weight: 700; color: #c9d3ee; text-align: center; }
+  .icon-cell .ico-tile { width: 56px; height: 56px; border-radius: 16px; }
+  .icon-cell .ico-tile svg { width: 30px; height: 30px; }
+  .icon-cell .plain { width: 56px; height: 56px; display: grid; place-items: center; color: var(--dim); }
+  .icon-cell .plain svg { width: 28px; height: 28px; }
+  @media (prefers-reduced-motion: reduce) { .ring .bar { animation: none; stroke-dashoffset: 76; } .set.done .check { animation: none; } .cta { transition: none; } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs><linearGradient id="gRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#2f6bff"/></linearGradient></defs>
+  <!-- One family: 2 px strokes where lines are needed, duotone fills with the second layer at .5 -->
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V20a1.5 1.5 0 0 1-1.5 1.5h-4v-6H9v6H5a1.5 1.5 0 0 1-1.5-1.5Z" fill="currentColor" opacity=".5"/><path d="M12 3.5 3.5 10.5M12 3.5l8.5 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="15.5" width="6" height="6" rx="1.2" fill="currentColor"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="4" fill="currentColor" opacity=".5"/><path d="M3 9a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1H3Z" fill="currentColor"/><rect x="7" y="2.5" width="2.2" height="5" rx="1.1" fill="currentColor"/><rect x="14.8" y="2.5" width="2.2" height="5" rx="1.1" fill="currentColor"/><circle cx="8.5" cy="14.5" r="1.6" fill="currentColor"/><circle cx="12" cy="14.5" r="1.6" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.6" fill="currentColor"/></symbol>
+  <symbol id="i-plans" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="19" rx="4" fill="currentColor" opacity=".5"/><rect x="8" y="1.5" width="8" height="4" rx="2" fill="currentColor"/><path d="m7.5 11 1.6 1.6 3-3M7.5 16.5l1.6 1.6 3-3" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="13.5" y="10.5" width="3.5" height="2" rx="1" fill="currentColor"/><rect x="13.5" y="16" width="3.5" height="2" rx="1" fill="currentColor"/></symbol>
+  <symbol id="i-analysis" viewBox="0 0 24 24"><rect x="3" y="12" width="4.5" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="9.75" y="7" width="4.5" height="14" rx="2" fill="currentColor" opacity=".75"/><rect x="16.5" y="3" width="4.5" height="18" rx="2" fill="currentColor"/></symbol>
+  <symbol id="i-exercises" viewBox="0 0 24 24"><rect x="1.5" y="9" width="3" height="6" rx="1.2" fill="currentColor" opacity=".5"/><rect x="4.5" y="6.5" width="3.5" height="11" rx="1.5" fill="currentColor"/><rect x="8" y="10.8" width="8" height="2.4" rx="1.2" fill="currentColor" opacity=".5"/><rect x="16" y="6.5" width="3.5" height="11" rx="1.5" fill="currentColor"/><rect x="19.5" y="9" width="3" height="6" rx="1.2" fill="currentColor" opacity=".5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6Z" fill="currentColor" opacity=".5"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0Z" fill="currentColor"/><path d="M6 13 4 16h16l-2-3Z" fill="currentColor"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 1-7-7c0-3 1.6-5.2 3.2-6.9.4 2 1.4 3.3 2.6 3.9C10.5 8 12 4.6 14.6 2c.6 3.4 4.4 6.4 4.4 11.4A7 7 0 0 1 12 22Z" fill="currentColor" opacity=".5"/><path d="M12 22a3.6 3.6 0 0 1-3.6-3.6c0-2 1.6-3.4 2.4-4.8.4 1 1.2 1.8 2 2.1.2-1.4.8-2.6 1.6-3.4.6 1.8 1.2 3 1.2 4.9A3.6 3.6 0 0 1 12 22Z" fill="currentColor"/></symbol>
+  <symbol id="i-dumbbell" viewBox="0 0 24 24"><rect x="2" y="9" width="3" height="6" rx="1.2" fill="currentColor" opacity=".5"/><rect x="5" y="6.5" width="3.5" height="11" rx="1.5" fill="currentColor"/><rect x="8.5" y="10.8" width="7" height="2.4" rx="1.2" fill="currentColor" opacity=".5"/><rect x="15.5" y="6.5" width="3.5" height="11" rx="1.5" fill="currentColor"/><rect x="19" y="9" width="3" height="6" rx="1.2" fill="currentColor" opacity=".5"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13.5" r="8" fill="currentColor" opacity=".5"/><path d="M12 13.5V8.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><rect x="9" y="1.5" width="6" height="2.6" rx="1.3" fill="currentColor"/><circle cx="12" cy="13.5" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M7 3h10v6a5 5 0 0 1-10 0Z" fill="currentColor"/><path d="M7 5H4v2a4 4 0 0 0 3.6 4M17 5h3v2a4 4 0 0 1-3.6 4" stroke="currentColor" stroke-width="2" fill="none" opacity=".5"/><rect x="10.8" y="13" width="2.4" height="4" fill="currentColor" opacity=".5"/><rect x="7.5" y="17" width="9" height="3.5" rx="1.5" fill="currentColor"/></symbol>
+  <symbol id="i-weight" viewBox="0 0 24 24"><path d="M6.5 8h11l3 12.5a1.2 1.2 0 0 1-1.2 1.5H4.7a1.2 1.2 0 0 1-1.2-1.5Z" fill="currentColor" opacity=".5"/><circle cx="12" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10.5 15.5h3" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <!-- Flexed arm: upper arm raised, forearm up, biceps bulge -->
+  <symbol id="i-muscle" viewBox="0 0 24 24"><path d="M4 20.5c0-3.2 1.2-6 3.4-7.6l2.4-1.8L8.6 6.6A2 2 0 0 1 10 4.2l2.2-.7a2 2 0 0 1 2.4 1.2l2.6 6.5c2.5.5 4.3 2.8 4.3 5.6v3.7Z" fill="currentColor" opacity=".5"/><path d="M8.2 15.6c1.4-2.3 4.4-3.3 7-2.3 1.5.6 2.5 1.8 2.8 3.2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="m9.8 11.1 2.6 1.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-skeleton" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2.6" fill="currentColor"/><rect x="11" y="7" width="2" height="9" rx="1" fill="currentColor"/><path d="M8 9.5h8M8.5 12h7M9 14.5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".5"/><path d="m12 16-3 6M12 16l3 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10-6.5a1 1 0 0 0 0-1.8l-10-6.5A1 1 0 0 0 8 5.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor" opacity=".5"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5Z" fill="currentColor"/><path d="m3 12.5 9 5 9-5" stroke="currentColor" stroke-width="2" fill="none" opacity=".5" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="intro">
+  <h1>GetFit! · Mockup V3</h1>
+  <p>Nach der Kritik (6,5/10) überarbeitet: ein Akzent (Blau → Cyan) für die Oberfläche, kräftige 3D-Icon-Kacheln in nur vier Farben, Leuchten nur noch am Hauptknopf bzw. am aktiven Satz, Kontraste ≥ 3 : 1, alle Ziele ≥ 44 px. Im Training ersetzt eine Aktionsleiste die Navigation. Die Muskelkarte trennt „Übung · Woche · Gruppen“. Neu im Training: Die offenen Sätze sind schon ausgefüllt; pro Übung umschalten, ob mit „Letztes Mal“ oder „Durchschnitt“ (antippbar). Figuren = Platzhalter aus deinem Lieblingsbild.</p>
+</header>
+
+<div class="row">
+  <!-- HEUTE -->
+  <section class="phone" aria-label="Heute">
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="screen">
+      <div class="top">
+        <div class="brand">Get<span>Fit!</span></div>
+        <div class="top-actions">
+          <div class="glass-btn" aria-label="Kalender"><svg><use href="#i-calendar"/></svg></div>
+          <div class="glass-btn" aria-label="Mitteilungen"><svg><use href="#i-bell"/></svg><span class="badge"></span></div>
+        </div>
+      </div>
+      <div class="hero">
+        <div class="hero-text">
+          <h2>Heute</h2>
+          <p>Ganzkörper A ist bereit. Kniebeuge heute +2,5 kg.</p>
+          <span class="chip"><svg><use href="#i-fire"/></svg>4 Wochen Serie</span>
+        </div>
+        <div class="fig" role="img" aria-label="Figur (Platzhalter)"></div>
+      </div>
+      <div class="next">
+        <div class="next-head">
+          <div class="ico-tile t-blue"><svg><use href="#i-dumbbell"/></svg></div>
+          <div><div class="label">Nächstes Training</div><h3>Ganzkörper A</h3></div>
+        </div>
+        <div class="meta"><span><svg><use href="#i-clock"/></svg>~ 50 min</span><span><svg><use href="#i-layers"/></svg>6 Übungen · 18 Sätze</span></div>
+        <button class="cta">Training starten <svg><use href="#i-play"/></svg></button>
+      </div>
+      <div class="bento">
+        <div class="tile ring-tile">
+          <div class="ring-wrap"><svg class="ring" viewBox="0 0 116 116"><circle class="track" cx="58" cy="58" r="48"/><circle class="bar" cx="58" cy="58" r="48"/></svg><b>3/4</b></div>
+          <div class="label" style="margin-top:8px">Wochenziel</div>
+          <div class="week">
+            <div class="day done">M<i></i></div><div class="day done">D<i></i></div><div class="day done">M<i></i></div><div class="day today">D<i></i></div><div class="day">F<i></i></div>
+          </div>
+        </div>
+        <div class="tile"><div class="ico-tile t-orange"><svg><use href="#i-fire"/></svg></div><div class="num">4<small>Wochen</small></div><div class="label">Serie</div></div>
+        <div class="tile"><div class="ico-tile t-gold"><svg><use href="#i-trophy"/></svg></div><div class="num">2<small>neu</small></div><div class="label">Bestleistungen</div></div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Navigation">
+      <a class="on" aria-current="page"><svg><use href="#i-home"/></svg>Heute</a>
+      <a><svg><use href="#i-calendar"/></svg>Kalender</a>
+      <a><svg><use href="#i-plans"/></svg>Pläne</a>
+      <a><svg><use href="#i-analysis"/></svg>Auswertung</a>
+      <a><svg><use href="#i-exercises"/></svg>Übungen</a>
+    </nav>
+  </section>
+
+  <!-- TRAINING -->
+  <section class="phone" aria-label="Training">
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="screen">
+      <div class="bar-top">
+        <div class="glass-btn" aria-label="Zurück"><svg><use href="#i-back"/></svg></div>
+        <h2>Ganzkörper A</h2>
+        <div class="glass-btn" aria-label="Mehr"><svg><use href="#i-more"/></svg></div>
+      </div>
+      <div class="steps"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><span>2/6 · 18:24</span></div>
+      <div class="media">
+        <div class="fig" role="img" aria-label="Übungsbild Kniebeuge (Platzhalter)"></div>
+        <div class="roles"><span class="role"><span class="sw primary"></span>Primär</span><span class="role"><span class="sw secondary"></span>Sekundär</span></div>
+        <div class="play" aria-label="Animation abspielen"><svg><use href="#i-play"/></svg></div>
+      </div>
+      <div class="ex-title">
+        <h3>Kniebeuge · Langhantel</h3>
+        <div class="target"><span>3 × 8–12</span><span>RIR 2</span><span>Pause 2:00</span></div>
+      </div>
+      <div class="compare" role="radiogroup" aria-label="Felder vorausfüllen mit">
+        <button role="radio" aria-checked="true" data-mode="last">Letztes Mal<small>60 kg × 10 · 12.11.</small></button>
+        <button role="radio" aria-checked="false" data-mode="avg">Durchschnitt<small>Ø 58,5 kg × 9,6 · letzte 5</small></button>
+      </div>
+      <div class="sets">
+        <div class="sets-head label"><span>#</span><span>kg</span><span>Wdh</span><span></span></div>
+        <div class="set done"><span class="n">1</span><span class="field">60<small>kg</small></span><span class="field">10</span><span class="check" aria-label="Satz 1 erledigt"><svg><use href="#i-check"/></svg></span></div>
+        <div class="set active"><span class="n">2</span><span class="field suggested" data-last="60" data-avg="58,5" data-unit="kg">60<small>kg</small></span><span class="field suggested focus" data-last="10" data-avg="9,6">10</span><span class="check" aria-label="Satz 2 übernehmen"><svg><use href="#i-check"/></svg></span></div>
+        <div class="set"><span class="n">3</span><span class="field suggested" data-last="60" data-avg="57,5" data-unit="kg">60<small>kg</small></span><span class="field suggested" data-last="9" data-avg="8,8">9</span><span class="check" aria-label="Satz 3 übernehmen"><svg><use href="#i-check"/></svg></span></div>
+        <p class="hint">Die Felder sind schon ausgefüllt. Antippen ändert den Wert, der Haken übernimmt ihn.</p>
+      </div>
+    </div>
+    <div class="actionbar" aria-label="Pause und Satz speichern">
+      <div class="timer-ring" aria-label="Pause 1:25"><svg viewBox="0 0 52 52"><circle class="track" cx="26" cy="26" r="23"/><circle class="bar" cx="26" cy="26" r="23"/></svg><b>1:25</b></div>
+      <span class="pill">−15</span><span class="pill">+15</span>
+      <button class="save">Satz 2 speichern</button>
+    </div>
+  </section>
+
+  <!-- MUSKELKARTE -->
+  <section class="phone" aria-label="Muskelkarte">
+    <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+    <div class="screen">
+      <div class="bar-top">
+        <div class="glass-btn" aria-label="Zurück"><svg><use href="#i-back"/></svg></div>
+        <h2>Muskelkarte</h2>
+        <div class="glass-btn" aria-label="Skelett einblenden"><svg><use href="#i-skeleton"/></svg></div>
+      </div>
+      <div class="seg" role="tablist"><span>Übung</span><span class="on" aria-selected="true">Woche</span><span>Gruppen</span></div>
+      <div class="stage">
+        <div class="fig" role="img" aria-label="Figur mit farbigen Muskelgruppen (Platzhalter)"></div>
+        <span class="callout" style="left:10px; top:62px">Brust 12 Sätze<small>im Bereich</small></span>
+        <span class="callout" style="right:10px; top:112px">Schultern 8<small>knapp</small></span>
+        <span class="callout" style="left:10px; top:206px">Bauch 6<small>zu wenig</small></span>
+        <span class="callout" style="right:10px; top:262px">Beine 14<small>im Bereich</small></span>
+      </div>
+      <div class="scale">
+        <div class="label">Belastung diese Woche (Sätze pro Muskel)</div>
+        <div class="scale-bar" aria-hidden="true"></div>
+        <div class="scale-labels"><span>0</span><span>wenig</span><span>Bereich</span><span>viel</span><span>sehr viel</span></div>
+      </div>
+      <div class="roles-legend" aria-label="Rollen in der Ansicht Übung">
+        <div class="leg"><span class="sw primary"></span>Primär</div>
+        <div class="leg"><span class="sw secondary"></span>Sekundär</div>
+        <div class="leg"><span class="sw stabilizer"></span>Stabilisator</div>
+        <div class="leg"><span class="sw inactive"></span>Inaktiv</div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Navigation">
+      <a><svg><use href="#i-home"/></svg>Heute</a>
+      <a><svg><use href="#i-calendar"/></svg>Kalender</a>
+      <a><svg><use href="#i-plans"/></svg>Pläne</a>
+      <a class="on" aria-current="page"><svg><use href="#i-analysis"/></svg>Auswertung</a>
+      <a><svg><use href="#i-exercises"/></svg>Übungen</a>
+    </nav>
+  </section>
+</div>
+
+<section class="sheet" aria-label="Icon-Satz">
+  <h2>Icon-Satz V3</h2>
+  <p>Eine Familie: Duotone mit kräftiger Grundform und zweiter Ebene bei 50 % Deckkraft, Linien 2 px. In der Navigation ohne Kachel (inaktiv 70 % Weiß, aktiv volles Weiß auf blauer Pille). Für Kennzahlen „soft 3D“-Kacheln in vier festen Datenfarben: Blau = Training, Orange = Serie, Gold = Bestleistung, Cyan = Zeit/Pause. Endgültige Icons: Grafik-Team (G08).</p>
+  <div class="icons">
+    <div class="icon-cell"><div class="ico-tile t-blue"><svg><use href="#i-dumbbell"/></svg></div>Training</div>
+    <div class="icon-cell"><div class="ico-tile t-orange"><svg><use href="#i-fire"/></svg></div>Serie</div>
+    <div class="icon-cell"><div class="ico-tile t-gold"><svg><use href="#i-trophy"/></svg></div>Bestleistung</div>
+    <div class="icon-cell"><div class="ico-tile t-cyan"><svg><use href="#i-timer"/></svg></div>Pause</div>
+    <div class="icon-cell"><div class="ico-tile t-blue"><svg><use href="#i-weight"/></svg></div>Volumen</div>
+    <div class="icon-cell"><div class="ico-tile t-orange"><svg><use href="#i-muscle"/></svg></div>Muskeln</div>
+    <div class="icon-cell"><div class="ico-tile t-cyan"><svg><use href="#i-skeleton"/></svg></div>Skelett</div>
+    <div class="icon-cell"><span class="plain"><svg><use href="#i-home"/></svg></span>Heute</div>
+    <div class="icon-cell"><span class="plain"><svg><use href="#i-calendar"/></svg></span>Kalender</div>
+    <div class="icon-cell"><span class="plain"><svg><use href="#i-plans"/></svg></span>Pläne</div>
+    <div class="icon-cell"><span class="plain"><svg><use href="#i-analysis"/></svg></span>Auswertung</div>
+    <div class="icon-cell"><span class="plain"><svg><use href="#i-exercises"/></svg></span>Übungen</div>
+  </div>
+</section>
+<script>
+  // Mockup only: the open sets are prefilled; per exercise the user switches
+  // between the values of last time and the average of the last 5 sessions.
+  document.querySelectorAll('.compare').forEach(group => {
+    group.addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (!button) return;
+      group.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', String(b === button)));
+      const mode = button.dataset.mode;
+      group.nextElementSibling.querySelectorAll('.field.suggested').forEach(cell => {
+        cell.innerHTML = cell.dataset[mode] + (cell.dataset.unit ? '<small>' + cell.dataset.unit + '</small>' : '');
+      });
+    });
+  });
+</script>
+</body>
+</html>

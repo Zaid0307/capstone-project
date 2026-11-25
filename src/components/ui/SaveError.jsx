@@ -1,18 +1,57 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { BiErrorCircle } from 'react-icons/bi';
-import { colors, fontWeights, radii, shadows, space } from '../../styles/tokens';
+import { colors, fontWeights, radii, shadows, sizes, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
+import { describeFailure } from '../../lib/networkError';
 
-// Shown on every page when a plan or a training could not be saved, e.g.
-// because the browser storage is full or blocked. Nothing is lost silently.
-export default function SaveError() {
+// Tracks whether the device has a connection, so the message can change with it.
+function useIsOnline() {
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine !== false);
+  useEffect(() => {
+    const update = () => setIsOnline(navigator.onLine !== false);
+    window.addEventListener('online', update);
+    window.addEventListener('offline', update);
+    return () => {
+      window.removeEventListener('online', update);
+      window.removeEventListener('offline', update);
+    };
+  }, []);
+  return isOnline;
+}
+
+// Shown on every page when a plan or a training could not be saved or loaded,
+// e.g. because the browser storage is full or the connection is gone. Nothing
+// is lost silently; "Try again" repeats the failed action or loads again.
+export default function SaveError({ error, onRetry }) {
   const { t } = useTranslation();
+  const isOnline = useIsOnline();
+  const [isRetrying, setIsRetrying] = useState(false);
+  const kind = describeFailure(error, isOnline);
+
+  async function handleRetry() {
+    setIsRetrying(true);
+    try {
+      await onRetry();
+    } finally {
+      setIsRetrying(false);
+    }
+  }
+
   return (
     <Banner role="alert">
       <BiErrorCircle aria-hidden="true" />
-      <p>
-        <strong>{t('saveError.title')}</strong> {t('saveError.text')}
-      </p>
+      <Body>
+        <p>
+          <strong>{t('saveError.title')}</strong>{' '}
+          {kind === 'offline' ? t('saveError.offline') : kind === 'network' ? t('saveError.network') : t('saveError.text')}
+        </p>
+        {onRetry && (
+          <RetryButton type="button" onClick={handleRetry} disabled={isRetrying} aria-busy={isRetrying}>
+            {isRetrying ? t('saveError.retrying') : t('saveError.retry')}
+          </RetryButton>
+        )}
+      </Body>
     </Banner>
   );
 }
@@ -36,5 +75,25 @@ const Banner = styled.div`
   }
   strong {
     font-weight: ${fontWeights.bold};
+  }
+`;
+
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${space.sm};
+`;
+
+const RetryButton = styled.button`
+  min-height: ${sizes.touchTarget};
+  padding: 0 ${space.md};
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  background: none;
+  color: inherit;
+  font-weight: ${fontWeights.bold};
+  &:disabled {
+    opacity: 0.6;
   }
 `;

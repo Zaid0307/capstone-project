@@ -1,4 +1,4 @@
-import { fireEvent, screen, within } from '@testing-library/react';
+import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
 import { renderWithProviders } from './test-utils';
@@ -51,8 +51,20 @@ const savedPlans = [
   },
 ];
 
+// The pages are loaded on demand in the app; load their code once up front so
+// that switching pages in the tests does not wait for the module transform.
+beforeAll(async () => {
+  const pages = import.meta.glob('./pages/*Page.jsx');
+  await Promise.all(Object.values(pages).map(load => load()));
+}, 60000);
+
+// Opening a page that has not been shown yet waits for its code.
+const pageLoad = { timeout: 5000 };
+
 async function renderApp(route) {
   renderWithProviders(<App />, { route });
+  // Most pages are loaded on demand; wait until the page is there.
+  await waitFor(() => expect(screen.queryByText('Loading …')).not.toBeInTheDocument(), pageLoad);
 }
 
 // Edit, duplicate, archive and delete sit in the ⋮ menu of a plan card.
@@ -256,7 +268,7 @@ describe('App', () => {
       await renderApp('/plans');
 
       await planAction('Push', 'Edit workout plan Push');
-      expect(screen.getByRole('heading', { name: 'Edit workout plan' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { name: 'Edit workout plan' }, pageLoad)).toBeInTheDocument();
       await userEvent.click(screen.getByRole('button', { name: 'Details of Bench Press' }));
       const firstSet = within(screen.getByRole('group', { name: 'Set 1' }));
       await userEvent.clear(firstSet.getByLabelText('kg'));
@@ -312,7 +324,7 @@ describe('App', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Create workout plan' }));
 
       // A finished plan goes straight into the training diary.
-      expect(screen.getByRole('heading', { name: 'Training diary' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { name: 'Training diary' }, pageLoad)).toBeInTheDocument();
       expect(screen.getByLabelText('Plan')).toHaveDisplayValue('Legs');
       const [plan] = readPlans();
       expect(plan.schedule).toMatchObject({ type: 'rotation', daysPerWeek: 3 });
@@ -379,16 +391,18 @@ describe('App', () => {
       // The editor hides the navigation; leaving keeps the draft.
       await userEvent.click(screen.getByRole('button', { name: 'Back to plans' }));
       await userEvent.click(screen.getByRole('button', { name: 'Keep draft' }));
-      await userEvent.click(screen.getByRole('button', { name: 'New workout plan' }));
+      // Pages load on demand, so wait for the plan list.
+      await userEvent.click(await screen.findByRole('button', { name: 'New workout plan' }));
 
-      expect(screen.getByText('Your unsaved changes have been restored.')).toBeInTheDocument();
+      expect(await screen.findByText('Your unsaved changes have been restored.')).toBeInTheDocument();
       expect(screen.getByLabelText('Name of the plan')).toHaveValue('Unfinished');
 
       await userEvent.click(screen.getByRole('button', { name: 'Back to plans' }));
       await userEvent.click(screen.getByRole('button', { name: 'Discard and leave' }));
-      await userEvent.click(screen.getByRole('button', { name: 'New workout plan' }));
-      expect(screen.getByRole('button', { name: 'Empty plan' })).toBeInTheDocument();
-    });
+      await userEvent.click(await screen.findByRole('button', { name: 'New workout plan' }));
+      expect(await screen.findByRole('button', { name: 'Empty plan' })).toBeInTheDocument();
+      // Many steps across lazily loaded pages: allow more time than the default.
+    }, 40000);
   });
 
   describe('training diary', () => {
@@ -410,16 +424,22 @@ describe('App', () => {
       fireEvent.change(screen.getByLabelText('Date'), { target: { value: '2026-11-16' } });
       await userEvent.click(screen.getByRole('button', { name: 'Start training' }));
 
-      expect(screen.getByRole('heading', { name: 'Push · Monday' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { name: 'Push · Monday' }, pageLoad)).toBeInTheDocument();
       await userEvent.clear(screen.getByLabelText('Set 1: kg'));
       await userEvent.type(screen.getByLabelText('Set 1: kg'), '62.5');
       // A set counts as done as soon as its repetitions are entered; no extra button.
       await userEvent.type(screen.getByLabelText('Set 1: Reps'), '8');
       expect(screen.getByText('1 of 4 sets')).toBeInTheDocument();
       await userEvent.click(screen.getByRole('button', { name: 'Finish training' }));
+      // Open planned sets: finishing asks first.
+      await userEvent.click(
+        within(screen.getByRole('alertdialog', { name: 'Finish the training?' })).getByRole('button', {
+          name: 'Finish anyway',
+        })
+      );
 
       // The summary after finishing.
-      expect(screen.getByRole('heading', { level: 1, name: 'Training saved' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Training saved' }, pageLoad)).toBeInTheDocument();
       expect(screen.getByText('1 of 4')).toBeInTheDocument();
       expect(screen.getByText('Bench Press: 3 sets fewer')).toBeInTheDocument();
       expect(readWorkouts()[0].finishedAt).toEqual(expect.any(String));
@@ -427,7 +447,7 @@ describe('App', () => {
       expect(screen.getByRole('heading', { level: 1, name: 'Today' })).toBeInTheDocument();
       await userEvent.click(screen.getByRole('link', { name: 'All diary entries' }));
 
-      expect(screen.getByRole('link', { name: 'Push · Monday' })).toBeInTheDocument();
+      expect(await screen.findByRole('link', { name: 'Push · Monday' }, pageLoad)).toBeInTheDocument();
       expect(screen.getByText(/Trained · 1 of 4 sets · 500 kg · Plan followed 25 %/)).toBeInTheDocument();
       const [workout] = readWorkouts();
       expect(workout).toMatchObject({ schemaVersion: 2, date: '2026-11-16', status: 'done', plan: { planId: 'plan1' } });
@@ -629,11 +649,11 @@ describe('App', () => {
       const navigation = () => within(screen.getByRole('navigation', { name: 'Main navigation' }));
 
       await userEvent.click(navigation().getByRole('link', { name: 'Calendar' }));
-      expect(screen.getByRole('heading', { level: 1, name: 'Calendar' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Calendar' }, pageLoad)).toBeInTheDocument();
       expect(screen.getByRole('grid')).toBeInTheDocument();
 
       await userEvent.click(navigation().getByRole('link', { name: 'Analysis' }));
-      expect(screen.getByRole('heading', { level: 1, name: 'Analysis' })).toBeInTheDocument();
+      expect(await screen.findByRole('heading', { level: 1, name: 'Analysis' }, pageLoad)).toBeInTheDocument();
     });
 
     it('opens the analysis of one exercise', async () => {
@@ -662,6 +682,7 @@ describe('App', () => {
         ...plan.days[0],
         id: `day-${weekday}`,
         weekday,
+        weekdays: [weekday],
       }));
       savePlans([plan]);
       await renderApp('/today');

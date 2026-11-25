@@ -1,3 +1,4 @@
+import { countsAsTraining } from '../../utils/workoutLog';
 import {
   completeWeeks,
   countSets,
@@ -68,7 +69,7 @@ export function dashboardData({ plans, workouts, filters, today, allRows }) {
   const previousRows = filterRows(rowsOfAll, filters, previous);
   const warmups = { warmups: filters.warmups };
 
-  const firstDate = planWorkouts.find(workout => workout.status === 'done')?.date ?? null;
+  const firstDate = planWorkouts.find(countsAsTraining)?.date ?? null;
   const fullWeeks = firstDate ? completeWeeks(range, today, firstDate) : 0;
   const hasHistoryBefore = firstDate !== null && firstDate <= previous.to;
   const compare = filters.range !== 'all' && fullWeeks >= MIN_WEEKS && hasHistoryBefore;
@@ -113,8 +114,8 @@ export function dashboardData({ plans, workouts, filters, today, allRows }) {
     previous,
     compare,
     fullWeeks,
-    hasAnyWorkout: sorted.some(workout => workout.status === 'done'),
-    workoutCount: current.filter(workout => workout.status === 'done').length,
+    hasAnyWorkout: sorted.some(countsAsTraining),
+    workoutCount: current.filter(countsAsTraining).length,
     kpis,
     streak: {
       weeklyTarget,

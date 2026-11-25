@@ -15,7 +15,7 @@ export default function EditPlanPage({ plans, onSave, onCancel }) {
   return (
     <PageLayout isWide hideNavigation={Boolean(plan)}>
       {plan ? (
-        <Editor key={plan.id} plan={plan} onSave={onSave} onCancel={onCancel} />
+        <Editor key={plan.id} plan={plan} otherPlans={plans} onSave={onSave} onCancel={onCancel} />
       ) : (
         <Message role="alert">
           <p>{t('plans.notFound')}</p>
@@ -26,13 +26,14 @@ export default function EditPlanPage({ plans, onSave, onCancel }) {
   );
 }
 
-function Editor({ plan, onSave, onCancel }) {
+function Editor({ plan, otherPlans, onSave, onCancel }) {
   // Keep the start plan stable, so the editor can tell whether anything changed.
   const [initialPlan] = useState(() => migratePlan(plan));
   return (
     <PlanEditor
       initialPlan={initialPlan}
       draftKey={plan.id}
+      otherPlans={otherPlans}
       onSave={onSave}
       onCancel={onCancel}
     />

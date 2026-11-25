@@ -1,8 +1,27 @@
 import { longestWeekStreak, streakWorkouts, weekStreak, weeklyTargetOf, workoutCounts, workoutsPerWeek } from './consistency';
-import { makePlan, makeWorkout } from './testing';
+import { loggedExercise, makePlan, makeWorkout, set } from './testing';
 
 const TODAY = '2026-11-13'; // Friday of week 46
-const done = (...dates) => dates.map(date => makeWorkout({ date }));
+// A training counts only with at least one done set (countsAsTraining).
+const trained = date => makeWorkout({ date, exercises: [loggedExercise({ sets: [set({ reps: 10 })] })] });
+const done = (...dates) => dates.map(trained);
+
+describe('weekly target with days on several weekdays', () => {
+  it('counts every planned weekday', () => {
+    const plan = makePlan({ days: [{ id: 'full', weekdays: ['monday', 'thursday'] }, { id: 'legs', weekday: 'saturday' }] });
+    expect(weeklyTargetOf([plan])).toBe(3);
+  });
+});
+
+describe('which workouts count', () => {
+  it('leaves out empty and just started trainings without a done set', () => {
+    const empty = makeWorkout({ date: '2026-11-10' });
+    const started = makeWorkout({ date: '2026-11-11', exercises: [loggedExercise({ sets: [set({ weight: 60 })] })] });
+    const workouts = [...done('2026-11-09'), empty, started];
+    expect(workoutCounts(workouts)).toEqual({ workouts: 1, trainingDays: 1 });
+    expect(workoutsPerWeek(workouts, { from: '2026-11-09', to: '2026-11-15' }, TODAY)[0].count).toBe(1);
+  });
+});
 
 describe('weekStreak', () => {
   it('counts finished weeks reaching the target, back from last week', () => {
@@ -66,8 +85,8 @@ describe('weekly target and counts', () => {
 
     // Mobility workouts still count as workouts for the streak.
     const workouts = [
-      ...['2026-11-02', '2026-11-03'].map(date => makeWorkout({ date, plan: { planId: 'strength', dayId: 'monday' } })),
-      ...['2026-11-04', '2026-11-05'].map(date => makeWorkout({ date, plan: { planId: 'mobility', dayId: 'monday' } })),
+      ...['2026-11-02', '2026-11-03'].map(date => ({ ...trained(date), plan: { planId: 'strength', dayId: 'monday' } })),
+      ...['2026-11-04', '2026-11-05'].map(date => ({ ...trained(date), plan: { planId: 'mobility', dayId: 'monday' } })),
     ];
     const counted = streakWorkouts(workouts, [strength, mobility]);
     expect(weekStreak(counted, weeklyTargetOf([strength, mobility]), TODAY)).toBe(1);

@@ -5,16 +5,21 @@ import PageLayout from '../components/layout/PageLayout';
 import { ErrorText, Field, FormCard, Input, Label } from '../components/planEditor/formStyles';
 import Button from '../components/ui/Button';
 import PageTitle from '../components/ui/PageTitle';
-import { useAuth } from '../auth/AuthContext';
+import { MIN_PASSWORD_LENGTH, isGoogleSignInEnabled, useAuth } from '../auth/AuthContext';
 import { useTranslation } from '../i18n/LanguageContext';
+import ExportDataButton from '../storage/ExportDataButton';
+import { countPendingChanges } from '../storage/accountCopies';
+import { usePlanStore } from '../storage/PlanStoreContext';
+import { useWorkoutStore } from '../storage/WorkoutStoreContext';
 import { routes } from '../routes';
 import { colors, fontSizes, radii, space } from '../styles/tokens';
 
 // Sign in, create an account, reset the password; when signed in: sign out
-// and delete the account.
+// and delete the account. After the link from the reset e-mail: set a new password.
 export default function AccountPage() {
   const { t } = useTranslation();
   const auth = useAuth();
+  const [passwordChanged, setPasswordChanged] = useState(false);
 
   return (
     <PageLayout>
@@ -24,8 +29,13 @@ export default function AccountPage() {
         <FormCard>
           <p>{t('account.notConfigured')}</p>
         </FormCard>
+      ) : auth.isRecovering ? (
+        <NewPasswordForm auth={auth} onDone={() => setPasswordChanged(true)} />
       ) : auth.user ? (
-        <SignedIn auth={auth} />
+        <>
+          {passwordChanged && <Notice role="status">{t('account.passwordChanged')}</Notice>}
+          <SignedIn auth={auth} />
+        </>
       ) : (
         <SignInForms auth={auth} />
       )}
@@ -33,7 +43,7 @@ export default function AccountPage() {
   );
 }
 
-export function SignInForms({ auth }) {
+export function SignInForms({ auth, showGoogle = isGoogleSignInEnabled }) {
   const { t } = useTranslation();
   const [mode, setMode] = useState('signIn');
   const [email, setEmail] = useState('');
@@ -76,7 +86,7 @@ export function SignInForms({ auth }) {
   return (
     <FormCard as="form" onSubmit={handleSubmit} aria-labelledby="accountFormTitle">
       <h2 id="accountFormTitle">{t(`account.${mode}Title`)}</h2>
-      <p>{t('account.intro')}</p>
+      <p>{t('account.freeVersion')}</p>
       {message && <Notice role="status">{message}</Notice>}
       <Field>
         <Label htmlFor="accountEmail">{t('account.email')}</Label>
@@ -119,6 +129,7 @@ export function SignInForms({ auth }) {
           {t(mode === 'signIn' ? 'account.signIn' : mode === 'signUp' ? 'account.signUp' : 'account.sendReset')}
         </Button>
       </Actions>
+      {showGoogle && mode !== 'reset' && <GoogleSignIn auth={auth} />}
       <Links>
         {mode !== 'signUp' && (
           <TextButton type="button" onClick={() => switchTo('signUp')}>
@@ -140,10 +151,100 @@ export function SignInForms({ auth }) {
   );
 }
 
+// Sign-in with Google. A Google sign-in can create a new account, so the
+// privacy consent is asked here as well.
+function GoogleSignIn({ auth }) {
+  const { t } = useTranslation();
+  const [consent, setConsent] = useState(false);
+  const [error, setError] = useState(null);
+
+  async function handleClick() {
+    setError(null);
+    try {
+      await auth.signInWithGoogle();
+    } catch (googleError) {
+      setError(t('account.error', { message: googleError.message }));
+    }
+  }
+
+  return (
+    <GoogleBox aria-labelledby="googleTitle">
+      <p id="googleTitle">{t('account.orGoogle')}</p>
+      <Consent>
+        <input type="checkbox" checked={consent} onChange={event => setConsent(event.target.checked)} />
+        <span>
+          {t('account.googleConsent')} <Link to={routes.privacy}>{t('account.privacyLink')}</Link>
+        </span>
+      </Consent>
+      {error && <ErrorText role="alert">{error}</ErrorText>}
+      <Button type="button" $variant="secondary" disabled={!consent} onClick={handleClick}>
+        {t('account.google')}
+      </Button>
+    </GoogleBox>
+  );
+}
+
+// Shown after the link from the "reset password" e-mail.
+function NewPasswordForm({ auth, onDone }) {
+  const { t } = useTranslation();
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [isBusy, setIsBusy] = useState(false);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setError(null);
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      setError(t('account.passwordTooShort'));
+      return;
+    }
+    setIsBusy(true);
+    try {
+      await auth.updatePassword(password);
+      onDone();
+    } catch (submitError) {
+      setError(t('account.error', { message: submitError.message }));
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
+  return (
+    <FormCard as="form" onSubmit={handleSubmit} aria-labelledby="newPasswordTitle" noValidate>
+      <h2 id="newPasswordTitle">{t('account.newPasswordTitle')}</h2>
+      <p>{t('account.newPasswordIntro')}</p>
+      <Field>
+        <Label htmlFor="newPassword">{t('account.newPassword')}</Label>
+        <Input
+          id="newPassword"
+          type="password"
+          autoComplete="new-password"
+          minLength={MIN_PASSWORD_LENGTH}
+          required
+          aria-describedby="newPasswordHint"
+          aria-invalid={Boolean(error)}
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+        />
+        <Muted id="newPasswordHint">{t('account.passwordHint')}</Muted>
+      </Field>
+      {error && <ErrorText role="alert">{error}</ErrorText>}
+      <Actions>
+        <Button type="submit" disabled={isBusy}>
+          {t('account.savePassword')}
+        </Button>
+      </Actions>
+    </FormCard>
+  );
+}
+
 function SignedIn({ auth }) {
   const { t } = useTranslation();
   const [isConfirming, setIsConfirming] = useState(false);
+  const [isConfirmingSignOut, setIsConfirmingSignOut] = useState(false);
   const [error, setError] = useState(null);
+  const planStore = usePlanStore();
+  const workoutStore = useWorkoutStore();
 
   async function run(action) {
     setError(null);
@@ -154,6 +255,15 @@ function SignedIn({ auth }) {
     }
   }
 
+  // Changes made offline that were not sent yet are lost on sign-out: try to
+  // send them first, and ask if some still wait.
+  async function handleSignOut() {
+    setError(null);
+    await Promise.all([planStore.flush?.(), workoutStore.flush?.()]).catch(() => {});
+    if (countPendingChanges(auth.user.id) > 0) setIsConfirmingSignOut(true);
+    else run(auth.signOut);
+  }
+
   return (
     <FormCard>
       <p>
@@ -162,7 +272,8 @@ function SignedIn({ auth }) {
       <p>{t('account.savedOnline')}</p>
       {error && <ErrorText role="alert">{error}</ErrorText>}
       <Actions>
-        <Button $variant="secondary" onClick={() => run(auth.signOut)}>
+        <ExportDataButton />
+        <Button $variant="secondary" onClick={handleSignOut}>
           {t('account.signOut')}
         </Button>
         {!isConfirming && (
@@ -171,6 +282,20 @@ function SignedIn({ auth }) {
           </Button>
         )}
       </Actions>
+      {isConfirmingSignOut && (
+        <Confirm role="alertdialog" aria-labelledby="pendingTitle" aria-describedby="pendingText">
+          <p id="pendingTitle">
+            <strong>{t('account.pendingTitle')}</strong>
+          </p>
+          <p id="pendingText">{t('account.pendingText')}</p>
+          <Actions>
+            <Button onClick={() => run(auth.signOut)}>{t('account.signOutAnyway')}</Button>
+            <Button $variant="secondary" onClick={() => setIsConfirmingSignOut(false)}>
+              {t('account.cancel')}
+            </Button>
+          </Actions>
+        </Confirm>
+      )}
       {isConfirming && (
         <Confirm role="alertdialog" aria-labelledby="deleteAccountTitle" aria-describedby="deleteAccountText">
           <p id="deleteAccountTitle">
@@ -192,6 +317,15 @@ function SignedIn({ auth }) {
 const Muted = styled.p`
   color: ${colors.textMuted};
   font-size: ${fontSizes.caption};
+`;
+
+const GoogleBox = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: ${space.sm};
+  padding-top: ${space.md};
+  border-top: 1px solid ${colors.border};
 `;
 
 const Notice = styled.p`

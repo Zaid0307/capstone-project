@@ -6,7 +6,7 @@ import { useTranslation } from '../../i18n/LanguageContext';
 import { colors, fontSizes, fontWeights, radii, space } from '../../styles/tokens';
 import { setOutcome, workoutStatus } from '../../utils/analysis';
 import { createSkippedWorkout, workoutSummary } from '../../utils/workoutLog';
-import { entryName, formatDose } from '../../utils/workoutPlan';
+import { dayTitle, entryName, formatDose } from '../../utils/workoutPlan';
 import Button from '../ui/Button';
 import { useUndo } from '../ui/UndoProvider';
 import SkipDialog from '../diary/SkipDialog';
@@ -28,7 +28,8 @@ const OUTCOME_ICONS = {
 export function sessionTitle(session, plansById, t) {
   const plan = plansById.get(session.planId);
   const day = plan?.days.find(item => item.id === session.dayId);
-  const dayName = day ? day.name || (day.weekday ? t(`day.${day.weekday}`) : '') : '';
+  // Like the entries: the day's name, else its title (all its weekdays, dayTitle).
+  const dayName = day ? day.name || dayTitle(day, plan.schedule, t) : '';
   return [plan?.nameOfWorkout ?? session.planId, dayName].filter(Boolean).join(' · ');
 }
 
@@ -179,6 +180,11 @@ function WorkoutDetails({ workout, format, t, language, actual, targetText, onDe
               .filter(Boolean)
               .join(' · ')}
           </Muted>
+          {workout.feeling && (
+            <p>
+              {t('workout.feeling.value', { value: workout.feeling, label: t(`workout.feeling.${workout.feeling}`) })}
+            </p>
+          )}
           {workout.note && <p>{workout.note}</p>}
           {workout.exercises.map(exercise => (
             <TableBox key={exercise.id}>
@@ -216,6 +222,11 @@ function WorkoutDetails({ workout, format, t, language, actual, targetText, onDe
                   })}
                 </tbody>
               </Table>
+              {exercise.note && (
+                <Muted>
+                  {t('workout.exerciseNote.label', { name: entryName(exercise, language) })}: {exercise.note}
+                </Muted>
+              )}
             </TableBox>
           ))}
         </>

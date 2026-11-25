@@ -9,6 +9,7 @@ import PageTitle from '../components/ui/PageTitle';
 import { colors, fontWeights, sizes, space } from '../styles/tokens';
 import { useTranslation } from '../i18n/LanguageContext';
 import { routes } from '../routes';
+import { useExerciseLibrary } from '../data/exerciseLibraryLoader';
 import { isPlanActive } from '../utils/workoutPlan';
 
 // Date of the last finished training per plan.
@@ -32,6 +33,8 @@ export default function WorkoutPlansPage({
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  // Exercise names of the opened plans come from the catalog; render again once it is loaded.
+  useExerciseLibrary();
   const isEmpty = plans.length === 0;
   // Several plans can be active at once; archived ones are kept for the analyses.
   const lastTrained = lastTrainedByPlan(workouts);

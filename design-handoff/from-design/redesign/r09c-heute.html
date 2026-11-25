@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1220">
+<title>Heute · Mobiler Designentwurf</title>
+<style>
+:root{color-scheme:dark;--canvas:#0d1220;--text:#f3f6ff;--dim:#b3bfd8;--blue:#8ca8ff;--line:#ffffff13}
+*{box-sizing:border-box}
+body{margin:0;display:grid;justify-items:center;background:#080c15;color:var(--text);font-family:Inter,"Segoe UI",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid #9dedff;outline-offset:3px}
+.screen{position:relative;width:min(100%,390px);min-height:844px;padding:23px 17px 110px;overflow:hidden;background:radial-gradient(ellipse at 90% 5%,#232545 0,transparent 45%),var(--canvas)}
+.header{display:flex;align-items:center;justify-content:space-between;padding:0 4px;margin-bottom:17px}
+.header p{color:var(--dim);font-size:13px;margin:0 0 3px}
+h1,h2,p{margin:0}
+h1{font-size:34px;line-height:1.1;letter-spacing:-1.5px;font-weight:780}
+.date{border-radius:15px;background:#ffffff0e;padding:8px 12px;font-size:12px;text-align:center;border:1px solid var(--line);line-height:1.2;color:var(--dim)}
+.date strong{display:block;font-size:19px;color:white}
+.card{border:1px solid var(--line);border-radius:24px}
+.week{display:grid;grid-template-columns:89px 1fr;align-items:center;gap:12px;min-height:111px;padding:11px 15px;background:linear-gradient(120deg,#222d48,#191f34 68%);box-shadow:0 12px 30px #03071470}
+.week h2,.hero h2{font-size:19px;line-height:1.2;letter-spacing:-.4px}
+.week p,.hero p,.workout p{font-size:12px;color:var(--dim);margin-top:4px}
+.ring{display:grid;place-items:center;position:relative;width:82px;height:82px}
+.ring svg{width:82px;position:absolute;inset:0;transform:rotate(-90deg)}
+.ring strong{font-size:24px;letter-spacing:-1.4px}
+.ring span{font-size:14px;color:#aebde1;letter-spacing:-.4px}
+.days{display:flex;gap:6px;margin-top:12px}
+.days span{display:grid;place-items:center;background:#0e162b80;color:#c3cee6;border-radius:7px;width:21px;height:20px;font-size:10px;font-weight:650}
+.days .done{background:#7b94ff2e;color:#d3dcff}
+.days .today{border:1px solid #7895fc;color:#e2e9ff}
+.hero{overflow:hidden;isolation:isolate;position:relative;margin-top:13px;min-height:371px;padding:16px 14px;background:radial-gradient(ellipse at 30% 52%,#243575 0%,#192542 43%,#151b2e 76%);box-shadow:0 12px 32px #01071b8c}
+.hero::before{content:"";position:absolute;z-index:-1;left:0;bottom:14%;width:58%;height:17%;border-radius:50%;background:#536cff42;filter:blur(24px)}
+.hero h2,.hero>p{padding-left:3px}
+.figure{position:absolute;left:0;bottom:31px;width:230px;height:282px;object-fit:contain;filter:drop-shadow(0 0 12px #3c65ec65)}
+.monitor{position:absolute;top:76px;right:12px;width:126px;border:1px solid #b1bcff2a;background:#10182ea3;backdrop-filter:blur(16px);border-radius:18px;padding:12px 10px;display:grid;gap:9px}
+.monitor h3{margin:0;font-size:11px;font-weight:650;color:#f0f3ff}
+.metric{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:10px;color:#c1ccec;line-height:1.3}
+.metric strong{font-size:10px;color:#f7f8ff}
+.track{grid-column:span 2;height:4px;background:#8492c62d;border-radius:20px;overflow:hidden}
+.track i{display:block;width:var(--fill);height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--lo),var(--hi))}
+.monitor small{font-size:10px;line-height:1.25;color:var(--dim)}
+.switch{position:absolute;right:12px;bottom:69px;display:flex;background:#0b14268f;border:1px solid var(--line);border-radius:16px;padding:3px}
+.switch button{background:none;border:0;padding:6px 8px;font-size:10px;border-radius:12px}
+.switch [aria-pressed=true]{background:#4869d5;color:white}
+.preview-note{position:absolute;left:15px;bottom:12px;color:#d1dcfb;background:#0d152da6;border-radius:12px;padding:4px 8px;font-size:10px}
+.workout{position:relative;margin-top:13px;min-height:100px;padding:14px 12px 14px 14px;display:flex;align-items:center;justify-content:space-between;gap:6px;background:linear-gradient(112deg,#3852a7,#26377d 66%,#28426f);box-shadow:0 11px 24px #3446a344}
+.workout p{margin:0 0 4px;color:#e1e8ff}
+.workout h2{font-size:20px;line-height:1.15;letter-spacing:-.6px}
+.workout small{display:block;font-size:11px;margin-top:5px;color:#e1e8ff}
+.start{background:#eaf1ff;color:#172752;border:0;border-radius:20px;min-height:39px;padding:0 13px;font-size:12px;font-weight:750;white-space:nowrap;box-shadow:0 4px 17px #211a70a0}
+.start:active,.switch button:active{transform:scale(.96)}
+.nav{position:absolute;bottom:23px;left:17px;right:17px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px;border-radius:25px;background:#182139d9;border:1px solid #b8c8ff26;backdrop-filter:blur(19px);box-shadow:0 8px 25px #0008}
+.nav span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-width:0;height:46px;font-size:10px;color:#bfcbe5;border-radius:19px}
+.nav .selected{background:linear-gradient(145deg,#99b3ff,#5978ec);color:#111b3a;box-shadow:0 0 21px #7195ff56;font-weight:750}
+.nav svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.result{position:absolute;right:12px;left:12px;bottom:-6px;color:#fff;font-size:11px;text-align:right;transform:translateY(100%)}
+@media(max-width:365px){.figure{width:207px}.monitor{width:111px}.switch button{padding-inline:6px}.days{gap:4px}}
+</style>
+</head>
+<body>
+<main class="screen" aria-label="Heute">
+<header class="header">
+  <div><p>Guten Morgen, Fares</p><h1>Heute</h1></div>
+  <time class="date" datetime="2026-11-15">So<strong>15</strong></time>
+</header>
+<section class="card week" aria-labelledby="week-title">
+  <div class="ring" role="img" aria-label="3 von 4 Trainings abgeschlossen">
+    <svg viewBox="0 0 84 84" aria-hidden="true"><defs><linearGradient id="progress"><stop stop-color="#a8a0ff"/><stop offset="1" stop-color="#6df4ef"/></linearGradient></defs><circle cx="42" cy="42" r="33" fill="none" stroke="#8fa7ed30" stroke-width="7"/><circle cx="42" cy="42" r="33" fill="none" stroke="url(#progress)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="75 100"/></svg>
+    <strong aria-hidden="true">3<span>/4</span></strong>
+  </div>
+  <div><h2 id="week-title">Diese Woche</h2><p>Noch ein Training bis zum Ziel</p>
+    <div class="days" aria-label="Abgeschlossen am Montag, Mittwoch und Freitag. Heute ist Sonntag."><span class="done">Mo</span><span>Di</span><span class="done">Mi</span><span>Do</span><span class="done">Fr</span><span>Sa</span><span class="today">So</span></div>
+  </div>
+</section>
+<section class="card hero" aria-labelledby="monitor-title">
+  <h2 id="monitor-title">Muskel-Monitor</h2>
+  <p>Belastung der letzten 7 Tage</p>
+  <img class="figure" id="hero-figure" src="../../fitness-graphics/g01-figurenprobe/male_front.svg" alt="Männliche Trainingsfigur von vorne">
+  <div class="monitor">
+    <h3>Nach Muskelgruppe</h3>
+    <div class="metric" style="--fill:80%;--lo:#7c88ff;--hi:#a8a0ff">Brust <strong>80 %</strong><div class="track"><i></i></div></div>
+    <div class="metric" style="--fill:65%;--lo:#4bc7ec;--hi:#75efdf">Rücken <strong>65 %</strong><div class="track"><i></i></div></div>
+    <div class="metric" style="--fill:42%;--lo:#cc7ad7;--hi:#f5a3bf">Beine <strong>42 %</strong><div class="track"><i></i></div></div>
+    <small>Beispielwerte</small>
+  </div>
+  <div class="switch" role="group" aria-label="Figurenansicht">
+    <button type="button" data-view="front" aria-pressed="true">Vorne</button>
+    <button type="button" data-view="back" aria-pressed="false">Hinten</button>
+  </div>
+  <span class="preview-note">Figurenprobe G01</span>
+</section>
+<section class="card workout" aria-labelledby="workout-title">
+  <div><p>Nächstes Training</p><h2 id="workout-title">Oberkörper</h2><small>6 Übungen · 45 Min.</small></div>
+  <button class="start" type="button">Starten <span aria-hidden="true">↗</span></button>
+  <output class="result" aria-live="polite"></output>
+</section>
+<nav class="nav" aria-label="Vorschau der Hauptnavigation">
+  <span class="selected" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10l9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>Heute</span>
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18"/></svg>Plan</span>
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4m3-7v10m12-10v10m3-7v4M6 12h12"/></svg>Training</span>
+  <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18M8 16l4-6 4 3 4-7"/></svg>Verlauf</span>
+</nav>
+</main>
+<script>
+const image = document.querySelector('#hero-figure');
+const figureRoot = '../../fitness-graphics/g01-figurenprobe/';
+const figureFiles = {
+  front: figureRoot + 'male_front.svg',
+  back: figureRoot + 'male_back.svg'
+};
+const viewButtons = Array.from(document.querySelectorAll('.switch button'));
+viewButtons.forEach(button => button.addEventListener('click', () => {
+  const view = button.dataset.view;
+  viewButtons.forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+  image.src = figureFiles[view];
+  image.alt = view === 'front' ? 'Männliche Trainingsfigur von vorne' : 'Männliche Trainingsfigur von hinten';
+}));
+document.querySelector('.start').addEventListener('click', () => {
+  document.querySelector('.result').textContent = 'Training startet in der App.';
+});
+</script>
+</body>
+</html>
+
+

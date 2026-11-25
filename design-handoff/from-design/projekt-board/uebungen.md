@@ -1,5 +1,12 @@
 # Übungen und Varianten
 
+<!-- fortsetzung-2026-11-25 -->
+**Verbindlich für alle Leitungen, Agenten und Kritiker.** Nach jedem Ticket und auch nach jeder Ticketanlage direkt weiterarbeiten. Nächstes bearbeitbares Ticket übernehmen oder ein notwendiges fehlendes Folgeticket mit Ziel und Abnahme erstellen und anschließend Aufgaben abarbeiten. Übernahme und nächste Aktion im Board festhalten, Doppelarbeit vermeiden. [Vollständige Arbeitsregel](weiterarbeiten.md).
+<!-- /fortsetzung-2026-11-25 -->
+
+
+
+
 Team Grafik. Je ID sind Bewegung, Standbild und Prüfbeleg für beide Figuren abzulegen. Seitigkeit folgt der Prioritätenliste.
 
 | Karte | Priorität | Übungs-ID | Status |

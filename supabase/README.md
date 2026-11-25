@@ -51,3 +51,20 @@ Tabellen für eigene Dashboards und Ziele fehlen bewusst. Ihre Inhalte sind noch
 - Vercel-Projekt `getfit`, Produktionsadresse **https://getfit-rosy.vercel.app**, Umgebungsvariablen `VITE_SUPABASE_URL` und `VITE_SUPABASE_ANON_KEY` (öffentlich, Typ „config“) für Production und Preview. `.vercelignore` lädt nur die App hoch.
 - Auth-Einstellungen stehen in `supabase/config.toml`; ändern, `npx supabase config diff` prüfen, dann `npx supabase config push`.
 - Offen: GitHub-Verbindung in Vercel (automatische Veröffentlichung), Name/Kontakt des Verantwortlichen in der Datenschutzerklärung, Google-Anmeldung, eigener SMTP-Dienst bei vielen Testern (Supabase-Grenze: wenige E-Mails pro Stunde).
+
+## Google-Anmeldung einrichten (vorbereitet, Stand 15.11.2026)
+
+Die App zeigt den Knopf „Mit Google anmelden“ nur, wenn die Umgebungsvariable `VITE_GOOGLE_SIGN_IN=true` gesetzt ist. Vorher muss Google in Supabase eingerichtet sein, sonst endet der Klick mit einer Fehlermeldung. Alles ist kostenlos.
+
+1. **Google-Projekt anlegen:** In der [Google Cloud Console](https://console.cloud.google.com/) mit einem Google-Konto anmelden, oben „Projekt auswählen“ → „Neues Projekt“, Name z. B. `getfit`. Kein Abrechnungskonto nötig.
+2. **Zustimmungsbildschirm (OAuth consent screen):** „APIs & Dienste“ → „OAuth-Zustimmungsbildschirm“ (bzw. „Google Auth Platform“ → „Branding“). Nutzertyp **Extern**, App-Name `GetFit!`, Support- und Kontakt-E-Mail eintragen, Link zur Datenschutzerklärung `https://getfit-rosy.vercel.app/privacy`. Bereiche (Scopes): nur `openid`, `email`, `profile`. Im Status **Testen** bleiben und die Google-Adressen der Testpersonen unter „Testnutzer“ eintragen (bis 100, keine Prüfung durch Google nötig).
+3. **OAuth-Client erstellen:** „Anmeldedaten“ → „Anmeldedaten erstellen“ → „OAuth-Client-ID“, Typ **Webanwendung**, Name `GetFit! Supabase`.
+   - Autorisierte JavaScript-Quellen: `https://getfit-rosy.vercel.app` und `http://localhost:3000`.
+   - Autorisierte Weiterleitungs-URI: `https://<projekt-ref>.supabase.co/auth/v1/callback` (die genaue Adresse steht in Supabase unter Authentication → Sign In / Providers → Google → „Callback URL“).
+   - Client-ID und Client-Secret kopieren. Das Secret gehört nie ins Repository.
+4. **In Supabase eintragen:** Dashboard → Authentication → Sign In / Providers → **Google** aktivieren, Client-ID und Client-Secret einfügen, speichern. Alternativ in `supabase/config.toml` unter `[auth.external.google]` mit `enabled = true`, `client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"`, `secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"` und dann `npx supabase config push` (die Werte nur als Umgebungsvariablen im eigenen Terminal setzen).
+5. **Weiterleitungen prüfen:** Unter Authentication → URL Configuration müssen `https://getfit-rosy.vercel.app` (Site URL) sowie `http://localhost:3000` in den Redirect URLs stehen (ist in `config.toml` schon eingetragen). Die App kehrt nach Google auf die Startadresse zurück.
+6. **Einschalten:** In Vercel (Production und Preview) die Variable `VITE_GOOGLE_SIGN_IN` mit dem Wert `true` anlegen und neu veröffentlichen; lokal in `.env.local`.
+7. **Testen:** Abmelden, „Mit Google anmelden“ (vorher Einwilligung ankreuzen), Google-Konto wählen. Danach ist man angemeldet; die Einwilligung wird beim Zurückkommen in `consents` gespeichert, das Profil legt die Datenbank automatisch an.
+
+Hinweis: Meldet sich jemand mit Google an, dessen E-Mail-Adresse schon ein Passwort-Konto hat, verknüpft Supabase beide, sobald die Adresse bestätigt ist.

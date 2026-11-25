@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useTranslation } from '../../i18n/LanguageContext';
 import { colors, fontSizes, fontWeights, radii, shadows, space } from '../../styles/tokens';
 import { workoutStatus } from '../../utils/analysis';
-import { workoutSummary } from '../../utils/workoutLog';
+import { countsAsTraining, workoutSummary } from '../../utils/workoutLog';
 import { paths, tCount, useFormat, workoutTitle } from '../analysis/format';
 import { Muted, PlainList } from '../analysis/styles';
 import StatusIcon from './StatusIcon';
@@ -32,7 +32,7 @@ export default function MonthList({ weeks, month, titleId }) {
   return (
     <Weeks aria-labelledby={titleId}>
       {shown.map(week => {
-        const done = week.entries.filter(workout => workout.status === 'done').length;
+        const done = week.entries.filter(countsAsTraining).length;
         return (
           <li key={week.weekKey}>
             <WeekHeader>

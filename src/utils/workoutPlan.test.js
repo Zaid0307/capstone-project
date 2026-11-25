@@ -1,8 +1,13 @@
 import {
   PLAN_SCHEMA_VERSION,
+  combinePlans,
+  supersetLabels,
+  exerciseFitsEquipment,
+  planEquipment,
   createEntry,
   createSet,
   dayTitle,
+  dayWeekdays,
   entryName,
   findLibraryExercise,
   formatDose,
@@ -14,6 +19,7 @@ import {
   removeDay,
   summarizeSets,
   weeklySetsByMuscle,
+  withWeekdays,
 } from './workoutPlan';
 import { translate } from '../i18n/translations';
 
@@ -113,6 +119,27 @@ describe('migratePlan', () => {
     });
   });
 
+  it('turns the one weekday of a version 3 day into a list and keeps it mirrored', () => {
+    const version3 = {
+      id: 'v3',
+      schemaVersion: 3,
+      nameOfWorkout: 'Old',
+      description: '',
+      schedule: { type: 'weekdays' },
+      days: [
+        { id: 'a', name: 'A', weekday: 'monday', entries: [] },
+        { id: 'b', name: 'B', weekday: null, entries: [] },
+      ],
+    };
+    const plan = migratePlan(version3);
+    expect(plan.schemaVersion).toBe(PLAN_SCHEMA_VERSION);
+    expect(plan.days.map(day => [day.weekdays, day.weekday])).toEqual([
+      [['monday'], 'monday'],
+      [[], null],
+    ]);
+    expect(migratePlan(version1Plan).days[0].weekdays).toEqual(['friday']);
+  });
+
   it('leaves current plans untouched', () => {
     const plan = migratePlan(version1Plan);
     expect(migratePlan(plan)).toBe(plan);
@@ -120,7 +147,7 @@ describe('migratePlan', () => {
 });
 
 describe('library helpers', () => {
-  it('finds library exercises by German or English name, ignoring case', () => {
+  it('finds older exercises by German or English name, ignoring case', () => {
     expect(findLibraryExercise('langhantel-bankdrücken').id).toBe('barbell_bench_press');
     expect(findLibraryExercise('  FOREARM PLANK ').id).toBe('plank');
     expect(findLibraryExercise('Something else')).toBeNull();
@@ -193,6 +220,32 @@ describe('days', () => {
     expect(dayTitle(plan.days[0], { type: 'rotation' }, t)).toBe('B');
   });
 
+  it('trains one day on several weekdays', () => {
+    const fullBody = withWeekdays({ id: 'f', name: 'Full body', entries: [] }, ['thursday', 'monday']);
+    expect(fullBody).toMatchObject({ weekdays: ['monday', 'thursday'], weekday: 'monday' });
+    expect(dayWeekdays({ weekday: 'friday' })).toEqual(['friday']);
+    expect(dayTitle(fullBody, { type: 'weekdays' }, t)).toBe('Montag, Donnerstag');
+    const plan2 = { schedule: { type: 'weekdays' }, days: [plan.days[0], { ...fullBody }] };
+    expect(orderedDays(plan2).map(day => day.id)).toEqual(['f', 'b']);
+  });
+
+  it('counts a day trained on two weekdays twice per week', () => {
+    const squat = createEntry({ exerciseId: 'barbell_squat' });
+    const twice = { schedule: { type: 'weekdays' }, days: [withWeekdays({ entries: [squat] }, ['monday', 'thursday'])] };
+    const once = { schedule: { type: 'weekdays' }, days: [withWeekdays({ entries: [squat] }, ['monday'])] };
+    const legs = plan => weeklySetsByMuscle(plan).find(item => item.muscle === 'legs').sets;
+    expect(legs(twice)).toBe(2 * legs(once));
+  });
+
+  it('adds up several plans as one week, each with its own schedule', () => {
+    const squat = createEntry({ exerciseId: 'barbell_squat' });
+    const gym = { schedule: { type: 'weekdays' }, days: [withWeekdays({ entries: [squat] }, ['monday', 'thursday'])] };
+    const home = { schedule: { type: 'rotation', daysPerWeek: 3 }, days: [{ name: 'A', entries: [squat] }] };
+    const legs = plan => weeklySetsByMuscle(plan).find(item => item.muscle === 'legs').sets;
+    expect(legs(combinePlans([gym, home]))).toBe(legs(gym) + legs(home));
+    expect(legs(home)).toBe(3 * legs({ ...home, schedule: { type: 'rotation', daysPerWeek: 1 } }));
+  });
+
   it('removes one day', () => {
     expect(removeDay(plan, 'a').days.map(day => day.id)).toEqual(['b']);
   });
@@ -251,6 +304,32 @@ describe('weeklySetsByMuscle', () => {
   });
 });
 
+describe('supersetLabels', () => {
+  it('names supersets A1/A2, B1/B2 and leaves single exercises out', () => {
+    const entries = [{ groupId: 'x' }, { groupId: 'x' }, {}, { groupId: 'y' }, { groupId: 'y' }, { groupId: 'y' }, { groupId: 'z' }];
+    expect(supersetLabels(entries).map(item => item?.label ?? null)).toEqual(['A1', 'A2', null, 'B1', 'B2', 'B3', null]);
+    expect(supersetLabels(entries)[1]).toMatchObject({ group: 'A', position: 1, size: 2 });
+    // Members that are not next to each other are no superset.
+    expect(supersetLabels([{ groupId: 'x' }, {}, { groupId: 'x' }])).toEqual([null, null, null]);
+  });
+});
+
+describe('place and equipment', () => {
+  it('has all equipment in a gym and in plans without a setup', () => {
+    expect(planEquipment({})).toBeNull();
+    expect(planEquipment({ setup: { place: 'gym', equipment: null } })).toBeNull();
+    expect(planEquipment({ setup: { place: 'home', equipment: ['dumbbells'] } })).toEqual(['dumbbells']);
+  });
+
+  it('fits exercises whose equipment is all there; mat and wall always are', () => {
+    const exercise = equipment => ({ equipment });
+    expect(exerciseFitsEquipment(exercise(['barbell', 'rack']), null)).toBe(true);
+    expect(exerciseFitsEquipment(exercise(['dumbbells']), ['dumbbells'])).toBe(true);
+    expect(exerciseFitsEquipment(exercise(['mat']), [])).toBe(true);
+    expect(exerciseFitsEquipment(exercise(['barbell', 'rack']), ['barbell'])).toBe(false);
+  });
+});
+
 describe('planProblems', () => {
   const valid = () => ({
     nameOfWorkout: 'Push',
@@ -272,6 +351,9 @@ describe('planProblems', () => {
       { type: 'emptyDay', dayId: 'e' },
     ]);
     expect(planProblems({ ...valid(), days: [] })).toEqual([{ type: 'noDays' }]);
+    // An emptied weekday list counts, even if an old mirrored weekday is left.
+    const emptied = { ...valid(), days: [{ ...valid().days[0], weekdays: [] }] };
+    expect(planProblems(emptied)).toEqual([{ type: 'noWeekday', dayId: 'd' }]);
   });
 
   it('needs day names on rotation plans and valid sets', () => {

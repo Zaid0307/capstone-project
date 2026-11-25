@@ -1,5 +1,5 @@
-import { workoutSummary } from '../workoutLog';
-import { WEEKDAYS } from '../workoutPlan';
+import { countsAsTraining, workoutSummary } from '../workoutLog';
+import { WEEKDAYS, dayWeekdays } from '../workoutPlan';
 import { addDays, asDateKey, mondayOf, weekKeyOf, weekdayIndex } from './dates';
 
 // Plan adherence (content) and schedule adherence (dates)
@@ -30,7 +30,7 @@ export function pooledAdherence(workouts) {
   let met = 0;
   let planned = 0;
   for (const workout of workouts) {
-    if (workout.status !== 'done') continue;
+    if (!countsAsTraining(workout)) continue;
     const summary = workoutSummary(workout);
     if (!summary.plannedSets) continue;
     planned += summary.plannedSets;
@@ -108,9 +108,12 @@ export function scheduledSessions(plans, range, today, workouts = []) {
       }
       continue;
     }
+    // One entry per weekday; a day trained on several weekdays appears for each of them.
     const dayByWeekday = new Map();
     for (const day of plan.days ?? []) {
-      if (WEEKDAYS.includes(day.weekday) && !dayByWeekday.has(day.weekday)) dayByWeekday.set(day.weekday, day);
+      for (const weekday of dayWeekdays(day)) {
+        if (!dayByWeekday.has(weekday)) dayByWeekday.set(weekday, day);
+      }
     }
     if (!dayByWeekday.size) continue;
     for (let date = from; date <= to; date = addDays(date, 1)) {
@@ -131,7 +134,7 @@ export function scheduleAdherence(plans, workouts, range, today) {
   // Done workouts per plan + week (+ day), counted up to today.
   const available = new Map();
   for (const workout of workouts) {
-    if (workout.status !== 'done' || !workout.plan || workout.date > todayKey) continue;
+    if (!countsAsTraining(workout) || !workout.plan || workout.date > todayKey) continue;
     const week = weekKeyOf(workout.date);
     for (const key of [`${workout.plan.planId}|${week}`, `${workout.plan.planId}|${week}|${workout.plan.dayId}`]) {
       available.set(key, (available.get(key) ?? 0) + 1);

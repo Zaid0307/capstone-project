@@ -19,6 +19,7 @@ export default function CreatePlanPage({ plans, onSave, onCancel }) {
           initialPlan={startPlan}
           draftKey={NEW_PLAN_DRAFT}
           isNew
+          otherPlans={plans}
           onSave={onSave}
           onCancel={onCancel}
         />

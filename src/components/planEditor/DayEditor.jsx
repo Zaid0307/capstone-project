@@ -1,37 +1,41 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useId, useState } from 'react';
 import styled from 'styled-components';
 import { BiPlusCircle } from 'react-icons/bi';
-import {
-  MdArrowBack,
-  MdArrowDownward,
-  MdArrowForward,
-  MdArrowUpward,
-  MdContentCopy,
-  MdOutlineDeleteForever,
-} from 'react-icons/md';
+import { MdArrowBack, MdArrowForward, MdContentCopy, MdOutlineDeleteForever } from 'react-icons/md';
 import ActionMenu from './ActionMenu';
 import EntryEditor from './EntryEditor';
 import ExercisePicker from './ExercisePicker';
-import { ErrorText, Field, Input, Label, Select } from './formStyles';
+import SortableEntryList from './SortableEntryList';
+import { ErrorText, Field, Input, Label } from './formStyles';
+import { shortWeekday } from '../workoutPlans/planSummary';
 import Button from '../ui/Button';
-import IconButton from '../ui/IconButton';
 import ScreenReaderOnly from '../ui/ScreenReaderOnly';
 import { useUndo } from '../ui/UndoProvider';
-import { colors, fontSizes, fontWeights, radii, space } from '../../styles/tokens';
+import { colors, fontSizes, fontWeights, radii, sizes, space } from '../../styles/tokens';
 import { useTranslation } from '../../i18n/LanguageContext';
 import {
   addEntry,
   duplicateDay,
   insertDay,
   moveDay,
-  moveEntry,
+  moveEntryTo,
   removeDayFromPlan,
+  toggleDayWeekday,
   updateDay,
 } from '../../utils/planEditing';
-import { WEEKDAYS, dayTitle, defaultDayName, entryName } from '../../utils/workoutPlan';
+import {
+  MAX_SUPERSET_SIZE,
+  WEEKDAYS,
+  dayTitle,
+  dayWeekdays,
+  defaultDayName,
+  entryName,
+  planEquipment,
+  supersetLabels,
+} from '../../utils/workoutPlan';
 
 // Everything about one training day: name, weekday, note, day actions (⋮) and its
-// exercises. "Sort" switches the exercises to a compact list with up/down buttons.
+// exercises. "Sort" switches the exercises to a compact list to drag or move with up/down buttons.
 export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
   const { t, language } = useTranslation();
   const id = useId();
@@ -40,8 +44,6 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
   const [isPicking, setIsPicking] = useState(day.entries.length === 0);
   const [isSorting, setIsSorting] = useState(false);
   const [announcement, setAnnouncement] = useState('');
-  const sortButtons = useRef(new Map());
-  const pendingFocus = useRef(null);
   const isRotation = plan.schedule.type === 'rotation';
   const title = dayTitle(day, plan.schedule, t);
   const index = plan.days.findIndex(item => item.id === day.id);
@@ -49,7 +51,9 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
     .filter(item => item.id !== day.id)
     .map(item => ({ id: item.id, title: dayTitle(item, plan.schedule, t) }));
   const has = type => problems.some(problem => problem.type === type && problem.dayId === day.id);
-  const usedWeekdays = plan.days.filter(item => item.id !== day.id).map(item => item.weekday);
+  const usedWeekdays = plan.days.filter(item => item.id !== day.id).flatMap(dayWeekdays);
+  const weekdays = dayWeekdays(day);
+  const supersets = supersetLabels(day.entries);
 
   function handleDuplicate() {
     const result = duplicateDay(plan, day.id, t('planEditor.day.copyName', { name: day.name || title }));
@@ -57,34 +61,17 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
     onSelectDay(result.day.id);
   }
 
-  // After a move the pressed button keeps the focus; at the edge it is disabled,
-  // then the other arrow of the same exercise takes it.
-  useEffect(() => {
-    if (!pendingFocus.current) return;
-    const { entryId, offset } = pendingFocus.current;
-    pendingFocus.current = null;
-    const pressed = sortButtons.current.get(`${entryId}:${offset}`);
-    const other = sortButtons.current.get(`${entryId}:${-offset}`);
-    (pressed && !pressed.disabled ? pressed : other)?.focus();
-  });
-
-  function handleSortMove(entry, position, offset) {
-    edit(current => moveEntry(current, day.id, entry.id, offset));
-    pendingFocus.current = { entryId: entry.id, offset };
+  // Dragging and the arrow buttons both end here.
+  function handleSortMove(entry, position) {
+    edit(current => moveEntryTo(current, day.id, entry.id, position));
     setAnnouncement(
       t('planEditor.sort.moved', {
         name: entryName(entry, language),
-        position: position + offset + 1,
+        position: position + 1,
         count: day.entries.length,
       })
     );
   }
-
-  const sortButtonRef = (entryId, offset) => element => {
-    const key = `${entryId}:${offset}`;
-    if (element) sortButtons.current.set(key, element);
-    else sortButtons.current.delete(key);
-  };
 
   const dayMenuItems = [
     isRotation && {
@@ -163,32 +150,41 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
             <ErrorText id={`${id}-nameError`}>{t('planEditor.problem.noDayName')}</ErrorText>
           )}
         </Field>
-        {!isRotation && (
-          <Field>
-            <Label htmlFor={`${id}-weekday`}>{t('planEditor.day.weekday')}</Label>
-            <Select
-              id={`${id}-weekday`}
-              aria-invalid={has('noWeekday') || undefined}
-              aria-describedby={has('noWeekday') ? `${id}-weekdayError` : undefined}
-              value={day.weekday ?? ''}
-              onChange={event =>
-                edit(current => updateDay(current, day.id, { weekday: event.target.value || null }))
-              }
-            >
-              <option value="">{t('planEditor.chooseOption')}</option>
-              {WEEKDAYS.map(weekday => (
-                <option key={weekday} value={weekday}>
-                  {t(`day.${weekday}`)}
-                  {usedWeekdays.includes(weekday) ? ` (${t('planEditor.day.weekdayUsed')})` : ''}
-                </option>
-              ))}
-            </Select>
-            {has('noWeekday') && (
-              <ErrorText id={`${id}-weekdayError`}>{t('planEditor.problem.noWeekday')}</ErrorText>
-            )}
-          </Field>
-        )}
       </Fields>
+
+      {!isRotation && (
+        <Field>
+          <Label as="p" id={`${id}-weekdays`}>{t('planEditor.day.weekdays')}</Label>
+          <WeekdayChips
+            role="group"
+            aria-labelledby={`${id}-weekdays`}
+            aria-describedby={has('noWeekday') ? `${id}-weekdayError` : `${id}-weekdaysHint`}
+            $isInvalid={has('noWeekday')}
+          >
+            {WEEKDAYS.map(weekday => (
+              <WeekdayChip
+                key={weekday}
+                type="button"
+                aria-pressed={weekdays.includes(weekday)}
+                aria-label={
+                  usedWeekdays.includes(weekday)
+                    ? t('planEditor.day.weekdayUsedBy', { day: t(`day.${weekday}`) })
+                    : t(`day.${weekday}`)
+                }
+                $isUsed={usedWeekdays.includes(weekday)}
+                onClick={() => edit(current => toggleDayWeekday(current, day.id, weekday))}
+              >
+                {shortWeekday(weekday, language)}
+              </WeekdayChip>
+            ))}
+          </WeekdayChips>
+          {has('noWeekday') ? (
+            <ErrorText id={`${id}-weekdayError`}>{t('planEditor.problem.noWeekday')}</ErrorText>
+          ) : (
+            <Hint id={`${id}-weekdaysHint`}>{t('planEditor.day.weekdaysHint')}</Hint>
+          )}
+        </Field>
+      )}
 
       <Field>
         <Label htmlFor={`${id}-note`}>{t('planEditor.day.note')}</Label>
@@ -214,40 +210,22 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
       {isSorting ? (
         <>
           <Hint>{t('planEditor.sort.hint')}</Hint>
-          <SortList aria-label={t('planEditor.sort.list', { name: title })}>
-            {day.entries.map((entry, position) => {
-              const name = entryName(entry, language);
-              return (
-                <SortItem key={entry.id}>
-                  <SortPosition aria-hidden="true">{position + 1}</SortPosition>
-                  <SortName>{name}</SortName>
-                  <IconButton
-                    ref={sortButtonRef(entry.id, -1)}
-                    aria-label={t('planEditor.entry.moveUp', { name })}
-                    title={t('planEditor.entry.moveUp', { name })}
-                    disabled={position === 0}
-                    onClick={() => handleSortMove(entry, position, -1)}
-                  >
-                    <MdArrowUpward />
-                  </IconButton>
-                  <IconButton
-                    ref={sortButtonRef(entry.id, 1)}
-                    aria-label={t('planEditor.entry.moveDown', { name })}
-                    title={t('planEditor.entry.moveDown', { name })}
-                    disabled={position === day.entries.length - 1}
-                    onClick={() => handleSortMove(entry, position, 1)}
-                  >
-                    <MdArrowDownward />
-                  </IconButton>
-                </SortItem>
-              );
-            })}
-          </SortList>
+          <SortableEntryList
+            entries={day.entries}
+            label={t('planEditor.sort.list', { name: title })}
+            onMove={handleSortMove}
+          />
         </>
       ) : day.entries.length > 0 && (
         <EntryList aria-label={t('planEditor.day.exercisesOf', { name: title })}>
           {day.entries.map((entry, position) => (
             <EntryEditor
+              superset={supersets[position]}
+              canLinkNext={
+                position < day.entries.length - 1 &&
+                (supersets[position]?.size ?? 1) + (supersets[position + 1]?.size ?? 1) <= MAX_SUPERSET_SIZE
+              }
+              nextName={day.entries[position + 1] ? entryName(day.entries[position + 1], language) : ''}
               key={entry.id}
               entry={entry}
               dayId={day.id}
@@ -258,6 +236,7 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
               onToggle={() => setOpenEntryId(openEntryId === entry.id ? null : entry.id)}
               hasProblem={problems.some(problem => problem.entryId === entry.id)}
               edit={edit}
+              availableEquipment={planEquipment(plan)}
             />
           ))}
         </EntryList>
@@ -266,6 +245,7 @@ export default function DayEditor({ plan, day, problems, edit, onSelectDay }) {
       {isSorting ? null : isPicking ? (
         <ExercisePicker
           targetName={title}
+          availableEquipment={planEquipment(plan)}
           onAdd={entries => edit(current => entries.reduce((plan, entry) => addEntry(plan, day.id, entry), current))}
           onClose={() => setIsPicking(false)}
         />
@@ -314,38 +294,31 @@ const Hint = styled.p`
   font-size: ${fontSizes.caption};
 `;
 
-const SortList = styled.ol`
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: ${space.xs};
-  list-style: none;
-`;
-
-const SortItem = styled.li`
+const WeekdayChips = styled.div`
   display: flex;
-  align-items: center;
-  gap: ${space.sm};
-  padding: ${space.xs} ${space.xs} ${space.xs} ${space.sm};
-  border: 1px solid ${colors.surfaceMuted};
+  flex-wrap: wrap;
+  gap: ${space.xs};
+  padding: ${props => (props.$isInvalid ? space.xs : 0)};
+  border: ${props => (props.$isInvalid ? `2px solid ${colors.error}` : 'none')};
   border-radius: ${radii.small};
+`;
+
+// A weekday another day already uses stays choosable but is marked with a dashed border.
+const WeekdayChip = styled.button`
+  min-width: ${sizes.touchTarget};
+  min-height: ${sizes.touchTarget};
+  padding: 0 ${space.sm};
+  border: 1px ${props => (props.$isUsed ? 'dashed' : 'solid')} ${colors.border};
+  border-radius: ${radii.pill};
   background-color: ${colors.surface};
-  button:disabled {
-    opacity: 0.4;
+  color: ${colors.text};
+  &[aria-pressed='true'] {
+    border-style: solid;
+    border-color: ${colors.primary};
+    background-color: ${colors.primary};
+    color: ${colors.onPrimary};
+    font-weight: ${fontWeights.medium};
   }
-`;
-
-const SortPosition = styled.span`
-  flex-shrink: 0;
-  min-width: 1.5rem;
-  font-weight: ${fontWeights.medium};
-  font-variant-numeric: tabular-nums;
-  text-align: center;
-`;
-
-const SortName = styled.span`
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-wrap: anywhere;
 `;
 
 const Subtitle = styled.h4`

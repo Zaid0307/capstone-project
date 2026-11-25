@@ -22,7 +22,7 @@ import {
   weekdayOf,
   workoutSummary,
 } from '../utils/workoutLog';
-import { WEEKDAYS, dayTitle, isPlanActive, migratePlan, orderedDays } from '../utils/workoutPlan';
+import { WEEKDAYS, dayTitle, dayWeekdays, isPlanActive, migratePlan, orderedDays } from '../utils/workoutPlan';
 
 // Monday of the current week, as date key.
 function weekStart(dateKey) {
@@ -47,12 +47,12 @@ function todayOf(plan, today, workouts) {
     return { day: suggestDay(plan, today, workouts), isRestDay: false, doneToday };
   }
   const weekday = weekdayOf(today);
-  const day = orderedDays(plan).find(item => item.weekday === weekday) ?? null;
+  const day = orderedDays(plan).find(item => dayWeekdays(item).includes(weekday)) ?? null;
   if (day) return { day, isRestDay: false, doneToday };
-  const order = index => (WEEKDAYS.indexOf(index) - WEEKDAYS.indexOf(weekday) + 7) % 7;
-  const next = [...plan.days]
-    .filter(item => item.weekday)
-    .sort((a, b) => order(a.weekday) - order(b.weekday))[0];
+  // The next training day: the day with the nearest of its weekdays after today.
+  const distance = item => (WEEKDAYS.indexOf(item) - WEEKDAYS.indexOf(weekday) + 7) % 7;
+  const nearest = item => Math.min(...dayWeekdays(item).map(distance));
+  const next = [...plan.days].filter(item => dayWeekdays(item).length).sort((a, b) => nearest(a) - nearest(b))[0];
   return { day: null, next, isRestDay: true, doneToday };
 }
 

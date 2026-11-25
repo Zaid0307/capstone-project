@@ -7,6 +7,7 @@ import catalog from './exerciseCatalog.json';
 import { EQUIPMENT } from './equipment';
 import { MUSCLES } from './muscles';
 import { MUSCLE_GROUP_NAMES } from './muscleGroups';
+import { registerExerciseLibrary } from './exerciseLibraryLoader';
 
 export const EXERCISES = catalog.exercises;
 
@@ -81,3 +82,13 @@ export function exercisesByGroup(language) {
   }
   return groups;
 }
+
+// Fills the holder of exerciseLibraryLoader.js for the code that runs without a
+// static import of the catalog (utils/workoutPlan.js).
+registerExerciseLibrary({
+  EXERCISES,
+  exerciseById,
+  exerciseGroups,
+  isPerSideExercise,
+  countsForMuscleLoad,
+});

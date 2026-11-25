@@ -7,6 +7,7 @@ import Message from '../components/ui/Message';
 import PageTitle from '../components/ui/PageTitle';
 import { useUndo } from '../components/ui/UndoProvider';
 import useNow from '../components/workout/useNow';
+import FeelingPicker from '../components/workout/FeelingPicker';
 import { formatDuration, workoutTitle } from '../components/workout/workoutText';
 import { newRecordsOf } from '../components/workout/workoutRecords';
 import { colors, fontSizes, fontWeights, radii, shadows, sizes, space } from '../styles/tokens';
@@ -18,6 +19,7 @@ import {
   hasDoneSets,
   isWorkoutRunning,
   loggedExerciseName,
+  updateWorkout,
   workoutDeviations,
   workoutDuration,
   workoutSummary,
@@ -27,7 +29,7 @@ const KG_RECORDS = ['heaviestWeight', 'bestE1rm'];
 
 // Shown after "Finish training" (docs/ux/02-tagebuch.md, 3.3 and 4.6): duration,
 // sets, volume, plan adherence, new personal records and the deviations from the plan.
-export default function WorkoutSummaryPage({ workouts, onAddWorkout, onDeleteWorkout }) {
+export default function WorkoutSummaryPage({ workouts, onAddWorkout, onUpdateWorkout, onDeleteWorkout }) {
   const { t, language } = useTranslation();
   const navigate = useNavigate();
   const showUndo = useUndo();
@@ -181,6 +183,16 @@ export default function WorkoutSummaryPage({ workouts, onAddWorkout, onDeleteWor
               ))}
             </List>
           )}
+        </Card>
+      )}
+
+      {/* Needs onUpdateWorkout; without it the rating is not offered. */}
+      {onUpdateWorkout && !isEmpty && (
+        <Card as="div">
+          <FeelingPicker
+            value={workout.feeling ?? null}
+            onChange={feeling => onUpdateWorkout(updateWorkout(workout, { feeling }))}
+          />
         </Card>
       )}
 

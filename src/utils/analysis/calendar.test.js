@@ -84,6 +84,15 @@ describe('calendarMonth', () => {
     expect(dayStatus({ workouts: [], planned: [{ state: 'missed' }, { state: 'upcoming' }] })).toBe('missed');
     expect(dayStatus({})).toBe('rest');
   });
+
+  it('does not count an empty or just started training as trained', () => {
+    const empty = makeWorkout({ date: '2026-11-11', plan: { planId: 'a', dayId: 'thu' } });
+    expect(dayStatus({ workouts: [empty] })).toBe('rest');
+    const weeks = calendarMonth([plan], [{ ...empty, date: '2026-11-12' }], '2026-11', TODAY);
+    const thursday = findDay(weeks, '2026-11-12');
+    expect(thursday).toMatchObject({ status: 'planned', doneCount: 0 });
+    expect(thursday.planned[0].state).toBe('open');
+  });
 });
 
 describe('setOutcome', () => {

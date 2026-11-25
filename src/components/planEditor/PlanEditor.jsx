@@ -4,6 +4,7 @@ import { BiPlus } from 'react-icons/bi';
 import { MdArrowBack, MdTune, MdUndo } from 'react-icons/md';
 import DayEditor from './DayEditor';
 import PlanAnalysis from './PlanAnalysis';
+import PlanSetupFields from './PlanSetupFields';
 import { ErrorText, Field, FormCard, Input, Label, Select } from './formStyles';
 import Button from '../ui/Button';
 import IconButton from '../ui/IconButton';
@@ -29,6 +30,7 @@ import {
   SCHEDULE_TYPES,
   WEEKDAYS,
   dayTitle,
+  dayWeekdays,
   defaultDayName,
   orderedDays,
   planProblems,
@@ -43,7 +45,8 @@ const isTextField = element => ['INPUT', 'TEXTAREA', 'SELECT'].includes(element?
 // Creates or edits a plan on one page: details, schedule, days and their
 // exercises. Every change is kept as a draft until the plan is saved or the
 // editing is cancelled.
-export default function PlanEditor({ initialPlan, draftKey, isNew, onSave, onCancel }) {
+// `otherPlans`: the user's other plans, for the muscle analysis over all active plans.
+export default function PlanEditor({ initialPlan, draftKey, isNew, otherPlans = [], onSave, onCancel }) {
   const { t } = useTranslation();
   const { plan, setPlan, isRestored, discardDraft } = usePlanDraft(draftKey, initialPlan);
   const [selectedDayId, setSelectedDayId] = useState(() => orderedDays(plan)[0]?.id ?? null);
@@ -110,7 +113,7 @@ export default function PlanEditor({ initialPlan, draftKey, isNew, onSave, onCan
       : t('planEditor.summary.weekdays');
 
   function handleAddDay() {
-    const usedWeekdays = plan.days.map(day => day.weekday);
+    const usedWeekdays = plan.days.flatMap(dayWeekdays);
     const values =
       plan.schedule.type === 'rotation'
         ? { name: defaultDayName(plan.days.length, t) }
@@ -270,6 +273,7 @@ export default function PlanEditor({ initialPlan, draftKey, isNew, onSave, onCan
                 </Segments>
                 <Muted id="scheduleHint">{t(`planEditor.schedule.${plan.schedule.type}Hint`)}</Muted>
               </Fieldset>
+              <PlanSetupFields plan={plan} edit={edit} />
               <Dates>
                 <Field>
                   <Label htmlFor="planStartDate">{t('planEditor.schedule.startDate')}</Label>
@@ -374,7 +378,7 @@ export default function PlanEditor({ initialPlan, draftKey, isNew, onSave, onCan
       </FooterArea>
 
       <AsideArea aria-label={t('planEditor.analysis.label')}>
-        <PlanAnalysis plan={plan} day={selectedDay} />
+        <PlanAnalysis plan={plan} day={selectedDay} otherPlans={otherPlans} />
       </AsideArea>
     </Layout>
   );
